@@ -1,0 +1,13 @@
+[Core]
+Name = Test plugin 3
+Module = test3
+
+[Scheduling]
+ScheduleMode = date
+run_date = 2018-01-01 00:00:01
+timezone = UTC
+
+[Documentation]
+Description = Collector plugin for testing
+Author = USoVietnam
+Version = 0.0.1

@@ -1,0 +1,8 @@
+[Core]
+Name = Regional WA stats
+Module = wa_stats
+
+[Documentation]
+Description = Calculate WA nation number and percentages
+Author = USoVietnam
+Version = 0.0.1

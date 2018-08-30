@@ -1,0 +1,12 @@
+*.code-workspace
+__pycache__/
+.pytest_cache/
+.vscode/
+*.json
+*.txt
+*.png
+*.db
+*.xml
+*.gz
+*.log
+*.ini

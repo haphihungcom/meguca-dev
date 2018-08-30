@@ -1,0 +1,8 @@
+[Core]
+Name = Test plugin 4
+Module = test4
+
+[Documentation]
+Description = Plugin uses config from other plugins for testing
+Author = USoVietnam
+Version = 0.0.1

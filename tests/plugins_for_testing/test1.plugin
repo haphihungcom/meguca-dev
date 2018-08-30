@@ -1,0 +1,9 @@
+[Core]
+Name = Test plugin 1
+Module = test1
+ConfigFile = tests/plugins_for_testing/test1_config.ini
+
+[Documentation]
+Description = Plugin with external config file for testing
+Author = USoVietnam
+Version = 0.0.1

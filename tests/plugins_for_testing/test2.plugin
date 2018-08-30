@@ -1,0 +1,8 @@
+[Core]
+Name = Test plugin 2
+Module = test2
+
+[Documentation]
+Description = Plugin with no external config file and uses data from plugins not yet run for testing
+Author = USoVietnam
+Version = 0.0.1
