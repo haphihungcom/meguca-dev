@@ -4,18 +4,18 @@ import inspect
 from apscheduler.schedulers.background import BackgroundScheduler
 import yapsy
 
-from . import exceptions
-from . import plugin
-from .utils import general_utils
+from meguca import exceptions
+from meguca import plugin
+from meguca import utils
 
-GENERAL_CONFIG_FILENAME = "tests/config_for_testing.ini"
+GENERAL_CONFIG_FILENAME = "config/general_config.ini"
 
 class Meguca():
     def __init__(self, config_filename):
         self.scheduler = BackgroundScheduler()
 
         self.config = {}
-        self.config['Meguca'] = general_utils.load_config(config_filename)
+        self.config['Meguca'] = utils.load_config(config_filename)
 
         self.plugins = plugin.Plugins(self.config['Meguca']['General']['PluginDirectory'])
         # Plugin-specific config
@@ -30,53 +30,53 @@ class Meguca():
         """Run a plugin.
 
         :param plg: A yapsy.PluginInfo object
-        :param entry_method: Plugin entry method name
+        :param entry_method: Plugin entry-point method name
         """
 
-        entry = getattr(plg.plugin_object, entry_method)
+        entrypoint_method = getattr(plg.plugin_object, entry_method)
 
-        # Only pass arguments the entry method requires
-        entry_params = dict(inspect.signature(entry).parameters)
-        entry_args = {}
+        # Only pass arguments the entry-point method requires
+        entrypoint_params = entrypoint_method.__code__.co_varnames
+        entrypoint_args = {}
 
-        if 'data' in entry_params:
-            entry_args['data'] = self.data
-        if 'config' in entry_params:
-            entry_args['config'] = self.config
+        if 'data' in entrypoint_params:
+            entrypoint_args['data'] = plugin.EntryPointMethodParam(self.data, raise_notyetexist=True)
+        if 'config' in entrypoint_params:
+            entrypoint_args['config'] = plugin.EntryPointMethodParam(self.config)
 
-        try:
-            result = entry(**entry_args)
-        except KeyError:
-            raise exceptions.DataNotFound()
+        result = entrypoint_method(**entrypoint_args)
 
         # Add returned data to the data dict if the plugin
         # does return data
         if result:
             self.data.update(result)
 
-        print(self.data)
-
     def _run_stat_plugins(self):
         """Run all stat plugins."""
 
         # If a plugin wants to use data not yet created by other plugins,
         # it will be put on queue to run again after the required data
-        # become available
+        # become available.
         queue = [plg for plg in self.plugins.get_plugins('Stat')]
 
-        while queue:
+        # Limit the number of iterations through the queue to 2 because
+        # after the first iteration, we should have all the data needed by
+        # plugins that use non-yet-exist data, the second iteration is to
+        # re-run those plugins with the now-exist data.
+        for i in range(2):
             for plg in queue:
                 try:
                     self._run_plugin(plg, 'run')
                     queue.remove(plg)
-                except exceptions.DataNotFound:
-                    pass
+                except exceptions.NotYetExist as non_existent_key:
+                    if i == 1:
+                        raise exceptions.NotFound('Stat plugin {} requires non-existent item {} from a param'.format(plg.name, non_existent_key))
 
     def _schedule_plugins(self, plg_category, entry_method):
         """Schedule plugins by category.
 
         :param plg_category: Plugin category name
-        :param entry_method: Plugin entry method name
+        :param entry_method: Plugin entry-point method name
         """
 
         for plg in self.plugins.get_plugins(plg_category):
