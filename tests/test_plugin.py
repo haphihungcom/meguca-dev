@@ -43,5 +43,11 @@ class TestEntryMethodParam():
         with pytest.raises(exceptions.NotFound):
             param['Test1']
 
+    def test_getitem_on_non_existent_item_with_raise_notyetexist_on(self):
+        param = plugin.EntryPointMethodParam({'Test': 'Test'}, raise_notyetexist=True)
+
+        with pytest.raises(exceptions.NotYetExist):
+            param['Test1']
+
 
 
