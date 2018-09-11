@@ -3,8 +3,9 @@ import configparser
 
 from yapsy import PluginFileLocator, PluginManager
 
-from . import plugin_categories
-from .utils import general_utils
+from meguca import plugin_categories
+from meguca import utils
+from meguca import exceptions
 
 PLUGIN_CATEGORIES = {
     'Collector': plugin_categories.Collector,
@@ -29,7 +30,7 @@ class Plugins():
             self.plugin_manager.activatePluginByName(plg.name)
 
             try:
-                plg_config = general_utils.load_config(plg.details['Core']['ConfigFile'])
+                plg_config = utils.load_config(plg.details['Core']['ConfigFile'])
                 plg.plugin_object.plg_config = plg_config
                 all_plg_config[plg.name] = plg_config
             except (IOError, KeyError):
@@ -39,3 +40,15 @@ class Plugins():
 
     def get_plugins(self, category):
         return self.plugin_manager.getPluginsOfCategory(category)
+
+
+class EntryPointMethodParam():
+    """Encapsulate an object to pass as argument to the entry-point method of a plugin."""
+    def __init__(self, obj):
+        self.obj = obj
+
+    def __getitem__(self, key):
+        if key not in self.obj:
+            raise exceptions.NotFound()
+
+        return self.obj[key]

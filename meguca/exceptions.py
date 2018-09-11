@@ -6,12 +6,8 @@ class PluginError(Meguca):
     """Base exception for plugin-related exceptions"""
 
 
-class PluginError(Meguca):
-    """Base exception for plugin API-related exceptions"""
-
-
-class DataNotFound(PluginError):
-    """Raise if get a non-existent key from data"""
+class NotFound(PluginError):
+    """Raise if get a non-existent key from a hook"""
 
 
 class NSAPIError(Meguca):
