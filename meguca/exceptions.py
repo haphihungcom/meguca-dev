@@ -7,7 +7,7 @@ class PluginError(Meguca):
 
 
 class NotFound(PluginError):
-    """Raise if get a non-existent key from a hook"""
+    """Raise if get a non-existent key from entry-point method's parameters"""
 
 
 class NSAPIError(Meguca):
