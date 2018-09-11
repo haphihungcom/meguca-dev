@@ -43,12 +43,21 @@ class Plugins():
 
 
 class EntryPointMethodParam():
-    """Encapsulate an object to pass as argument to the entry-point method of a plugin."""
-    def __init__(self, obj):
+    """Encapsulate an object to pass as argument to the entry-point method of a plugin.
+
+    :param obj: An object
+    :param raise_notyetexist: If getting non-existent items from object
+    exceptions.NotYetExist will be raised instead of exceptions.NotFound
+    """
+    def __init__(self, obj, raise_notyetexist=False):
         self.obj = obj
+        self.raise_notyetexist = raise_notyetexist
 
     def __getitem__(self, key):
         if key not in self.obj:
-            raise exceptions.NotFound()
+            if self.raise_notyetexist:
+                raise exceptions.NotYetExist()
+            else:
+                raise exceptions.NotFound()
 
         return self.obj[key]
