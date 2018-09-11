@@ -19,14 +19,11 @@ class TestNSApiLowLevel():
         assert api.req_headers['X-Password'] == 'Test'
 
     def test_construct_req_url(self):
-        ns_api.API_URL_BEGINNING = 'Test/'
-        ns_api.API_PARAM_DELIMITER = ';'
-        ns_api.API_VALUE_DELIMITER = '+'
 
         api = ns_api.NSApi("")
         url = api.construct_req_url('Test', 'Test', 'Test', {'Test2': 'Test'})
 
-        assert url == 'Test/Test=Test;q=Test;Test2=Test;'
+        assert url == 'https://www.nationstates.net/cgi-bin/api.cgi?Test=Test;q=Test;Test2=Test;'
 
     def test_set_ratelimit_req_count(self):
         mocked_resp = mock.Mock(headers={'x-ratelimit-requests-seen': '0'})
