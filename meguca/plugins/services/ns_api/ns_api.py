@@ -30,12 +30,12 @@ class NSApi():
             self._setup_private_session()
 
     def _setup_private_session(self):
-        """Add password into headers to obtain pin on first private shard call"""
+        """Add password into headers to obtain pin on first private shard call."""
 
         self.req_headers['X-Password'] = self.password
 
     def construct_req_url(self, api_type, name, shards, shard_params):
-        """Construct an API request URL based on api_type, name, and shards"""
+        """Construct an API request URL based on api_type, name, and shards."""
 
         params = {api_type: name, 'q': shards}
         params.update(shard_params)
@@ -63,17 +63,17 @@ class NSApi():
         return respond
 
     def set_ratelimit_req_count(self, resp):
-        """Set ratelimit request count
+        """Set ratelimit request count.
 
-        :param resp: A request.Respond object
+        :param resp: A requests.Respond object
         """
         if 'x-ratelimit-requests-seen' in resp.headers:
             self.ratelimit_req_count = int(resp.headers['x-ratelimit-requests-seen'])
 
     def set_pin(self, resp):
-        """Add pin into request headers for next private calls
+        """Add pin into request headers for next private calls.
 
-        :param resp: A request.Respond object
+        :param resp: A requests.Respond object
         """
 
         if 'X-Pin' in resp.headers:
@@ -82,9 +82,9 @@ class NSApi():
             self.req_headers.pop('X-Password', None)
 
     def process_xml(self, resp):
-        """Process XML in respond into dict
+        """Process XML in respond into dict.
 
-        :param resp: A request.Respond object
+        :param resp: A requests.Respond object
 
         :rtype: A dict represents the XML tree without root element
         """
@@ -96,9 +96,9 @@ class NSApi():
         return resp_dict
 
     def process_respond(self, resp):
-        """Process the API respond
+        """Process the API respond.
 
-        :param resp: A request.Respond object
+        :param resp: A requests.Respond object
 
         :rtype: A dict represents the XML tree of the respond
         """
@@ -126,7 +126,7 @@ class NSApi():
             raise exceptions.NSAPIError('An unknown API error has occured')
 
     def get_data(self, api_type, name, shards, shard_params={}):
-        """Get info from the API
+        """Get info from the API.
 
         :param api_type: Type of API (nation, region, or world)
         :param name: Name of nation/region
@@ -142,7 +142,7 @@ class NSApi():
         return self.process_respond(respond)
 
     def get_nation(self, name, shards, shard_params={}):
-        """Get info of a nation
+        """Get info of a nation.
 
         :param name: Name of the nation
         :param shards: A name of a shard or list of shards
@@ -154,7 +154,7 @@ class NSApi():
         return self.get_data('nation', name, shards, shard_params)
 
     def get_region(self, name, shards, shard_params={}):
-        """Get info of a region
+        """Get info of a region.
 
         :param name: Name of the region
         :param shards: A name of a shard or list of shards
@@ -166,7 +166,7 @@ class NSApi():
         return self.get_data('region', name, shards, shard_params)
 
     def get_world(self, shards, shard_params={}):
-        """Get info of the game world
+        """Get info of the game world.
 
         :param shards: A name of a shard or list of shards
         :param shard_params: A dict represents shard parameters
