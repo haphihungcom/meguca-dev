@@ -48,6 +48,3 @@ class TestEntryMethodParam():
 
         with pytest.raises(exceptions.NotYetExist):
             param['Test1']
-
-
-
