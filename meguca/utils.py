@@ -9,7 +9,6 @@ def load_config(filename):
     """
 
     config = configparser.ConfigParser()
-    config.optionxform = str
 
     f = open(filename)
     config.read(filename)

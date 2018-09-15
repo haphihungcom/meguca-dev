@@ -10,7 +10,6 @@ class TestLoadConfig():
     @pytest.fixture(scope='class')
     def setup_config_file(self):
         config = configparser.ConfigParser()
-        config.optionxform = str
 
         config['Example'] = {'Example': '0'}
 
@@ -24,4 +23,4 @@ class TestLoadConfig():
     def test_load_config_from_ini(self, setup_config_file):
         config = utils.load_config('tests/test_config.ini')
 
-        assert config['Example']['Example'] == '0'
+        assert config['Example']['example'] == '0'
