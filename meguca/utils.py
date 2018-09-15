@@ -9,8 +9,6 @@ def load_config(filename):
     """
 
     config = configparser.ConfigParser()
-
-    f = open(filename)
     config.read(filename)
 
     return config
