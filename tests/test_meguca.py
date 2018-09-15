@@ -1,8 +1,10 @@
 import time
+import configparser
 from unittest import mock
 
 import pytest
 import freezegun
+import apscheduler
 
 from meguca import meguca
 from meguca import exceptions
@@ -81,3 +83,45 @@ class TestRunStatPlugins():
             meguca_ins._run_stat_plugins()
 
             assert meguca_ins.data == {'TestData1': 'Test Data', 'TestData2': 'Test Data'}
+
+
+@mock.patch('meguca.utils.load_config', return_value={'General': {'PluginDirectory': 'Test'}})
+@mock.patch('meguca.meguca.Meguca.prepare')
+@mock.patch('meguca.plugin.Plugins.load_plugins')
+class TestSchedule():
+    def test_schedule_with_a_method_with_kwargs(self, mocked_load_config,
+                                                mocked_prepare, mocked_load_plugins):
+        meguca_ins = meguca.Meguca('')
+        mocked_method = mock.Mock()
+        schedule_config = configparser.ConfigParser()
+        schedule_config['Scheduling'] = {'ScheduleMode': 'interval',
+                                         'seconds': '1'}
+
+        meguca_ins._schedule(mocked_method, kwargs={'Test': 'Test'},
+                             name='Test Method',
+                             schedule_config=schedule_config.items('Scheduling'))
+
+        assert meguca_ins.scheduler.get_jobs()[0].kwargs == {'Test': 'Test'}
+        assert str(meguca_ins.scheduler.get_jobs()[0].trigger) == 'interval[0:00:01]'
+
+
+@mock.patch('meguca.utils.load_config', return_value={'General': {'PluginDirectory': 'Test'}})
+@mock.patch('meguca.meguca.Meguca.prepare')
+@mock.patch('meguca.plugin.Plugins.load_plugins')
+class TestSchedulePlugins():
+    def test_schedule_plugins(self, mocked_load_plugins,
+                              mocked_prepare, mocked_load_config):
+        with mock.patch('meguca.plugin.Plugins.get_plugins') as mocked_get_plugins:
+            meguca_ins = meguca.Meguca('')
+            mocked_plg_obj = mock.Mock(run=mock.Mock())
+            schedule_config = configparser.ConfigParser()
+            schedule_config['Scheduling'] = {'ScheduleMode': 'interval',
+                                             'seconds': '1'}
+            mocked_plg = mock.Mock(plugin_object=mocked_plg_obj,
+                                   details=schedule_config)
+            type(mocked_plg).name = mock.PropertyMock(return_value='Test')
+            mocked_get_plugins.return_value = [mocked_plg]
+
+            meguca_ins._schedule_plugins('Test')
+
+            assert meguca_ins.scheduler.get_jobs()[0].name == 'Test'

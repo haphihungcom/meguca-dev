@@ -72,49 +72,52 @@ class Meguca():
                     if i == 1:
                         raise exceptions.NotFound('Stat plugin {} requires non-existent item {} from a param'.format(plg.name, non_existent_key))
 
-    def _schedule_plugins(self, plg_category, entry_method):
-        """Schedule plugins by category.
+    def _schedule(self, method, name, schedule_config, kwargs={}):
+        """Schedule a method with schedule config.
 
-        :param plg_category: Plugin category name
-        :param entry_method: Plugin entry-point method name
+        :param method: Method to schedule
+        :param kwargs: A dict that contains keyword arguments to pass to the method
+        :param name: Name of the method (optional)
+        :param schedule_config: A ConfigParser section object that contains schedule config
         """
 
-        for plg in self.plugins.get_plugins(plg_category):
-            schedule_config = dict(plg.details.items('Scheduling'))
-            schedule_mode = schedule_config.pop('schedulemode')
-            # Convert all values into int
-            if schedule_mode != 'date':
-                schedule_config = {k: int(v) for k, v in schedule_config.items()}
-
-            self.scheduler.add_job(self._run_plugin,
-                                   trigger=schedule_mode,
-                                   name=plg.name,
-                                   kwargs={'plg': plg,
-                                           'entry_method': entry_method},
-                                   coalesce=True,
-                                   **schedule_config)
-
-    def _schedule_all(self):
-        """Schedule all plugins."""
-
-        self._schedule_plugins('Collector', 'run')
-
-        # Schedule stat plugins which don't have specific scheduling
-        # capability
-
-        schedule_config = dict(self.config['Meguca'].items('StatPluginScheduling'))
-        schedule_mode = schedule_config.pop('ScheduleMode')
+        schedule_config = dict(schedule_config)
+        schedule_mode = schedule_config.pop('schedulemode')
         # Convert all values into int
         if schedule_mode != 'date':
             schedule_config = {k: int(v) for k, v in schedule_config.items()}
 
-        self.scheduler.add_job(self._run_stat_plugins,
-                               name='Stat plugins',
+        self.scheduler.add_job(method,
                                trigger=schedule_mode,
+                               name=name,
+                               kwargs=kwargs,
                                coalesce=True,
                                **schedule_config)
 
-        self._schedule_plugins('View', 'run')
+    def _schedule_plugins(self, plg_category):
+        """Schedule plugins by category.
+
+        :param plg_category: Plugin category name
+        """
+
+        for plg in self.plugins.get_plugins(plg_category):
+            self._schedule(self._run_plugin,
+                           kwargs={'plg': plg,
+                                   'entry_method': 'run'},
+                           name=plg.name,
+                           schedule_config=plg.details.items('Scheduling'))
+
+    def _schedule_all(self):
+        """Schedule all plugins."""
+
+        self._schedule_plugins('Collector')
+
+        # Schedule stat plugins which don't have scheduling capability for each plugin
+        self._schedule(self._run_stat_plugins,
+                       name='Stat plugins',
+                       schedule_config=self.config['Meguca'].items('StatPluginScheduling'))
+
+        self._schedule_plugins('View')
 
     def prepare(self):
         for plg in self.plugins.get_plugins('Collector'):
