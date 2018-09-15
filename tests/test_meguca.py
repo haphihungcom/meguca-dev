@@ -145,4 +145,3 @@ class TestPluginSchedulingMethods():
             meguca_ins._schedule_all()
 
             assert meguca_ins.scheduler.get_jobs()[2].name == 'Test'
-
