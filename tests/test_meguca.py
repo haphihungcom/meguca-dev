@@ -13,13 +13,15 @@ from meguca import exceptions
 class TestRunPlugin():
     def test_run_plugin_with_entrypoint_method_has_no_param(self, mocked_plugins, mocked_load_config):
         meguca_ins = meguca.Meguca('')
-        mocked_plg_obj = mock.Mock(run=mock.Mock(return_value={'Test': 'Test'},
-                                                 __code__=mock.Mock(co_varnames=())))
+
+        def stub_run():
+            return {'Test': 'Test'}
+
+        mocked_plg_obj = mock.Mock(run=stub_run)
         mocked_plg = mock.Mock(plugin_object=mocked_plg_obj)
 
         meguca_ins._run_plugin(mocked_plg, 'run')
 
-        mocked_plg_obj.run.assert_called_with()
         assert meguca_ins.data == {'Test': 'Test'}
 
     def test_run_plugin_with_entrypoint_method_has_params(self, mocked_load_plugins, mocked_load_config):
