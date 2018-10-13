@@ -1,0 +1,8 @@
+[Core]
+Name = Regional endorsement stats
+Module = regional_endo_stats
+
+[Documentation]
+Description = Calculate total endorsement count and cross-endo rate (endorsement saturation) of a region
+Author = USoVietnam
+Version = 0.0.1
