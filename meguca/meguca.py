@@ -26,7 +26,7 @@ class Meguca():
 
         self.prepare()
 
-    def _run_plugin(self, plg, entry_method):
+    def run_plugin(self, plg, entry_method):
         """Run a plugin.
 
         :param plg: A yapsy.PluginInfo object
@@ -51,7 +51,7 @@ class Meguca():
         if result:
             self.data.update(result)
 
-    def _run_stat_plugins(self):
+    def run_stat_plugins(self):
         """Run all stat plugins."""
 
         # If a plugin wants to use data not yet created by other plugins,
@@ -66,13 +66,13 @@ class Meguca():
         for i in range(2):
             for plg in queue:
                 try:
-                    self._run_plugin(plg, 'run')
+                    self.run_plugin(plg, 'run')
                     queue.remove(plg)
                 except exceptions.NotYetExist as non_existent_key:
                     if i == 1:
                         raise exceptions.NotFound('Stat plugin {} requires non-existent item {} from a param'.format(plg.name, non_existent_key))
 
-    def _schedule(self, method, name, schedule_config, kwargs={}):
+    def schedule(self, method, name, schedule_config, kwargs={}):
         """Schedule a method with schedule config.
 
         :param method: Method to schedule
@@ -94,36 +94,36 @@ class Meguca():
                                coalesce=True,
                                **schedule_config)
 
-    def _schedule_plugins(self, plg_category):
+    def schedule_plugins(self, plg_category):
         """Schedule plugins by category.
 
         :param plg_category: Plugin category name
         """
 
         for plg in self.plugins.get_plugins(plg_category):
-            self._schedule(self._run_plugin,
+            self.schedule(self.run_plugin,
                            kwargs={'plg': plg,
                                    'entry_method': 'run'},
                            name=plg.name,
                            schedule_config=plg.details.items('Scheduling'))
 
-    def _schedule_all(self):
+    def schedule_all(self):
         """Schedule all plugins."""
 
-        self._schedule_plugins('Collector')
+        self.schedule_plugins('Collector')
 
         # Schedule stat plugins which don't have scheduling capability for each plugin
-        self._schedule(self._run_stat_plugins,
-                       name='Stat plugins',
-                       schedule_config=self.config['Meguca'].items('StatPluginScheduling'))
+        self.schedule(self.run_stat_plugins,
+                      name='Stat plugins',
+                      schedule_config=self.config['Meguca'].items('StatPluginScheduling'))
 
-        self._schedule_plugins('View')
+        self.schedule_plugins('View')
 
     def prepare(self):
         for plg in self.plugins.get_plugins('Collector'):
-            self._run_plugin(plg, 'prime_run')
+            self.run_plugin(plg, 'prime_run')
 
-        self._schedule_all()
+        self.schedule_all()
 
     def run(self):
         self.scheduler.start()
