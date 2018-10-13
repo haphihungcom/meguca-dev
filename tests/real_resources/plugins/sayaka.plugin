@@ -1,0 +1,13 @@
+[Core]
+Name = Sayaka
+Module = sayaka
+
+[Scheduling]
+ScheduleMode = date
+run_date = 2018-01-01 00:00:02
+timezone = UTC
+
+[Documentation]
+Description = A collector plugin that uses config from another plugin.
+Author = USoVietnam
+Version = 0.0.1

@@ -1,0 +1,8 @@
+[Core]
+Name = Homura
+Module = homura
+
+[Documentation]
+Description = A plugin that wants data from a plugin not yet run.
+Author = USoVietnam
+Version = 0.0.1
