@@ -10,12 +10,10 @@ from meguca import exceptions
 @mock.patch('yapsy.PluginManager.PluginManager.collectPlugins')
 @mock.patch('yapsy.PluginManager.PluginManager.activatePluginByName')
 class TestPlugins():
-    def test_load_plugins(self, mocked_activatePluginByName,
-                          mocked_collectPlugins, mocked_load_config):
+    @pytest.mark.usefixtures('mocked_plg')
+    def test_load_plugins(self, mocked_activatePluginByName, mocked_collectPlugins,
+                          mocked_load_config, mocked_plg):
         with mock.patch('yapsy.PluginManager.PluginManager.getAllPlugins') as mocked_getAllPlugins:
-            mocked_plg = mock.Mock(plugin_object=mock.Mock(plg_config=None),
-                                   details={'Core': {'ConfigFile': 'Test'}})
-            type(mocked_plg).name = mock.PropertyMock(return_value='Test')
             mocked_getAllPlugins.return_value = [mocked_plg]
 
             plugins_ins = plugin.Plugins('')
@@ -28,7 +26,6 @@ class TestPlugins():
         plugins_ins = plugin.Plugins('')
 
         assert plugins_ins.get_plugins('Test') == 'Test'
-        mocked_getPluginsOfCategory.assert_called_with('Test')
 
 
 class TestEntryMethodParam():
