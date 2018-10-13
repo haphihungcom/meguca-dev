@@ -1,0 +1,9 @@
+[Core]
+Name = WA and endorsement data collector
+Module = wa_data_collector
+ConfigFile = meguca/config/plugin_config/wa_data_collector.ini
+
+[Documentation]
+Description = Gather WA and endorsement data from the API and data dump
+Author = USoVietnam
+Version = 0.0.1
