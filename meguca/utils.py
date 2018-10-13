@@ -12,3 +12,10 @@ def load_config(filename):
     config.read(filename)
 
     return config
+
+
+def canonical(name):
+    if name is None:
+        return None
+    else:
+        return name.lower().replace('_', ' ')
