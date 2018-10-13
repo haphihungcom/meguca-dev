@@ -56,8 +56,8 @@ class EntryPointMethodParam():
     def __getitem__(self, key):
         if key not in self.obj:
             if self.raise_notyetexist:
-                raise exceptions.NotYetExist()
+                raise exceptions.NotYetExist(key)
             else:
-                raise exceptions.NotFound()
+                raise exceptions.NotFound(key)
 
         return self.obj[key]
