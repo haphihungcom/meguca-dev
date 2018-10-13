@@ -1,9 +1,13 @@
 from meguca import plugin_categories
+from meguca.plugins.services.ns_api import ns_api
 
-class WAStats(plugin_categories.Stat):
-    def run(self, data):
-        wa_nation_num = data['wa_nations'].number_of_nodes()
-        wa_nation_perc = wa_nation_num / data['regional_nation_num'] * 100
+class NationNumStats(plugin_categories.Stat):
+    def run(self, config):
+        api = ns_api.NSApi(config['General']['useragent'])
 
-        return {'wa_nation_num': wa_nation_num,
-                'wa_nation_perc': wa_nation_perc}
+        nation_num = api.get_region(config['General']['region'], 'numnations')['NUMNATIONS']
+        ns_nation_num = api.get_world('numnations')['NUMNATIONS']
+        nationnum_perc = nation_num / ns_nation_num * 100
+
+        return {'nation_num': nation_num,
+                'nation_num_perc': nationnum_perc}
