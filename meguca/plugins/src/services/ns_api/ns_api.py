@@ -1,8 +1,9 @@
 import requests
 import xmltodict
 
-from meguca.plugins.services.ns_api import exceptions
-from meguca.plugins.services.ns_api import api_helper
+from meguca import plugin_categories
+from meguca.plugins.src.services.ns_api import exceptions
+from meguca.plugins.src.services.ns_api import api_helper
 
 # Maximum number of requests sent in 30 sec
 RATE_LIMIT = 50
@@ -10,6 +11,12 @@ RATE_LIMIT = 50
 API_URL_BEGINNING = "https://www.nationstates.net/cgi-bin/api.cgi?"
 API_PARAM_DELIMITER = ";"
 API_VALUE_DELIMITER = "+"
+
+
+class NSApiPlugin(plugin_categories.Service):
+    def get(self):
+        return NSApi(self.plg_config['Auth']['useragent'],
+                     self.plg_config['Auth']['password'])
 
 
 class NSApi():

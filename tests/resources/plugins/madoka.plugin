@@ -1,7 +1,7 @@
 [Core]
 Name = Madoka
 Module = madoka
-ConfigFile = tests/real_resources/plugins/madoka_config.ini
+ConfigFile = tests/resources/plugins/madoka_config.ini
 
 [Documentation]
 Description = A plugin with an external config file.

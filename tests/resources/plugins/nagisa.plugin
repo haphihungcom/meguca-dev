@@ -1,0 +1,9 @@
+[Core]
+Name = Nagisa
+Identifier = nagisa
+Module = nagisa
+
+[Documentation]
+Description = A service plugin
+Author = USoVietnam
+Version = 0.0.1

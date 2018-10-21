@@ -1,0 +1,9 @@
+[Core]
+Name = NationStates API Wrapper
+Identifier = ns_api
+Module = src/services/ns_api/ns_api
+
+[Documentation]
+Description = Provide a NationStates API Wrapper
+Author = USoVietnam
+Version = 0.0.1

@@ -3,7 +3,6 @@ import xml.etree.cElementTree as ET
 
 import networkx as nx
 
-from meguca.plugins.services.ns_api import ns_api
 from meguca import plugin_categories
 from meguca import utils
 
@@ -85,15 +84,13 @@ def load_data_from_api(events, nations):
 
 
 class WADataCollector(plugin_categories.Collector):
-    def __init__(self):
-        self.api = ns_api.NSApi(user_agent=self.plg_config['Auth']['useragent'])
-        self.last_evt_time = ''
+    last_evt_time = ''
 
-    def run(self, data):
+    def run(self, data, ns_api):
         shard_params = {'view': 'region.{}'.format(self.plg_config['Region']['name']),
                         'filter': ['endo', 'member'],
                         'sincetime': self.last_evt_time}
-        events = self.api.get_world('happenings', shard_params=shard_params)['HAPPENINGS']['EVENT']
+        events = self.ns_api.get_world('happenings', shard_params=shard_params)['HAPPENINGS']['EVENT']
         self.last_evt_time = events[0]['TIMESTAMP']
 
         load_data_from_api(events, data['wa_nations'])
