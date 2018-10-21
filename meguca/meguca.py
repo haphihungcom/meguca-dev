@@ -9,7 +9,6 @@ from meguca import exceptions
 from meguca import plugin
 from meguca import utils
 
-GENERAL_CONFIG_FILENAME = "config/general_config.ini"
 
 class Meguca():
     def __init__(self, plugins, general_config, plugin_config):
