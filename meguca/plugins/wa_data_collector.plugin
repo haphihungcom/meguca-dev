@@ -1,6 +1,6 @@
 [Core]
 Name = WA and endorsement data collector
-Module = wa_data_collector
+Module = src/wa_data_collector
 ConfigFile = meguca/config/plugin_config/wa_data_collector.ini
 
 [Documentation]

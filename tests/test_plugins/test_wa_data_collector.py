@@ -8,7 +8,7 @@ import pytest
 import xmltodict
 import networkx as nx
 
-from meguca.plugins import wa_data_collector
+from meguca.plugins.src import wa_data_collector
 
 
 @pytest.fixture(scope='module')

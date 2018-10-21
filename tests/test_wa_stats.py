@@ -1,6 +1,6 @@
 import networkx as nx
 
-from meguca.plugins import wa_stats
+from meguca.plugins.src import wa_stats
 
 class TestWAStats():
     def test(self):
@@ -11,4 +11,3 @@ class TestWAStats():
         result = ins.run(mocked_data)
 
         assert result['wa_nation_num'] == 2
-        assert result['wa_nation_perc'] == 100

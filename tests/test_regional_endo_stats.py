@@ -1,6 +1,6 @@
 import networkx as nx
 
-from meguca.plugins import regional_endo_stats
+from meguca.plugins.src import regional_endo_stats
 
 class TestRegionalEndoStats():
     def test(self):

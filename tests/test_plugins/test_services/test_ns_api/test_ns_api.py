@@ -1,11 +1,12 @@
+import configparser
 from unittest import mock
 
 import pytest
 import requests
 
-from meguca.plugins.services.ns_api import ns_api
-from meguca.plugins.services.ns_api import api_helper
-from meguca.plugins.services.ns_api import exceptions
+from meguca.plugins.src.services.ns_api import ns_api
+from meguca.plugins.src.services.ns_api import api_helper
+from meguca.plugins.src.services.ns_api import exceptions
 
 USER_AGENT = "Unit tests of Meguca | NS API Wrapper component"
 
@@ -171,6 +172,17 @@ class TestNSApiIntegration():
         api = ns_api.NSApi(USER_AGENT)
 
         assert api.get_world('lasteventid')['LASTEVENTID']
+
+
+class TestNSApiPlugin():
+    def test_get(self):
+        plg = ns_api.NSApiPlugin()
+        plg.plg_config = configparser.ConfigParser()
+        plg.plg_config['Auth'] = {'useragent': 'Test', 'password': 'password'}
+
+        api = plg.get()
+
+        assert api.user_agent == 'Test' and api.password == 'password'
 
 
 

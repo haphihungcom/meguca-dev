@@ -1,6 +1,6 @@
 [Core]
 Name = Regional nation number stats
-Module = nation_num_stats
+Module = src/nation_num_stats
 
 [Documentation]
 Description = Calculate number of nations in a region and percentage of the number to NS total nation number

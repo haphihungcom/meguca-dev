@@ -1,6 +1,6 @@
 [Core]
 Name = Regional WA stats
-Module = wa_stats
+Module = src/wa_stats
 
 [Documentation]
 Description = Calculate WA nation number and percentages

@@ -1,6 +1,6 @@
 import pytest
 
-from meguca.plugins.services.ns_api import api_helper
+from meguca.plugins.src.services.ns_api import api_helper
 
 API_URL_BEGINNING = "https://www.nationstates.net/cgi-bin/api.cgi?"
 API_PARAM_DELIMITER = ";"

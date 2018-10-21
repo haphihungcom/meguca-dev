@@ -6,6 +6,8 @@ import pytest
 
 @pytest.fixture
 def mocked_plg():
+    """A mocked plugin with standard entrypoint methods and config.
+    It behaves like a real plugin."""
     def stub_run():
         return {'Test': 'Test'}
 
