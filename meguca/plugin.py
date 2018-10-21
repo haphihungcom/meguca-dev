@@ -8,6 +8,7 @@ from meguca import utils
 from meguca import exceptions
 
 PLUGIN_CATEGORIES = {
+    'Service': plugin_categories.Service,
     'Collector': plugin_categories.Collector,
     'Stat': plugin_categories.Stat,
     'View': plugin_categories.View
@@ -43,7 +44,8 @@ class Plugins():
 
 
 class EntryPointMethodParam():
-    """Encapsulate an object to pass as argument to the entry-point method of a plugin.
+    """Encapsulate an indexable object to pass as argument
+    to the entry-point method of a plugin.
 
     :param obj: An object
     :param raise_notyetexist: If getting non-existent items from object

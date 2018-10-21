@@ -4,6 +4,7 @@ import inspect
 from apscheduler.schedulers.background import BackgroundScheduler
 import yapsy
 
+from meguca import info
 from meguca import exceptions
 from meguca import plugin
 from meguca import utils
@@ -11,20 +12,19 @@ from meguca import utils
 GENERAL_CONFIG_FILENAME = "config/general_config.ini"
 
 class Meguca():
-    def __init__(self, config_filename):
+    def __init__(self, plugins, general_config, plugin_config):
         self.scheduler = BackgroundScheduler()
 
-        self.config = {}
-        self.config['Meguca'] = utils.load_config(config_filename)
+        self.plugins = plugins
 
-        self.plugins = plugin.Plugins(self.config['Meguca']['General']['PluginDirectory'])
-        # Plugin-specific config
-        self.config['Plugin'] = self.plugins.load_plugins()
+        self.config = {'Meguca': general_config,
+                       'Plugins': plugin_config}
+
+        # Hold all service objects
+        self.services = {}
 
         # Hold all data generated and used by plugins
         self.data = {}
-
-        self.prepare()
 
     def run_plugin(self, plg, entry_method):
         """Run a plugin.
@@ -43,6 +43,10 @@ class Meguca():
             entrypoint_args['data'] = plugin.EntryPointMethodParam(self.data, raise_notyetexist=True)
         if 'config' in entrypoint_params:
             entrypoint_args['config'] = plugin.EntryPointMethodParam(self.config)
+
+        for param in entrypoint_params:
+            if param in self.services:
+                entrypoint_args[param] = self.services[param]
 
         result = entrypoint_method(**entrypoint_args)
 
@@ -119,10 +123,17 @@ class Meguca():
 
         self.schedule_plugins('View')
 
-    def prepare(self):
+    def load_services(self):
+        for plg in self.plugins.get_plugins('Service'):
+            self.services[plg.details['Core']['Identifier']] = plg.plugin_object.get()
+
+    def prime_run_plugins(self):
         for plg in self.plugins.get_plugins('Collector'):
             self.run_plugin(plg, 'prime_run')
 
+    def prepare(self):
+        self.load_services()
+        self.prime_run_plugins()
         self.schedule_all()
 
     def run(self):
@@ -131,7 +142,11 @@ class Meguca():
 
 def main():
     print('Starting Meguca')
-    meguca = Meguca(GENERAL_CONFIG_FILENAME)
+    general_config = utils.load_config(GENERAL_CONFIG_FILENAME)
+    plugins = plugin.Plugins(info.PLUGIN_DIRECTORY)
+    plugin_config = plugins.load_plugins()
+    meguca = Meguca(plugins, general_config, plugin_config)
+    meguca.prepare()
     meguca.run()
 
 
