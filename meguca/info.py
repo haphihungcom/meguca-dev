@@ -1,0 +1,1 @@
+PLUGIN_DIRECTORY = 'meguca/plugins'
