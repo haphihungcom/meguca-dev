@@ -172,6 +172,24 @@ class NSApi():
 
         return self.get_data('region', name, shards, shard_params)
 
+    def get_wa(self, council, shards, shard_params={}):
+        """Get info about the World Assembly.
+
+        :param council: Name of the council
+                        (ga for General Assembly, sc for Security Council)
+        :param shards: A name of a shard or list of shards
+        :param shard_params: A dict represents shard parameters
+
+        :rtype: A dict represents the XML tree of the API respond
+        """
+
+        if council == 'ga'
+            api_type = 'wa=1'
+        elif council == 'sc':
+            api_type = 'wa=2'
+
+        return self.get_data(api_type, '', shards, shard_params)
+
     def get_world(self, shards, shard_params={}):
         """Get info of the game world.
 
