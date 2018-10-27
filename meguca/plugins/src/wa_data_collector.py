@@ -90,7 +90,7 @@ class WADataCollector(plugin_categories.Collector):
         shard_params = {'view': 'region.{}'.format(self.plg_config['Region']['name']),
                         'filter': ['endo', 'member'],
                         'sincetime': self.last_evt_time}
-        events = self.ns_api.get_world('happenings', shard_params=shard_params)['HAPPENINGS']['EVENT']
+        events = ns_api.get_world('happenings', shard_params=shard_params)['HAPPENINGS']['EVENT']
         self.last_evt_time = events[0]['TIMESTAMP']
 
         load_data_from_api(events, data['wa_nations'])
