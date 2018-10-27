@@ -110,13 +110,11 @@ class TestWADataCollector():
     def test_prime_run_with_mocked_dump(self, prep_dumpfile, prep_config):
         ins = wa_data_collector.WADataCollector()
 
-        assert ('nation1', 'nation2') in ins.prime_run()['nations'].edges
+        assert ('nation1', 'nation2') in ins.prime_run()['wa_nations'].edges
 
     def test_run_with_mocked_events(self, prep_dumpfile, prep_config):
         mocked_events = {'HAPPENINGS': {'EVENT': [
                         {'TEXT': '@@nation1@@ withdrew its endorsement from @@nation3@@.',
-                         'TIMESTAMP': '3'},
-                        {'TEXT': '@@nation1@@ endorsed @@nation3@@.',
                          'TIMESTAMP': '2'},
                         {'TEXT': '@@nation1@@ endorsed @@nation2@@.',
                          'TIMESTAMP': '1'},
@@ -124,16 +122,16 @@ class TestWADataCollector():
                          'TIMESTAMP': '0'}
                         ]}}
 
-        with mock.patch('meguca.plugins.services.ns_api.ns_api.NSApi.get_world',
-                        return_value=mocked_events) as mocked_events:
-            ins = wa_data_collector.WADataCollector()
-            nations = nx.DiGraph()
 
-            ins.run({'nations': nations})
+        ins = wa_data_collector.WADataCollector()
+        mocked_nsapi = mock.Mock(get_world=mock.Mock(return_value=mocked_events))
+        nations = nx.DiGraph([('nation1', 'nation3')])
 
-            assert ('nation1', 'nation2') in nations.edges
-            assert ('nation1', 'nation3') not in nations.edges
-            assert ins.last_evt_time == '3'
+        ins.run(data={'wa_nations': nations}, ns_api=mocked_nsapi)
+
+        assert ('nation1', 'nation2') in nations.edges
+        assert ('nation1', 'nation3') not in nations.edges
+        assert ins.last_evt_time == '2'
 
 
 
