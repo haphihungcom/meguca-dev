@@ -3,7 +3,7 @@ import xmltodict
 
 from meguca import plugin_categories
 from meguca.plugins.src.services.ns_api import exceptions
-from meguca.plugins.src.services.ns_api import api_helper
+from meguca.plugins.src.services.ns_api import helpers
 
 # Maximum number of requests sent in 30 sec
 RATE_LIMIT = 50
@@ -14,87 +14,74 @@ API_VALUE_DELIMITER = "+"
 
 
 class NSApiPlugin(plugin_categories.Service):
-    def get(self):
-        return NSApi(self.plg_config['Auth']['useragent'],
-                     self.plg_config['Auth']['password'])
+    def get(self, config):
+
+        if 'password' in config['Meguca']['Auth']:
+            ns_api = NSApi(config['Meguca']['Auth']['useragent'],
+                           config['Meguca']['Auth']['password'])
+            ns_api.get_nation(config['Meguca']['Auth']['loginnation'], 'ping')
+        else:
+            ns_api = NSApi(config['Meguca']['Auth']['useragent'])
+
+        return ns_api
 
 
 class NSApi():
     def __init__(self, user_agent, password=None):
         self.session = requests.Session()
-
-        self.user_agent = user_agent
+        self.session.headers['user-agent'] = user_agent
         self.password = password
 
         # Number of requests sent in 30 sec range
         # to avoid rate-limit exceeding
         self.ratelimit_req_count = 0
 
-        # Headers of API requests
-        self.req_headers = {'user-agent': self.user_agent}
-
         if password is not None:
-            self._setup_private_session()
+            self.setup_private_session()
 
-    def _setup_private_session(self):
+    def setup_private_session(self):
         """Add password into headers to obtain pin on first private shard call."""
 
-        self.req_headers['X-Password'] = self.password
+        self.session.headers.update({'X-Password': self.password})
 
     def construct_req_url(self, api_type, name, shards, shard_params):
-        """Construct an API request URL based on api_type, name, and shards."""
+        """Construct a request URL based on api_type, name, and shards."""
 
         params = {api_type: name, 'q': shards}
         params.update(shard_params)
 
-        url = api_helper.construct_url(params, API_URL_BEGINNING,
-                                       API_PARAM_DELIMITER,
-                                       API_VALUE_DELIMITER)
+        url = helpers.construct_url(params, API_URL_BEGINNING,
+                                    API_PARAM_DELIMITER,
+                                    API_VALUE_DELIMITER)
 
         return url
 
-    def send_api_req(self, url):
-        """Send API request.
+    def send_req(self, url):
+        """Send request."""
 
-        :param url: API request URL
-
-        :rtype: A requests.Respond object
-        """
-
-        print(self.ratelimit_req_count)
         if self.ratelimit_req_count <= RATE_LIMIT:
-             respond = self.session.get(url, headers=self.req_headers)
+             resp = self.session.get(url)
         else:
             raise exceptions.NSAPIRateLimitError("API rate limit exceeded! Please wait a minute")
 
-        return respond
+        return resp
 
     def set_ratelimit_req_count(self, resp):
-        """Set ratelimit request count.
+        """Set ratelimit request count."""
 
-        :param resp: A requests.Respond object
-        """
         if 'x-ratelimit-requests-seen' in resp.headers:
             self.ratelimit_req_count = int(resp.headers['x-ratelimit-requests-seen'])
 
     def set_pin(self, resp):
-        """Add pin into request headers for next private calls.
-
-        :param resp: A requests.Respond object
-        """
+        """Add pin into request headers for next private calls."""
 
         if 'X-Pin' in resp.headers:
-            self.req_headers['X-Pin'] = resp.headers['X-Pin']
+            self.session.headers.update({'X-Pin': resp.headers['X-Pin']})
             # Password is not necessary anymore
-            self.req_headers.pop('X-Password', None)
+            self.session.headers.pop('X-Password', None)
 
     def process_xml(self, resp):
-        """Process XML in respond into dict.
-
-        :param resp: A requests.Respond object
-
-        :rtype: A dict represents the XML tree without root element
-        """
+        """Convert the XML in respond into dict."""
 
         resp_dict = xmltodict.parse(resp.text)
         # Discard root XML element
@@ -103,12 +90,7 @@ class NSApi():
         return resp_dict
 
     def process_respond(self, resp):
-        """Process the API respond.
-
-        :param resp: A requests.Respond object
-
-        :rtype: A dict represents the XML tree of the respond
-        """
+        """Process the respond."""
 
         self.set_ratelimit_req_count(resp)
 
@@ -132,30 +114,91 @@ class NSApi():
         else:
             raise exceptions.NSAPIError('An unknown API error has occured')
 
-    def get_data(self, api_type, name, shards, shard_params={}):
-        """Get info from the API.
+    def get_data(self, api_type="", name="", shards, shard_params={}):
+        """Get info.
 
-        :param api_type: Type of API (nation, region, or world)
-        :param name: Name of nation/region
-        :param shards: A name of a shard or list of shards
-        :param shard_params: A dict represents shard parameters
+        Args:
+            api_type (str, optional): API type (nation/region/wa)
+                Don't use if wanting world data.
+            name (str, optional): Name of nation/region
+                Don't use if wanting WA or world data.
+            shards (str|list): Shard to request
+                Use a list for multiple shards.
+            shard_params (dict, optional): Shard parameters
 
-        :rtype: A dict represents the XML tree of the response
+        Returns:
+            dict: XML tree of the respond.
+
+        Examples:
+            Get the population of a nation.
+
+            >>> ns_api = NSApi('Lampshade')
+            >>> r = ns_api.get_nation('testlandia', 'population')
+            >>> r['POPULATION']
+            '33107'
+
+            Get the population and motto of a nation:
+
+            >>> ns_api = NSApi('Lampshade')
+            >>> r = ns_api.get_data('nation', 'testlandia', ['population', 'motto'])
+            >>> r['POPULATION']
+            '33107'
+            >>> r['MOTTO']
+            'Grr. Arg.'
+
+            Get the average endorsement count and influence of the world:
+
+            >>> ns_api = NSApi('Lampshade')
+            >>> r = ns_api.get_data(shards='census', params={'scale': ['66', '65'], 'mode': 'score'})
+            >>> r['CENSUS']['SCALE'][0]['SCORE']
+            '3.34'
+            >>> r['CENSUS']['SCALE'][1]['SCORE']
+            '1833.28'
         """
 
+
         url = self.construct_req_url(api_type, name, shards, shard_params)
-        respond = self.send_api_req(url)
+        respond = self.send_req(url)
 
         return self.process_respond(respond)
 
     def get_nation(self, name, shards, shard_params={}):
         """Get info of a nation.
 
-        :param name: Name of the nation
-        :param shards: A name of a shard or list of shards
-        :param shard_params: A dict represents shard parameters
+        Args:
+            name (str): Name of nation
+            shards (str|list): Shard to request
+                Use a list for multiple shards.
+            shard_params (dict, optional): Shard parameters
 
-        :rtype: A dict represents the XML tree of the API respond
+        Returns:
+            dict: XML tree of the respond.
+
+        Examples:
+            Get the population of a nation.
+
+            >>> ns_api = NSApi('Lampshade')
+            >>> r = ns_api.get_nation('testlandia', 'population')
+            >>> r['POPULATION']
+            '33107'
+
+            Get the population and motto of a nation:
+
+            >>> ns_api = NSApi('Lampshade')
+            >>> r = ns_api.get_data('nation', 'testlandia', ['population', 'motto'])
+            >>> r['POPULATION']
+            '33107'
+            >>> r['MOTTO']
+            'Grr. Arg.'
+
+            Get the endorsement count and influence of a nation:
+
+            >>> ns_api = NSApi('Lampshade')
+            >>> r = ns_api.get_data('nation', 'testlandia', 'census', {'scale': ['66', '65'], 'mode': 'score'})
+            >>> r['CENSUS']['SCALE'][0]['SCORE']
+            '0.00'
+            >>> r['CENSUS']['SCALE'][1]['SCORE']
+            '12345.0'
         """
 
         return self.get_data('nation', name, shards, shard_params)
@@ -163,24 +206,74 @@ class NSApi():
     def get_region(self, name, shards, shard_params={}):
         """Get info of a region.
 
-        :param name: Name of the region
-        :param shards: A name of a shard or list of shards
-        :param shard_params: A dict represents shard parameters
+        Args:
+            name (str): Name of region
+            shards (str|list): Shard to request
+                Use a list for multiple shards.
+            shard_params (dict, optional): Shard parameters
 
-        :rtype: A dict represents the XML tree of the API respond
+        Returns:
+            dict: XML tree of the respond.
+
+        Examples:
+            Get the name of a region:
+
+            >>> ns_api = NSApi('Lampshade')
+            >>> r = ns_api.get_region('the_south_pacific', 'name')
+            >>> r['NAME']
+            'the South Pacific'
+
+            Get the nation number and founder of a region:
+
+            >>> ns_api = NSApi('Lampshade')
+            >>> r = ns_api.get_region('the_south_pacific', ['numnations', 'founder'])
+            >>> r['NUMNATIONS']
+            '7250'
+            >>> r['FOUNDER']
+            '0'
+
+            Get the average endorsement count and influence of a region:
+
+            >>> ns_api = NSApi('Lampshade')
+            >>> r = ns_api.get_region('the_south_pacific', 'census', {'scale': ['66', '65'], 'mode': 'score'})
+            >>> r['CENSUS']['SCALE'][0]['SCORE']
+            '8.12'
+            >>> r['CENSUS']['SCALE'][1]['SCORE']
+            '17776.3'
         """
 
         return self.get_data('region', name, shards, shard_params)
 
     def get_wa(self, council, shards, shard_params={}):
-        """Get info about the World Assembly.
+        """Get info of the World Assembly.
 
-        :param council: Name of the council
-                        (ga for General Assembly, sc for Security Council)
-        :param shards: A name of a shard or list of shards
-        :param shard_params: A dict represents shard parameters
+        Args:
+            council (str): Council name
+                ga -- General Assembly
+                sc -- Security Council
+            shards (str|list): Shard to request
+                Use a list for multiple shards.
+            shard_params (dict, optional): Shard parameters
 
-        :rtype: A dict represents the XML tree of the API respond
+        Returns:
+            dict: XML tree of the respond.
+
+        Examples:
+            Get the current GA resolution:
+
+            >>> ns_api = NSApi('Lampshade')
+            >>> r = ns_api.get_wa('ga', 'resolution')
+            >>> r['RESOLUTION']['NAME']
+            'Sensible limits on industry act'
+
+            Get delegates and WA members:
+
+            >>> ns_api = NSApi('Lampshade')
+            >>> r = ns_api.get_wa('ga', ['delegates', 'members'])
+            >>> r['DELEGATES']
+            'erinor,tsunamy,fedele,siwale'
+            >>> r['MEMBERS']
+            'usovietnam,roavin,serres,queen_yuno'
         """
 
         if council == 'ga':
@@ -191,12 +284,40 @@ class NSApi():
         return self.get_data(api_type, '', shards, shard_params)
 
     def get_world(self, shards, shard_params={}):
-        """Get info of the game world.
+        """Get info of the world.
 
-        :param shards: A name of a shard or list of shards
-        :param shard_params: A dict represents shard parameters
+        Args:
+            name (str): Name of region
+            shards (str|list): Shard to request
+                Use a list for multiple shards.
+            shard_params (dict, optional): Shard parameters
 
-        :rtype: A dict represents the XML tree of the API respond
+        Returns:
+            dict: XML tree of the respond.
+
+        Examples:
+            Get the total number of nations in NationStates:
+
+            >>> ns_api = NSApi('Lampshade')
+            >>> r = ns_api.get_world('numnations')
+            >>> r['NAME']
+            '199000'
+
+            Get the number of regions and region names in NationStates:
+
+            >>> ns_api = NSApi('Lampshade')
+            >>> ns_api.get_world(['regions', 'numregions'])
+            >>> r['REGIONS']
+            'the_south_pacific,the_east_pacific,japan'
+            >>> r['NUMREGIONS']
+            '12220'
+
+            Get 5 founding and CTE events:
+
+            >>> ns_api = NSApi('Lampshade')
+            >>> r = ns_api.get_world('happenings', {'filter': ['founding', 'cte'], 'limit': '5'})
+            >>> r['HAPPENINGS']['EVENT'][0]['TEXT']
+            '@@homura_chan@@ was founded in %%the_east_pacific%%.
         """
 
         return self.get_data('', '', shards, shard_params)
