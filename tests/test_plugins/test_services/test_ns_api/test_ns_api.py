@@ -5,7 +5,6 @@ import pytest
 import requests
 
 from meguca.plugins.src.services.ns_api import ns_api
-from meguca.plugins.src.services.ns_api import api_helper
 from meguca.plugins.src.services.ns_api import exceptions
 
 USER_AGENT = "Unit tests of Meguca | NS API Wrapper component"
@@ -15,9 +14,9 @@ class TestNSApiLowLevel():
 
     def test_setup_private_session(self):
         api = ns_api.NSApi("", 'Test')
-        api._setup_private_session()
+        api.setup_private_session()
 
-        assert api.req_headers['X-Password'] == 'Test'
+        assert api.session.headers['X-Password'] == 'Test'
 
     def test_construct_req_url(self):
 
@@ -52,12 +51,12 @@ class TestNSApiLowLevel():
     def test_set_pin(self):
         mocked_resp = mock.Mock(headers={'X-Pin': '0'})
         api = ns_api.NSApi("")
-        api.req_headers['X-Password'] = '0'
+        api.session.headers['X-Password'] = '0'
 
         api.set_pin(mocked_resp)
 
-        assert api.req_headers['X-Pin'] == '0'
-        assert 'X-Password' not in api.req_headers
+        assert api.session.headers['X-Pin'] == '0'
+        assert 'X-Password' not in api.session.headers
 
     def test_process_xml(self):
         mocked_resp = mock.Mock(text='<A><a>homuraisbestgirl</a></A>')
@@ -124,12 +123,12 @@ class TestNSApiAuth():
     def test_init_no_password(self):
         api = ns_api.NSApi("")
 
-        assert 'X-Password' not in api.req_headers
+        assert 'X-Password' not in api.session.headers
 
     def test_init_with_password(self):
         api = ns_api.NSApi("", password='Test')
 
-        assert api.req_headers['X-Password'] == 'Test'
+        assert api.session.headers['X-Password'] == 'Test'
 
     @mock.patch('requests.Session.get', return_value=mock.Mock(status_code=200,
                 text='<A><a>a</a></A>', headers={'X-Pin': '0', 'x-ratelimit-requests-seen': '0'}))
@@ -138,7 +137,7 @@ class TestNSApiAuth():
         api.get_data('test', 'Test', 'test')
         api.get_data('test', 'Test', 'test')
 
-        assert api.req_headers['X-Pin'] == '0' and 'X-Password' not in api.req_headers
+        assert api.session.headers['X-Pin'] == '0' and 'X-Password' not in api.session.headers
 
 
 class TestNSApiRateLimiter():
@@ -175,14 +174,27 @@ class TestNSApiIntegration():
 
 
 class TestNSApiPlugin():
-    def test_get(self):
+    @mock.patch('requests.Session.get',
+                return_value=mock.Mock(headers={'X-Pin': '0'},
+                                       status_code=200,
+                                       text='<A><a>a</a></A>'))
+    def test_get_with_password(self, mocked_requests_session_get):
         plg = ns_api.NSApiPlugin()
-        plg.plg_config = configparser.ConfigParser()
-        plg.plg_config['Auth'] = {'useragent': 'Test', 'password': 'password'}
+        config = configparser.ConfigParser()
+        config['Auth'] = {'useragent': 'Test', 'password': 'password', 'loginnation': 'Test'}
 
-        api = plg.get()
+        api = plg.get(config={'Meguca': config})
 
-        assert api.user_agent == 'Test' and api.password == 'password'
+        assert api.session.headers['user-agent'] == 'Test' and api.session.headers['X-Pin'] == '0'
+
+    def test_get_without_password(self):
+        plg = ns_api.NSApiPlugin()
+        config = configparser.ConfigParser()
+        config['Auth'] = {'useragent': 'Test', 'loginnation': 'Test'}
+
+        api = plg.get(config={'Meguca': config})
+
+        assert api.session.headers['user-agent'] == 'Test'
 
 
 
