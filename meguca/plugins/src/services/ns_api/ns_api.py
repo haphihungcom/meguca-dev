@@ -183,7 +183,7 @@ class NSApi():
         :rtype: A dict represents the XML tree of the API respond
         """
 
-        if council == 'ga'
+        if council == 'ga':
             api_type = 'wa=1'
         elif council == 'sc':
             api_type = 'wa=2'
