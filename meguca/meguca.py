@@ -141,7 +141,7 @@ class Meguca():
 def main():
     print('Starting Meguca')
     general_config = utils.load_config(GENERAL_CONFIG_FILENAME)
-    plugins = plugin.Plugins(info.PLUGIN_DIRECTORY)
+    plugins = plugin.Plugins(info.PLUGIN_DIRECTORY, info.PLUGIN_DESC_EXTENSION)
     plugin_config = plugins.load_plugins()
     meguca = Meguca(plugins, general_config, plugin_config)
     meguca.prepare()

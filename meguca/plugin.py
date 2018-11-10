@@ -15,8 +15,8 @@ PLUGIN_CATEGORIES = {
 }
 
 class Plugins():
-    def __init__(self, plugin_dir):
-        plg_analyzer = PluginFileLocator.PluginFileAnalyzerWithInfoFile('locator', 'plugin')
+    def __init__(self, plugin_dir, plugin_ext):
+        plg_analyzer = PluginFileLocator.PluginFileAnalyzerWithInfoFile('locator', plugin_ext)
         plg_locator = PluginFileLocator.PluginFileLocator(analyzers=[plg_analyzer])
         self.plugin_manager = PluginManager.PluginManager(
                               categories_filter=PLUGIN_CATEGORIES,
