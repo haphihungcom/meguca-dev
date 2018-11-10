@@ -10,12 +10,12 @@ class NSAPIRateLimitError(NSAPIError):
 
 class NSAPIReqError(NSAPIError):
     """Raise if there is an error in the API request
-    i.e non-existent regions, incorrect shard names, parameters,...
+    e.g non-existent regions, incorrect shard names, parameters,...
     """
 
 
 class NSAPIAuthError(NSAPIError):
     """Raise if there is an error during authentication
     for private calls
-    i.e incorrect password
+    e.g incorrect password, invalid pin,...
     """

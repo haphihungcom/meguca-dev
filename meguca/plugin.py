@@ -47,15 +47,30 @@ class EntryPointMethodParam():
     """Encapsulate an indexable object to pass as argument
     to the entry-point method of a plugin.
 
-    :param obj: An object
-    :param raise_notyetexist: If getting non-existent items from object
-    exceptions.NotYetExist will be raised instead of exceptions.NotFound
+    Args:
+        obj (object): An indexable object
+        raise_notyetexist (bool, optional): Defaults to False.
+            Raise NotYetExist instead of NotFound if cannot index object.
     """
+
     def __init__(self, obj, raise_notyetexist=False):
         self.obj = obj
         self.raise_notyetexist = raise_notyetexist
 
     def __getitem__(self, key):
+        """Index the object
+
+        Args:
+            key (int|str): Index number or key
+
+        Raises:
+            exceptions.NotFound: Raise if cannot index object
+            exceptions.NotYetExist: Raise if cannot index object when raise_notyetexist is True
+
+        Returns:
+            Result of the indexing
+        """
+
         if key not in self.obj:
             if self.raise_notyetexist:
                 raise exceptions.NotYetExist(key)

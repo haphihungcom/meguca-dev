@@ -127,10 +127,10 @@ class NSApi():
             shard_params (dict, optional): Shard parameters
 
         Returns:
-            dict: XML tree of the respond.
+            dict: XML tree of the respond
 
         Examples:
-            Get the population of a nation.
+            Get the population of a nation:
 
             >>> ns_api = NSApi('Lampshade')
             >>> r = ns_api.get_nation('testlandia', 'population')
@@ -172,7 +172,7 @@ class NSApi():
             shard_params (dict, optional): Shard parameters
 
         Returns:
-            dict: XML tree of the respond.
+            dict: XML tree of the respond
 
         Examples:
             Get the population of a nation.
@@ -213,7 +213,7 @@ class NSApi():
             shard_params (dict, optional): Shard parameters
 
         Returns:
-            dict: XML tree of the respond.
+            dict: XML tree of the respond
 
         Examples:
             Get the name of a region:
@@ -256,7 +256,7 @@ class NSApi():
             shard_params (dict, optional): Shard parameters
 
         Returns:
-            dict: XML tree of the respond.
+            dict: XML tree of the respond
 
         Examples:
             Get the current GA resolution:
@@ -293,7 +293,7 @@ class NSApi():
             shard_params (dict, optional): Shard parameters
 
         Returns:
-            dict: XML tree of the respond.
+            dict: XML tree of the respond
 
         Examples:
             Get the total number of nations in NationStates:
