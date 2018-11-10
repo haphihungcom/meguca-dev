@@ -16,14 +16,14 @@ class TestPlugins():
         with mock.patch('yapsy.PluginManager.PluginManager.getAllPlugins') as mocked_getAllPlugins:
             mocked_getAllPlugins.return_value = [mocked_plg]
 
-            plugins_ins = plugin.Plugins('')
+            plugins_ins = plugin.Plugins('','')
 
             assert plugins_ins.load_plugins() == {'Test': 'Test'}
 
     @mock.patch('yapsy.PluginManager.PluginManager.getPluginsOfCategory', return_value='Test')
     def test_get_plugins(self, mocked_getPluginsOfCategory, mocked_activatePluginByName,
                          mocked_collectPlugins, mocked_load_config):
-        plugins_ins = plugin.Plugins('')
+        plugins_ins = plugin.Plugins('','')
 
         assert plugins_ins.get_plugins('Test') == 'Test'
 

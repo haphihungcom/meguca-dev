@@ -172,7 +172,7 @@ class TestIntegrationMeguca():
     @freezegun.freeze_time('2018-01-01 00:00:00', tick=True)
     def test_run_meguca_with_real_plugins_and_config(self):
         general_config = utils.load_config('tests/resources/general_config.ini')
-        plugins = plugin.Plugins('tests/resources/plugins')
+        plugins = plugin.Plugins('tests/resources/plugins', 'plugin')
         plugin_config = plugins.load_plugins()
 
         meguca_ins = meguca.Meguca(plugins, general_config, plugin_config)
