@@ -1,24 +1,11 @@
 def key_val_format(key, val):
-    """Get a key=value formatted parameter str
-
-    :param key: Parameter's key
-    :param val: Parameter's value
-
-    :rtype: A str with key=value format
-    """
+    """Get a key=value formatted parameter string."""
 
     return "{}={}".format(key, val)
 
 
 def construct_url(params, url_beginning, param_delim, param_val_delim):
-    """Construct the parameter part of the URL
-    :param params: A dict containing the parameters
-    :param url_beginning: The beginning part of the request URL
-    :param param_delim: Delimiter that separates parameters
-    :param param_val_delim: Delimiter that separates values of a parameter
-
-    :rtype: A URL str
-    """
+    """Construct the parameter part of a URL."""
 
     url = url_beginning
 
