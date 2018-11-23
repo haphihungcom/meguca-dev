@@ -32,72 +32,72 @@ def meguca_dummy_plg(general_config):
     return meguca_ins
 
 
-@pytest.mark.usefixtures('mocked_plg')
+@pytest.mark.usefixtures('mock_plg')
 @pytest.fixture
-def meguca_standard_plg(mocked_plg, general_config):
-    """A Meguca instance with a mocked plugin which behaves like a real one."""
-    plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mocked_plg]))
+def meguca_standard_plg(mock_plg, general_config):
+    """A Meguca instance with a mock plugin which behaves like a real one."""
+    plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mock_plg]))
     meguca_ins = meguca.Meguca(plugins, general_config, None)
 
     return meguca_ins
 
 
 class TestRunPlugin():
-    @pytest.mark.usefixtures('mocked_plg')
-    def test_run_plugin_with_entrypoint_method_has_no_param(self, mocked_plg):
+    @pytest.mark.usefixtures('mock_plg')
+    def test_run_plugin_with_entrypoint_method_has_no_param(self, mock_plg):
         meguca_ins = meguca.Meguca(mock.Mock(), None, None)
 
-        meguca_ins.run_plugin(mocked_plg, 'run')
+        meguca_ins.run_plugin(mock_plg, 'run')
 
         assert meguca_ins.data == {'Test': 'Test'}
 
-    @pytest.mark.usefixtures('mocked_plg')
-    def test_run_plugin_with_entrypoint_method_has_params(self, mocked_plg):
+    @pytest.mark.usefixtures('mock_plg')
+    def test_run_plugin_with_entrypoint_method_has_params(self, mock_plg):
         meguca_ins = meguca.Meguca(mock.Mock(), None, None)
         meguca_ins.data = {'TestData': 'Test Data'}
 
         def stub_run(data):
             return {'Test': data['TestData']}
 
-        mocked_plg.plugin_object.run = stub_run
+        mock_plg.plugin_object.run = stub_run
 
-        meguca_ins.run_plugin(mocked_plg, 'run')
+        meguca_ins.run_plugin(mock_plg, 'run')
 
         assert meguca_ins.data['Test'] == 'Test Data'
 
-    @pytest.mark.usefixtures('mocked_plg')
-    def test_run_plugin_with_entrypoint_method_has_service_params(self, mocked_plg):
+    @pytest.mark.usefixtures('mock_plg')
+    def test_run_plugin_with_entrypoint_method_has_service_params(self, mock_plg):
         meguca_ins = meguca.Meguca(mock.Mock(), None, None)
         meguca_ins.services = {'service': mock.Mock(return_value='Test')}
 
         def stub_run(service):
             return {'Test': service()}
 
-        mocked_plg.plugin_object.run = stub_run
+        mock_plg.plugin_object.run = stub_run
 
-        meguca_ins.run_plugin(mocked_plg, 'run')
+        meguca_ins.run_plugin(mock_plg, 'run')
 
         assert meguca_ins.data['Test'] == 'Test'
 
 
 class TestRunStatPlugins():
     @mock.patch('meguca.meguca.Meguca.run_plugin', side_effect=exceptions.NotFound(''))
-    def test_run_stat_plugins_with_plugin_accesses_non_existent_item_of_param(self, mocked_run_plugin, meguca_dummy_plg):
+    def test_run_stat_plugins_with_plugin_indexes_non_existent_item_of_param(self, run_plugin, meguca_dummy_plg):
         meguca_ins = meguca_dummy_plg
 
         with pytest.raises(exceptions.NotFound):
             meguca_ins.run_stat_plugins()
 
-    def test_run_stat_plugins_with_plugin_accesses_not_yet_exist_item_of_param(self):
+    def test_run_stat_plugins_with_plugin_indexes_not_yet_exist_item_of_param(self):
         def stub_run_1():
             return {'TestData1': 'Test Data'}
 
         def stub_run_2(data):
             return {'TestData2': data['TestData1']}
 
-        mocked_plg_1 = mock.Mock(plugin_object=mock.Mock(run=stub_run_1))
-        mocked_plg_2 = mock.Mock(plugin_object=mock.Mock(run=stub_run_2))
-        plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mocked_plg_2, mocked_plg_1]))
+        mock_plg_1 = mock.Mock(plugin_object=mock.Mock(run=stub_run_1))
+        mock_plg_2 = mock.Mock(plugin_object=mock.Mock(run=stub_run_2))
+        plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mock_plg_2, mock_plg_1]))
         meguca_ins = meguca.Meguca(plugins, None, None)
 
         meguca_ins.run_stat_plugins()
@@ -108,12 +108,12 @@ class TestRunStatPlugins():
 class TestPluginSchedulingMethods():
     def test_schedule_with_a_method_with_kwargs(self):
         meguca_ins = meguca.Meguca(mock.Mock(), None, None)
-        mocked_method = mock.Mock()
+        mock_method = mock.Mock()
         schedule_config = configparser.ConfigParser()
         schedule_config['Scheduling'] = {'ScheduleMode': 'interval',
                                          'seconds': '1'}
 
-        meguca_ins.schedule(mocked_method, kwargs={'Test': 'Test'},
+        meguca_ins.schedule(mock_method, kwargs={'Test': 'Test'},
                             name='Test Method',
                             schedule_config=schedule_config.items('Scheduling'))
 
@@ -141,8 +141,8 @@ class TestLoadServices():
             return 'Test'
         plg_info = configparser.ConfigParser()
         plg_info['Core'] = {'Identifier': 'Test'}
-        mocked_plg = mock.Mock(plugin_object=mock.Mock(get=get), details=plg_info)
-        plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mocked_plg]))
+        mock_plg = mock.Mock(plugin_object=mock.Mock(get=get), details=plg_info)
+        plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mock_plg]))
         meguca_ins = meguca.Meguca(plugins, None, None)
 
         meguca_ins.load_services()
@@ -151,15 +151,15 @@ class TestLoadServices():
 
 
 class TestRunMeguca():
-    @pytest.mark.usefixtures('mocked_plg')
-    def test_prepare_calls_plugin_prime_run(self, meguca_standard_plg):
+    @pytest.mark.usefixtures('mock_plg')
+    def test_prime_run_plugins(self, meguca_standard_plg):
         meguca_ins = meguca_standard_plg
 
         meguca_ins.prime_run_plugins()
 
         assert meguca_ins.data == {'TestPrime': 'Test Prime'}
 
-    def test_run(self, meguca_dummy_plg):
+    def test_run_start_scheduler(self, meguca_dummy_plg):
         meguca_ins = meguca_dummy_plg
         meguca_ins.scheduler = mock.Mock(start=mock.Mock())
 

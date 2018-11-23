@@ -22,8 +22,8 @@ def prep_config():
 
 
 @pytest.fixture
-def mocked_dump():
-    mocked_dump = {'NATIONS': {'NATION': [{'NAME': 'nation1', 'REGION': 'region',
+def mock_dump():
+    dump = {'NATIONS': {'NATION': [{'NAME': 'nation1', 'REGION': 'region',
                               'UNSTATUS': 'WA Member', 'ENDORSEMENTS': 'nation2,nation3'},
                               {'NAME': 'nation2', 'REGION': 'region',
                               'UNSTATUS': 'WA Member', 'ENDORSEMENTS': 'nation1'},
@@ -31,7 +31,7 @@ def mocked_dump():
                               'UNSTATUS': 'WA Member', 'ENDORSEMENTS': ''}]}
                   }
 
-    return io.StringIO(xmltodict.unparse(mocked_dump))
+    return io.StringIO(xmltodict.unparse(dump))
 
 
 class TestLoadDump():
@@ -57,42 +57,42 @@ class TestAddEndo():
 
 
 class TestGetEligibleNations():
-    def test_run_with_mocked_datadump_xml(self, mocked_dump):
-        assert "nation1" in wa_data_collector.get_eligible_nations(mocked_dump, 'region')
+    def test_run_with_datadump_xml(self, mock_dump):
+        assert "nation1" in wa_data_collector.get_eligible_nations(mock_dump, 'region')
 
 
 class TestLoadDataFromDump():
-    def test_run_with_mocked_datadump_xml(self, mocked_dump):
+    def test_run_with_datadump_xml(self, mock_dump):
         nations = nx.DiGraph()
         eligible_nations = set(['nation1', 'nation2', 'nation3'])
 
-        wa_data_collector.load_data_from_dump(nations, mocked_dump, eligible_nations, 'region')
+        wa_data_collector.load_data_from_dump(nations, mock_dump, eligible_nations, 'region')
 
         assert ('nation1', 'nation2') in nations.edges
 
 
 class TestLoadDataFromAPI():
     def test_add_endorsement(self):
-        mocked_events = [{'TEXT': "@@nation1@@ endorsed @@nation2@@."}]
+        events = [{'TEXT': "@@nation1@@ endorsed @@nation2@@."}]
         nations = nx.DiGraph()
 
-        wa_data_collector.load_data_from_api(mocked_events, nations)
+        wa_data_collector.load_data_from_api(events, nations)
 
         assert ('nation1', 'nation2') in nations.edges
 
     def test_remove_endorsement(self):
-        mocked_events = [{'TEXT': "@@nation1@@ withdrew its endorsement from @@nation2@@."}]
+        events = [{'TEXT': "@@nation1@@ withdrew its endorsement from @@nation2@@."}]
         nations = nx.DiGraph([('nation1', 'nation2')])
 
-        wa_data_collector.load_data_from_api(mocked_events, nations)
+        wa_data_collector.load_data_from_api(events, nations)
 
         assert ('nation1', 'nation2') not in nations.edges
 
     def test_new_wa_admission(self):
-        mocked_events = [{'TEXT': "@@nation1@@ was admitted to the World Assembly."}]
+        events = [{'TEXT': "@@nation1@@ was admitted to the World Assembly."}]
         nations = nx.DiGraph()
 
-        wa_data_collector.load_data_from_api(mocked_events, nations)
+        wa_data_collector.load_data_from_api(events, nations)
 
         assert 'nation1' in nations
 
@@ -101,19 +101,19 @@ class TestWADataCollector():
     @pytest.fixture(scope='class')
     def prep_dumpfile(self):
         with gzip.open('meguca/nations.xml.gz', 'wb') as f:
-            f.write(mocked_dump().read().encode())
+            f.write(mock_dump().read().encode())
 
         yield 0
 
         os.remove('meguca/nations.xml.gz')
 
-    def test_prime_run_with_mocked_dump(self, prep_dumpfile, prep_config):
+    def test_prime_run_with_dump(self, prep_dumpfile, prep_config):
         ins = wa_data_collector.WADataCollector()
 
         assert ('nation1', 'nation2') in ins.prime_run()['wa_nations'].edges
 
-    def test_run_with_mocked_events(self, prep_dumpfile, prep_config):
-        mocked_events = {'HAPPENINGS': {'EVENT': [
+    def test_run_with_mock_events(self, prep_dumpfile, prep_config):
+        events = {'HAPPENINGS': {'EVENT': [
                         {'TEXT': '@@nation1@@ withdrew its endorsement from @@nation3@@.',
                          'TIMESTAMP': '2'},
                         {'TEXT': '@@nation1@@ endorsed @@nation2@@.',
@@ -124,10 +124,10 @@ class TestWADataCollector():
 
 
         ins = wa_data_collector.WADataCollector()
-        mocked_nsapi = mock.Mock(get_world=mock.Mock(return_value=mocked_events))
+        ns_api = mock.Mock(get_world=mock.Mock(return_value=events))
         nations = nx.DiGraph([('nation1', 'nation3')])
 
-        ins.run(data={'wa_nations': nations}, ns_api=mocked_nsapi)
+        ins.run(data={'wa_nations': nations}, ns_api=ns_api)
 
         assert ('nation1', 'nation2') in nations.edges
         assert ('nation1', 'nation3') not in nations.edges

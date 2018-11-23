@@ -10,7 +10,7 @@ LOCALID_URL = "https://www.nationstates.net/template-overall=none/page=settings"
 
 
 class NSSitePlugin(plugin_categories.Service):
-    def get(self, config, ns_api):
+    def get(self, ns_api):
         if 'X-Pin' in ns_api.session.headers:
             pin = ns_api.session.headers['X-Pin']
 

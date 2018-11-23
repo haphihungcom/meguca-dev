@@ -34,19 +34,19 @@ class TestNSApiLowLevel():
         assert api.ratelimit_req_count == 0
 
     @mock.patch('requests.Session.get', return_value='Test')
-    def test_send_api_req(self, mocked_requests_session_get):
+    def test_send_req(self, mocked_requests_session_get):
         api = ns_api.NSApi("")
 
-        assert api.send_api_req('Test') == 'Test'
+        assert api.send_req('Test') == 'Test'
 
     @mock.patch('requests.Session.get', return_value=mock.Mock(headers={'x-ratelimit-requests-seen': '0'}))
-    def test_send_api_req_when_ratelimit_exceeded(self, mocked_request_session_get):
+    def test_send_req_when_ratelimit_exceeded(self, mocked_request_session_get):
         ns_api.RATE_LIMIT = 0
         api = ns_api.NSApi("")
         api.ratelimit_req_count = 1
 
         with pytest.raises(exceptions.NSAPIRateLimitError):
-            api.send_api_req('Test')
+            api.send_req('Test')
 
     def test_set_pin(self):
         mocked_resp = mock.Mock(headers={'X-Pin': '0'})

@@ -10,19 +10,19 @@ from meguca import exceptions
 @mock.patch('yapsy.PluginManager.PluginManager.collectPlugins')
 @mock.patch('yapsy.PluginManager.PluginManager.activatePluginByName')
 class TestPlugins():
-    @pytest.mark.usefixtures('mocked_plg')
-    def test_load_plugins(self, mocked_activatePluginByName, mocked_collectPlugins,
-                          mocked_load_config, mocked_plg):
-        with mock.patch('yapsy.PluginManager.PluginManager.getAllPlugins') as mocked_getAllPlugins:
-            mocked_getAllPlugins.return_value = [mocked_plg]
+    @pytest.mark.usefixtures('mock_plg')
+    def test_load_plugins(self, activatePluginByName, collectPlugins,
+                          load_config, mock_plg):
+        with mock.patch('yapsy.PluginManager.PluginManager.getAllPlugins') as getAllPlugins:
+            getAllPlugins.return_value = [mock_plg]
 
             plugins_ins = plugin.Plugins('','')
 
             assert plugins_ins.load_plugins() == {'Test': 'Test'}
 
     @mock.patch('yapsy.PluginManager.PluginManager.getPluginsOfCategory', return_value='Test')
-    def test_get_plugins(self, mocked_getPluginsOfCategory, mocked_activatePluginByName,
-                         mocked_collectPlugins, mocked_load_config):
+    def test_get_plugins(self, getPluginsOfCategory, activatePluginByName,
+                         collectPlugins, load_config):
         plugins_ins = plugin.Plugins('','')
 
         assert plugins_ins.get_plugins('Test') == 'Test'
