@@ -114,7 +114,7 @@ class NSApi():
         else:
             raise exceptions.NSAPIError('An unknown API error has occured')
 
-    def get_data(self, api_type="", name="", shards, shard_params={}):
+    def get_data(self, api_type="", name="", shards="", shard_params={}):
         """Get info.
 
         Args:
