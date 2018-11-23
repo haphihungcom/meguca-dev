@@ -1,0 +1,9 @@
+[Core]
+Name = NationStates API Wrapper
+Identifier = ns_site
+Module = src/services/ns_site/ns_site
+
+[Documentation]
+Description = Provide a direct interface for NationStates website
+Author = USoVietnam
+Version = 0.0.1
