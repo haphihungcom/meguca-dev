@@ -1,20 +1,20 @@
 import requests
 
 from meguca import plugin_categories
-from meguca import utils
 from meguca.plugins.src.services.ns_site import helpers
 from meguca.plugins.src.services.ns_site import exceptions
+
 
 ACTION_URL = "https://www.nationstates.net/page={}"
 LOCALID_URL = "https://www.nationstates.net/template-overall=none/page=settings"
 
 
 class NSSitePlugin(plugin_categories.Service):
-    def get(self, ns_api):
+    def get(self, ns_api, config):
         if 'X-Pin' in ns_api.session.headers:
             pin = ns_api.session.headers['X-Pin']
 
-        return NSSite(self.plg_config['Auth']['useragent'], pin)
+        return NSSite(config['Meguca']['Auth']['useragent'], pin)
 
 
 class NSSite():
