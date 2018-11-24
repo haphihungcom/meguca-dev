@@ -13,12 +13,14 @@ from meguca.plugins.src import endo_collector
 
 @pytest.fixture(scope='module')
 def prep_config():
-    config = configparser.ConfigParser()
-    config['Auth'] = {'useragent': ''}
-    config['Region'] = {'name': 'region'}
-    config['DataDump'] = {'filepath': 'meguca/nations.xml.gz'}
+    plg_config = configparser.ConfigParser()
+    plg_config['DataDump'] = {'filepath': 'meguca/nations.xml.gz'}
+    endo_collector.EndoDataCollector.plg_config = plg_config
 
-    endo_collector.EndoDataCollector.plg_config = config
+    meguca_config = configparser.ConfigParser()
+    meguca_config['General'] = {'regionname': 'region'}
+
+    return {'Meguca': meguca_config}
 
 
 @pytest.fixture
@@ -110,7 +112,7 @@ class TestEndoDataCollector():
     def test_prime_run_with_dump(self, prep_dumpfile, prep_config):
         ins = endo_collector.EndoDataCollector()
 
-        assert ('nation1', 'nation2') in ins.prime_run()['endos'].edges
+        assert ('nation1', 'nation2') in ins.prime_run(config=prep_config)['endos'].edges
 
     def test_run_with_mock_events(self, prep_dumpfile, prep_config):
         events = {'HAPPENINGS': {'EVENT': [
@@ -127,7 +129,7 @@ class TestEndoDataCollector():
         ns_api = mock.Mock(get_world=mock.Mock(return_value=events))
         endos = nx.DiGraph([('nation1', 'nation3')])
 
-        ins.run(data={'endos': endos}, ns_api=ns_api)
+        ins.run(data={'endos': endos}, ns_api=ns_api, config=prep_config)
 
         assert ('nation1', 'nation2') in endos.edges
         assert ('nation1', 'nation3') not in endos.edges

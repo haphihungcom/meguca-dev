@@ -86,8 +86,8 @@ def load_data_from_api(events, endos):
 class EndoDataCollector(plugin_categories.Collector):
     last_evt_time = ''
 
-    def run(self, data, ns_api):
-        shard_params = {'view': 'region.{}'.format(self.plg_config['Region']['name']),
+    def run(self, data, ns_api, config):
+        shard_params = {'view': 'region.{}'.format(config['Meguca']['General']['regionname']),
                         'filter': ['endo', 'member'],
                         'sincetime': self.last_evt_time}
         events = ns_api.get_world('happenings', shard_params=shard_params)['HAPPENINGS']['EVENT']
@@ -95,13 +95,13 @@ class EndoDataCollector(plugin_categories.Collector):
 
         load_data_from_api(events, data['endos'])
 
-    def prime_run(self):
+    def prime_run(self, config):
         # A directional graph to store nations and their endorsements
         endos = nx.DiGraph()
         dump = load_dump(self.plg_config['DataDump']['filepath'])
 
-        eligible_nations = get_eligible_nations(dump, self.plg_config['Region']['name'])
+        eligible_nations = get_eligible_nations(dump, config['Meguca']['General']['regionname'])
         dump.seek(0)
-        load_data_from_dump(endos, dump, eligible_nations, self.plg_config['Region']['name'])
+        load_data_from_dump(endos, dump, eligible_nations, config['Meguca']['General']['regionname'])
 
         return {'endos': endos}
