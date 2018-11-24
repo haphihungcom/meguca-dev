@@ -1,0 +1,8 @@
+[Core]
+Name = Delegate endorsement stats
+Module = src/delegate_stats
+
+[Documentation]
+Description = Get incumbent delegate's name and endorsement count
+Author = USoVietnam
+Version = 0.0.1
