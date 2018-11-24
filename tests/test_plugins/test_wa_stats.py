@@ -14,5 +14,5 @@ class TestWAStats():
 
         result = ins.run(ns_api=ns_api, config=config)
 
-        result == {'region_wa_num': 1,
-                   'ns_wa_num': 2}
+        assert result == {'region_wa': ['nation1'],
+                          'ns_wa_num': 2}
