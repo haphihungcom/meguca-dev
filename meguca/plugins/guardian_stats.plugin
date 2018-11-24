@@ -1,0 +1,9 @@
+[Core]
+Name = Guardian stats
+Module = src/guardian_stats
+ConfigFile = meguca/config/plugin_config/guardian_stats.ini
+
+[Documentation]
+Description = Create a list of guardians
+Author = USoVietnam
+Version = 0.0.1
