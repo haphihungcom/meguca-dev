@@ -1,0 +1,9 @@
+[Core]
+Name = Endorsement data collector
+Module = src/endo_collector
+ConfigFile = meguca/config/plugin_config/endo_collector.ini
+
+[Documentation]
+Description = Gather endorsement data from the API and data dump
+Author = USoVietnam
+Version = 0.0.1
