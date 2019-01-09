@@ -74,7 +74,7 @@ class Meguca():
                     if i == 1:
                         raise exceptions.NotFound('Stat plugin {} requires non-existent item {} from a param'.format(plg.name, non_existent_key))
 
-    def schedule(self, method, name, schedule_config, kwargs={}):
+    def schedule(self, method, name, schedule_config, kwargs=None):
         """Schedule a method with schedule config.
 
         :param method: Method to schedule
@@ -92,7 +92,7 @@ class Meguca():
         self.scheduler.add_job(method,
                                trigger=schedule_mode,
                                name=name,
-                               kwargs=kwargs,
+                               kwargs=kwargs or {},
                                coalesce=True,
                                **schedule_config)
 

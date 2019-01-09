@@ -76,7 +76,7 @@ class NSApi():
         """Add pin into request headers for next private calls."""
 
         if 'X-Pin' in resp.headers:
-            self.session.headers.update({'X-Pin': resp.headers['X-Pin']})
+            self.session.headers['X-Pin'] = resp.headers['X-Pin']
             # Password is not necessary anymore
             self.session.headers.pop('X-Password', None)
 
@@ -114,7 +114,7 @@ class NSApi():
         else:
             raise exceptions.NSAPIError('An unknown API error has occured')
 
-    def get_data(self, api_type="", name="", shards="", shard_params={}):
+    def get_data(self, api_type="", name="", shards="", shard_params=None):
         """Get info.
 
         Args:
@@ -157,12 +157,12 @@ class NSApi():
         """
 
 
-        url = self.construct_req_url(api_type, name, shards, shard_params)
+        url = self.construct_req_url(api_type, name, shards, shard_params or {})
         respond = self.send_req(url)
 
         return self.process_respond(respond)
 
-    def get_nation(self, name, shards, shard_params={}):
+    def get_nation(self, name, shards, shard_params=None):
         """Get info of a nation.
 
         Args:
@@ -203,7 +203,7 @@ class NSApi():
 
         return self.get_data('nation', name, shards, shard_params)
 
-    def get_region(self, name, shards, shard_params={}):
+    def get_region(self, name, shards, shard_params=None):
         """Get info of a region.
 
         Args:
@@ -244,7 +244,7 @@ class NSApi():
 
         return self.get_data('region', name, shards, shard_params)
 
-    def get_wa(self, council, shards, shard_params={}):
+    def get_wa(self, council, shards, shard_params=None):
         """Get info of the World Assembly.
 
         Args:
@@ -283,7 +283,7 @@ class NSApi():
 
         return self.get_data(api_type, '', shards, shard_params)
 
-    def get_world(self, shards, shard_params={}):
+    def get_world(self, shards, shard_params=None):
         """Get info of the world.
 
         Args:

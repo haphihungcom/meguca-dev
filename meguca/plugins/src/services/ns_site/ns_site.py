@@ -21,8 +21,8 @@ class NSSite():
     def __init__(self, user_agent, pin=None):
         self.session = requests.Session()
 
-        self.session.headers.update({'user-agent': user_agent})
-        self.session.cookies.update({'pin': pin})
+        self.session.headers['user-agent'] = user_agent
+        self.session.cookies['pin'] = pin
 
         self.localid = None
 
