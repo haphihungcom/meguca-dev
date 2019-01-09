@@ -70,20 +70,20 @@ class TestNSSite():
 class TestIntegrationNSSite():
     def test_init_get_pin_from_ns_api(self):
         plg = ns_site.NSSitePlugin()
-        plg.plg_config = configparser.ConfigParser()
-        plg.plg_config['Auth'] = {'useragent': ''}
+        config = configparser.ConfigParser()
+        config['Auth'] = {'useragent': 'Test'}
         ns_api = mock.Mock(session=mock.Mock(headers={'X-Pin': '12345'}))
 
-        ins = plg.get(ns_api=ns_api)
+        ins = plg.get(ns_api=ns_api, config={'Meguca': config})
 
         assert ins.session.cookies['pin'] == '12345'
 
     def test_send_dispatch_update_request(self):
         plg = ns_site.NSSitePlugin()
-        plg.plg_config = configparser.ConfigParser()
-        plg.plg_config['Auth'] = {'useragent': ''}
+        config = configparser.ConfigParser()
+        config['Auth'] = {'useragent': 'Test'}
         ns_api = mock.Mock(session=mock.Mock(headers={'X-Pin': '12345'}))
-        ins = plg.get(ns_api=ns_api)
+        ins = plg.get(ns_api=ns_api, config={'Meguca': config})
 
         with mock.patch('requests.Session.get',
                         return_value=mock.Mock(status_code=200,
