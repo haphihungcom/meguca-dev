@@ -10,30 +10,34 @@ from meguca import utils
 
 
 class Meguca():
+    """Main application code."""
+
     def __init__(self, plugins, general_config, plugin_config):
         self.scheduler = BackgroundScheduler()
 
         self.plugins = plugins
 
+        # Holds general and plugins' configuration
         self.config = {'Meguca': general_config,
                        'Plugins': plugin_config}
 
-        # Hold all service objects
+        # Holds all service objects
         self.services = {}
 
-        # Hold all data generated and used by plugins
+        # Holds all data generated and used by plugins
         self.data = {}
 
     def run_plugin(self, plg, entry_method):
         """Run a plugin.
 
-        :param plg: A yapsy.PluginInfo object
-        :param entry_method: Plugin entry-point method name
+        Args:
+            plg (yapsy.PluginInfo): A PluginInfo object.
+            entry_method (str): Name of the entry point method.
         """
 
         entrypoint_method = getattr(plg.plugin_object, entry_method)
 
-        # Only pass arguments the entry-point method requires
+        # Only pass things the entry point method requires
         entrypoint_params = entrypoint_method.__code__.co_varnames
         entrypoint_args = {}
 
@@ -46,12 +50,12 @@ class Meguca():
             if param in self.services:
                 entrypoint_args[param] = self.services[param]
 
-        result = entrypoint_method(**entrypoint_args)
+        return_data = entrypoint_method(**entrypoint_args)
 
         # Add returned data to the data dict if the plugin
         # does return data
-        if result:
-            self.data.update(result)
+        if return_data:
+            self.data.update(return_data)
 
     def run_stat_plugins(self):
         """Run all stat plugins."""
@@ -75,12 +79,14 @@ class Meguca():
                         raise exceptions.NotFound('Stat plugin {} requires non-existent item {} from a param'.format(plg.name, non_existent_key))
 
     def schedule(self, method, name, schedule_config, kwargs=None):
-        """Schedule a method with schedule config.
+        """Schedule a plugin. run_plugin() of the plugin is used
+        to add to the scheduler's job list.
 
-        :param method: Method to schedule
-        :param kwargs: A dict that contains keyword arguments to pass to the method
-        :param name: Name of the method (optional)
-        :param schedule_config: A ConfigParser section object that contains schedule config
+        Args:
+            method: Entry point method.
+            name (str): Name
+            schedule_config (configparser.ConfigParser): Schedule configuration
+            kwargs (optional): Defaults to None. Arguments to pass to run_plugin()
         """
 
         schedule_config = dict(schedule_config)
@@ -99,7 +105,8 @@ class Meguca():
     def schedule_plugins(self, plg_category):
         """Schedule plugins by category.
 
-        :param plg_category: Plugin category name
+        Args:
+            plg_category (str): Category name
         """
 
         for plg in self.plugins.get_plugins(plg_category):
@@ -122,19 +129,31 @@ class Meguca():
         self.schedule_plugins('View')
 
     def load_services(self):
+        """Load service plugins."""
+
         for plg in self.plugins.get_plugins('Service'):
             self.services[plg.details['Core']['Identifier']] = plg.plugin_object.get()
 
     def prime_run_plugins(self):
+        """Prime run collector plugins."""
+
         for plg in self.plugins.get_plugins('Collector'):
             self.run_plugin(plg, 'prime_run')
 
     def prepare(self):
+        """Prepare everything before running.
+
+        - Load serivce plugins.
+        - Prime run collector plugins.
+        - Add plugins to the scheduler.
+        """
+
         self.load_services()
         self.prime_run_plugins()
         self.schedule_all()
 
     def run(self):
+        """Start the scheduler and run."""
         self.scheduler.start()
 
 
