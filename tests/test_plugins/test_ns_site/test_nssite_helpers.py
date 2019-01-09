@@ -1,4 +1,4 @@
-from meguca.plugins.src.services.ns_site import helpers
+from meguca.plugins.src.ns_site import helpers
 
 
 class TestParsers():

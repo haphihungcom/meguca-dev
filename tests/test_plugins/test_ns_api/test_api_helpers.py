@@ -1,4 +1,4 @@
-from meguca.plugins.src.services.ns_api import helpers
+from meguca.plugins.src.ns_api import helpers
 
 
 API_URL_BEGINNING = "https://www.nationstates.net/cgi-bin/api.cgi?"

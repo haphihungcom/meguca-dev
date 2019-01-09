@@ -1,8 +1,8 @@
 import requests
 
 from meguca import plugin_categories
-from meguca.plugins.src.services.ns_site import helpers
-from meguca.plugins.src.services.ns_site import exceptions
+from meguca.plugins.src.ns_site import helpers
+from meguca.plugins.src.ns_site import exceptions
 
 
 ACTION_URL = "https://www.nationstates.net/page={}"

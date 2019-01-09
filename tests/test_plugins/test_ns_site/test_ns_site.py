@@ -3,8 +3,8 @@ from unittest import mock
 
 import pytest
 
-from meguca.plugins.src.services.ns_site import ns_site
-from meguca.plugins.src.services.ns_site import exceptions
+from meguca.plugins.src.ns_site import ns_site
+from meguca.plugins.src.ns_site import exceptions
 
 
 class TestNSSiteHandleErrors():

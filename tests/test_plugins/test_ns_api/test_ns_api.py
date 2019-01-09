@@ -4,8 +4,8 @@ from unittest import mock
 import pytest
 import requests
 
-from meguca.plugins.src.services.ns_api import ns_api
-from meguca.plugins.src.services.ns_api import exceptions
+from meguca.plugins.src.ns_api import ns_api
+from meguca.plugins.src.ns_api import exceptions
 
 
 USER_AGENT = "Unit tests of Meguca | NS API Wrapper component"

@@ -1,7 +1,7 @@
 [Core]
-Name = NationStates API Wrapper
+Name = NationStates Site Direct Interface
 Identifier = ns_site
-Module = src/services/ns_site/ns_site
+Module = src/ns_site/ns_site
 
 [Documentation]
 Description = Provide a direct interface for NationStates website

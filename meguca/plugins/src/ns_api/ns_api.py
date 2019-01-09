@@ -2,8 +2,8 @@ import requests
 import xmltodict
 
 from meguca import plugin_categories
-from meguca.plugins.src.services.ns_api import exceptions
-from meguca.plugins.src.services.ns_api import helpers
+from meguca.plugins.src.ns_api import exceptions
+from meguca.plugins.src.ns_api import helpers
 
 # Maximum number of requests sent in 30 sec
 RATE_LIMIT = 50
