@@ -23,8 +23,7 @@ def prep_config():
     return {'Meguca': meguca_config}
 
 
-@pytest.fixture
-def mock_dump():
+def create_mock_dump():
     dump = {'NATIONS': {'NATION': [{'NAME': 'nation1', 'REGION': 'region',
                                     'UNSTATUS': 'WA Member', 'ENDORSEMENTS': 'nation2,nation3'},
                                    {'NAME': 'nation2', 'REGION': 'region',
@@ -34,6 +33,11 @@ def mock_dump():
            }
 
     return io.StringIO(xmltodict.unparse(dump))
+
+
+@pytest.fixture
+def mock_dump():
+    return create_mock_dump()
 
 
 class TestLoadDump():
@@ -103,7 +107,7 @@ class TestEndoDataCollector():
     @pytest.fixture(scope='class')
     def prep_dumpfile(self):
         with gzip.open('meguca/nations.xml.gz', 'wb') as f:
-            f.write(mock_dump().read().encode())
+            f.write(create_mock_dump().read().encode())
 
         yield 0
 
