@@ -117,7 +117,7 @@ class Meguca():
         # Schedule stat plugins which don't have scheduling capability for each plugin
         self.schedule(self.run_stat_plugins,
                       name='Stat plugins',
-                      schedule_config=self.config['Meguca'].items('StatPluginScheduling'))
+                      schedule_config=self.config['Meguca'].items('StatPluginsScheduling'))
 
         self.schedule_plugins('View')
 

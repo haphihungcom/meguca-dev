@@ -17,7 +17,7 @@ def general_config():
     """Standard general config for Meguca."""
 
     config = configparser.ConfigParser()
-    config['StatPluginScheduling'] = {'ScheduleMode': 'interval',
+    config['StatPluginsScheduling'] = {'ScheduleMode': 'interval',
                                       'seconds': '1'}
 
     return config
