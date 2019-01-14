@@ -7,12 +7,14 @@ from meguca import plugin_categories
 from meguca import utils
 from meguca import exceptions
 
+
 PLUGIN_CATEGORIES = {
     'Service': plugin_categories.Service,
     'Collector': plugin_categories.Collector,
     'Stat': plugin_categories.Stat,
     'View': plugin_categories.View
 }
+
 
 class Plugins():
     def __init__(self, plugin_dir, plugin_ext):
@@ -43,9 +45,9 @@ class Plugins():
         return self.plugin_manager.getPluginsOfCategory(category)
 
 
-class EntryPointMethodParam():
+class EntryParam():
     """Encapsulate an indexable object to pass as argument
-    to the entry-point method of a plugin.
+    to the entry method of a plugin.
 
     Args:
         obj (object): An indexable object
