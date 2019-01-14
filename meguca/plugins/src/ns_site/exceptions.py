@@ -10,8 +10,9 @@ class NSSiteHTTPError(exceptions.Meguca):
     """Raise if HTTP status code is not 200."""
     pass
 
+
 class NSSiteSecurityError(NSSiteError):
-    """Raise if a security check failure occurs."""
+    """Raise if a security check failure occurs or if no pin is provided."""
     pass
 
 

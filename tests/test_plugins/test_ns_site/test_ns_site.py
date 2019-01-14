@@ -33,6 +33,15 @@ class TestNSSiteHandleErrors():
         with pytest.raises(exceptions.NSSiteSecurityError):
             ins.handle_errors(resp)
 
+    def test_raise_exception_no_pin_provided(self):
+        plg = ns_site.NSSitePlugin()
+        config = configparser.ConfigParser()
+        config['Auth'] = {'useragent': ''}
+        ns_api = mock.Mock(session=mock.Mock(headers={}))
+
+        with pytest.raises(exceptions.NSSiteSecurityError):
+            plg.get(ns_api=ns_api, config={'Meguca': config})
+
     def test_raise_exception_page_not_found(self):
         ins = ns_site.NSSite('', '')
         html = '<p class="error">The requested page does not exist.</p>'
@@ -68,22 +77,27 @@ class TestNSSite():
 
 
 class TestIntegrationNSSite():
-    def test_init_get_pin_from_ns_api(self):
+    @pytest.fixture(scope='class')
+    def mock_ns_api(self):
+        ns_api = mock.Mock(session=mock.Mock(headers={'X-Pin': '12345'}))
+
+        return ns_api
+
+    def test_init_get_pin_from_ns_api(self, mock_ns_api):
         plg = ns_site.NSSitePlugin()
         config = configparser.ConfigParser()
         config['Auth'] = {'useragent': 'Test'}
         ns_api = mock.Mock(session=mock.Mock(headers={'X-Pin': '12345'}))
 
-        ins = plg.get(ns_api=ns_api, config={'Meguca': config})
+        ins = plg.get(ns_api=mock_ns_api, config={'Meguca': config})
 
         assert ins.session.cookies['pin'] == '12345'
 
-    def test_send_dispatch_update_request(self):
+    def test_send_dispatch_update_request(self, mock_ns_api):
         plg = ns_site.NSSitePlugin()
         config = configparser.ConfigParser()
         config['Auth'] = {'useragent': 'Test'}
-        ns_api = mock.Mock(session=mock.Mock(headers={'X-Pin': '12345'}))
-        ins = plg.get(ns_api=ns_api, config={'Meguca': config})
+        ins = plg.get(ns_api=mock_ns_api, config={'Meguca': config})
 
         with mock.patch('requests.Session.get',
                         return_value=mock.Mock(status_code=200,

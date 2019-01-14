@@ -15,7 +15,6 @@ API_VALUE_DELIMITER = "+"
 
 class NSApiPlugin(plugin_categories.Service):
     def get(self, config):
-
         if 'password' in config['Meguca']['Auth']:
             ns_api = NSApi(config['Meguca']['Auth']['useragent'],
                            config['Meguca']['Auth']['password'])

@@ -13,12 +13,22 @@ class NSSitePlugin(plugin_categories.Service):
     def get(self, ns_api, config):
         if 'X-Pin' in ns_api.session.headers:
             pin = ns_api.session.headers['X-Pin']
-
-        return NSSite(config['Meguca']['Auth']['useragent'], pin)
+            return NSSite(config['Meguca']['Auth']['useragent'], pin)
+        else:
+            raise exceptions.NSSiteSecurityError("Cannot find PIN to authenticate host nation. Consider providing login credential
+                                                 "for the host nation in the general config file or disabling this plugin")
 
 
 class NSSite():
-    def __init__(self, user_agent, pin=None):
+    """Provide a way to send POST requests with local ID to NationStates main site.
+    Is primarily used to update dispatches.
+
+    Args:
+        user_agent (str): User agent
+        pin (str): Defaults to None. PIN number to authenticate requests.
+    """
+
+    def __init__(self, user_agent, pin):
         self.session = requests.Session()
 
         self.session.headers['user-agent'] = user_agent
@@ -27,6 +37,15 @@ class NSSite():
         self.localid = None
 
     def handle_errors(self, resp):
+        """Handling errors if a request returns them.
+
+        Args:
+            resp (requests.Response): Respond.
+
+        Raises:
+            Refer to NS Site exceptions for the exception each type of errors may raise.
+        """
+
         if resp.status_code != 200:
             raise exceptions.NSSiteHTTPError("""A HTTP error occured when connecting to NationStates website.
                                              HTTP status code: {}""".format(resp.status_code))
@@ -46,6 +65,8 @@ class NSSite():
             raise exceptions.NSSiteError(error)
 
     def set_localid(self):
+        """Set local ID for a request."""
+
         resp = self.session.get(LOCALID_URL)
         self.handle_errors(resp)
 
@@ -55,6 +76,8 @@ class NSSite():
         self.localid = parser.get_id()
 
     def execute(self, action, params):
+        """Send a POST request."""
+
         params['localid'] = self.localid
         url = ACTION_URL.format(action)
 
