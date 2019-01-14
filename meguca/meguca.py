@@ -135,7 +135,10 @@ class Meguca():
         """Prime run collector plugins."""
 
         for plg in self.plugins.get_plugins('Collector'):
-            self.run_plugin(plg, 'prime_run')
+            try:
+                self.run_plugin(plg, 'prime_run')
+            except AttributeError:
+                continue
 
     def prepare(self):
         """Prepare everything before running."""
