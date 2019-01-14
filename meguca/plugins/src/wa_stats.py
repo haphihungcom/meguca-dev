@@ -7,7 +7,7 @@ class WAStats(plugin_categories.Stat):
 
         ns_wa_num = int(wa_data['NUMNATIONS'])
 
-        region_nations = set(ns_api.get_region(config['Meguca']['General']['region'],
+        region_nations = set(ns_api.get_region(config['Meguca']['General']['Region'],
                                                'nations')['NATIONS'].split(':'))
         ns_wa_nations = set(wa_data['MEMBERS'].split(','))
         region_wa_nations = list(region_nations & ns_wa_nations)

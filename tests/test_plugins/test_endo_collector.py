@@ -1,7 +1,6 @@
 import os
 import io
 import gzip
-import configparser
 from unittest import mock
 
 import pytest
@@ -13,12 +12,10 @@ from meguca.plugins.src import endo_collector
 
 @pytest.fixture(scope='module')
 def prep_config():
-    plg_config = configparser.ConfigParser()
-    plg_config['DataDump'] = {'filepath': 'meguca/nations.xml.gz'}
+    plg_config = {'DataDump': {'FilePath': 'meguca/nations.xml.gz'}}
     endo_collector.EndoDataCollector.plg_config = plg_config
 
-    meguca_config = configparser.ConfigParser()
-    meguca_config['General'] = {'regionname': 'region'}
+    meguca_config = {'General': {'Region': 'region'}}
 
     return {'Meguca': meguca_config}
 

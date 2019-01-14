@@ -6,8 +6,9 @@ import pytest
 
 @pytest.fixture
 def mock_plg():
-    """A mock plugin with standard entrypoint methods and config.
+    """A mock plugin with standard entry methods and config.
     It behaves like a real plugin."""
+
     def stub_run():
         return {'Test': 'Test'}
 
@@ -20,7 +21,7 @@ def mock_plg():
     config['Scheduling'] = {'ScheduleMode': 'interval',
                             'seconds': '1'}
     mock_plg = mock.Mock(plugin_object=mock_plg_obj,
-                           details=config)
+                         details=config)
     type(mock_plg).name = mock.PropertyMock(return_value='Test')
 
     return mock_plg

@@ -1,20 +1,28 @@
-import configparser
+import toml
 
 def load_config(filename):
-    """Get config from an INI file.
+    """Load configuration from a TOML file.
 
-    :param filename: Name of config file
+    Args:
+        filename (str): File name.
 
-    :rtype: A ConfigParser object
+    Returns:
+        dict: Configuration as a dictionary.
     """
 
-    config = configparser.ConfigParser()
-    config.read(filename)
-
-    return config
+    return toml.load(filename)
 
 
 def canonical(name):
+    """Turn a name into canonical form with no underscore or upper case.
+
+    Args:
+        name (str): A name
+
+    Returns:
+        str: Canonicalized name.
+    """
+
     if name is None:
         return None
     else:

@@ -1,4 +1,3 @@
-import configparser
 from unittest import mock
 
 import pytest
@@ -182,8 +181,7 @@ class TestNSApiPlugin():
                                        text='<A><a>a</a></A>'))
     def test_get_with_password(self, mocked_requests_session_get):
         plg = ns_api.NSApiPlugin()
-        config = configparser.ConfigParser()
-        config['Auth'] = {'useragent': 'Test', 'password': 'password', 'loginnation': 'Test'}
+        config = {'Auth': {'UserAgent': 'Test', 'Password': 'password', 'HostNation': 'Test'}}
 
         api = plg.get(config={'Meguca': config})
 
@@ -191,8 +189,7 @@ class TestNSApiPlugin():
 
     def test_get_without_password(self):
         plg = ns_api.NSApiPlugin()
-        config = configparser.ConfigParser()
-        config['Auth'] = {'useragent': 'Test', 'loginnation': 'Test'}
+        config = {'Auth': {'UserAgent': 'Test', 'HostNation': 'Test'}}
 
         api = plg.get(config={'Meguca': config})
 

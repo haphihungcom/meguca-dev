@@ -15,12 +15,12 @@ API_VALUE_DELIMITER = "+"
 
 class NSApiPlugin(plugin_categories.Service):
     def get(self, config):
-        if 'password' in config['Meguca']['Auth']:
-            ns_api = NSApi(config['Meguca']['Auth']['useragent'],
-                           config['Meguca']['Auth']['password'])
-            ns_api.get_nation(config['Meguca']['Auth']['loginnation'], 'ping')
+        if 'Password' in config['Meguca']['Auth']:
+            ns_api = NSApi(config['Meguca']['Auth']['UserAgent'],
+                           config['Meguca']['Auth']['Password'])
+            ns_api.get_nation(config['Meguca']['Auth']['HostNation'], 'ping')
         else:
-            ns_api = NSApi(config['Meguca']['Auth']['useragent'])
+            ns_api = NSApi(config['Meguca']['Auth']['UserAgent'])
 
         return ns_api
 

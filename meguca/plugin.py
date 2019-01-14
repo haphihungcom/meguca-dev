@@ -1,5 +1,4 @@
 import os
-import configparser
 
 from yapsy import PluginFileLocator, PluginManager
 

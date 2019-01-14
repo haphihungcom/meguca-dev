@@ -1,5 +1,3 @@
-import configparser
-
 from apscheduler.schedulers.background import BackgroundScheduler
 import yapsy
 
@@ -87,7 +85,14 @@ class Meguca():
         """
 
         schedule_config = dict(schedule_config)
-        schedule_mode = schedule_config.pop('schedulemode')
+
+        # Plugin definition files make no distinction of upper and lower case
+        # while configuration files does make
+        try:
+            schedule_mode = schedule_config.pop('schedulemode')
+        except KeyError:
+            schedule_mode = schedule_config.pop('ScheduleMode')
+
         # Convert all values into int
         if schedule_mode != 'date':
             schedule_config = {k: int(v) for k, v in schedule_config.items()}
@@ -121,7 +126,7 @@ class Meguca():
         # Stat plugins are run together with the same schedule.
         self.schedule(self.run_stat_plugins,
                       name='Stat plugins',
-                      schedule_config=self.config['Meguca'].items('StatPluginsScheduling'))
+                      schedule_config=self.config['Meguca']['StatPluginsScheduling'])
 
         self.schedule_plugins('View')
 

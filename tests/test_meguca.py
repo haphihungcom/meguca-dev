@@ -16,9 +16,8 @@ from meguca import exceptions
 def general_config():
     """Standard general config for Meguca."""
 
-    config = configparser.ConfigParser()
-    config['StatPluginsScheduling'] = {'ScheduleMode': 'interval',
-                                      'seconds': '1'}
+    config = {'StatPluginsScheduling': {'ScheduleMode': 'interval',
+                                        'seconds': '1'}}
 
     return config
 
@@ -26,6 +25,7 @@ def general_config():
 @pytest.fixture
 def meguca_dummy_plg(general_config):
     """A Meguca instance with a dummy plugin."""
+
     plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mock.Mock()]))
     meguca_ins = meguca.Meguca(plugins, general_config, None)
 
@@ -36,6 +36,7 @@ def meguca_dummy_plg(general_config):
 @pytest.fixture
 def meguca_standard_plg(mock_plg, general_config):
     """A Meguca instance with a mock plugin which behaves like a real one."""
+
     plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mock_plg]))
     meguca_ins = meguca.Meguca(plugins, general_config, None)
 
@@ -171,7 +172,7 @@ class TestRunMeguca():
 class TestIntegrationMeguca():
     @freezegun.freeze_time('2018-01-01 00:00:00', tick=True)
     def test_run_meguca_with_real_plugins_and_config(self):
-        general_config = utils.load_config('tests/resources/general_config.ini')
+        general_config = utils.load_config('tests/resources/general_config.toml')
         plugins = plugin.Plugins('tests/resources/plugins', 'plugin')
         plugin_config = plugins.load_plugins()
 

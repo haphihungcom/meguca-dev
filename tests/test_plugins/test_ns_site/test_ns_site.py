@@ -1,4 +1,3 @@
-import configparser
 from unittest import mock
 
 import pytest
@@ -35,8 +34,7 @@ class TestNSSiteHandleErrors():
 
     def test_raise_exception_no_pin_provided(self):
         plg = ns_site.NSSitePlugin()
-        config = configparser.ConfigParser()
-        config['Auth'] = {'useragent': ''}
+        config = {'Auth': {'UserAgent': ''}}
         ns_api = mock.Mock(session=mock.Mock(headers={}))
 
         with pytest.raises(exceptions.NSSiteSecurityError):
@@ -85,9 +83,7 @@ class TestIntegrationNSSite():
 
     def test_init_get_pin_from_ns_api(self, mock_ns_api):
         plg = ns_site.NSSitePlugin()
-        config = configparser.ConfigParser()
-        config['Auth'] = {'useragent': 'Test'}
-        ns_api = mock.Mock(session=mock.Mock(headers={'X-Pin': '12345'}))
+        config = {'Auth': {'UserAgent': 'Test'}}
 
         ins = plg.get(ns_api=mock_ns_api, config={'Meguca': config})
 
@@ -95,8 +91,7 @@ class TestIntegrationNSSite():
 
     def test_send_dispatch_update_request(self, mock_ns_api):
         plg = ns_site.NSSitePlugin()
-        config = configparser.ConfigParser()
-        config['Auth'] = {'useragent': 'Test'}
+        config = {'Auth': {'UserAgent': 'Test'}}
         ins = plg.get(ns_api=mock_ns_api, config={'Meguca': config})
 
         with mock.patch('requests.Session.get',
