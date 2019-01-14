@@ -1,0 +1,8 @@
+[Core]
+Name = Dispatch Updater
+Module = src/dispatch_updater/dispatch_updater
+
+[Documentation]
+Description = Update dispatches
+Author = USoVietnam
+Version = 0.0.1
