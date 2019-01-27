@@ -52,7 +52,10 @@ def load_data_from_dump(endos, dump, eligible_nations, region_name):
 
             if nation_name in eligible_nations:
                 is_in_region = True
-                endos_text = utils.canonical(elem.find('ENDORSEMENTS').text)
+
+                endos_text = elem.find('ENDORSEMENTS').text
+                if endos_text is not None:
+                    endos_text = utils.canonical(endos_text)
 
                 if endos_text is None:
                     endos.add_node(nation_name)
