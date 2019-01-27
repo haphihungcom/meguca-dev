@@ -159,8 +159,7 @@ class Meguca():
 
 
 def main():
-    """Initialize and start Meguca or clean-up and stop it.
-    """
+    """Initialize and start Meguca or clean-up and stop it."""
 
     print('Starting Meguca')
     general_config = utils.load_config(info.GENERAL_CONFIG_PATH)
