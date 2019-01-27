@@ -1,5 +1,8 @@
+"""This module handles the scheduling and calling of plugins.
+"""
+
+
 from apscheduler.schedulers.background import BackgroundScheduler
-import yapsy
 
 from meguca import info
 from meguca import exceptions
@@ -8,7 +11,7 @@ from meguca import utils
 
 
 class Meguca():
-    """Main application code."""
+    """Scheduling and plugin handling."""
 
     def __init__(self, plugins, general_config, plugin_config):
         self.scheduler = BackgroundScheduler()
@@ -74,30 +77,28 @@ class Meguca():
                     if i == 1:
                         raise exceptions.NotFound('Stat plugin {} requires non-existent item {} from a param'.format(plg.name, non_existent_key))
 
-    def schedule(self, callable, name, schedule_config, kwargs=None):
+    def schedule(self, callable_obj, name, schedule_config, kwargs=None):
         """Schedule a callable.
 
         Args:
-            callable: A callable.
+            callable_obj: A callable object.
             name (str): Name to refer to in the scheduler.
             schedule_config (configparser.SectionProxy): Schedule configuration.
             kwargs (optional): Defaults to None. Arguments to pass to the callable.
         """
 
-        schedule_config = dict(schedule_config)
-
-        # Plugin definition files make no distinction of upper and lower case
-        # while configuration files does make
+        # Plugin definition files make no distinction between upper and lower case
+        # while the TOML configuration files do make.
         try:
             schedule_mode = schedule_config.pop('schedulemode')
         except KeyError:
             schedule_mode = schedule_config.pop('ScheduleMode')
 
-        # Convert all values into int
+        # Convert all values into integers
         if schedule_mode != 'date':
             schedule_config = {k: int(v) for k, v in schedule_config.items()}
 
-        self.scheduler.add_job(callable,
+        self.scheduler.add_job(callable_obj,
                                trigger=schedule_mode,
                                name=name,
                                kwargs=kwargs,
@@ -116,7 +117,7 @@ class Meguca():
                           kwargs={'plg': plg,
                                   'entry_method': 'run'},
                           name=plg.name,
-                          schedule_config=plg.details.items('Scheduling'))
+                          schedule_config=dict(plg.details.items('Scheduling')))
 
     def schedule_all(self):
         """Schedule all plugins."""
@@ -153,14 +154,17 @@ class Meguca():
         self.schedule_all()
 
     def run(self):
-        """Start the scheduler and run."""
+        """Start the scheduler."""
         self.scheduler.start()
 
 
 def main():
+    """Initialize and start Meguca or clean-up and stop it.
+    """
+
     print('Starting Meguca')
-    general_config = utils.load_config(GENERAL_CONFIG_FILENAME)
-    plugins = plugin.Plugins(info.PLUGIN_DIRECTORY, info.PLUGIN_DESC_EXTENSION)
+    general_config = utils.load_config(info.GENERAL_CONFIG_PATH)
+    plugins = plugin.Plugins(info.PLUGIN_DIRECTORY, info.PLUGIN_DESC_EXT)
     plugin_config = plugins.load_plugins()
     meguca = Meguca(plugins, general_config, plugin_config)
     meguca.prepare()
