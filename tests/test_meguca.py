@@ -45,7 +45,7 @@ def meguca_standard_plg(mock_plg, general_config):
 
 class TestRunPlugin():
     @pytest.mark.usefixtures('mock_plg')
-    def test_run_plugin_with_entrypoint_method_has_no_param(self, mock_plg):
+    def test_run_plugin_with_entry_method_has_no_param(self, mock_plg):
         meguca_ins = meguca.Meguca(mock.Mock(), None, None)
 
         meguca_ins.run_plugin(mock_plg, 'run')
@@ -53,7 +53,7 @@ class TestRunPlugin():
         assert meguca_ins.data == {'Test': 'Test'}
 
     @pytest.mark.usefixtures('mock_plg')
-    def test_run_plugin_with_entrypoint_method_has_params(self, mock_plg):
+    def test_run_plugin_with_entry_method_has_params(self, mock_plg):
         meguca_ins = meguca.Meguca(mock.Mock(), None, None)
         meguca_ins.data = {'TestData': 'Test Data'}
 
@@ -67,7 +67,7 @@ class TestRunPlugin():
         assert meguca_ins.data['Test'] == 'Test Data'
 
     @pytest.mark.usefixtures('mock_plg')
-    def test_run_plugin_with_entrypoint_method_has_service_params(self, mock_plg):
+    def test_run_plugin_with_entry_method_has_service_params(self, mock_plg):
         meguca_ins = meguca.Meguca(mock.Mock(), None, None)
         meguca_ins.services = {'service': mock.Mock(return_value='Test')}
 
@@ -112,11 +112,11 @@ class TestPluginSchedulingMethods():
         mock_method = mock.Mock()
         schedule_config = configparser.ConfigParser()
         schedule_config['Scheduling'] = {'ScheduleMode': 'interval',
-                                         'seconds': '1'}
+                                         'Seconds': 1}
 
         meguca_ins.schedule(mock_method, kwargs={'Test': 'Test'},
                             name='Test Method',
-                            schedule_config=schedule_config.items('Scheduling'))
+                            schedule_config=dict(schedule_config.items('Scheduling')))
 
         assert meguca_ins.scheduler.get_jobs()[0].kwargs == {'Test': 'Test'}
         assert str(meguca_ins.scheduler.get_jobs()[0].trigger) == 'interval[0:00:01]'
