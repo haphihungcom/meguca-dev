@@ -1,3 +1,7 @@
+"""This module contains plugin category classes for plugins to inherit.
+"""
+
+
 from yapsy import IPlugin
 
 
@@ -33,11 +37,8 @@ class Collector(StandardPlugin):
     """Base class for plugins that collect data.
     Implement run() as entry point for normal run
     and prime_run() as entry point for prime run (optional).
-    run() and prime_run() needs to return a dict which contains
-    data you want to return. The key names in the dict will be used
-    as identifiers for the data you return. These identifiers
-    will be used by Meguca and other plugins to get the data
-    created by this plugin.
+    run() and prime_run() needs to return a dictionary which contains
+    data you want to return.
     """
 
     def prime_run(self):
@@ -45,13 +46,10 @@ class Collector(StandardPlugin):
 
 
 class Stat(StandardPlugin):
-    """Base class for plugins that calculate and return data
+    """Base class for plugins that calculate and return data.
     Implement run() as entry point.
-    run() needs to return a dict contains stats you want to
-    return. The dict's key names will be used as identifiers
-    of the stats you return. These identifiers will be used by
-    Meguca and other plugins to get the data created
-    by this plugin.
+    run() needs to return a dictionary which contains data
+    you want to return.
     """
 
 

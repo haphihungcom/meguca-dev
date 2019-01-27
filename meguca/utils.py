@@ -1,4 +1,9 @@
+"""A few utilities.
+"""
+
+
 import toml
+
 
 def load_config(filename):
     """Load configuration from a TOML file.
@@ -23,7 +28,4 @@ def canonical(name):
         str: Canonicalized name.
     """
 
-    if name is None:
-        return None
-    else:
-        return name.lower().replace('_', ' ')
+    return name.lower().replace('_', ' ')
