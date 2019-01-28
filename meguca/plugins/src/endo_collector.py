@@ -85,7 +85,6 @@ def load_data_from_dump(endos, dump, eligible_nations):
         eligible_nations (set): Used to confirm an endorsement is valid.
     """
 
-
     is_in_region = False
     for evt, elem in ET.iterparse(dump):
         if elem.tag == 'NATION':
