@@ -1,3 +1,7 @@
+"""Create a list of guardians
+"""
+
+
 import networkx as nx
 
 from meguca import plugin_categories

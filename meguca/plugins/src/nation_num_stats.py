@@ -1,3 +1,7 @@
+"""Get number of nations in a region and percentages.
+"""
+
+
 from meguca import plugin_categories
 
 

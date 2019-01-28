@@ -1,3 +1,7 @@
+"""Get WA nation number and percentages
+"""
+
+
 from meguca import plugin_categories
 
 

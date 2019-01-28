@@ -1,6 +1,11 @@
+"""Get total endorsement count and cross-endorsement rate.
+"""
+
+
 import networkx as nx
 
 from meguca import plugin_categories
+
 
 class RegionalEndoStats(plugin_categories.Stat):
     def run(self, data):
