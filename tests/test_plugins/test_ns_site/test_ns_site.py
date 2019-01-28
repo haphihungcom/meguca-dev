@@ -92,12 +92,11 @@ class TestIntegrationNSSite():
     def test_send_dispatch_update_request(self, mock_ns_api):
         plg = ns_site.NSSitePlugin()
         config = {'Auth': {'UserAgent': 'Test'}}
-        ins = plg.get(ns_api=mock_ns_api, config={'Meguca': config})
 
         with mock.patch('requests.Session.get',
                         return_value=mock.Mock(status_code=200,
                                                text='<input type="hidden" name="localid" value="li42rYLF326ZS">')):
-            ins.set_localid()
+            ins = plg.get(ns_api=mock_ns_api, config={'Meguca': config})
 
         with mock.patch('requests.Session.post',
                         return_value=mock.Mock(status_code=200,
