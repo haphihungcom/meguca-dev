@@ -73,7 +73,7 @@ class EntryParam():
     to the entry method of a plugin.
 
     Args:
-        obj (object): An indexable object
+        obj (object): An indexable object.
         raise_notyetexist (bool, optional): Defaults to False.
             Raise NotYetExist instead of NotFound if cannot index object.
     """
@@ -86,14 +86,14 @@ class EntryParam():
         """Index the object
 
         Args:
-            key (int|str): Index number or key
+            key (int|str): Index number or key.
 
         Raises:
-            exceptions.NotFound: Raise if cannot index object
-            exceptions.NotYetExist: Raise if cannot index object when raise_notyetexist is True
+            exceptions.NotFound: Raise if cannot index object.
+            exceptions.NotYetExist: Raise if cannot index object when raise_notyetexist is True.
 
         Returns:
-            Result of the indexing
+            Result of the indexing.
         """
 
         if key not in self.obj:
