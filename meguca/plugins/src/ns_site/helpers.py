@@ -4,14 +4,14 @@ from html import parser
 class LocalIdParser(parser.HTMLParser):
     """Extract localid from HTML."""
 
-    id = None
+    local_id = None
 
     def handle_starttag(self, tag, attrs):
-        if tag == "input" and attrs[1][1] == "localid":
-            self.id = attrs[2][1]
+        if tag == 'input' and ('name', 'localid') in attrs:
+            self.local_id = dict(attrs)['value']
 
     def get_id(self):
-        return self.id
+        return self.local_id
 
 
 class ErrorParser(parser.HTMLParser):
@@ -21,12 +21,13 @@ class ErrorParser(parser.HTMLParser):
     is_error = False
 
     def handle_starttag(self, tag, attrs):
-        if tag == "p" and attrs[0][1] == "error":
+        if tag == 'p' and ('class', 'error') in attrs:
             self.is_error = True
 
     def handle_data(self, data):
         if self.is_error:
             self.error = data
+            self.is_error = False
 
     def get_error(self):
         return self.error
