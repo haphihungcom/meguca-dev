@@ -1,0 +1,8 @@
+[Core]
+Name = Regional endorsement stats
+Module = src/regional_endo_stats
+
+[Documentation]
+Description = Get total endorsement count and cross-endorsement rate.
+Author = USoVietnam
+Version = 0.0.1

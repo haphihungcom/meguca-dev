@@ -3,6 +3,6 @@ Name = Regional nation number stats
 Module = src/nation_num_stats
 
 [Documentation]
-Description = Calculate number of nations in a region and percentage of the number to NS total nation number
+Description = Get number of nations in a region and percentages
 Author = USoVietnam
 Version = 0.0.1

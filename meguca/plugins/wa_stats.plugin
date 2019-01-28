@@ -3,6 +3,6 @@ Name = Regional WA stats
 Module = src/wa_stats
 
 [Documentation]
-Description = Calculate WA nation number and percentages
+Description = Get WA nation number and percentages
 Author = USoVietnam
 Version = 0.0.1
