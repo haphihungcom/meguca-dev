@@ -6,6 +6,7 @@ import requests
 import xmltodict
 
 from meguca import plugin_categories
+from meguca import utils
 from meguca.plugins.src.ns_api import exceptions
 from meguca.plugins.src.ns_api import helpers
 
@@ -27,7 +28,7 @@ class NSApiPlugin(plugin_categories.Service):
         if 'Password' in config['Meguca']['Auth']:
             ns_api = NSApi(config['Meguca']['Auth']['UserAgent'],
                            config['Meguca']['Auth']['Password'])
-            ns_api.get_nation(config['Meguca']['Auth']['HostNation'], 'ping')
+            ns_api.get_nation(utils.canonical(config['Meguca']['Auth']['HostNation']), 'ping')
         else:
             ns_api = NSApi(config['Meguca']['Auth']['UserAgent'])
 
@@ -312,11 +313,11 @@ class NSApi():
         """
 
         if council == 'ga':
-            api_type = 'wa=1'
+            name = '1'
         elif council == 'sc':
-            api_type = 'wa=2'
+            name = '2'
 
-        return self.get_data(api_type, '', shards, shard_params)
+        return self.get_data('wa', name, shards, shard_params)
 
     def get_world(self, shards, shard_params=None):
         """Get data about the world.
