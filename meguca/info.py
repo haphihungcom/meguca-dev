@@ -9,4 +9,4 @@ PLUGIN_DIRECTORY = 'meguca/plugins'
 PLUGIN_DESC_EXT = 'plugin'
 
 # Path to general configuration file
-GENERAL_CONFIG_PATH = 'meguca/config/meguca.toml'
+GENERAL_CONFIG_PATH = 'meguca/config/general_config.toml'
