@@ -26,22 +26,3 @@ class TestPlugins():
         plugins_ins = plugin.Plugins('','')
 
         assert plugins_ins.get_plugins('Test') == 'Test'
-
-
-class TestEntryParam():
-    def test_getitem(self):
-        param = plugin.EntryParam({'Test': 'Test'})
-
-        assert param['Test'] == 'Test'
-
-    def test_getitem_on_non_existent_item(self):
-        param = plugin.EntryParam({'Test': 'Test'})
-
-        with pytest.raises(exceptions.NotFound):
-            param['Test1']
-
-    def test_getitem_on_non_existent_item_with_raise_notyetexist_on(self):
-        param = plugin.EntryParam({'Test': 'Test'}, raise_notyetexist=True)
-
-        with pytest.raises(exceptions.NotYetExist):
-            param['Test1']
