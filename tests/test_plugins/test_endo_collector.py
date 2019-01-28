@@ -69,7 +69,7 @@ class TestLoadDataFromDump():
         endos = nx.DiGraph()
         eligible_nations = set(['nation1', 'nation2', 'nation3'])
 
-        endo_collector.load_data_from_dump(endos, mock_dump, eligible_nations, 'region')
+        endo_collector.load_data_from_dump(endos, mock_dump, eligible_nations)
 
         assert ('nation1', 'nation2') in endos.edges
 
