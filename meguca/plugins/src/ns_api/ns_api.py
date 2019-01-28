@@ -10,7 +10,7 @@ from meguca.plugins.src.ns_api import exceptions
 from meguca.plugins.src.ns_api import helpers
 
 
-# Maximum number of requests sent in 30 sec
+# Maximum number of requests to send in 30 sec
 RATE_LIMIT = 50
 
 API_URL_BEGINNING = "https://www.nationstates.net/cgi-bin/api.cgi?"
