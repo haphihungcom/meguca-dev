@@ -3,6 +3,10 @@ Name = Dispatch Updater
 Module = src/dispatch_updater/dispatch_updater
 ConfigFile = meguca/config/dispatch_updater.toml
 
+[Scheduling]
+ScheduleMode = interval
+seconds = 40
+
 [Documentation]
 Description = Update dispatches
 Author = USoVietnam

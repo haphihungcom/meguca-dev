@@ -1,7 +1,7 @@
 [Core]
 Name = Guardian stats
 Module = src/guardian_stats
-ConfigFile = meguca/config/plugin_config/guardian_stats.ini
+ConfigFile = meguca/config/guardian_stats.toml
 
 [Documentation]
 Description = Create a list of guardians

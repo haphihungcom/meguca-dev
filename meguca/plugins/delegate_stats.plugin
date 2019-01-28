@@ -1,6 +1,7 @@
 [Core]
 Name = Delegate endorsement stats
 Module = src/delegate_stats
+ConfigFile = meguca/config/delegate_stats.toml
 
 [Documentation]
 Description = Get incumbent delegate's name and endorsement count

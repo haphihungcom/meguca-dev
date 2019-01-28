@@ -1,7 +1,11 @@
 [Core]
 Name = Endorsement data collector
 Module = src/endo_collector
-ConfigFile = meguca/config/plugin_config/endo_collector.ini
+ConfigFile = meguca/config/endo_collector.toml
+
+[Scheduling]
+ScheduleMode = interval
+hours = 1
 
 [Documentation]
 Description = Collect endorsement data from the API and data dump
