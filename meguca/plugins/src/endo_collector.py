@@ -1,3 +1,7 @@
+"""Collect endorsement data from the API and data dump.
+"""
+
+
 import gzip
 import xml.etree.cElementTree as ET
 
@@ -8,7 +12,18 @@ from meguca import utils
 
 
 def load_dump(dump_path):
-    """Load NS data dump file."""
+    """Load NationStates data dump file.
+
+    Args:
+        dump_path (str): Path to data dump file.
+
+    Raises:
+        FileNotFoundError: Raises if cannot find data dump file.
+
+    Returns:
+        file object: Data dump file object.
+    """
+
 
     try:
         dump = gzip.open(dump_path)
@@ -19,20 +34,39 @@ def load_dump(dump_path):
 
 
 def add_endo(endo_sender, endo_receiver, endos, eligible_nations):
+    """Add endorsements to graph.
+
+    Args:
+        endo_sender (str): Endorsement-sending nation.
+        endo_receiver (str): Endorsement-receiving nation.
+        endos (networkx.DiGraph): Endorsement graph.
+        eligible_nations (set): Used to confirm an endorsement is valid.
+    """
+
     if endo_sender in eligible_nations:
         endos.add_edge(endo_sender, endo_receiver)
 
 
 def get_eligible_nations(dump, region_name):
-    """Build a set of eligible nations (in WA and configured region)
-    to remove a bug."""
+    """Get eligible nations to confirm validity of endorsements.
+    Read NationStates's data dump endorsement issue for the rationale
+    behind this.
+
+    Args:
+        dump (file object): Data dump file.
+        region_name (str): Region.
+
+    Returns:
+        set: Eligible nations.
+    """
+
 
     eligible_nations = set()
 
     for evt, elem in ET.iterparse(dump):
         if elem.tag == 'NATION':
-            if (elem.find('REGION').text == region_name
-                and elem.find('UNSTATUS').text.find('WA') != -1):
+            if (elem.find('REGION').text == region_name and
+                elem.find('UNSTATUS').text.find('WA') != -1):
 
                 nation_name = utils.canonical(elem.find('NAME').text)
                 eligible_nations.add(nation_name)
@@ -42,8 +76,15 @@ def get_eligible_nations(dump, region_name):
     return eligible_nations
 
 
-def load_data_from_dump(endos, dump, eligible_nations, region_name):
-    """Build nation graph with data from NS data dump."""
+def load_data_from_dump(endos, dump, eligible_nations):
+    """Build the endorsement graph using data from the data dump.
+
+    Args:
+        endos (networkx.DiGraph): Endorsement graph.
+        dump (file object): Data dump file.
+        eligible_nations (set): Used to confirm an endorsement is valid.
+    """
+
 
     is_in_region = False
     for evt, elem in ET.iterparse(dump):
@@ -72,6 +113,13 @@ def load_data_from_dump(endos, dump, eligible_nations, region_name):
 
 
 def load_data_from_api(events, endos):
+    """Update the endorsement graph with data from the happenings API.
+
+    Args:
+        events (list): Relevant happenings.
+        endos (networkx.DiGraph): Endorsement graph.
+    """
+
     for event in reversed(events):
         event_text = utils.canonical(event['TEXT'].replace('@@', '')[:-1])
 
@@ -90,6 +138,7 @@ class EndoDataCollector(plugin_categories.Collector):
     last_evt_time = ''
 
     def run(self, data, ns_api, config):
+        """Load new happenings from the API and update the endorsement graph."""
         shard_params = {'view': 'region.{}'.format(config['Meguca']['General']['Region']),
                         'filter': ['endo', 'member'],
                         'sincetime': self.last_evt_time}
@@ -99,12 +148,14 @@ class EndoDataCollector(plugin_categories.Collector):
         load_data_from_api(events, data['endos'])
 
     def prime_run(self, config):
-        # A directional graph to store nations and their endorsements
+        """Make an initial endorsement graph using the data dump."""
+
+        # A directional graph to store endorsement data.
         endos = nx.DiGraph()
         dump = load_dump(self.plg_config['DataDump']['FilePath'])
 
         eligible_nations = get_eligible_nations(dump, config['Meguca']['General']['Region'])
         dump.seek(0)
-        load_data_from_dump(endos, dump, eligible_nations, config['Meguca']['General']['Region'])
+        load_data_from_dump(endos, dump, eligible_nations)
 
         return {'endos': endos}
