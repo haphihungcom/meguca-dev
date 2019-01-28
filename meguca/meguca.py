@@ -2,7 +2,7 @@
 """
 
 
-from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 from meguca import info
 from meguca import exceptions
@@ -14,7 +14,7 @@ class Meguca():
     """Scheduling and plugin handling."""
 
     def __init__(self, plugins, general_config, plugin_config):
-        self.scheduler = BackgroundScheduler()
+        self.scheduler = BlockingScheduler()
 
         self.plugins = plugins
 
@@ -28,6 +28,21 @@ class Meguca():
         # Holds all data generated and used by plugins
         self.data = {}
 
+    def get_args(self, entry_method):
+        entry_params = entry_method.__code__.co_varnames
+        entry_args = {}
+
+        if 'data' in entry_params:
+            entry_args['data'] = self.data
+        if 'config' in entry_params:
+            entry_args['config'] = self.config
+
+        for param in entry_params:
+            if param in self.services:
+                entry_args[param] = self.services[param]
+
+        return entry_args
+
     def run_plugin(self, plg, entry_method):
         """Run a plugin.
 
@@ -37,19 +52,7 @@ class Meguca():
         """
 
         entry_method = getattr(plg.plugin_object, entry_method)
-
-        # Only pass things the entry method requires.
-        entry_params = entry_method.__code__.co_varnames
-        entry_args = {}
-
-        if 'data' in entry_params:
-            entry_args['data'] = plugin.EntryParam(self.data, raise_notyetexist=True)
-        if 'config' in entry_params:
-            entry_args['config'] = plugin.EntryParam(self.config)
-
-        for param in entry_params:
-            if param in self.services:
-                entry_args[param] = self.services[param]
+        entry_args = self.get_args(entry_method)
 
         return_data = entry_method(**entry_args)
 
@@ -73,7 +76,7 @@ class Meguca():
                 try:
                     self.run_plugin(plg, 'run')
                     queue.remove(plg)
-                except exceptions.NotYetExist as non_existent_key:
+                except KeyError as non_existent_key:
                     if i == 1:
                         raise exceptions.NotFound('Stat plugin {} requires non-existent item {} from a param'.format(plg.name, non_existent_key))
 
@@ -135,7 +138,8 @@ class Meguca():
         """Load service plugins."""
 
         for plg in self.plugins.get_plugins('Service'):
-            self.services[plg.details['Core']['Identifier']] = plg.plugin_object.get()
+            args = self.get_args(plg.plugin_object.get)
+            self.services[plg.details['Core']['Identifier']] = plg.plugin_object.get(**args)
 
     def prime_run_plugins(self):
         """Prime run collector plugins."""
