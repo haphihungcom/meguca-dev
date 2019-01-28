@@ -34,7 +34,7 @@ class NSSite():
         self.session.headers['user-agent'] = user_agent
         self.session.cookies['pin'] = pin
 
-        self.localid = None
+        self.set_localid()
 
     def handle_errors(self, resp):
         """Handling errors if a request returns them.
