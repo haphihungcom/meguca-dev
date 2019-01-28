@@ -11,6 +11,17 @@ USER_AGENT = "Unit tests of Meguca | NS API Wrapper component"
 
 
 def get_ns_api(user_agent="", password=None, **kwargs):
+    """Get an NS API instance with mocked requests.Respond.
+
+    Args:
+    user_agent (str, optional): Defaults to "". User agent.
+    password (str, optional): Defaults to None. Password.
+    **kwargs: Arguments for mocked requests.Respond.
+
+    Returns:
+        NSApi: NS API instance.
+    """
+
     api = ns_api.NSApi(user_agent, password)
     if kwargs is not None:
         api.respond = mock.Mock(**kwargs)
@@ -201,6 +212,3 @@ class TestNSApiPlugin():
         api = plg.get(config={'Meguca': config})
 
         assert api.session.headers['user-agent'] == 'Test'
-
-
-

@@ -11,7 +11,7 @@ class PluginError(Meguca):
 
 
 class NotFound(PluginError):
-    """Raise if get a non-existent item from entry-point method's parameters."""
+    """Raise if get a non-existent item from entry method's parameters."""
 
     def __init__(self, key):
         self.non_existent_key = key
@@ -21,4 +21,4 @@ class NotFound(PluginError):
 
 
 class NotYetExist(NotFound):
-    """Raise if get a non-yet-exist item from entry-point method's parameters."""
+    """Raise if get a non-yet-exist item from entry method's parameters."""

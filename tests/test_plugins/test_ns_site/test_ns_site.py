@@ -118,6 +118,3 @@ class TestIntegrationNSSite():
                                                            'dname': 'ex',
                                                            'message': 'abc',
                                                            'submitbutton': '1'})
-
-
-

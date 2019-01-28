@@ -83,6 +83,3 @@ class NSSite():
 
         resp = self.session.post(url, data=params)
         self.handle_errors(resp)
-
-
-

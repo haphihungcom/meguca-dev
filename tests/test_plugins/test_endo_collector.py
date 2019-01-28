@@ -135,7 +135,3 @@ class TestEndoDataCollector():
         assert ('nation1', 'nation2') in endos.edges
         assert ('nation1', 'nation3') not in endos.edges
         assert ins.last_evt_time == '2'
-
-
-
-

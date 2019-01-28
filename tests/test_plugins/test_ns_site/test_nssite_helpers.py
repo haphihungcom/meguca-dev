@@ -15,4 +15,3 @@ class TestParsers():
         parser.feed(html)
 
         assert parser.get_error() == 'Error'
-
