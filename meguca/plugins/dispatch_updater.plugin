@@ -1,6 +1,7 @@
 [Core]
 Name = Dispatch Updater
 Module = src/dispatch_updater/dispatch_updater
+ConfigFile = meguca/config/dispatch_updater.toml
 
 [Documentation]
 Description = Update dispatches
