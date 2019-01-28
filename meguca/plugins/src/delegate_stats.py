@@ -9,4 +9,4 @@ class DelegateStats(plugin_categories.Stat):
                                         {'mode': 'score', 'scale': '66'})['CENSUS']['SCALE']['SCORE']
 
         return {'incumbent_delegate': incumbent_delegate,
-                'delegate_ec': int(delegate_ec)}
+                'delegate_ec': int(float(delegate_ec))}
