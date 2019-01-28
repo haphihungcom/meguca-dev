@@ -1,9 +1,14 @@
+"""A wrapper for NationStates API.
+"""
+
+
 import requests
 import xmltodict
 
 from meguca import plugin_categories
 from meguca.plugins.src.ns_api import exceptions
 from meguca.plugins.src.ns_api import helpers
+
 
 # Maximum number of requests sent in 30 sec
 RATE_LIMIT = 50
@@ -14,7 +19,11 @@ API_VALUE_DELIMITER = "+"
 
 
 class NSApiPlugin(plugin_categories.Service):
+    """Service plugin class."""
+
     def get(self, config):
+        """Automatically collect pin for private requests if password is provided."""
+
         if 'Password' in config['Meguca']['Auth']:
             ns_api = NSApi(config['Meguca']['Auth']['UserAgent'],
                            config['Meguca']['Auth']['Password'])
@@ -26,14 +35,23 @@ class NSApiPlugin(plugin_categories.Service):
 
 
 class NSApi():
+    """Wrapper for NationStates API.
+
+    Args:
+        user_agent (str): User agent.
+        password (str, optional): Defaults to None.
+            Password to authenticate private requests.
+    """
+
     def __init__(self, user_agent, password=None):
         self.session = requests.Session()
         self.session.headers['user-agent'] = user_agent
+        self.respond = None
         self.password = password
 
-        # Number of requests sent in 30 sec range
-        # to avoid rate-limit exceeding
-        self.ratelimit_req_count = 0
+        # Number of requests sent in 30 seconds.
+        # Used to check the rate limit.
+        self.req_count = 0
 
         if password is not None:
             self.setup_private_session()
@@ -43,90 +61,99 @@ class NSApi():
 
         self.session.headers.update({'X-Password': self.password})
 
-    def construct_req_url(self, api_type, name, shards, shard_params):
-        """Construct a request URL based on api_type, name, and shards."""
-
-        params = {api_type: name, 'q': shards}
-        params.update(shard_params)
-
-        url = helpers.construct_url(params, API_URL_BEGINNING,
-                                    API_PARAM_DELIMITER,
-                                    API_VALUE_DELIMITER)
-
-        return url
-
     def send_req(self, url):
-        """Send request."""
+        """Send request.
 
-        if self.ratelimit_req_count <= RATE_LIMIT:
-             resp = self.session.get(url)
+        Args:
+            url (str): URL to send.
+
+        Raises:
+            exceptions.NSAPIRateLimitError: Raises if the rate limit is exceeded.
+        """
+
+        if self.req_count <= RATE_LIMIT:
+            self.respond = self.session.get(url)
         else:
             raise exceptions.NSAPIRateLimitError("API rate limit exceeded! Please wait a minute")
 
-        return resp
+    def set_req_count(self):
+        """Set request count."""
 
-    def set_ratelimit_req_count(self, resp):
-        """Set ratelimit request count."""
+        if 'x-ratelimit-requests-seen' in self.respond.headers:
+            self.req_count = int(self.respond.headers['x-ratelimit-requests-seen'])
 
-        if 'x-ratelimit-requests-seen' in resp.headers:
-            self.ratelimit_req_count = int(resp.headers['x-ratelimit-requests-seen'])
+    def set_pin(self):
+        """Collect and set pin if a request returns one.
+        The pin is used to authenticate private requests
+        of the same session.
+        """
 
-    def set_pin(self, resp):
-        """Add pin into request headers for next private calls."""
-
-        if 'X-Pin' in resp.headers:
-            self.session.headers['X-Pin'] = resp.headers['X-Pin']
+        if 'X-Pin' in self.respond.headers:
+            self.session.headers['X-Pin'] = self.respond.headers['X-Pin']
             # Password is not necessary anymore
             self.session.headers.pop('X-Password', None)
 
-    def process_xml(self, resp):
-        """Convert the XML in respond into dict."""
+    def process_xml(self):
+        """Convert the XML content in a respond into a dictionary.
 
-        resp_dict = xmltodict.parse(resp.text)
+        Returns:
+            dict: Converted content.
+        """
+
+        resp_dict = xmltodict.parse(self.respond.text)
         # Discard root XML element
         resp_dict = resp_dict[list(resp_dict.keys())[0]]
 
         return resp_dict
 
-    def process_respond(self, resp):
-        """Process the respond."""
+    def get_respond(self):
+        """Process the respond returned after a request is sent.
 
-        self.set_ratelimit_req_count(resp)
+        Raises:
+            Exceptions will be raised if the respond's HTTP code is not 200.
+            Read exceptions for more information.
 
-        if resp.status_code == 200:
-            self.set_pin(resp)
-            return self.process_xml(resp)
-        elif resp.status_code == 400:
+        Returns:
+            dict: Respond's content.
+        """
+
+        self.set_req_count()
+
+        if self.respond.status_code == 200:
+            self.set_pin()
+        elif self.respond.status_code == 400:
             raise exceptions.NSAPIReqError('Empty shard causes error when get world data')
-        elif resp.status_code == 404:
+        elif self.respond.status_code == 404:
             raise exceptions.NSAPIReqError('This region or nation does not exist')
-        elif resp.status_code == 403:
+        elif self.respond.status_code == 403:
             raise exceptions.NSAPIAuthError('Incorrect password')
-        elif resp.status_code == 429:
+        elif self.respond.status_code == 429:
             # In case someone override the internal
             # ratelimiting mechanism
             raise exceptions.NSAPIRateLimitError('NationStates has temporarily banned you for'
                                                  'violating the rate limit.'
-                                                 'Re-try after {}'.format(resp.headers['X-Retry-After']))
-        elif resp.status_code == 500:
+                                                 'Re-try after {}'.format(self.respond.headers['X-Retry-After']))
+        elif self.respond.status_code == 500:
             raise exceptions.NSAPIError('NS API returned an internal server error')
         else:
             raise exceptions.NSAPIError('An unknown API error has occured')
 
+        return self.process_xml()
+
     def get_data(self, api_type="", name="", shards="", shard_params=None):
-        """Get info.
+        """Get data about something from the API.
 
         Args:
-            api_type (str, optional): API type (nation/region/wa)
-                Don't use if wanting world data.
-            name (str, optional): Name of nation/region
-                Don't use if wanting WA or world data.
-            shards (str|list): Shard to request
+            api_type (str, optional): API type. (nation/region/wa)
+                Leave empty for the world API.
+            name (str, optional): Name of nation/region.
+                Leave empty for the wa or world API.
+            shards (str|list): Shard.
                 Use a list for multiple shards.
-            shard_params (dict, optional): Shard parameters
+            shard_params (dict, optional): Shard parameters.
 
         Returns:
-            dict: XML tree of the respond
+            dict: Respond content.
 
         Examples:
             Get the population of a nation:
@@ -148,30 +175,35 @@ class NSApi():
             Get the average endorsement count and influence of the world:
 
             >>> ns_api = NSApi('Lampshade')
-            >>> r = ns_api.get_data(shards='census', params={'scale': ['66', '65'], 'mode': 'score'})
+            >>> r = ns_api.get_data(shards='census',
+                                    params={'scale': ['66', '65'],
+                                            'mode': 'score'})
             >>> r['CENSUS']['SCALE'][0]['SCORE']
             '3.34'
             >>> r['CENSUS']['SCALE'][1]['SCORE']
             '1833.28'
         """
 
+        params = {api_type: name, 'q': shards}
+        params.update(shard_params or {})
 
-        url = self.construct_req_url(api_type, name, shards, shard_params or {})
-        respond = self.send_req(url)
+        url = helpers.construct_url(params, API_URL_BEGINNING,
+                                    API_PARAM_DELIMITER,
+                                    API_VALUE_DELIMITER)
 
-        return self.process_respond(respond)
+        self.send_req(url)
+        return self.get_respond()
 
     def get_nation(self, name, shards, shard_params=None):
-        """Get info of a nation.
+        """Get data about a nation.
 
         Args:
-            name (str): Name of nation
-            shards (str|list): Shard to request
+            name (str): Name of nation.
+            shards (str|list): Shard.
                 Use a list for multiple shards.
-            shard_params (dict, optional): Shard parameters
-
+            shard_params (dict, optional): Shard parameters.
         Returns:
-            dict: XML tree of the respond
+            dict: Respond content.
 
         Examples:
             Get the population of a nation.
@@ -193,7 +225,9 @@ class NSApi():
             Get the endorsement count and influence of a nation:
 
             >>> ns_api = NSApi('Lampshade')
-            >>> r = ns_api.get_data('nation', 'testlandia', 'census', {'scale': ['66', '65'], 'mode': 'score'})
+            >>> r = ns_api.get_data('nation', 'testlandia',
+                                    'census', {'scale': ['66', '65'],
+                                               'mode': 'score'})
             >>> r['CENSUS']['SCALE'][0]['SCORE']
             '0.00'
             >>> r['CENSUS']['SCALE'][1]['SCORE']
@@ -203,16 +237,16 @@ class NSApi():
         return self.get_data('nation', name, shards, shard_params)
 
     def get_region(self, name, shards, shard_params=None):
-        """Get info of a region.
+        """Get data about a region.
 
         Args:
-            name (str): Name of region
-            shards (str|list): Shard to request
+            name (str): Name of region.
+            shards (str|list): Shard.
                 Use a list for multiple shards.
-            shard_params (dict, optional): Shard parameters
+            shard_params (dict, optional): Shard parameters.
 
         Returns:
-            dict: XML tree of the respond
+            dict: Respond content.
 
         Examples:
             Get the name of a region:
@@ -234,7 +268,9 @@ class NSApi():
             Get the average endorsement count and influence of a region:
 
             >>> ns_api = NSApi('Lampshade')
-            >>> r = ns_api.get_region('the_south_pacific', 'census', {'scale': ['66', '65'], 'mode': 'score'})
+            >>> r = ns_api.get_region('the_south_pacific', 'census',
+                                      {'scale': ['66', '65'],
+                                       'mode': 'score'})
             >>> r['CENSUS']['SCALE'][0]['SCORE']
             '8.12'
             >>> r['CENSUS']['SCALE'][1]['SCORE']
@@ -244,18 +280,18 @@ class NSApi():
         return self.get_data('region', name, shards, shard_params)
 
     def get_wa(self, council, shards, shard_params=None):
-        """Get info of the World Assembly.
+        """Get data about the World Assembly.
 
         Args:
-            council (str): Council name
+            council (str): Council name.
                 ga -- General Assembly
                 sc -- Security Council
-            shards (str|list): Shard to request
+            shards (str|list): Shard.
                 Use a list for multiple shards.
-            shard_params (dict, optional): Shard parameters
+            shard_params (dict, optional): Shard parameters.
 
         Returns:
-            dict: XML tree of the respond
+            dict: Respond content.
 
         Examples:
             Get the current GA resolution:
@@ -283,16 +319,15 @@ class NSApi():
         return self.get_data(api_type, '', shards, shard_params)
 
     def get_world(self, shards, shard_params=None):
-        """Get info of the world.
+        """Get data about the world.
 
         Args:
-            name (str): Name of region
-            shards (str|list): Shard to request
+            shards (str|list): Shard.
                 Use a list for multiple shards.
-            shard_params (dict, optional): Shard parameters
+            shard_params (dict, optional): Shard parameters.
 
         Returns:
-            dict: XML tree of the respond
+            dict: Respond content.
 
         Examples:
             Get the total number of nations in NationStates:
@@ -314,7 +349,9 @@ class NSApi():
             Get 5 founding and CTE events:
 
             >>> ns_api = NSApi('Lampshade')
-            >>> r = ns_api.get_world('happenings', {'filter': ['founding', 'cte'], 'limit': '5'})
+            >>> r = ns_api.get_world('happenings',
+                                     {'filter': ['founding', 'cte'],
+                                     'limit': '5'})
             >>> r['HAPPENINGS']['EVENT'][0]['TEXT']
             '@@homura_chan@@ was founded in %%the_east_pacific%%.
         """
