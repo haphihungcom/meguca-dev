@@ -19,9 +19,9 @@ class TestTemplateProcessor():
         os.remove('tests/template_file_test.txt')
 
     def test_process_template(self, setup_template):
-        ins = dispatch_updater.TemplateProcessor('tests', {'j': [1, 2, 3]})
+        ins = dispatch_updater.DispatchRenderer('tests', {'j': [1, 2, 3]})
 
-        assert ins.process_template('template_file_test.txt') == '123'
+        assert ins.render_dispatch('template_file_test.txt') == '123'
 
 
 class TestDispatchUpdater():

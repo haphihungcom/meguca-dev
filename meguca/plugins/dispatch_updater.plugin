@@ -8,6 +8,6 @@ ScheduleMode = interval
 seconds = 40
 
 [Documentation]
-Description = Update dispatches
+Description = Create dispatches based on templates and upload them.
 Author = USoVietnam
 Version = 0.0.1
