@@ -4,9 +4,10 @@ from unittest import mock
 import pytest
 
 from meguca.plugins.src.dispatch_updater import dispatch_updater
+from meguca.plugins.src.dispatch_updater import dispatch_renderer
 
 
-class TestTemplateProcessor():
+class TestDispatchRenderer():
     @pytest.fixture
     def setup_template(self):
         template = '{% for i in j %}{{ i }}{% endfor %}'
@@ -18,8 +19,8 @@ class TestTemplateProcessor():
 
         os.remove('tests/template_file_test.txt')
 
-    def test_process_template(self, setup_template):
-        ins = dispatch_updater.DispatchRenderer('tests', {'j': [1, 2, 3]})
+    def test_render_dispatch(self, setup_template):
+        ins = dispatch_renderer.Renderer('tests', {'j': [1, 2, 3]})
 
         assert ins.render_dispatch('template_file_test.txt') == '123'
 
