@@ -9,6 +9,7 @@ import networkx as nx
 
 from meguca import plugin_categories
 from meguca import utils
+from meguca.plugins.src.endo_collector import exceptions
 
 
 def load_dump(dump_path):
@@ -111,7 +112,7 @@ def load_data_from_dump(endos, dump, eligible_nations):
             elem.clear()
 
 
-def load_data_from_api(events, endos):
+def load_data_from_api(events, endos, precision_mode=False):
     """Update the endorsement graph with data from the happenings API.
 
     Args:
@@ -122,15 +123,19 @@ def load_data_from_api(events, endos):
     for event in reversed(events):
         event_text = utils.canonical(event['TEXT'].replace('@@', '')[:-1])
 
-        if "endorsed" in event_text:
-            endo = event_text.split(" endorsed ")
-            endos.add_edge(endo[0], endo[1])
-        elif "withdrew its endorsement from" in event_text:
-            endo = event_text.split(" withdrew its endorsement from ")
-            endos.remove_edge(endo[0], endo[1])
-        elif "was admitted to the world assembly" in event_text:
-            nation = event_text.split(" was admitted to the world assembly")[0]
-            endos.add_node(nation)
+        try:
+            if "endorsed" in event_text:
+                endo = event_text.split(" endorsed ")
+                endos.add_edge(endo[0], endo[1])
+            elif "withdrew its endorsement from" in event_text:
+                endo = event_text.split(" withdrew its endorsement from ")
+                endos.remove_edge(endo[0], endo[1])
+            elif "was admitted to the world assembly" in event_text:
+                nation = event_text.split(" was admitted to the world assembly")[0]
+                endos.add_node(nation)
+        except nx.NetworkXError as e:
+            if precision_mode:
+                raise exceptions.IllegalEndorsement
 
 
 class EndoDataCollector(plugin_categories.Collector):
@@ -141,10 +146,13 @@ class EndoDataCollector(plugin_categories.Collector):
         shard_params = {'view': 'region.{}'.format(config['Meguca']['General']['Region']),
                         'filter': ['endo', 'member'],
                         'sincetime': self.last_evt_time}
-        events = ns_api.get_world('happenings', shard_params=shard_params)['HAPPENINGS']['EVENT']
-        self.last_evt_time = events[0]['TIMESTAMP']
-
-        load_data_from_api(events, data['endos'])
+        try:
+            events = ns_api.get_world('happenings', shard_params=shard_params)['HAPPENINGS']['EVENT']
+            self.last_evt_time = events[0]['TIMESTAMP']
+            load_data_from_api(events, data['endos'],
+                               precision_mode=self.plg_config['Precision']['PrecisionMode'])
+        except KeyError:
+            pass
 
     def prime_run(self, config):
         """Make an initial endorsement graph using the data dump."""

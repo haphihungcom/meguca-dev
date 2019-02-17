@@ -7,12 +7,14 @@ import pytest
 import xmltodict
 import networkx as nx
 
-from meguca.plugins.src import endo_collector
+from meguca.plugins.src.endo_collector import endo_collector
+from meguca.plugins.src.endo_collector import exceptions
 
 
 @pytest.fixture(scope='module')
 def prep_config():
-    plg_config = {'DataDump': {'FilePath': 'meguca/nations.xml.gz'}}
+    plg_config = {'DataDump': {'FilePath': 'meguca/nations.xml.gz'},
+                  'Precision': {'PrecisionMode': False}}
     endo_collector.EndoDataCollector.plg_config = plg_config
 
     meguca_config = {'General': {'Region': 'region'}}
@@ -98,6 +100,21 @@ class TestLoadDataFromAPI():
         endo_collector.load_data_from_api(events, endos)
 
         assert 'nation1' in endos
+
+    def test_illegal_endorsements_with_precision_mode(self):
+        events = [{'TEXT': "@@nation1@@ withdrew its endorsement from @@nation2@@."}]
+        endos = nx.DiGraph()
+
+        with pytest.raises(exceptions.IllegalEndorsement):
+            endo_collector.load_data_from_api(events, endos, precision_mode=True)
+
+    def test_illegal_endorsements_with_no_precision_mode(self):
+        events = [{'TEXT': "@@nation1@@ withdrew its endorsement from @@nation2@@."}]
+        endos = nx.DiGraph()
+
+        endo_collector.load_data_from_api(events, endos, precision_mode=False)
+
+        assert True
 
 
 class TestEndoDataCollector():
