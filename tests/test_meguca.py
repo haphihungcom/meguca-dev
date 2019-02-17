@@ -12,7 +12,7 @@ from meguca import utils
 from meguca import exceptions
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture
 def general_config():
     """Standard general config for Meguca."""
 
@@ -38,6 +38,8 @@ def meguca_standard_plg(mock_plg, general_config):
     """A Meguca instance with a mock plugin which behaves like a real one."""
 
     plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mock_plg]))
+    general_config.update({'PluginsScheduling': {'test': {'ScheduleMode': 'interval',
+                                                          'seconds': 6}}})
     meguca_ins = meguca.Meguca(plugins, general_config, None)
 
     return meguca_ins
@@ -110,13 +112,11 @@ class TestPluginSchedulingMethods():
     def test_schedule_with_a_method_with_kwargs(self):
         meguca_ins = meguca.Meguca(mock.Mock(), None, None)
         mock_method = mock.Mock()
-        schedule_config = configparser.ConfigParser()
-        schedule_config['Scheduling'] = {'ScheduleMode': 'interval',
-                                         'Seconds': 1}
+        config = {'ScheduleMode': 'interval', 'seconds': 1}
 
         meguca_ins.schedule(mock_method, kwargs={'Test': 'Test'},
                             name='Test Method',
-                            schedule_config=dict(schedule_config.items('Scheduling')))
+                            schedule_config=config)
 
         assert meguca_ins.scheduler.get_jobs()[0].kwargs == {'Test': 'Test'}
         assert str(meguca_ins.scheduler.get_jobs()[0].trigger) == 'interval[0:00:01]'

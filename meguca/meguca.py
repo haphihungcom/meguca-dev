@@ -86,21 +86,11 @@ class Meguca():
         Args:
             callable_obj: A callable object.
             name (str): Name to refer to in the scheduler.
-            schedule_config (configparser.SectionProxy): Schedule configuration.
+            schedule_config (dict): Schedule configuration.
             kwargs (optional): Defaults to None. Arguments to pass to the callable.
         """
 
-        # Plugin definition files make no distinction between upper and lower case
-        # while the TOML configuration files do make.
-        try:
-            schedule_mode = schedule_config.pop('schedulemode')
-        except KeyError:
-            schedule_mode = schedule_config.pop('ScheduleMode')
-
-        # Convert all values into integers
-        if schedule_mode != 'date':
-            schedule_config = {k: int(v) for k, v in schedule_config.items()}
-
+        schedule_mode = schedule_config.pop('ScheduleMode')
         self.scheduler.add_job(callable_obj,
                                trigger=schedule_mode,
                                name=name,
@@ -116,11 +106,12 @@ class Meguca():
         """
 
         for plg in self.plugins.get_plugins(plg_category):
+            identifier = plg.details['Core']['Identifier']
             self.schedule(self.run_plugin,
                           kwargs={'plg': plg,
                                   'entry_method': 'run'},
                           name=plg.name,
-                          schedule_config=dict(plg.details.items('Scheduling')))
+                          schedule_config=self.config['Meguca']['PluginsScheduling'][identifier])
 
     def schedule_all(self):
         """Schedule all plugins."""
