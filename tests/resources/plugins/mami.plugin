@@ -1,5 +1,6 @@
 [Core]
 Name = Mami
+Identifier = mami
 Module = mami
 
 [Scheduling]

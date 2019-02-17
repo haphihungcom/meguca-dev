@@ -2,7 +2,7 @@
 """
 
 
-from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 
 from meguca import info
 from meguca import exceptions
@@ -14,7 +14,7 @@ class Meguca():
     """Scheduling and plugin handling."""
 
     def __init__(self, plugins, general_config, plugin_config):
-        self.scheduler = BlockingScheduler()
+        self.scheduler = BackgroundScheduler()
 
         self.plugins = plugins
 
@@ -106,12 +106,14 @@ class Meguca():
         """
 
         for plg in self.plugins.get_plugins(plg_category):
-            identifier = plg.details['Core']['Identifier']
+            identifier = plg.details['Core']['identifier']
+            schedule_config = dict(self.config['Meguca']['PluginScheduling'][identifier])
+
             self.schedule(self.run_plugin,
                           kwargs={'plg': plg,
                                   'entry_method': 'run'},
                           name=plg.name,
-                          schedule_config=self.config['Meguca']['PluginsScheduling'][identifier])
+                          schedule_config=schedule_config)
 
     def schedule_all(self):
         """Schedule all plugins."""

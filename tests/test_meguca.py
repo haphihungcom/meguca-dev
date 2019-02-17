@@ -38,8 +38,9 @@ def meguca_standard_plg(mock_plg, general_config):
     """A Meguca instance with a mock plugin which behaves like a real one."""
 
     plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mock_plg]))
-    general_config.update({'PluginsScheduling': {'test': {'ScheduleMode': 'interval',
-                                                          'seconds': 6}}})
+    general_config.update({'PluginScheduling': {'test': {'ScheduleMode': 'interval',
+                                                         'seconds': 6}}})
+
     meguca_ins = meguca.Meguca(plugins, general_config, None)
 
     return meguca_ins
