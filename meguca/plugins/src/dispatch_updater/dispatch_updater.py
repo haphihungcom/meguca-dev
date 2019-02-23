@@ -8,7 +8,8 @@ from meguca.plugins.src.dispatch_updater import dispatch_renderer
 
 class DispatchUpdater(plugin_categories.View):
     def run(self, data, ns_site):
-        renderer = dispatch_renderer.Renderer(self.plg_config['General']['TemplateDirectory'], data)
+        renderer = dispatch_renderer.Renderer(self.plg_config['General']['TemplateDirectory'],
+                                              self.plg_config['CustomBBCodeTags'], data)
         self.ns_site = ns_site
 
         dispatches = self.plg_config['Dispatches']
