@@ -1,16 +1,16 @@
-[StatPluginsScheduling]
+[StatPluginsSchedule]
 ScheduleMode = 'date'
 run_date = '2018-01-01 00:00:04'
 timezone = 'UTC'
 
 
-[PluginScheduling]
-[PluginScheduling.sayaka]
+[PluginSchedule]
+[PluginSchedule.sayaka]
 ScheduleMode = 'date'
 run_date = '2018-01-01 00:00:02'
 timezone = 'UTC'
 
-[PluginScheduling.mami]
+[PluginSchedule.mami]
 ScheduleMode = 'date'
 run_date = '2018-01-01 00:00:06'
 timezone = 'UTC'
