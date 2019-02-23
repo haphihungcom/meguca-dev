@@ -16,7 +16,7 @@ from meguca import exceptions
 def general_config():
     """Standard general config for Meguca."""
 
-    config = {'StatPluginsScheduling': {'ScheduleMode': 'interval',
+    config = {'StatPluginsSchedule': {'ScheduleMode': 'interval',
                                         'seconds': 1}}
 
     return config
@@ -38,7 +38,7 @@ def meguca_standard_plg(mock_plg, general_config):
     """A Meguca instance with a mock plugin which behaves like a real one."""
 
     plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mock_plg]))
-    general_config.update({'PluginScheduling': {'test': {'ScheduleMode': 'interval',
+    general_config.update({'PluginSchedule': {'test': {'ScheduleMode': 'interval',
                                                          'seconds': 6}}})
 
     meguca_ins = meguca.Meguca(plugins, general_config, None)

@@ -107,7 +107,7 @@ class Meguca():
 
         for plg in self.plugins.get_plugins(plg_category):
             identifier = plg.details['Core']['identifier']
-            schedule_config = dict(self.config['Meguca']['PluginScheduling'][identifier])
+            schedule_config = dict(self.config['Meguca']['PluginSchedule'][identifier])
 
             self.schedule(self.run_plugin,
                           kwargs={'plg': plg,
@@ -123,7 +123,7 @@ class Meguca():
         # Stat plugins are run together with the same schedule.
         self.schedule(self.run_stat_plugins,
                       name='Stat plugins',
-                      schedule_config=self.config['Meguca']['StatPluginsScheduling'])
+                      schedule_config=self.config['Meguca']['StatPluginsSchedule'])
 
         self.schedule_plugins('View')
 
