@@ -1,4 +1,9 @@
+import logging
+
 from meguca import plugin_categories
+
+
+logger = logging.getLogger(__name__)
 
 
 class DelegateStats(plugin_categories.Stat):
@@ -8,5 +13,9 @@ class DelegateStats(plugin_categories.Stat):
                                         'census',
                                         {'mode': 'score', 'scale': '66'})['CENSUS']['SCALE']['SCORE']
 
-        return {'incumbent_delegate': incumbent_delegate,
-                'delegate_ec': int(float(delegate_ec))}
+        result =  {'incumbent_delegate': incumbent_delegate,
+                   'delegate_ec': int(float(delegate_ec))}
+
+        logger.debug('Delegate stats generated: %r', result)
+
+        return result

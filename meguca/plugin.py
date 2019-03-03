@@ -3,11 +3,16 @@ to interact with the plugins.
 """
 
 
+import logging
+
 from yapsy import PluginFileLocator, PluginManager
 
 from meguca import plugin_categories
 from meguca import utils
 from meguca import exceptions
+
+
+logger = logging.getLogger(__name__)
 
 
 PLUGIN_CATEGORIES = {
@@ -50,8 +55,12 @@ class Plugins():
                 plg_config = utils.load_config(plg.details['Core']['ConfigFile'])
                 plg.plugin_object.plg_config = plg_config
                 all_plg_config[plg.name] = plg_config
+
+                logger.debug('Loaded plugin "%s"', plg.name)
             except (IOError, KeyError):
                 pass
+
+        logger.info('Loaded all plugins')
 
         return all_plg_config
 
@@ -66,3 +75,40 @@ class Plugins():
         """
 
         return self.plugin_manager.getPluginsOfCategory(category)
+
+
+class EntryParam():
+    """Encapsulate an indexable object to pass as argument
+    to the entry method of a plugin.
+
+    Args:
+        obj (object): An indexable object
+        raise_notyetexist (bool, optional): Defaults to False.
+            Raise NotYetExist instead of NotFound if cannot index object.
+    """
+
+    def __init__(self, obj, raise_notyetexist=False):
+        self.obj = obj
+        self.raise_notyetexist = raise_notyetexist
+
+    def __getitem__(self, key):
+        """Index the object.
+
+        Args:
+            key (int|str): Index number or key.
+
+        Raises:
+            exceptions.NotFound: Raise if cannot index object.
+            exceptions.NotYetExist: Raise if cannot index object when raise_notyetexist is True.
+
+        Returns:
+            Result of the indexing.
+        """
+
+        if key not in self.obj:
+            if self.raise_notyetexist:
+                raise exceptions.NotYetExist(key)
+            else:
+                raise exceptions.NotFound(key)
+
+        return self.obj[key]

@@ -2,6 +2,7 @@
 """
 
 
+import logging
 import gzip
 import xml.etree.cElementTree as ET
 
@@ -10,6 +11,9 @@ import networkx as nx
 from meguca import plugin_categories
 from meguca import utils
 from meguca.plugins.src.endo_collector import exceptions
+
+
+logger = logging.getLogger(__name__)
 
 
 def load_dump(dump_path):
@@ -28,6 +32,7 @@ def load_dump(dump_path):
 
     try:
         dump = gzip.open(dump_path)
+        logger.info('Loaded data dump')
     except FileNotFoundError as e:
         raise FileNotFoundError('Could not find data dump file.') from e
 
@@ -46,6 +51,7 @@ def add_endo(endo_sender, endo_receiver, endos, eligible_nations):
 
     if endo_sender in eligible_nations:
         endos.add_edge(endo_sender, endo_receiver)
+        logger.debug('Added endorsement between "%s" and "%s"', endo_sender, endo_receiver)
 
 
 def get_eligible_nations(dump, region_name):
@@ -74,6 +80,8 @@ def get_eligible_nations(dump, region_name):
 
             elem.clear()
 
+    logger.debug('Built eligible nations set: %r', eligible_nations)
+
     return eligible_nations
 
 
@@ -89,9 +97,9 @@ def load_data_from_dump(endos, dump, eligible_nations):
     is_in_region = False
     for evt, elem in ET.iterparse(dump):
         if elem.tag == 'NATION':
-            nation_name = utils.canonical(elem.find('NAME').text)
+            nation = utils.canonical(elem.find('NAME').text)
 
-            if nation_name in eligible_nations:
+            if nation in eligible_nations:
                 is_in_region = True
 
                 endos_text = elem.find('ENDORSEMENTS').text
@@ -99,17 +107,20 @@ def load_data_from_dump(endos, dump, eligible_nations):
                     endos_text = utils.canonical(endos_text)
 
                 if endos_text is None:
-                    endos.add_node(nation_name)
+                    endos.add_node(nation)
+                    logger.debug('Added nation "%s"', nation)
                 elif "," not in endos_text:
-                    add_endo(endos_text, nation_name, endos, eligible_nations)
+                    add_endo(endos_text, nation, endos, eligible_nations)
                 elif "," in endos_text:
                     for endo in endos_text.split(","):
-                        add_endo(endo, nation_name, endos, eligible_nations)
+                        add_endo(endo, nation, endos, eligible_nations)
 
             elif is_in_region:
                 break
 
             elem.clear()
+
+    logger.info('Loaded endorsement data from data dump')
 
 
 def load_data_from_api(events, endos, precision_mode=False):
@@ -127,15 +138,22 @@ def load_data_from_api(events, endos, precision_mode=False):
             if "endorsed" in event_text:
                 endo = event_text.split(" endorsed ")
                 endos.add_edge(endo[0], endo[1])
+                logger.debug('Added endorsement between "%s" and "%s"', endo[0], endo[1])
             elif "withdrew its endorsement from" in event_text:
                 endo = event_text.split(" withdrew its endorsement from ")
                 endos.remove_edge(endo[0], endo[1])
+                logger.debug('Removed endorsement between "%s" and "%s"', endo[0], endo[1])
             elif "was admitted to the world assembly" in event_text:
                 nation = event_text.split(" was admitted to the world assembly")[0]
                 endos.add_node(nation)
+                logger.debug('Added nation "%s"', nation)
         except nx.NetworkXError as e:
             if precision_mode:
                 raise exceptions.IllegalEndorsement
+
+            logger.warning('Illegal endorsement: %s', e)
+
+    logger.info('Loaded endorsement data from NS API')
 
 
 class EndoDataCollector(plugin_categories.Collector):
@@ -143,15 +161,21 @@ class EndoDataCollector(plugin_categories.Collector):
 
     def run(self, data, ns_api, config):
         """Load new happenings from the API and update the endorsement graph."""
+
         shard_params = {'view': 'region.{}'.format(config['Meguca']['General']['Region']),
                         'filter': ['endo', 'member'],
                         'sincetime': self.last_evt_time}
+
         try:
             events = ns_api.get_world('happenings', shard_params=shard_params)['HAPPENINGS']['EVENT']
+            logger.debug('Events from %s: %r', self.last_evt_time, events)
+
             self.last_evt_time = events[0]['TIMESTAMP']
+
             load_data_from_api(events, data['endos'],
                                precision_mode=self.plg_config['Precision']['PrecisionMode'])
         except KeyError:
+            logger.debug('There was no event from %s', self.last_evt_time)
             pass
 
     def prime_run(self, config):

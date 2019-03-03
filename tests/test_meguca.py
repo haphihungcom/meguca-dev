@@ -17,7 +17,7 @@ def general_config():
     """Standard general config for Meguca."""
 
     config = {'StatPluginsSchedule': {'ScheduleMode': 'interval',
-                                        'seconds': 1}}
+                                      'seconds': 1}}
 
     return config
 

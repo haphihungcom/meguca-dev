@@ -2,10 +2,15 @@
 """
 
 
+import logging
+
 import networkx as nx
 
 from meguca import plugin_categories
 from meguca import utils
+
+
+logger = logging.getLogger(__name__)
 
 
 class GuardianStats(plugin_categories.Stat):
@@ -19,4 +24,8 @@ class GuardianStats(plugin_categories.Stat):
 
         guardians = list(set.intersection(*endorsees_list))
 
-        return {'guardians': guardians}
+        result = {'guardians': guardians}
+
+        logger.debug('Guardian stats generated: %r', result)
+
+        return result

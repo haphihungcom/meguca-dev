@@ -2,7 +2,12 @@
 """
 
 
+import logging
+
 from meguca import plugin_categories
+
+
+logger = logging.getLogger(__name__)
 
 
 class NationNumStats(plugin_categories.Stat):
@@ -10,5 +15,9 @@ class NationNumStats(plugin_categories.Stat):
         region_nation_num = ns_api.get_region(config['Meguca']['General']['Region'], 'numnations')['NUMNATIONS']
         ns_nation_num = ns_api.get_world('numnations')['NUMNATIONS']
 
-        return {'region_nation_num': int(region_nation_num),
-                'ns_nation_num': int(ns_nation_num)}
+        result = {'region_nation_num': int(region_nation_num),
+                  'ns_nation_num': int(ns_nation_num)}
+
+        logger.debug('Nation number stats generated: %r', result)
+
+        return result

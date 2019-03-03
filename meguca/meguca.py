@@ -2,12 +2,20 @@
 """
 
 
+import logging
+import logging.config
+
 from apscheduler.schedulers.background import BackgroundScheduler
 
 from meguca import info
 from meguca import exceptions
 from meguca import plugin
 from meguca import utils
+
+
+logging.config.dictConfig(info.LOGGING_CONFIG)
+
+logger = logging.getLogger(__name__)
 
 
 class Meguca():
@@ -28,12 +36,12 @@ class Meguca():
         # Holds all data generated and used by plugins
         self.data = {}
 
-    def get_args(self, entry_method):
+    def get_args(self, entry_method, is_stat_plg):
         entry_params = entry_method.__code__.co_varnames
         entry_args = {}
 
         if 'data' in entry_params:
-            entry_args['data'] = self.data
+            entry_args['data'] = plugin.EntryParam(self.data, raise_notyetexist=is_stat_plg)
         if 'config' in entry_params:
             entry_args['config'] = self.config
 
@@ -43,7 +51,7 @@ class Meguca():
 
         return entry_args
 
-    def run_plugin(self, plg, entry_method):
+    def run_plugin(self, plg, entry_method, is_stat_plg=False):
         """Run a plugin.
 
         Args:
@@ -52,12 +60,14 @@ class Meguca():
         """
 
         entry_method = getattr(plg.plugin_object, entry_method)
-        entry_args = self.get_args(entry_method)
+        entry_args = self.get_args(entry_method, is_stat_plg)
 
         return_data = entry_method(**entry_args)
 
         if return_data:
             self.data.update(return_data)
+
+        logger.info('Run plugin "%s"', plg.name)
 
     def run_stat_plugins(self):
         """Run all stat plugins."""
@@ -66,6 +76,7 @@ class Meguca():
         # it will be put on queue to run again after the required data
         # become available.
         queue = [plg for plg in self.plugins.get_plugins('Stat')]
+        logger.debug('Stat plugins run queue built')
 
         # Limit the number of iterations through the queue to 2 because
         # after the first iteration, we should have all the data needed by
@@ -74,11 +85,14 @@ class Meguca():
         for i in range(2):
             for plg in queue:
                 try:
-                    self.run_plugin(plg, 'run')
+                    self.run_plugin(plg, 'run', is_stat_plg=True)
+                    logger.info('Run plugin "%s"', plg.name)
                     queue.remove(plg)
-                except KeyError as non_existent_key:
-                    if i == 1:
-                        raise exceptions.NotFound('Stat plugin {} requires non-existent item {} from a param'.format(plg.name, non_existent_key))
+                except exceptions.NotYetExist as non_existent_key:
+                    if i == 0:
+                        logger.debug('Did not find key "%s" in data dict. Put plugin "%s" on rerun queue', plg.name)
+                    elif i == 1:
+                        raise exceptions.NotFound('Plugin "{}" wanted non-existent key "{}" from data dict.'.format(plg.name, non_existent_key))
 
     def schedule(self, callable_obj, name, schedule_config, kwargs=None):
         """Schedule a callable.
@@ -98,6 +112,8 @@ class Meguca():
                                coalesce=True,
                                **schedule_config)
 
+        logger.debug('Schedule "%s" with %s and %r', name, schedule_mode, schedule_config)
+
     def schedule_plugins(self, plg_category):
         """Schedule plugins by category.
 
@@ -106,7 +122,7 @@ class Meguca():
         """
 
         for plg in self.plugins.get_plugins(plg_category):
-            identifier = plg.details['Core']['identifier']
+            identifier = plg.details['Core']['Identifier']
             schedule_config = dict(self.config['Meguca']['PluginSchedule'][identifier])
 
             self.schedule(self.run_plugin,
@@ -114,6 +130,10 @@ class Meguca():
                                   'entry_method': 'run'},
                           name=plg.name,
                           schedule_config=schedule_config)
+
+            logger.debug('Scheduled plugin "%s"', plg.name)
+
+        logger.info('Scheduled %s plugins', plg_category)
 
     def schedule_all(self):
         """Schedule all plugins."""
@@ -131,8 +151,11 @@ class Meguca():
         """Load service plugins."""
 
         for plg in self.plugins.get_plugins('Service'):
-            args = self.get_args(plg.plugin_object.get)
+            args = self.get_args(plg.plugin_object.get, is_stat_plg=False)
             self.services[plg.details['Core']['Identifier']] = plg.plugin_object.get(**args)
+            logger.debug('Loaded service "%s"', plg.name)
+
+        logger.info('Loaded all services')
 
     def prime_run_plugins(self):
         """Prime run collector plugins."""
@@ -140,8 +163,12 @@ class Meguca():
         for plg in self.plugins.get_plugins('Collector'):
             try:
                 self.run_plugin(plg, 'prime_run')
+                logging.debug('Prime run plugin "%s"', plg.name)
             except AttributeError:
+                logging.debug('Did not find prime_run() in "%s". Skip', plg.name)
                 continue
+
+        logger.info('Prime run all plugins')
 
     def prepare(self):
         """Prepare everything before running."""
@@ -153,17 +180,25 @@ class Meguca():
     def run(self):
         """Start the scheduler."""
         self.scheduler.start()
+        logger.info('Scheduler started')
 
 
 def main():
     """Initialize and start Meguca or clean-up and stop it."""
 
     print('Starting Meguca')
+    logger.info('Initialize Meguca')
+
     general_config = utils.load_config(info.GENERAL_CONFIG_PATH)
+    logger.info('Loaded general configuration')
+
     plugins = plugin.Plugins(info.PLUGIN_DIRECTORY, info.PLUGIN_DESC_EXT)
     plugin_config = plugins.load_plugins()
+
     meguca = Meguca(plugins, general_config, plugin_config)
     meguca.prepare()
+    logger.info('Prepared everything')
+
     meguca.run()
 
 

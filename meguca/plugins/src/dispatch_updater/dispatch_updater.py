@@ -2,8 +2,13 @@
 """
 
 
+import logging
+
 from meguca import plugin_categories
 from meguca.plugins.src.dispatch_updater import dispatch_renderer
+
+
+logger = logging.getLogger(__name__)
 
 
 class DispatchUpdater(plugin_categories.View):
@@ -16,6 +21,8 @@ class DispatchUpdater(plugin_categories.View):
         for name, info in dispatches.items():
             content = renderer.render_dispatch(name)
             self.update_dispatch(info, content)
+
+            logger.info('Updated dispatch "%s"', name)
 
     def update_dispatch(self, info, content):
         """Update dispatch.

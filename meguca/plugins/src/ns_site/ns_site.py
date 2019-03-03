@@ -1,8 +1,17 @@
+"""An interface to send POST requests to NationStates.
+"""
+
+
+import logging
+
 import requests
 
 from meguca import plugin_categories
 from meguca.plugins.src.ns_site import helpers
 from meguca.plugins.src.ns_site import exceptions
+
+
+logger = logging.getLogger(__name__)
 
 
 ACTION_URL = "https://www.nationstates.net/page={}"
@@ -75,6 +84,8 @@ class NSSite():
 
         self.localid = parser.get_id()
 
+        logger.debug('Set local ID: %s', self.localid)
+
     def execute(self, action, params):
         """Send a POST request."""
 
@@ -82,4 +93,7 @@ class NSSite():
         url = ACTION_URL.format(action)
 
         resp = self.session.post(url, data=params)
+
+        logger.debug('Sent POST request with parameters: %r', params)
+
         self.handle_errors(resp)

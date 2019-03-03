@@ -8,5 +8,5 @@ class EndoCollectorErrror(exceptions.Meguca):
 
 class IllegalEndorsement(EndoCollectorErrror):
     """Raises if attempting to process illegal endorsements.
-    E.g Endorsements on on-existent nations."""
+    E.g Endorsements on non-existent nations."""
     pass

@@ -2,7 +2,12 @@
 """
 
 
+import logging
+
 from meguca import plugin_categories
+
+
+logger = logging.getLogger(__name__)
 
 
 class WAStats(plugin_categories.Stat):
@@ -16,5 +21,9 @@ class WAStats(plugin_categories.Stat):
         ns_wa_nations = set(wa_data['MEMBERS'].split(','))
         region_wa_nations = list(region_nations & ns_wa_nations)
 
-        return {'region_wa': region_wa_nations,
-                'ns_wa_num': ns_wa_num}
+        result = {'region_wa': region_wa_nations,
+                  'ns_wa_num': ns_wa_num}
+
+        logger.debug('WA nation number stats generated: %r', result)
+
+        return result
