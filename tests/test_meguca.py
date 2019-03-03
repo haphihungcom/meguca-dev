@@ -4,7 +4,6 @@ from unittest import mock
 
 import pytest
 import freezegun
-import apscheduler
 
 from meguca import meguca
 from meguca import plugin
