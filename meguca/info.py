@@ -2,10 +2,6 @@
 """
 
 
-import sys
-import logging
-
-
 # Directory to find plugin description files
 PLUGIN_DIRECTORY = 'meguca/plugins'
 
