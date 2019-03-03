@@ -38,7 +38,7 @@ def meguca_standard_plg(mock_plg, general_config):
 
     plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mock_plg]))
     general_config.update({'PluginSchedule': {'test': {'ScheduleMode': 'interval',
-                                                         'seconds': 6}}})
+                                                       'seconds': 6}}})
 
     meguca_ins = meguca.Meguca(plugins, general_config, None)
 
@@ -69,6 +69,14 @@ class TestRunPlugin():
         assert meguca_ins.data['Test'] == 'Test Data'
 
     @pytest.mark.usefixtures('mock_plg')
+    @mock.patch('meguca.meguca.Meguca.run_plugin', side_effect=exceptions.NotFound(''))
+    def test_run_plugin_with_plugin_indexes_non_existent_key_of_data_dict(self, run_plugin, mock_plg):
+        meguca_ins = meguca.Meguca(mock.Mock(), None, None)
+
+        with pytest.raises(exceptions.NotFound):
+            meguca_ins.run_plugin(mock_plg)
+
+    @pytest.mark.usefixtures('mock_plg')
     def test_run_plugin_with_entry_method_has_service_params(self, mock_plg):
         meguca_ins = meguca.Meguca(mock.Mock(), None, None)
         meguca_ins.services = {'service': mock.Mock(return_value='Test')}
@@ -85,13 +93,13 @@ class TestRunPlugin():
 
 class TestRunStatPlugins():
     @mock.patch('meguca.meguca.Meguca.run_plugin', side_effect=exceptions.NotFound(''))
-    def test_run_stat_plugins_with_plugin_indexes_non_existent_item_of_param(self, run_plugin, meguca_dummy_plg):
+    def test_run_stat_plugins_with_plugin_indexes_non_existent_key_of_data_dict(self, run_plugin, meguca_dummy_plg):
         meguca_ins = meguca_dummy_plg
 
         with pytest.raises(exceptions.NotFound):
             meguca_ins.run_stat_plugins()
 
-    def test_run_stat_plugins_with_plugin_indexes_not_yet_exist_item_of_param(self):
+    def test_run_stat_plugins_with_plugin_indexes_not_yet_exist_key_of_data_dict(self):
         def stub_run_1():
             return {'TestData1': 'Test Data'}
 
