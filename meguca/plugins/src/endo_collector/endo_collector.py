@@ -151,7 +151,7 @@ def load_data_from_api(events, endos, precision_mode=False):
             if precision_mode:
                 raise exceptions.IllegalEndorsement
 
-            logger.warning('Illegal endorsement: %s', e)
+            logger.debug('Illegal endorsement: %s', e)
 
     logger.info('Loaded endorsement data from NS API')
 
@@ -162,7 +162,7 @@ class EndoDataCollector(plugin_categories.Collector):
     def run(self, data, ns_api, config):
         """Load new happenings from the API and update the endorsement graph."""
 
-        shard_params = {'view': 'region.{}'.format(config['Meguca']['General']['Region']),
+        shard_params = {'view': 'region.{}'.format(config['meguca']['general']['region']),
                         'filter': ['endo', 'member'],
                         'sincetime': self.last_evt_time}
 
@@ -173,7 +173,7 @@ class EndoDataCollector(plugin_categories.Collector):
             self.last_evt_time = events[0]['TIMESTAMP']
 
             load_data_from_api(events, data['endos'],
-                               precision_mode=self.plg_config['Precision']['PrecisionMode'])
+                               precision_mode=self.plg_config['precision']['precision_mode'])
         except KeyError:
             logger.debug('There was no event from %s', self.last_evt_time)
             pass
@@ -183,9 +183,9 @@ class EndoDataCollector(plugin_categories.Collector):
 
         # A directional graph to store endorsement data.
         endos = nx.DiGraph()
-        dump = load_dump(self.plg_config['DataDump']['FilePath'])
+        dump = load_dump(self.plg_config['data_dump']['path'])
 
-        eligible_nations = get_eligible_nations(dump, config['Meguca']['General']['Region'])
+        eligible_nations = get_eligible_nations(dump, config['meguca']['general']['region'])
         dump.seek(0)
         load_data_from_dump(endos, dump, eligible_nations)
 

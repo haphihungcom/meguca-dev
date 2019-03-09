@@ -27,8 +27,8 @@ class Meguca():
         self.plugins = plugins
 
         # Holds general and plugins' configuration
-        self.config = {'Meguca': general_config,
-                       'Plugins': plugin_config}
+        self.config = {'meguca': general_config,
+                       'plugins': plugin_config}
 
         # Holds all service objects
         self.services = {}
@@ -104,7 +104,7 @@ class Meguca():
             kwargs (optional): Defaults to None. Arguments to pass to the callable.
         """
 
-        schedule_mode = schedule_config.pop('ScheduleMode')
+        schedule_mode = schedule_config.pop('schedule_mode')
         self.scheduler.add_job(callable_obj,
                                trigger=schedule_mode,
                                name=name,
@@ -123,7 +123,7 @@ class Meguca():
 
         for plg in self.plugins.get_plugins(plg_category):
             identifier = plg.details['Core']['Identifier']
-            schedule_config = dict(self.config['Meguca']['PluginSchedule'][identifier])
+            schedule_config = dict(self.config['meguca']['plugin_schedule'][identifier])
 
             self.schedule(self.run_plugin,
                           kwargs={'plg': plg,
@@ -143,7 +143,7 @@ class Meguca():
         # Stat plugins are run together with the same schedule.
         self.schedule(self.run_stat_plugins,
                       name='Stat plugins',
-                      schedule_config=self.config['Meguca']['StatPluginsSchedule'])
+                      schedule_config=self.config['meguca']['stat_plugins_schedule'])
 
         self.schedule_plugins('View')
 
@@ -192,7 +192,7 @@ def main():
     general_config = utils.load_config(info.GENERAL_CONFIG_PATH)
     logger.info('Loaded general configuration')
 
-    plugins = plugin.Plugins(info.PLUGIN_DIRECTORY, info.PLUGIN_DESC_EXT)
+    plugins = plugin.Plugins(info.PLUGIN_DIR_PATH, info.PLUGIN_DESC_EXT)
     plugin_config = plugins.load_plugins()
 
     meguca = Meguca(plugins, general_config, plugin_config)

@@ -35,7 +35,7 @@ class Renderer():
                                            install_defaults=False,
                                            escape_html=False)
         for tag, info in bbcode_tags.items():
-            self.bbcode_parser.add_simple_formatter(tag, info['Template'])
+            self.bbcode_parser.add_simple_formatter(tag, info['template'])
             logger.debug('Loaded custom BBCode tag "%s"', tag)
         logger.info('Loaded all custom BBCode tags')
 

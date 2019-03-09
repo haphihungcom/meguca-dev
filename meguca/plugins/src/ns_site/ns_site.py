@@ -22,7 +22,7 @@ class NSSitePlugin(plugin_categories.Service):
     def get(self, ns_api, config):
         if 'X-Pin' in ns_api.session.headers:
             pin = ns_api.session.headers['X-Pin']
-            return NSSite(config['Meguca']['Auth']['UserAgent'], pin)
+            return NSSite(config['meguca']['auth']['user_agent'], pin)
         else:
             raise exceptions.NSSiteSecurityError('Cannot find PIN to authenticate host nation. Consider providing login credential '
                                                  'for the host nation in the general config file or disabling this plugin')

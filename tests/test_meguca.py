@@ -15,8 +15,8 @@ from meguca import exceptions
 def general_config():
     """Standard general config for Meguca."""
 
-    config = {'StatPluginsSchedule': {'ScheduleMode': 'interval',
-                                      'seconds': 1}}
+    config = {'stat_plugins_schedule': {'schedule_mode': 'interval',
+                                        'seconds': 1}}
 
     return config
 
@@ -37,8 +37,8 @@ def meguca_standard_plg(mock_plg, general_config):
     """A Meguca instance with a mock plugin which behaves like a real one."""
 
     plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mock_plg]))
-    general_config.update({'PluginSchedule': {'test': {'ScheduleMode': 'interval',
-                                                       'seconds': 6}}})
+    general_config.update({'plugin_schedule': {'test': {'schedule_mode': 'interval',
+                                                        'seconds': 6}}})
 
     meguca_ins = meguca.Meguca(plugins, general_config, None)
 
@@ -120,7 +120,7 @@ class TestPluginSchedulingMethods():
     def test_schedule_with_a_method_with_kwargs(self):
         meguca_ins = meguca.Meguca(mock.Mock(), None, None)
         mock_method = mock.Mock()
-        config = {'ScheduleMode': 'interval', 'seconds': 1}
+        config = {'schedule_mode': 'interval', 'seconds': 1}
 
         meguca_ins.schedule(mock_method, kwargs={'Test': 'Test'},
                             name='Test Method',

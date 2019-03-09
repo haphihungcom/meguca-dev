@@ -199,16 +199,16 @@ class TestNSApiPlugin():
                                        text='<A><a>a</a></A>'))
     def test_get_with_password(self, mocked_requests_session_get):
         plg = ns_api.NSApiPlugin()
-        config = {'Auth': {'UserAgent': 'Test', 'Password': 'password', 'HostNation': 'Test'}}
+        config = {'auth': {'user_agent': 'Test', 'password': 'password', 'host_nation': 'Test'}}
 
-        api = plg.get(config={'Meguca': config})
+        api = plg.get(config={'meguca': config})
 
         assert api.session.headers['user-agent'] == 'Test' and api.session.headers['X-Pin'] == '0'
 
     def test_get_without_password(self):
         plg = ns_api.NSApiPlugin()
-        config = {'Auth': {'UserAgent': 'Test', 'HostNation': 'Test'}}
+        config = {'auth': {'user_agent': 'Test', 'host_nation': 'Test'}}
 
-        api = plg.get(config={'Meguca': config})
+        api = plg.get(config={'meguca': config})
 
         assert api.session.headers['user-agent'] == 'Test'

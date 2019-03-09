@@ -3,7 +3,7 @@
 
 
 # Directory to find plugin description files
-PLUGIN_DIRECTORY = 'meguca/plugins'
+PLUGIN_DIR_PATH = 'meguca/plugins'
 
 # Plugin description file extension
 PLUGIN_DESC_EXT = 'plugin'
@@ -26,7 +26,7 @@ LOGGING_CONFIG = {
             'class': 'logging.StreamHandler',
             'level': 'INFO',
             'formatter': 'MegucaFormatter',
-            'stream': 'sys.stdout'
+            'stream': 'ext://sys.stdout'
         },
         'file': {
             'class': 'logging.handlers.RotatingFileHandler',
@@ -36,5 +36,10 @@ LOGGING_CONFIG = {
             'maxBytes': 20000000,
             'backupCount': 5
         }
+    },
+
+    'root': {
+        'level': 'DEBUG',
+        'handlers': ['console', 'file']
     }
 }

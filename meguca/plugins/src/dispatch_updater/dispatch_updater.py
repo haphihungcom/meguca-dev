@@ -13,11 +13,11 @@ logger = logging.getLogger(__name__)
 
 class DispatchUpdater(plugin_categories.View):
     def run(self, data, ns_site):
-        renderer = dispatch_renderer.Renderer(self.plg_config['General']['TemplateDirectory'],
-                                              self.plg_config['CustomBBCodeTags'], data)
+        renderer = dispatch_renderer.Renderer(self.plg_config['general']['template_dir_path'],
+                                              self.plg_config['custom_bbcode_tags'], data.get_bare_obj())
         self.ns_site = ns_site
 
-        dispatches = self.plg_config['Dispatches']
+        dispatches = self.plg_config['dispatches']
         for name, info in dispatches.items():
             content = renderer.render_dispatch(name)
             self.update_dispatch(info, content)
@@ -32,11 +32,11 @@ class DispatchUpdater(plugin_categories.View):
             content (str): New content.
         """
 
-        subcategory_name = "subcategory-{}".format(info['Category'])
-        params = {'edit': str(info['Id']),
-                  'category': str(info['Category']),
-                  subcategory_name: str(info['Subcategory']),
-                  'dname': info['Title'],
+        subcategory_name = "subcategory-{}".format(info['category'])
+        params = {'edit': str(info['id']),
+                  'category': str(info['category']),
+                  subcategory_name: str(info['sub_category']),
+                  'dname': info['title'],
                   'message': content,
                   'submitbutton': '1'}
 

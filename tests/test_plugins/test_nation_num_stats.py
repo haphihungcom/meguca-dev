@@ -8,9 +8,9 @@ class TestNationNumStats():
         ins = nation_num_stats.NationNumStats()
         nsapi = mock.Mock(get_world=mock.Mock(return_value={'NUMNATIONS': '4'}),
                           get_region=mock.Mock(return_value={'NUMNATIONS': '2'}))
-        config = {'General': {'Region': 'region'}}
+        config = {'general': {'region': 'region'}}
 
-        result = ins.run(ns_api=nsapi, config={'Meguca': config})
+        result = ins.run(ns_api=nsapi, config={'meguca': config})
 
         assert result == {'region_nation_num': 2,
                           'ns_nation_num': 4}

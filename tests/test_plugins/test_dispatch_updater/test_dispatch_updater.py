@@ -20,7 +20,7 @@ class TestDispatchRenderer():
         os.remove('tests/template_file_test.txt')
 
     def test_render_dispatch(self, setup_template):
-        bbcode_tags = {'test': {'Template': '[a]%(value)s[/a]'}}
+        bbcode_tags = {'test': {'template': '[a]%(value)s[/a]'}}
         data = {'j': [1, 2, 3]}
         ins = dispatch_renderer.Renderer('tests', bbcode_tags, data)
 
@@ -45,8 +45,8 @@ class TestDispatchUpdater():
     def test_update_dispatch(self):
         ins = dispatch_updater.DispatchUpdater()
         ins.ns_site = mock.Mock(execute=mock.Mock())
-        template_info = {'Id': 12345, 'Title': 'Test',
-                         'Category': 123, 'Subcategory': 456}
+        template_info = {'id': 12345, 'title': 'Test',
+                         'category': 123, 'sub_category': 456}
 
         ins.update_dispatch(template_info, 'abc')
 
@@ -59,15 +59,15 @@ class TestDispatchUpdater():
                                                 'submitbutton': '1'})
 
     def test_run_multiple_dispatches(self, setup_templates):
-        data = {'j': [1, 2, 3], 'x': 1}
+        data = mock.Mock(get_bare_obj=mock.Mock(return_value={'j': [1, 2, 3], 'x': 1}))
         mocked_ns_site = mock.Mock(execute=mock.Mock())
-        config = {'General': {'TemplateDirectory': 'tests'},
-                  'Dispatches': {'template_1.txt': {'Id': 12345, 'Title': 'Example 1',
-                                                    'Category': 123, 'Subcategory': 456},
-                                 'template_2.txt': {'Id': 67890, 'Title': 'Example 2',
-                                                    'Category': 789, 'Subcategory': 123}},
-                  'CustomBBCodeTags': {'test1': {'Template': '[a]%(value)s[/a]'},
-                                       'test2': {'Template': '[b]%(value)s[/b]'}}}
+        config = {'general': {'template_dir_path': 'tests'},
+                  'dispatches': {'template_1.txt': {'id': 12345, 'title': 'Example 1',
+                                                    'category': 123, 'sub_category': 456},
+                                 'template_2.txt': {'id': 67890, 'title': 'Example 2',
+                                                    'category': 789, 'sub_category': 123}},
+                  'custom_bbcode_tags': {'test1': {'template': '[a]%(value)s[/a]'},
+                                         'test2': {'template': '[b]%(value)s[/b]'}}}
         ins = dispatch_updater.DispatchUpdater()
         ins.plg_config = config
 

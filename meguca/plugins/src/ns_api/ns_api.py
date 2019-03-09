@@ -25,12 +25,12 @@ class NSApiPlugin(plugin_categories.Service):
     def get(self, config):
         """Automatically collect pin for private requests if password is provided."""
 
-        if 'Password' in config['Meguca']['Auth']:
-            ns_api = NSApi(config['Meguca']['Auth']['UserAgent'],
-                           config['Meguca']['Auth']['Password'])
-            ns_api.get_nation(utils.canonical(config['Meguca']['Auth']['HostNation']), 'ping')
+        if 'password' in config['meguca']['auth']:
+            ns_api = NSApi(config['meguca']['auth']['user_agent'],
+                           config['meguca']['auth']['password'])
+            ns_api.get_nation(utils.canonical(config['meguca']['auth']['host_nation']), 'ping')
         else:
-            ns_api = NSApi(config['Meguca']['Auth']['UserAgent'])
+            ns_api = NSApi(config['meguca']['auth']['user_agent'])
 
         return ns_api
 

@@ -13,13 +13,13 @@ from meguca.plugins.src.endo_collector import exceptions
 
 @pytest.fixture(scope='module')
 def prep_config():
-    plg_config = {'DataDump': {'FilePath': 'meguca/nations.xml.gz'},
-                  'Precision': {'PrecisionMode': False}}
+    plg_config = {'data_dump': {'path': 'meguca/nations.xml.gz'},
+                  'precision': {'precision_mode': False}}
     endo_collector.EndoDataCollector.plg_config = plg_config
 
-    meguca_config = {'General': {'Region': 'region'}}
+    meguca_config = {'general': {'region': 'region'}}
 
-    return {'Meguca': meguca_config}
+    return {'meguca': meguca_config}
 
 
 def create_mock_dump():

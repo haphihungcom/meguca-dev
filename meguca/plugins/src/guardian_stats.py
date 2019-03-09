@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 class GuardianStats(plugin_categories.Stat):
     def run(self, ns_api):
-        required_endorsed = self.plg_config['Criteria']['RequiredToEndorseNations']
+        required_endorsed = self.plg_config['criteria']['required_to_endorse_nations']
 
         endorsees_list = []
         for nation in required_endorsed:

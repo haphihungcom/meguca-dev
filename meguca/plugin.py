@@ -112,3 +112,8 @@ class EntryParam():
                 raise exceptions.NotFound(key)
 
         return self.obj[key]
+
+    def get_bare_obj(self):
+        """Get the encapsulated object."""
+
+        return self.obj
