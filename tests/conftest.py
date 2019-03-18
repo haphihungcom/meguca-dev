@@ -12,10 +12,10 @@ def mock_plg():
     def stub_run():
         return {'Test': 'Test'}
 
-    def stub_prime_run():
+    def stub_prepare():
         return {'TestPrime': 'Test Prime'}
 
-    mock_plg_obj = mock.Mock(run=stub_run, prime_run=stub_prime_run)
+    mock_plg_obj = mock.Mock(run=stub_run, prepare=stub_prepare)
     config = configparser.ConfigParser()
     config['Core'] = {'ConfigFile': 'Test', 'Identifier': 'test'}
 

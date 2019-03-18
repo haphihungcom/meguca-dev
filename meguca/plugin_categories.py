@@ -10,7 +10,6 @@ class MegucaPlugin(IPlugin.IPlugin):
 
     # Plugin-specific configurations
     plg_config = None
-    logger = None
 
 
 class Service(MegucaPlugin):
@@ -32,28 +31,30 @@ class StandardPlugin(MegucaPlugin):
 
         raise NotImplementedError
 
+    def prepare(self):
+        """Entry method for prime run."""
+
 
 class Collector(StandardPlugin):
     """Base class for plugins that collect data.
     Implement run() as entry point for normal run
-    and prime_run() as entry point for prime run (optional).
-    run() and prime_run() needs to return a dictionary which contains
+    and start() as entry point for initialization (optional).
+    run() and prepare() needs to return a dictionary which contains
     data you want to return.
     """
-
-    def prime_run(self):
-        """Entry method for prime run."""
 
 
 class Stat(StandardPlugin):
     """Base class for plugins that calculate and return data.
-    Implement run() as entry point.
-    run() needs to return a dictionary which contains data
-    you want to return.
+    Implement run() as entry point for normal run
+    and start() as entry point for initialization (optional).
+    run() and prepare() needs to return a dictionary which contains
+    data you want to return.
     """
 
 
 class View(StandardPlugin):
     """Base class for plugins that output data.
-    Implement run() as entry point.
+    Implement run() as entry point for normal run
+    and prepare() as entry point for initialization (optional).
     """

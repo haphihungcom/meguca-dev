@@ -157,15 +157,15 @@ class Meguca():
 
         logger.info('Loaded all services')
 
-    def prime_run_plugins(self):
-        """Prime run collector plugins."""
+    def prepare_plugins(self):
+        """Initialize plugins."""
 
-        for plg in self.plugins.get_plugins('Collector'):
+        for plg in self.plugins.get_all_plugins():
             try:
-                self.run_plugin(plg, 'prime_run')
-                logging.debug('Prime run plugin "%s"', plg.name)
+                self.run_plugin(plg, 'prepare')
+                logging.debug('Initialized plugin "%s"', plg.name)
             except AttributeError:
-                logging.debug('Did not find prime_run() in "%s". Skip', plg.name)
+                logging.debug('Did not find prepare() in "%s". Skipping', plg.name)
                 continue
 
         logger.info('Prime run all plugins')
@@ -174,7 +174,7 @@ class Meguca():
         """Prepare everything before running."""
 
         self.load_services()
-        self.prime_run_plugins()
+        self.prepare_plugins()
         self.schedule_all()
 
     def run(self):

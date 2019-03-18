@@ -36,7 +36,8 @@ def meguca_dummy_plg(general_config):
 def meguca_standard_plg(mock_plg, general_config):
     """A Meguca instance with a mock plugin which behaves like a real one."""
 
-    plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mock_plg]))
+    plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mock_plg]),
+                        get_all_plugins=mock.Mock(return_value=[mock_plg]))
     general_config.update({'plugin_schedule': {'test': {'schedule_mode': 'interval',
                                                         'seconds': 6}}})
 
@@ -164,7 +165,7 @@ class TestRunMeguca():
     def test_prime_run_plugins(self, meguca_standard_plg):
         meguca_ins = meguca_standard_plg
 
-        meguca_ins.prime_run_plugins()
+        meguca_ins.prepare_plugins()
 
         assert meguca_ins.data == {'TestPrime': 'Test Prime'}
 

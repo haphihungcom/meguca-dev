@@ -71,10 +71,19 @@ class Plugins():
             category (str): Category name
 
         Returns:
-            list: Plugin metadata objects.
+            list: Plugin metadata objects (yapsy.PluginInfo).
         """
 
         return self.plugin_manager.getPluginsOfCategory(category)
+
+    def get_all_plugins(self):
+        """Get all plugins
+
+        Returns:
+            list: Plugin metadata objects (yapsy.PluginInfo).
+        """
+
+        return self.plugin_manager.getAllPlugins()
 
 
 class EntryParam():

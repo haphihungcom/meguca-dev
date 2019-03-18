@@ -27,6 +27,13 @@ class TestPlugins():
 
         assert plugins_ins.get_plugins('Test') == 'Test'
 
+    @mock.patch('yapsy.PluginManager.PluginManager.getAllPlugins', return_value='Test')
+    def test_get_all_plugins(self, getAllPlugins, activatePluginByName,
+                             collectPlugins, load_config):
+        plugins_ins = plugin.Plugins('','')
+
+        assert plugins_ins.get_all_plugins() == 'Test'
+
 
 class TestEntryParam():
     def test_getitem(self):
