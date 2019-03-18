@@ -12,14 +12,17 @@ logger = logging.getLogger(__name__)
 
 
 class DispatchUpdater(plugin_categories.View):
-    def run(self, data, ns_site):
-        renderer = dispatch_renderer.Renderer(self.plg_config['general']['template_dir_path'],
-                                              self.plg_config['custom_bbcode_tags'], data.get_bare_obj())
+    def prepare(self, ns_site):
+        self.renderer = dispatch_renderer.Renderer(self.plg_config['general']['template_dir_path'],
+                                                   self.plg_config['custom_bbcode_tags'])
+        self.dispatches = self.plg_config['dispatches']
         self.ns_site = ns_site
 
-        dispatches = self.plg_config['dispatches']
-        for name, info in dispatches.items():
-            content = renderer.render_dispatch(name)
+    def run(self, data):
+        self.renderer.data = data.get_bare_obj()
+
+        for name, info in self.dispatches.items():
+            content = self.renderer.render_dispatch(name)
             self.update_dispatch(info, content)
 
             logger.info('Updated dispatch "%s"', name)

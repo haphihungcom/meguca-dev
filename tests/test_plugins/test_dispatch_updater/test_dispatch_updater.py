@@ -22,7 +22,8 @@ class TestDispatchRenderer():
     def test_render_dispatch(self, setup_template):
         bbcode_tags = {'test': {'template': '[a]%(value)s[/a]'}}
         data = {'j': [1, 2, 3]}
-        ins = dispatch_renderer.Renderer('tests', bbcode_tags, data)
+        ins = dispatch_renderer.Renderer('tests', bbcode_tags)
+        ins.data = data
 
         assert ins.render_dispatch('template_file_test.txt') == '[a]1[/a][a]2[/a][a]3[/a]'
 
@@ -70,8 +71,9 @@ class TestDispatchUpdater():
                                          'test2': {'template': '[b]%(value)s[/b]'}}}
         ins = dispatch_updater.DispatchUpdater()
         ins.plg_config = config
+        ins.prepare(mocked_ns_site)
 
-        ins.run(data=data, ns_site=mocked_ns_site)
+        ins.run(data=data)
 
         expected_calls = [mock.call('lodge_dispatch',
                                     {'edit': '12345',

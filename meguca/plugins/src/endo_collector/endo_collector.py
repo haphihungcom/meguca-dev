@@ -157,7 +157,7 @@ def load_data_from_api(events, endos, precision_mode=False):
 
 
 class EndoDataCollector(plugin_categories.Collector):
-    last_evt_time = ''
+    last_evt_time = None
 
     def run(self, data, ns_api, config):
         """Load new happenings from the API and update the endorsement graph."""
@@ -178,7 +178,7 @@ class EndoDataCollector(plugin_categories.Collector):
             logger.debug('There was no event from %s', self.last_evt_time)
             pass
 
-    def prime_run(self, config):
+    def prepare(self, config):
         """Make an initial endorsement graph using the data dump."""
 
         # A directional graph to store endorsement data.

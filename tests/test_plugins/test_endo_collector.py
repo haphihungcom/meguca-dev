@@ -127,10 +127,10 @@ class TestEndoDataCollector():
 
         os.remove('meguca/nations.xml.gz')
 
-    def test_prime_run_with_dump(self, prep_dumpfile, prep_config):
+    def test_prepare_with_dump(self, prep_dumpfile, prep_config):
         ins = endo_collector.EndoDataCollector()
 
-        assert ('nation1', 'nation2') in ins.prime_run(config=prep_config)['endos'].edges
+        assert ('nation1', 'nation2') in ins.prepare(config=prep_config)['endos'].edges
 
     def test_run_with_mock_events(self, prep_dumpfile, prep_config):
         events = {'HAPPENINGS': {'EVENT': [

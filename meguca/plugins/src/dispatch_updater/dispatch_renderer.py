@@ -28,7 +28,7 @@ class Renderer():
         data (dict): Data.
     """
 
-    def __init__(self, template_dir, bbcode_tags, data):
+    def __init__(self, template_dir, bbcode_tags):
         template_loader = jinja2.FileSystemLoader(template_dir)
 
         self.bbcode_parser = bbcode.Parser(newline='\n',
@@ -43,7 +43,7 @@ class Renderer():
         self.env.filters.update(FILTERS)
         logger.info('Loaded all custom filters')
 
-        self.data = data
+        self.data = None
 
     def render_dispatch(self, template_name):
         """Render a dispatch.
