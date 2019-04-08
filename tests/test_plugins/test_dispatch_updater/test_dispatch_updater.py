@@ -1,7 +1,9 @@
 import os
+import shutil
 from unittest import mock
 
 import pytest
+import toml
 
 from meguca.plugins.src.dispatch_updater import dispatch_updater
 from meguca.plugins.src.dispatch_updater import dispatch_renderer
@@ -10,33 +12,40 @@ from meguca.plugins.src.dispatch_updater import dispatch_renderer
 class TestDispatchRenderer():
     @pytest.fixture
     def setup_template(self):
-        template = '{% for i in j %}[test]{{ i }}[/test]{% endfor %}'
+        template = '{% for i in j %}[test]{{ i }}[/test]{% endfor %}{{ john.foo }}'
+        custom_vars = {'john': {'foo': 'bar'}}
 
-        with open('tests/template_file_test.txt', 'w') as template_file:
-            template_file.write(template)
+        with open('tests/template.txt', 'w') as f:
+            f.write(template)
+
+        toml.dump(custom_vars, open('tests/custom_vars.toml', 'w'))
 
         yield 0
 
-        os.remove('tests/template_file_test.txt')
+        os.remove('tests/template.txt')
+        os.remove('tests/custom_vars.toml')
 
     def test_render_dispatch(self, setup_template):
         bbcode_tags = {'test': {'template': '[a]%(value)s[/a]'}}
         data = {'j': [1, 2, 3]}
-        ins = dispatch_renderer.Renderer('tests', bbcode_tags)
-        ins.data = data
+        ins = dispatch_renderer.Renderer('tests', bbcode_tags, 'tests/custom_vars.toml')
+        ins.update_data(data)
 
-        assert ins.render_dispatch('template_file_test.txt') == '[a]1[/a][a]2[/a][a]3[/a]'
+        assert ins.render_dispatch('template.txt') == '[a]1[/a][a]2[/a][a]3[/a]bar'
 
 
 class TestDispatchUpdater():
     @pytest.fixture
     def setup_templates(self):
         templates = {'tests/template_1.txt': '{% for i in j %}[test1]{{ i }}[/test1]{% endfor %}',
-                     'tests/template_2.txt': '[test2]{{ x }}[/test2]'}
+                     'tests/template_2.txt': '[test2]{{ john.foo }}[/test2]'}
+        custom_vars = {'john': {'foo': 'bar'}}
 
         for template_filename, template_content in templates.items():
             with open(template_filename, 'w') as template_file:
                 template_file.write(template_content)
+
+        toml.dump(custom_vars, open('tests/custom_vars.toml', 'w'))
 
         yield 0
 
@@ -62,7 +71,7 @@ class TestDispatchUpdater():
     def test_run_multiple_dispatches(self, setup_templates):
         data = mock.Mock(get_bare_obj=mock.Mock(return_value={'j': [1, 2, 3], 'x': 1}))
         mocked_ns_site = mock.Mock(execute=mock.Mock())
-        config = {'general': {'template_dir_path': 'tests'},
+        config = {'general': {'template_dir_path': 'tests', 'custom_vars_path': 'tests/custom_vars.toml'},
                   'dispatches': {'template_1.txt': {'id': 12345, 'title': 'Example 1',
                                                     'category': 123, 'sub_category': 456},
                                  'template_2.txt': {'id': 67890, 'title': 'Example 2',
@@ -87,6 +96,6 @@ class TestDispatchUpdater():
                                      'category': '789',
                                      'subcategory-789': '123',
                                      'dname': 'Example 2',
-                                     'message': '[b]1[/b]',
+                                     'message': '[b]bar[/b]',
                                      'submitbutton': '1'})]
         mocked_ns_site.execute.assert_has_calls(expected_calls)

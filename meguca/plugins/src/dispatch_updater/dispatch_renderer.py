@@ -8,6 +8,7 @@ import jinja2
 import bbcode
 
 from meguca.plugins.src.dispatch_updater import filters
+from meguca import utils
 
 
 logger = logging.getLogger(__name__)
@@ -20,7 +21,7 @@ FILTERS = {
 
 
 class Renderer():
-    """Render dispatches using Jinja and process custom BBcode tags.
+    """Render dispatches from templates and process custom BBcode tags.
 
     Args:
         template_dir (str): Template file directory.
@@ -28,7 +29,7 @@ class Renderer():
         data (dict): Data.
     """
 
-    def __init__(self, template_dir, bbcode_tags):
+    def __init__(self, template_dir, bbcode_tags, custom_vars_file):
         template_loader = jinja2.FileSystemLoader(template_dir)
 
         self.bbcode_parser = bbcode.Parser(newline='\n',
@@ -43,7 +44,21 @@ class Renderer():
         self.env.filters.update(FILTERS)
         logger.info('Loaded all custom filters')
 
-        self.data = None
+        # Context data
+        self.ctx = {}
+
+        with open(custom_vars_file) as f:
+            self.ctx.update(utils.load_config(f))
+            logger.info('Loaded custom vars file "%s"', custom_vars_file)
+
+    def update_data(self, data):
+        """Update data for context.
+
+        Args:
+            data (dict): General data buss.
+        """
+
+        self.ctx.update(data)
 
     def render_dispatch(self, template_name):
         """Render a dispatch.
@@ -56,7 +71,7 @@ class Renderer():
         """
 
         template = self.env.get_template(template_name)
-        rendered_dispatch = self.bbcode_parser.format(template.render(self.data))
+        rendered_dispatch = self.bbcode_parser.format(template.render(self.ctx))
 
         logger.debug('Rendered template "%s": %s', template_name, rendered_dispatch)
 
