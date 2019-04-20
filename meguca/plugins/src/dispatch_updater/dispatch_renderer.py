@@ -29,7 +29,7 @@ class Renderer():
         data (dict): Data.
     """
 
-    def __init__(self, template_dir, bbcode_tags, custom_vars_file):
+    def __init__(self, template_dir, bbcode_tags, custom_vars_dir):
         template_loader = jinja2.FileSystemLoader(template_dir)
 
         self.bbcode_parser = bbcode.Parser(newline='\n',
@@ -47,9 +47,16 @@ class Renderer():
         # Context data
         self.ctx = {}
 
-        with open(custom_vars_file) as f:
+        if isinstance(custom_vars_dir, list):
+            for custom_vars_filename in custom_vars_dir:
+                self.load_custom_vars(custom_vars_filename)
+        else:
+            self.load_custom_vars(custom_vars_dir)
+
+    def load_custom_vars(self, custom_vars_filename):
+        with open(custom_vars_filename) as f:
             self.ctx.update(utils.load_config(f))
-            logger.info('Loaded custom vars file "%s"', custom_vars_file)
+            logger.debug('Loaded custom vars file "%s"', custom_vars_filename)
 
     def update_data(self, data):
         """Update data for context.
