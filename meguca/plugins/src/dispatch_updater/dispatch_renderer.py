@@ -16,7 +16,8 @@ logger = logging.getLogger(__name__)
 
 FILTERS = {
            'nation': filters.nation,
-           'region': filters.region
+           'region': filters.region,
+           'gen_list': filters.gen_list
 }
 
 
