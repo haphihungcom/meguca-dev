@@ -5,47 +5,19 @@ from unittest import mock
 import pytest
 import toml
 
-from meguca.plugins.src.dispatch_updater import dispatch_updater
 from meguca.plugins.src.dispatch_updater import dispatch_renderer
-
-
-class TestDispatchRenderer():
-    @pytest.fixture
-    def setup_template(self):
-        template = '{% for i in j %}[test]{{ i }}[/test]{% endfor %}{{ john.foo }}'
-        custom_vars = {'john': {'foo': 'bar'}}
-
-        with open('tests/template.txt', 'w') as f:
-            f.write(template)
-
-        toml.dump(custom_vars, open('tests/custom_vars.toml', 'w'))
-
-        yield 0
-
-        os.remove('tests/template.txt')
-        os.remove('tests/custom_vars.toml')
-
-    def test_render_dispatch(self, setup_template):
-        bbcode_tags = {'test': {'template': '[a]%(value)s[/a]'}}
-        data = {'j': [1, 2, 3]}
-        ins = dispatch_renderer.Renderer('tests', bbcode_tags, 'tests/custom_vars.toml')
-        ins.update_data(data)
-
-        assert ins.render_dispatch('template.txt') == '[a]1[/a][a]2[/a][a]3[/a]bar'
+from meguca.plugins.src.dispatch_updater import dispatch_updater
 
 
 class TestDispatchUpdater():
     @pytest.fixture
     def setup_templates(self):
-        templates = {'tests/template_1.txt': '{% for i in j %}[test1]{{ i }}[/test1]{% endfor %}',
-                     'tests/template_2.txt': '[test2]{{ john.foo }}[/test2]'}
-        custom_vars = {'john': {'foo': 'bar'}}
+        templates = {'tests/template_1.txt': '{% for i in j %}{{ i }}{% endfor %}',
+                     'tests/template_2.txt': 'bar'}
 
         for template_filename, template_content in templates.items():
             with open(template_filename, 'w') as template_file:
                 template_file.write(template_content)
-
-        toml.dump(custom_vars, open('tests/custom_vars.toml', 'w'))
 
         yield 0
 
@@ -69,15 +41,15 @@ class TestDispatchUpdater():
                                                 'submitbutton': '1'})
 
     def test_run_multiple_dispatches(self, setup_templates):
-        data = mock.Mock(get_bare_obj=mock.Mock(return_value={'j': [1, 2, 3], 'x': 1}))
+        data = mock.Mock(get_bare_obj=mock.Mock(return_value={'j': [1, 2, 3]}))
         mocked_ns_site = mock.Mock(execute=mock.Mock())
-        config = {'general': {'template_dir_path': 'tests', 'custom_vars_path': 'tests/custom_vars.toml'},
-                  'dispatches': {'template_1.txt': {'id': 12345, 'title': 'Example 1',
-                                                    'category': 123, 'sub_category': 456},
-                                 'template_2.txt': {'id': 67890, 'title': 'Example 2',
-                                                    'category': 789, 'sub_category': 123}},
-                  'custom_bbcode_tags': {'test1': {'template': '[a]%(value)s[/a]'},
-                                         'test2': {'template': '[b]%(value)s[/b]'}}}
+        config = {'general': {'template_dir_path': 'tests', 'filters_path': '',
+                              'custom_vars_path': '', 'simple_bb_path': '',
+                              'bb_path': '', 'template_file_ext': 'txt'},
+                  'dispatches': {'template_1': {'id': 12345, 'title': 'Example 1',
+                                                 'category': 123, 'sub_category': 456},
+                                 'template_2': {'id': 67890, 'title': 'Example 2',
+                                                'category': 789, 'sub_category': 123}}}
         ins = dispatch_updater.DispatchUpdater()
         ins.plg_config = config
         ins.prepare(mocked_ns_site)
@@ -89,13 +61,13 @@ class TestDispatchUpdater():
                                      'category': '123',
                                      'subcategory-123': '456',
                                      'dname': 'Example 1',
-                                     'message': '[a]1[/a][a]2[/a][a]3[/a]',
+                                     'message': '123',
                                      'submitbutton': '1'}),
                           mock.call('lodge_dispatch',
                                     {'edit': '67890',
                                      'category': '789',
                                      'subcategory-789': '123',
                                      'dname': 'Example 2',
-                                     'message': '[b]bar[/b]',
+                                     'message': 'bar',
                                      'submitbutton': '1'})]
         mocked_ns_site.execute.assert_has_calls(expected_calls)

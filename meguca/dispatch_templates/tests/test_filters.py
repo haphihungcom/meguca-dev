@@ -1,6 +1,4 @@
-import jinja2
-
-from meguca.plugins.src.dispatch_updater import filters
+from meguca.dispatch_templates.filters import filters
 
 
 class TestNation():

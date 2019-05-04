@@ -107,6 +107,10 @@ class TestTemplateRenderer():
 
         assert ins.env.filters['filter1']
 
+    def test_load_filters_with_no_filters(self):
+        ins = dispatch_renderer.TemplateRenderer('tests', '')
+        assert 'filter1' not in ins.env.filters
+
     def test_render_with_filters(self, setup_template):
         ins = dispatch_renderer.TemplateRenderer('tests', 'tests/resources/filters.py')
 
@@ -133,7 +137,7 @@ class TestDispatchRenderer():
         os.remove('tests/custom_vars.toml')
         os.remove('tests/simple_bb_formatters.toml')
 
-    def test_render_dispatch(self, setup_template):
+    def test_render(self, setup_template):
         data = {'j': [1, 2, 3]}
         config = {'conf1': 'val1'}
         ins = dispatch_renderer.Renderer('tests', 'tests/resources/filters.py',
@@ -144,5 +148,5 @@ class TestDispatchRenderer():
 
         result = ('[a]1and1[/a][a]2and1[/a][a]3and1[/a]'
                   '[vnm=test1][efg=val1][xyz=val1]marry[/xyz][/efg][/vnm]')
-        assert ins.render_dispatch('template.txt') == result
+        assert ins.render('template.txt') == result
 

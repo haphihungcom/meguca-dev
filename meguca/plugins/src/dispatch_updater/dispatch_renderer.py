@@ -1,6 +1,7 @@
 """Render dispatches from templates.
 """
 
+
 import importlib
 import logging
 import inspect
@@ -10,7 +11,7 @@ import jinja2
 import bbcode
 
 from meguca import utils
-from meguca.plugins.src.dispatch_updater import utils as dispatch_utils
+from meguca.plugins.src.dispatch_updater import utils as plg_utils
 
 
 logger = logging.getLogger(__name__)
@@ -20,19 +21,19 @@ class CustomVars():
     """Custom variables.
 
         Args:
-            custom_vars_files (str|list): Custom vars files.
+            custom_vars_path (str|list): Custom vars files.
     """
 
-    def __init__(self, custom_vars_files):
+    def __init__(self, custom_vars_path):
         self._custom_vars = {}
 
-        if isinstance(custom_vars_files, list):
-            for custom_vars_file in custom_vars_files:
+        if isinstance(custom_vars_path, list):
+            for custom_vars_file in custom_vars_path:
                 self.load_custom_vars(custom_vars_file)
-        elif custom_vars_files == '':
-            self._custom_vars = {}
+        elif custom_vars_path == '':
+            pass
         else:
-            self.load_custom_vars(custom_vars_files)
+            self.load_custom_vars(custom_vars_path)
 
     def load_custom_vars(self, custom_vars_file):
             self._custom_vars.update(utils.load_config(custom_vars_file))
@@ -61,13 +62,13 @@ class BBParser():
         self.config = config
 
         try:
-            for tag, info in toml.load(simple_bb_path).items():
+            for tag, info in utils.load_config(simple_bb_path).items():
                 self.parser.add_simple_formatter(tag, info['template'], render_embedded=True)
                 logger.debug('Loaded simple BBCode formatter "%s"', tag)
         except FileNotFoundError:
             logger.warning('Simple BBCode formatter file not found!')
 
-        formatters = dispatch_utils.load_funcs(bb_path)
+        formatters = plg_utils.load_funcs(bb_path)
         if formatters is None:
             logger.warning('BBCode formatter file not found!')
         else:
@@ -84,11 +85,17 @@ class BBParser():
 
 
 class TemplateRenderer():
-    def __init__(self, template_dir, filters_path):
-        template_loader = jinja2.FileSystemLoader(template_dir)
+    def __init__(self, template_dir_path, filters_path):
+        """Render a dispatch template.
+
+        Args:
+            template_dir_path (str): Template file directory.
+            filters_path (str): Path to filters file.
+        """
+        template_loader = jinja2.FileSystemLoader(template_dir_path)
         self.env = jinja2.Environment(loader=template_loader)
 
-        filters = dispatch_utils.load_funcs(filters_path)
+        filters = plg_utils.load_funcs(filters_path)
         if filters is None:
             logger.warning('Filter file not found!')
         else:
@@ -117,8 +124,8 @@ class Renderer():
     """Render dispatches from templates and process custom BBcode tags.
 
     Args:
-        template_dir (str): Template file directory.
-        filter_path (str): Path to template filter file.
+        template_dir_path (str): Template file directory.
+        filters_path (str): Path to filters file.
         simple_bb_path (str): Path to simple BBCode formatter file.
         bb_path (str): Path to BBCode formatter file.
         data (dict): Data.
@@ -126,10 +133,10 @@ class Renderer():
         plg_config: Plugin configuration.
     """
 
-    def __init__(self, template_dir, filter_path, simple_bb_path,
-                 bb_path, custom_vars_files, plg_config):
-        custom_vars = CustomVars(custom_vars_files)
-        self.template_renderer = TemplateRenderer(template_dir, filter_path)
+    def __init__(self, template_dir_path, filters_path, simple_bb_path,
+                 bb_path, custom_vars_path, plg_config):
+        custom_vars = CustomVars(custom_vars_path)
+        self.template_renderer = TemplateRenderer(template_dir_path, filters_path)
         self.bb_parser = BBParser(simple_bb_path, bb_path,
                                   custom_vars.custom_vars, plg_config)
 
@@ -137,15 +144,15 @@ class Renderer():
         self.ctx = custom_vars.custom_vars
 
     def update_data(self, data):
-        """Update data for context.
+        """Update context with new data.
 
         Args:
-            data (dict): General data buss.
+            data (dict): New data.
         """
 
         self.ctx.update(data)
 
-    def render_dispatch(self, template_name):
+    def render(self, template_name):
         """Render a dispatch.
 
         Args:
