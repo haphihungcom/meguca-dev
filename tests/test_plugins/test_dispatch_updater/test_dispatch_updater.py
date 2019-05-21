@@ -43,9 +43,11 @@ class TestDispatchUpdater():
     def test_run_multiple_dispatches(self, setup_templates):
         data = mock.Mock(get_bare_obj=mock.Mock(return_value={'j': [1, 2, 3]}))
         mocked_ns_site = mock.Mock(execute=mock.Mock())
-        config = {'general': {'template_dir_path': 'tests', 'filters_path': '',
-                              'custom_vars_path': '', 'simple_bb_path': '',
-                              'bb_path': '', 'template_file_ext': 'txt'},
+        config = {'general': {'template_dir_path': 'tests',
+                              'filters_path': 'tests/resources/filters.py',
+                              'custom_vars_path': '',
+                              'template_file_ext': 'txt',
+                              'bb_path': 'tests/resources/bb_formatters.toml'},
                   'dispatches': {'template_1': {'id': 12345, 'title': 'Example 1',
                                                  'category': 123, 'sub_category': 456},
                                  'template_2': {'id': 67890, 'title': 'Example 2',

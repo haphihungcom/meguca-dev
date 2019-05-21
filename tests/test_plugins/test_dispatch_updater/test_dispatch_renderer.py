@@ -6,6 +6,7 @@ import pytest
 import toml
 
 from meguca.plugins.src.dispatch_updater import dispatch_renderer
+from meguca.plugins.src.dispatch_updater import exceptions
 
 
 class TestCustomVars():
@@ -43,50 +44,78 @@ class TestCustomVars():
 
 
 class TestBBCodeParser():
-    @pytest.fixture(scope='class')
-    def setup_formatters(self):
-        simple_bb_formatters = {'tag1': {'template': '[tagr1]%(value)s[/tagr1]'},
-                                'tag2': {'template': '[tagr2]%(value)s[/tagr2]'}}
-
-        with open('simple_bb.toml', 'w') as f:
-            toml.dump(simple_bb_formatters, f)
-
-        yield 0
-
-        os.remove('simple_bb.toml')
-
-    def test_load_formatters(self, setup_formatters):
-        ins = dispatch_renderer.BBParser('simple_bb.toml', 'tests/resources/bb_formatters.py',
+    def test_load_formatters(self):
+        ins = dispatch_renderer.BBParser(toml.load('tests/resources/bb_formatters.toml'),
                                          '', '')
 
         assert ins.parser.format('[dar][tag1]test[/tag1][/dar]') == '[abc][tagr1]test[/tagr1][/abc]'
 
-    def test_load_formatters_without_simple_formatter_file(self, setup_formatters):
-        ins = dispatch_renderer.BBParser('', 'tests/resources/bb_formatters.py', '', '')
+    def test_load_formatters_with_non_existent_func_file(self):
+        config = {'simple_formatters': {},
+                  'formatters': {'test': {'func_name': 'abc',
+                                          'func_path': 'foobar.py',
+                                          'render_embedded': True,
+                                          'newline_closes': False,
+                                          'same_tag_closes': False,
+                                          'standalone': False,
+                                          'strip': False,
+                                          'swallow_trailing_newline': False}}}
 
-        assert ins.parser.format('[dar]test[/dar]') == '[abc]test[/abc]'
+        with pytest.raises(exceptions.BBParserError):
+            ins = dispatch_renderer.BBParser(config, '', '')
 
-    def test_load_formatters_without_formatter_file(self, setup_formatters):
-        ins = dispatch_renderer.BBParser('simple_bb.toml', '', '', '')
+    def test_load_formatter_with_non_existent_func(self):
+        config = {'simple_formatters': {},
+                  'formatters': {'test': {'func_name': 'abc',
+                                          'func_path': 'tests/resources/bb_formatters.py',
+                                          'render_embedded': True,
+                                          'newline_closes': False,
+                                          'same_tag_closes': False,
+                                          'standalone': False,
+                                          'strip': False,
+                                          'swallow_trailing_newline': False}}}
 
-        assert ins.parser.format('[tag1]test[/tag1]') == '[tagr1]test[/tagr1]'
+        with pytest.raises(exceptions.BBParserError):
+            ins = dispatch_renderer.BBParser(config, '', '')
 
-    def test_format_with_simple_formatters(self, setup_formatters):
-        ins = dispatch_renderer.BBParser('simple_bb.toml', 'tests/resources/bb_formatters.py',
+    @pytest.fixture
+    def setup_func_file(self):
+        with open('func.py', 'w') as f:
+            f.write('')
+
+        yield
+
+        os.remove('func.py')
+
+    def test_load_formatter_with_empty_func_file(self):
+        config = {'simple_formatters': {},
+                  'formatters': {'test': {'func_name': 'abc',
+                                          'func_path': 'func.py',
+                                          'render_embedded': True,
+                                          'newline_closes': False,
+                                          'same_tag_closes': False,
+                                          'standalone': False,
+                                          'strip': False,
+                                          'swallow_trailing_newline': False}}}
+
+        with pytest.raises(exceptions.BBParserError):
+            ins = dispatch_renderer.BBParser(config, '', '')
+
+    def test_format_with_simple_formatters(self):
+        ins = dispatch_renderer.BBParser(toml.load('tests/resources/bb_formatters.toml'),
                                          '', '')
 
         assert ins.format('[tag1]abc[/tag1]') == '[tagr1]abc[/tagr1]'
 
-    def test_format_with_no_custom_vars_and_config(self, setup_formatters):
-        ins = dispatch_renderer.BBParser('simple_bb.toml', 'tests/resources/bb_formatters.py',
+    def test_format_with_no_custom_vars_and_config(self):
+        ins = dispatch_renderer.BBParser(toml.load('tests/resources/bb_formatters.toml'),
                                          '', '')
-
         assert ins.format('[dar]test[/dar]') == '[abc]test[/abc]'
 
-    def test_format_with_custom_vars_and_config(self, setup_formatters):
-        ins = dispatch_renderer.BBParser('simple_bb.toml', 'tests/resources/bb_formatters.py',
+    def test_format_with_custom_vars_and_config(self):
+        ins = dispatch_renderer.BBParser(toml.load('tests/resources/bb_formatters.toml'),
                                          custom_vars={'key1': 'val1'},
-                                         config={'conf1': 'val1'})
+                                         ext_config={'conf1': 'val1'})
 
         assert ins.format('[foo][bar]test[/bar][/foo]') == '[efg=val1][xyz=val1]test[/xyz][/efg]'
 

@@ -12,6 +12,7 @@ import bbcode
 
 from meguca import utils
 from meguca.plugins.src.dispatch_updater import utils as plg_utils
+from meguca.plugins.src.dispatch_updater import exceptions
 
 
 logger = logging.getLogger(__name__)
@@ -48,39 +49,68 @@ class BBParser():
     """Parse BBCode tags.
 
        Args:
-            simple_bb_path (str): Path to simple BBCode formatter file.
-            bb_path (str): Path to BBCode formatter file.
+            bb_config (dict): BBCode formatter configurations.
             custom_vars (dict): Custom variables to pass to formatters.
-            config (dict): Plugin configuration to pass to formatters.
+            ext_config (dict): Plugin configuration to pass to formatters.
     """
 
-    def __init__(self, simple_bb_path, bb_path, custom_vars, config):
+    def __init__(self, bb_config, custom_vars, ext_config):
         self.parser = bbcode.Parser(newline='\n',
                                     install_defaults=False,
-                                    escape_html=False)
+                                    escape_html=False,
+                                    replace_links=False,
+                                    replace_cosmetic=False)
+
         self.custom_vars = custom_vars
-        self.config = config
+        self.ext_config = ext_config
 
-        try:
-            for tag, info in utils.load_config(simple_bb_path).items():
-                self.parser.add_simple_formatter(tag, info['template'], render_embedded=True)
-                logger.debug('Loaded simple BBCode formatter "%s"', tag)
-        except FileNotFoundError:
-            logger.warning('Simple BBCode formatter file not found!')
+        for tag, info in bb_config['simple_formatters'].items():
+            self.parser.add_simple_formatter(tag, info['template'],
+                                             escape_html=False,
+                                             replace_links=False,
+                                             replace_cosmetic=False,
+                                             newline_closes=info['newline_closes'],
+                                             same_tag_closes=info['same_tag_closes'],
+                                             standalone=info['standalone'],
+                                             render_embedded=info['render_embedded'],
+                                             strip=info['strip'],
+                                             swallow_trailing_newline=info['swallow_trailing_newline'])
+            logger.debug('Loaded simple BBCode formatter %s', tag)
 
-        formatters = plg_utils.load_funcs(bb_path)
-        if formatters is None:
-            logger.warning('BBCode formatter file not found!')
-        else:
-            for formatter in formatters:
-                self.parser.add_formatter(formatter[0],formatter[1],
-                                          render_embedded=True,
-                                          swallow_trailing_newline=True)
-                logger.debug('Loaded BBCode formatter "%s"', formatter[0])
-            logger.info('Loaded all BBCode formatters')
+        for tag, info in bb_config['formatters'].items():
+            try:
+                funcs = plg_utils.load_funcs(info['func_path'])
+            except FileNotFoundError:
+                raise exceptions.BBParserError("Couldn't find BBCode formatter function file %s",
+                                               info['func_path'])
+            if funcs is None:
+                raise exceptions.BBParserError("Couldn't find any function in %s",
+                                               info['func_path'])
+
+            format_func = None
+            for func in funcs:
+                if func[0] == info['func_name']:
+                    format_func = func[1]
+            if format_func is None:
+                raise exceptions.BBParserError('Format function %s did not found in %s',
+                                               info['func_name'], info['func_path'])
+
+            self.parser.add_formatter(tag, format_func,
+                                      escape_html=False,
+                                      replace_links=False,
+                                      replace_cosmetic=False,
+                                      newline_closes=info['newline_closes'],
+                                      same_tag_closes=info['same_tag_closes'],
+                                      standalone=info['standalone'],
+                                      render_embedded=info['render_embedded'],
+                                      strip=info['strip'],
+                                      swallow_trailing_newline=info['swallow_trailing_newline'])
+            logger.debug('Loaded BBCode formatter %s', tag)
+
+        logger.info('Loaded all BBCode formatters')
 
     def format(self, text):
-        return self.parser.format(text, config=self.config,
+        return self.parser.format(text, config=self.ext_config,
                                   custom_vars=self.custom_vars)
 
 
@@ -93,7 +123,7 @@ class TemplateRenderer():
             filters_path (str): Path to filters file.
         """
         template_loader = jinja2.FileSystemLoader(template_dir_path)
-        self.env = jinja2.Environment(loader=template_loader)
+        self.env = jinja2.Environment(loader=template_loader, trim_blocks=True)
 
         filters = plg_utils.load_funcs(filters_path)
         if filters is None:
@@ -126,19 +156,22 @@ class Renderer():
     Args:
         template_dir_path (str): Template file directory.
         filters_path (str): Path to filters file.
-        simple_bb_path (str): Path to simple BBCode formatter file.
-        bb_path (str): Path to BBCode formatter file.
+        bb_path (str): Path to BBCode formatter configuration file.
         data (dict): Data.
         custom_vars_files (list|str): Custom vars files.
         plg_config: Plugin configuration.
     """
 
-    def __init__(self, template_dir_path, filters_path, simple_bb_path,
+    def __init__(self, template_dir_path, filters_path,
                  bb_path, custom_vars_path, plg_config):
         custom_vars = CustomVars(custom_vars_path)
         self.template_renderer = TemplateRenderer(template_dir_path, filters_path)
-        self.bb_parser = BBParser(simple_bb_path, bb_path,
-                                  custom_vars.custom_vars, plg_config)
+
+        try:
+            bb_config = utils.load_config(bb_path)
+            self.bb_parser = BBParser(bb_config, custom_vars.custom_vars, plg_config)
+        except FileNotFoundError:
+            raise exceptions.BBParserError('BBCode configuration file not found!')
 
         # Context for templates
         self.ctx = custom_vars.custom_vars

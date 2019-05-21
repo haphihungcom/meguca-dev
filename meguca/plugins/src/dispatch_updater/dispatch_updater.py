@@ -15,7 +15,6 @@ class DispatchUpdater(plugin_categories.View):
     def prepare(self, ns_site):
         self.renderer = dispatch_renderer.Renderer(self.plg_config['general']['template_dir_path'],
                                                    self.plg_config['general']['filters_path'],
-                                                   self.plg_config['general']['simple_bb_path'],
                                                    self.plg_config['general']['bb_path'],
                                                    self.plg_config['general']['custom_vars_path'],
                                                    self.plg_config)
