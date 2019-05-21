@@ -21,6 +21,8 @@ def get_url(url, custom_vars_urls, dispatches):
         elif url in dispatches:
             dispatch_id = dispatches[url]['id']
             real_url = 'https://www.nationstates.net/page=dispatch/id={}'.format(dispatch_id)
+        else:
+            real_url = url
     else:
         real_url = url
 
