@@ -1,0 +1,5 @@
+{% import 'macros/header_macros.txt' as macros %}
+{{ macros.gen_2rows_header(upper_urls={'Test1': 'https://test1',
+                                       'Test2': 'https://test2'},
+                           lower_urls={'Test3': 'https://test3',
+                                       'Test4': 'https://test4'}, logo='test') }}

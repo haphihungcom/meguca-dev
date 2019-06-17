@@ -3,6 +3,7 @@
 
 
 import logging
+import time
 
 from meguca import plugin_categories
 from meguca.plugins.src.dispatch_updater import dispatch_renderer
@@ -48,3 +49,4 @@ class DispatchUpdater(plugin_categories.View):
                   'submitbutton': '1'}
 
         self.ns_site.execute('lodge_dispatch', params)
+        time.sleep(6)

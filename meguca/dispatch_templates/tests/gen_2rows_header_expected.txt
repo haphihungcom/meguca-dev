@@ -1,0 +1,7 @@
+[background-block=#019AED][center][color=#019aed].[/color]
+[img]test[/img]
+[color=#019aed].[/color][/center][/background-block][background-block=#38b9ff][center][color=#38b9ff].[/color]
+[font=Segoe UI, Helvetica, sans-serif][size=140][raw_url=https://test1][color=#fff]Test1[/color][/raw_url] [color=#fff]|[/color] [raw_url=https://test2][color=#fff]Test2[/color][/raw_url][/size][/font]
+[color=#019aed].[/color][/center][/background-block][background-block=#1089e6][center][color=#38b9ff].[/color]
+[font=Segoe UI, Helvetica, sans-serif][size=140][raw_url=https://test3][color=#fff]Test3[/color][/raw_url] [color=#fff]|[/color] [raw_url=https://test4][color=#fff]Test4[/color][/raw_url][/size][/font]
+[color=#38b9ff].[/color][/center][/background-block]

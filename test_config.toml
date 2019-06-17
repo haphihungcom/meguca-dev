@@ -1,0 +1,11 @@
+[simple_formatters]
+
+[formatters.test]
+func_name = "abc"
+func_path = "tests/resources/bb_formatters.py"
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false

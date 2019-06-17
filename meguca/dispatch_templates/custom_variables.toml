@@ -1,0 +1,80 @@
+[gov_officials]
+delegate = 'Erinor'
+local_council = ['Volaworand', 'Aumeltopia', 'Auphelia']
+crs = ['Sandaoguo', 'Farengeto', 'Kringalia', 'Erinor', 'Tsunamy', 'Pencil Sharpeners 2']
+legcomm = ['United States of Vietnam', 'Nakarisaune', 'Erinor']
+general_corps = ['United States of Vietnam', 'Roavin']
+mora_advisory_council = ['Kringalia', 'Volaworand', 'Islands of unity', 'Aidenfieeld', 'Beepee', 'Roavin', 'Pencil Sharpeners 2']
+cabinet_advisors = ['Amerion']
+coa = 'Bzerneleg'
+pm = 'Roavin'
+mora = 'Beepee'
+mofa = 'Sandaoguo'
+moma = 'Nakarisaune'
+hc_chief_justice = 'Kringalia'
+hc_justices = ['Kringalia', 'Belschaft', 'Rebeltopia', 'Awesomiasa']
+election_commissioner = 'Tsunamy'
+
+[misc]
+secret_ballot_forum_acc = 'The Vote Collector'
+newspaper_adder = 'Amerion'
+
+[active_newspapers]
+Coco = 'https://www.nationstates.net/page=dispatches/nation=lama_glama_publishing_group'
+
+[other_newspapers]
+TestNews = 'https://www.nationstates.net/region=the_south_pacific'
+
+[proscriptions]
+[proscriptions.'Funkadelia']
+type = 'Individual'
+start_date = '25-07-2018'
+association = '[region]Lone Wolves United[/region]'
+note = '[url=https://tspforums.xyz/thread-6362.html]Cabinet statement[/url]'
+
+[proscriptions.'Lamb Stone']
+type = 'Individual'
+start_date = '25-07-2018'
+association = '[region]Lone Wolves United[/region]'
+note = '[url=https://tspforums.xyz/thread-6362.html]Cabinet statement[/url]'
+
+[proscriptions.'Evil Wolf']
+type = 'Individual'
+start_date = '25-07-2018'
+association = '[region]Lone Wolves United[/region]'
+note = '[url=https://tspforums.xyz/thread-6362.html]Cabinet statement[/url]'
+
+[proscriptions.'McMannia']
+type = 'Individual'
+start_date = '25-07-2018'
+association = '[region]HYDRA Command[/region], [region]The Ragerian Imperium[/region]'
+note = '[url=https://tspforums.xyz/thread-6362.html]Cabinet statement[/url]'
+
+[proscriptions.'HYDRA Command']
+type = 'Organization'
+start_date = '25-07-2018'
+association = 'N/A'
+note = '[url=https://tspforums.xyz/thread-6362.html]Cabinet statement[/url]'
+
+
+[urls]
+f_bantam_harbour = 'https://tspforums.xyz/forum-109.html'
+f_bantam_harbour_map = 'https://tspforums.xyz/thread-241.html'
+f_knowhere = 'https://tspforums.xyz/forum-292.html'
+f_spam = 'https://tspforums.xyz/forum-14.html'
+f_news = 'https://tspforums.xyz/forum-22.html'
+f_crs = 'https://tspforums.xyz/forum-53.html'
+roleplay_guide = 'https://www.nationstates.net/page=dispatch/id=920399'
+f_wa = 'https://tspforums.xyz/forum-35.html'
+forum = 'https://tspforums.xyz/index.php'
+rmb = 'https://www.nationstates.net/page=display_region_rmb/region=the_south_pacific'
+discord = 'https://discordapp.com/invite/tEyyDyh'
+ns_wa = 'https://www.nationstates.net/page=un'
+ns_telegram = 'https://www.nationstates.net/page=telegrams'
+secret_ballot_forum_acc = 'https://tspforums.xyz/user-73.html'
+lc_intro = 'https://www.nationstates.net/page=dispatch/id=1199328'
+rmb_rules = 'https://www.nationstates.net/page=dispatch/id=1199335'
+lc_policies = 'https://www.nationstates.net/page=dispatch/id=1199330'
+lc_elections = 'https://www.nationstates.net/page=dispatch/id=1186281'
+f_assembly_office = 'https://tspforums.xyz/thread-5131.html'
+

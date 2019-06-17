@@ -1,0 +1,74 @@
+{% import 'macros/sign.txt' as sign %}
+
+{% extends 'layout/security.txt' %}
+
+{% block body %}
+
+[title]Proscriptions[/title]
+[subtitle]in the Coalition of the South Pacific[/subtitle]
+
+{{ sign.note('Proscriptions should not be confused with [url=prohibitions]Prohibitions[/url]. Prohibitions are a less strict version of Proscriptions.') }}
+
+[p]A Proscription is a ban on one individual or an entire region from staying and participating in any area under the jurisdiction of the Coalition of the South Pacific's Government. Such harsh punishments are only carried out to individuals or organizations that have committed very serious offenses to the Coalition as a whole (Coup d'etat, invasion, infiltration,...). Proscriptions are issued/revoked by [url=cabinet_intro]the Cabinet[/url] or [url=crs_intro]the Council on Regional Security[/url] (CRS). Proscriptions can be reviewed by [url=court_intro]the High Court[/url] or by the issuing authority (Cabinet or/and CRS) under request from [url=assembly_intro]the Assembly[/url].[/p]
+
+[box]
+[center][h2]Proscribed individuals or regions[/h2][/center]
+[table][tr][th]Name[/th][th]Type[/th][th]Start date[/th][th]Association[/th][th]More information[/th][/tr]
+{% for name, info in proscriptions.items() %}
+[tr][td]{{ name }}[/td][td]{{ info.type }}[/td][td]{{ info.start_date }}[/td][td]{{ info.association }}[/td][td]{{ info.note }}[/td][/tr]
+{% endfor %}[/table][/box]
+
+[h2]Criteria for Proscriptions[/h2]
+
+[p]Please read [law]Article 1 of the Proscription Act[/law] for acts of hostility that can cause a Proscription.[/p]
+
+[h2]Types of Proscriptions[/h2]
+
+[p]There are two types of Proscriptions:[/p]
+[list][*][em]Regional Proscription:[/em] A ban on an individual or on all members of a region or organization from having a nation in any region in the Coalition's jurisdiction.
+[*][em]Full Proscription:[/em] Comprises a Regional Proscription as well as a ban on access to off-site resources of the Coalition such as our [url=forum]forum[/url] and [url=discord]Discord server[/url].
+[/list]
+
+[box][ref][p][law]Article 2 of the Proscription Act[/law][/p][/ref]
+[/box]
+
+[h2]Issuing/revoking a Proscription[/h2]
+
+[p]A Proscription on [u]foreign individuals or regions/organizations[/u] can be issued by one of these institutions:[/p]
+[list][*][url=cabinet_intro]Cabinet[/url]
+[*][url=crs_intro]Council on Regional Security[/url] (CRS)
+[/list]
+
+[p][em]Note:[/em] A Proscription on [u]our own members[/u] can only be issued jointly by both institutions.[/p]
+
+[p]A Proscription must be issued publicly and a report detailing the rationale must accompany the Proscription. After issuing, a Proscription on individual will take effect immediately while a Proscription on regions or organizations will take effect after one week. During this one week time, any member associated with the proscribed regions/organizations must leave our region or the proscribed regions/organizations.[/p]
+
+[p]The issuing authority can revoke a Proscription if they want. The issuing authority must issue a report on why the Proscription isn't necessary anymore to the Assembly.[/p]
+
+[box][ref][p][law]Article 3 of the Proscription Act[/law][/p][/ref]
+[/box]
+
+[h2]Review a Proscription[/h2]
+
+[h3]Judicial review[/h3]
+
+[p]There are two types of judicial review:[/p]
+[list][*][em]Individual Proscription review:[/em] Review underlying evidence of intelligence upon which a Proscription on an individual(s) is based.
+[*][em]Membership review:[/em] For a Proscription on regions/organizations, review whether an individual is a member of the proscribed regions/organizations.
+[/list]
+
+[box][ref][p][law]Article 4 of the Proscription Act[/law][/p][/ref]
+[/box]
+
+[p]Normal [url=court_procedure]judicial procedures[/url] are used like any other cases.[/p]
+
+[p][em]Note:[/em] Review for Proscriptions of regions/organizations is not possible with the High Court.[/p]
+
+[h3]Issuing authority review[/h3]
+
+[p]The Assembly can require the issuing authority to review a Proscription by passing a resolution with a simple majority vote. Review for Proscriptions on regions/organizations is only possible with this method.[/p]
+
+[box][ref][p][law]Section 4, Article 3 of the Proscription Act[/law][/p][/ref]
+[/box]
+
+{% endblock body %}

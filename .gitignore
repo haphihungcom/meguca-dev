@@ -4,11 +4,10 @@ __pycache__/
 .vscode/
 .tox/
 *.json
-*.txt
 *.png
 *.db
 *.xml
 *.gz
 *.log
-*.toml
+meguca/config/general_config.toml
 !requirements.txt

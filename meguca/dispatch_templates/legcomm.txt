@@ -1,0 +1,34 @@
+{% extends "layout/indie.txt" %}
+
+{% block body %}
+
+[title]Legislator Committee[/title]
+[subtitle]of the Coalition of the South Pacific[/subtitle]
+
+[p]The Legislator Committee or LegComm is a body of three legislators who oversee the admissions of new legislators into the Assembly. The duty of the Legislator Committee is to vet legislator applicants, perform monthly legislator checks, and assist the Chair of Assembly in handling disruptive legislators. The Legislator Committee is one of the Coalition's three independent institutions which ensure the stability and security of the region.[/p]
+
+[h2]Members[/h2]
+
+[p]Currently, the Legislator Committee has {{ gov_officials.legcomm|count }} members and they are: {{ gov_officials.legcomm|gen_list }}[/p]
+
+[h2]Powers and roles[/h2]
+
+[list]
+[*]Check legislator applicants if they have met the requirements for legislatorship then accept or reject the applicants accordingly
+[*]Perform monthly legislator checks to remove legislators who no longer meet the eligibility requirements
+[*]Suspend disruptive legislators under orders from the Chair of Assembly
+[/list]
+
+[h2]How Legislator Committee members are chosen[/h2]
+
+[p]Legislator Committee members are appointed by the Cabinet. The appointments need to be approved by the Assembly with a simple majority vote. The Assembly can recall any Legislator Committee member with a three-fifths majority vote like any other government official. The Cabinet itself cannot dismiss Legislator Committee members once they have been appointed.[/p]
+
+[p]Like any other government official, a Legislator Committee member(s) can be recalled by [url=assembly_intro]the Assembly[/url] with a Recall Resolution which requires a 3/5 supermajority to pass.[/p]
+
+[h2]How Legislator applications are vetted[/h2]
+
+[p]Legislator applicants are vetted by the Legislator Committee before they are accepted to prevent bad players or spies from the enemies from coming into our region. The Legislator Committee uses both NationStates-provided data and real-life data to check an applicant. Normally, the Legislator Committee will check the applicant's nation happenings and real-life locations based on IP addresses to make sure they are not a banned player who is circumventing the banhammer or trying to commit identity fraud. In some cases, social media accounts linked to the applicant's email will also be looked at to further confirm their identity. Sometimes, interviews with the applicant may be conducted to get more information. After all information has been gathered, Legislator Committee members will decide if the applicant should be accepted or not.[/p]
+
+[p]Because members of the Legislator Committee can see your real-life sensitive information, membership in this institution requires a high degree of trust and competence to ensure unfortunate doxxing incidents don't occur.[/p]
+
+{% endblock body %}

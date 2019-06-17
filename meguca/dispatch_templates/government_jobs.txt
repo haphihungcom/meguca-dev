@@ -1,0 +1,27 @@
+{% extends "layout/welcome.txt" %}
+
+{% block body %}
+
+[title]Get a job in the Government[/title]
+
+[p]Below are jobs that our Government is offering. All jobs below only require applications and are completely open for beginners. Getting a job(s) below is a good way to experience our community in-depth and meet new people which will be beneficial if you ever want to run in [url=elections]an election[/url]![/p]
+
+[box]
+[center][h4]Regional Affairs jobs[/h4]
+[url=ra_jobs][size=130]Sign up here[/size][/url][/center]
+[p]The [url=ra_intro]Ministry of Regional Affairs[/url] offers a wide variety of jobs such as writers, journalists, graphic designers, event planners,... If writing, designing, organizing, socializing,... are your strength and passion then these are the jobs for you! You will write newspapers, design graphics, logos, organizing games and events, or just talking and be friend with new members to integrate them into our community.[/p]
+[hr]
+[center][h4]Join the Military[/h4]
+[url=spsf_intro][size=130]Sign up here[/size][/url][/center]
+[p]If you hate text and want something fast-paced and requires strategic thinking then the military is your option! Our regional military, the South Pacific Special Forces (SPSF) is a body which takes part in what known as Military Gameplay, an area of the game that deals with invading and defending regions.[/p]
+[hr]
+[center][h4]Become an Ambassador[/h4]
+[url=fa_jobs][size=130]Sign up here[/size][/url][/center]
+[p]Ambassadors are the ones who act as a bridge between our region and other regions and carry out diplomacy and relationship between the two. Ambassador is the perfect entry job for the [url=fa_intro]Ministry of Foreign Affairs[/url] as you will gain valuable experience about foreign diplomacy and learn more about the rich culture and diversity of NationStates's world.[/p]
+[hr]
+[center][h4]High Court jobs[/h4]
+[url=court_jobs][size=130]Sign up here[/size][/url][/center]
+[p]Judges of the High Court, our supreme judicial institution, are appointed by the Cabinet so unfortunately, this position is not open for beginners, however, the High Court offers jobs that only require an application such as legal text researchers, paperwork managers, event organizers,... If you are interested in laws and judicial matters, just sign up for one of the jobs [url=court_jobs]here[/url]. These jobs are opened for both experienced and beginner individuals and are perfect chances to learn more about the Judiciary and gain the experience required if you want to become a judge in the future.[/p]
+[/box]
+
+{% endblock body %}

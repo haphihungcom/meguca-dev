@@ -1,0 +1,69 @@
+{% extends "layout/welcome.txt" %}
+
+{% block body %}
+
+[title]How to get involved[/title]
+[subtitle]in the Coalition of South Pacific[/subtitle]
+
+[p]The South Pacific is a very big and diverse community, there are a lot of stuff you can do here, ranging from just fun banter to serious politics. Below are ways that you can become involved in the community and have fun in the process![/p]
+
+[h2]Interact with people[/h2]
+
+[p]You can get involved in our region just by chatting with our friendly members on:[/p]
+
+[list]
+[*][url=rmb][b]Regional Message Board[/b][/url]: This is the gameside message board of our region. Most conversations on here are fun and silly banter, if that is your thing then this place is definitely for you! Remember to read the [url=rmb_rules]RMB Rules and Etiquette[/url] first to make sure moderators don't annoy you.
+[*][url=discord][b]Discord[/b][/url]: For more diverse conversations, you should have a look at our Discord channel. This is the place where simple talks about real-life, meme, bot games, and serious discussions about politics happen. If you want to involve in the Government then joining our Discord server is a must as most of our informal talks about Government business happen in there.
+[*][url=forum][b]Forum[/b][/url]: We have a forum where more formal conversations happen. Most formal business of the Government and serious roleplays with plot happen in there. Although it is a place for slow and well thought-out talks, we still have [url=f_spam]spam games[/url] to keep you entertained!
+[/list]
+
+[h2]Participate in our endorsement program[/h2]
+
+[p]The [url=swan_intro]Southern World Assembly Initiative[/url] is a program which enables your nation to gather more endorsements and influence which in turn give our region as a whole more voting power on the [url=wa]World Assembly[/url] and make it more secure. It is very easy to participate in it, just:[/p]
+
+[list]
+[*]Join the [url=wa]World Assembly[/url]
+[*]Endorse Delegate {{ gov_officials.delegate|nation }} and members of the Council on Regional Security: {{ gov_officials.crs|gen_list }}
+[*]Endorse everyone else in our region
+[/list]
+
+[p]Read [url=swan_guide]this guide[/url] if you don't know how to do the above steps.[/p]
+
+[h2]Roleplay[/h2]
+
+[p]There are many ways which you can roleplay in our region:[/p]
+
+[list]
+[*][region]Knowhere[/region]: This is a region where you can post informal roleplays (E.g. News about your nation) on the Message Board. You don't need to move your nation to this region in order to post on its RMB.
+[*][url=f_bantam_harbour][b]Bantam Harbour[/b][/url]: This is an area on our forum where canon roleplays which take place on [url=f_bantam_harbour_map]our map[/url] happen. You can have serious roleplays about wars, trades, meetings, news,... on here. Most roleplays on here are very long with complex world-building so if you like to write long stories, this may be the place for you.
+[*][url=f_knowhere][b]Knowhere (Forum)[/b][/url]: This is like Bantam Harbour, but everything is non-canon and we don't stick to the map.
+[/list]
+
+[p]You can learn more about how to roleplay in our region [url=roleplay_guide]here[/url].[/p]
+
+[p]Always remember to read the rules and guides of any roleplay community you participate in to avoid getting lost.[/p]
+
+[h2]Get involved in politics[/h2]
+
+[p]If you like politics and governing, you should participate in our Government and politics. The easiest way to get involved in this area is to become a Legislator. Legislators are members of the Assembly, our legislature. They create, debate, and vote on laws which govern the region. You can become a Legislator just by signing up [url=become_legislator]here[/url].[/p]
+
+[p]Alternatively, you can also get involved in the Government by having a job(s) in there.[/p]
+
+[h2]Get a job in the Government[/h2]
+
+[p]The second best way to participate in the Government is to hold a job in there. The Government has a lot of things to do. Therefore, there are lots of job opportunities for you! We have jobs such as writers, roleplayers, graphic designers, military soldiers and officers,... Most jobs come from the Executive branch as ministers require a lot of personnel to help them carry out their work.[/p]
+
+[p]All government jobs only require you to sign up via an application. For more information on what jobs are available and how to sign up for them, please visit [url=government_jobs]this dispatch[/url].[/p]
+
+[p]If you ever want to run for an office in the future, having a job in the Government is the [i]best[/i] way to gain experience for the office you want to hold. You will be able to collect valuable experience and establish relationships with other people which will help you get the votes.[/p]
+
+[h2]Establish a newspaper[/h2]
+
+[p]You can inform people by creating a news outlet. Your outlet can cover anything, from regional politics, roleplay news to the latest topic on the RMB in any format. You can start by writing on a dispatch then post a link to it on the RMB for people to see. If your newspaper publishes regularly enough, contact [nation]{{ gov_officials.newspaper_adder }}[/nation] to get it featured on our list. Alternatively you may want to use [url=f_news]our forum[/url] as a platform instead.[/p]
+
+[h2]More ways[/h2]
+
+[p]There are many more ways to get involved. You can establish civil organizations, talk about World Assembly resolutions on [url=f_wa]our WA forum[/url],... It is up to you to choose what ways to have the most fun in our community![/p]
+
+
+{% endblock body %}

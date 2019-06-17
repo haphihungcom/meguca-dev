@@ -1,0 +1,13 @@
+{% import 'macros/header_macros.txt' as macros %}
+
+{% extends 'layout/general.txt' %}
+
+{% block header %}
+{{ macros.gen_header(urls={'Home': 'welcome',
+                           'Get Involved': 'get_involved',
+                           'Guides': 'guide_index',
+                           'Government': 'government_intro',
+                           'Roleplay': 'roleplay_guide',
+                           'SWAN': 'swan_intro',
+                           'About our region': 'factbook'}) }}
+{% endblock header %}

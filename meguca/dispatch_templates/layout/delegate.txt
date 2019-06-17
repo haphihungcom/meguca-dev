@@ -1,0 +1,9 @@
+{% import 'macros/header_macros.txt' as macros %}
+
+{% extends 'layout/general.txt' %}
+
+{% block header %}
+{{ macros.gen_header(urls={'Home': 'delegate_intro',
+                           'Details': 'delegate_details',
+                           'Elections': 'delegate_elections'}) }}
+{% endblock  %}

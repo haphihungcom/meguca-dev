@@ -1,0 +1,6 @@
+{% macro gen_footer(urls={}, logo='') -%}
+[background-block=#019AED][center][color=#019aed].[/color]
+[img]{{ logo }}[/img]
+[font=Segoe UI, Helvetica, sans-serif][size=140]{% for name, url in urls.items() %}[raw_url={{ url }}][color=#fff]{{ name }}[/color][/raw_url]{% if loop.revindex != 1 %} [color=#fff]|[/color] {% endif %}{% endfor %}[/size][/font]
+[color=#38b9ff].[/color][/center][/background-block]
+{%- endmacro %}

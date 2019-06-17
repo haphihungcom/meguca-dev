@@ -1,0 +1,14 @@
+{% extends "layout/assembly.txt" %}
+
+{% block body %}
+
+[title]Beginner Guide to the Assembly[/title]
+[subtitle]of the Coalition of the South Pacific[/subtitle]
+
+[p]If you are new to [url=assembly_intro]the Assembly[/url] and making laws, you have come to the right place. The Assembly is our legislature and is the place where laws which govern the region are created.[/p]
+
+[h2]Membership[/h2]
+
+
+
+{% endblock body %}

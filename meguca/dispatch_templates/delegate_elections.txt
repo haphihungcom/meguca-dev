@@ -1,0 +1,111 @@
+{% extends "layout/elections.txt" %}
+
+{% block body %}
+
+[title]Delegate elections[/title]
+
+[p]The Delegate is elected in [b]Delegate elections[/b] which occur every 6 months (January and July). Only [url=become_legislator]Legislators[/url] of the Assembly can run for the position of Delegate or vote in the first round of Delegate elections. Unlike other types of elections, Delegate elections are conducted in a two-stage process, first on [url=forum]the forum[/url], then using a gameside poll, both overseen by the [url=election_commission]Election Commission[/url].[/p]
+
+
+[h2]Time periods[/h2]
+
+[p]A Delegate election usually lasts for upwards of two and a half weeks and has four periods:[/p]
+
+[list]
+[*][em]Round One Nomination and Campaigning (Days 1-7):[/em] This is when Legislators can declare their candidacy or nominate others.  They can also campaign by writing forum posts, dispatches, and answering questions to encourage voters to vote for them. It starts immediately after a election starts and lasts for 7 days.
+[*][em]Round One Voting (Days 8-10):[/em] Legislators vote on candidates during this period. It starts 7 days after the nomination and campaign period begins and lasts for 3 days.
+[*][em]Round Two Voting (Days 11-17):[/em] The Election Commissioner creates a regional poll featuring the top two candidates from Round One. Any WA member nation with more influence in the South Pacific than elsewhere may vote on these candidates during this period. It starts immediately after Round One voting and lasts for 7 days.
+[*][em]Transition Period (Days 18 onwards):[/em] During this period the government and Council on Regional Security coordinates transitioning the newly elected Delegate into the actual in-game Delegate role by ensuring they have more endorsements than the incumbent Delegate. This often involves support from our allies and is variable in length.
+[/list]
+
+
+[h2]How to vote (Round one)[/h2]
+
+[h3]Eligibility[/h3]
+
+[p]You can only vote in the first round of a Delegate election if you are a Legislator and became one before the current election starts.[/p]
+
+[h3]Voting method[/h3]
+
+[p]Approval voting is used in the first round of the Delegate election. To vote, you just need to list all the candidates you would approve of becoming Delegate.  Each candidate listed will count as one approval vote in their favour, [u]irrespective of the order in which they are listed[/u].[/p]
+
+[p]The two (or more, if there is a tie) candidates with the most approval votes will move into round two.[/p]
+
+[h3]Voting guide[/h3]
+
+[p]The vote will be conducted on our regional forum in a thread designated by the Election Commission.[/p]
+[list]
+[*][em]Step 1:[/em] Read the [i]Information and Nominations[/i] thread which is pinned in the Election Center subforum (This subforum will be uncovered when an election starts) for information on the current election, where candidates post their campaign, and where the voting thread is.
+[*][em]Step 2:[/em] Read the campaign post of [u]all[/u] candidates to know who to vote for, ask them some questions if you want.
+[*][em]Step 3:[/em] Post in the voting thread a list of candidates you vote for.
+[/list]
+
+[p][em]Remember:[/em] This is not Instant-runoff Voting (the [url=cabinet_elections]Cabinet election[/url] method) so just put on your ballot who you vote for, [u]not who you don't vote for[/u]. If you happen to list all candidates, you are doing it wrong.[/p]
+
+[spoiler=[p]Example ballot[/p]]
+[p]If you approve Donald Duck and, Mickey Mouse, but do not approve Goofy, then make a ballot like the one below.[/p]
+[box][p]Donald Duck[/p]
+[p]Mickey Mouse[/p]
+[/box]
+[/spoiler]
+
+[h3]Secret ballot[/h3]
+
+[p]If you don't want people to know who you vote for, just send the ballot to a designated forum account via the forum's Personal Message system. The [i]Information and Nominations[/i] thread will tell you what the account is. (Currently, it is [url=secret_ballot_forum_acc]{{ misc.secret_ballot_forum_acc }}[/url])[/p]
+
+
+[h2]How to vote (Round two)[/h2]
+
+[h3]Eligibility[/h3]
+
+[p]You can only vote in the second round of a Delegate election if you have a nation in the South Pacific that is also a member of [url=ns_wa]the World Assembly[/url] and has more influence in the South Pacific than any other region before the second round poll closes.[/p]
+
+[h3]Voting method[/h3]
+
+[p]The second round is conducted via a regional poll on the game site. Simply select the candidate you want to win and click ‘vote’. First-past-the-post (FPTP) is our method, which means whoever gets the most votes will win.[/p]
+
+[h3]Voting guide[/h3]
+
+[p]The vote will be conducted via the poll on our gameside region page.[/p]
+[list]
+[*][em]Step 1:[/em] Read the information dispatch which is linked in the description of the poll or pinned on the WFE (World Factbook Entry) for information on the current election and links to candidates' campaign.
+[*][em]Step 2:[/em] Read the campaign post of [u]all[/u] candidates to know who to vote for
+[*][em]Step 3:[/em] Post in the voting thread a list of candidates you vote for.
+[/list]
+
+[h3]Secret ballot[/h3]
+
+[p]There is currently not an option to vote privately in the second round of the Delegate Election.[/p]
+
+
+[h2]How to run[/h2]
+
+[h3]Eligibility[/h3]
+
+[p]In order to run for Delegate during a Delegate election, you need to be a Legislator and to have become one before the election starts.[/p]
+
+[h3]Rules[/h3]
+
+[p]Your candidacy in a Delegate election is only valid if you follow these rules:[/p]
+[list]
+[*]You can run for Delegate whilst you are holding another elected office in the South Pacific, You need to resign from it, however, if you run for Delegate and win.
+[p](Example: If you are the Minister of Military Affairs and you run for the Delegate position and win then you must resign from the Minister of Military Affairs position before starting as Delegate.)[/p]
+[*]You don't hold any position in other regions which is equivalent to the one you are running for.
+[p](Example: If you are the Head of State of region A, you are not allowed to run for Delegate in the South Pacific, unless you agree to resign the other position should you win.)[/p]
+[/list]
+
+[h3]Running guide[/h3]
+
+[list]
+[*][em]Step 1:[/em] Read the [i]Information and Nominations[/i] post which is pinned in the Election Central subforum (This subforum will be uncovered when an election starts) for information on the current election and where the nomination and campaign thread are.
+[*][em]Step 2:[/em] Declare your candidacy in the nomination thread.
+[*][em]Step 3:[/em] Write a Conflict of Interests (CoI) post which contains all potential conflict of interests you may have (Positions you are holding outside the region, alternative nations, membership in other regions,...) and campaign post which shows why voters should vote for you then post them as a new thread in the campaign subforum. [u]You need to write a CoI and campaign post in order for you to be considered an official candidate[/u]. These may also be included together in one post.
+[*][em]Step 4 (Optional):[/em] Answer questions made by voters, join debates,...
+[*][em]Step 5:[/em] You are done. Now you just need to wait for voters to vote for you.
+[/list]
+
+[h2]The winner[/h2]
+
+[p]The two (or more if there is a tie) candidates receiving the most votes in round one will move on to round two. The candidate with the most votes at the end of round two will be the winner and will be considered the [i]Delegate-elect[/i]. The government will encourage nations to endorse the Delegate-elect. The Delegate-elect will both formally and literally take office once they have more endorsements than the incumbent Delegate. The length of this transition period depends on how fast nations give their endorsement to the Delegate-elect. Militaries of our allies are usually mobilized to assist us in this time.[/p]
+
+{% endblock body %}

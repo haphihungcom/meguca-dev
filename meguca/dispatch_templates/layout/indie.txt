@@ -1,0 +1,10 @@
+{% import 'macros/header_macros.txt' as macros %}
+
+{% extends 'layout/general.txt' %}
+
+{% block header %}
+{{ macros.gen_header(urls={'Legislator Committee': 'legcomm',
+                           'CRS': 'crs_intro',
+                           'Delegate': 'delegate_intro',
+                           'Election Commission': 'election_commission'}) }}
+{% endblock header %}

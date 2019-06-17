@@ -1,0 +1,211 @@
+[general]
+template_dir_path = 'meguca/dispatch_templates'
+filters_path = 'meguca/dispatch_templates/filters/filters.py'
+custom_vars_path = 'meguca/dispatch_templates/custom_variables.toml'
+bb_path = 'meguca/dispatch_templates/bbcode/formatters.toml'
+template_file_ext = 'txt'
+
+[dispatches]
+[dispatches.'welcome']
+id = 1192500
+title = 'Introduction to NationStates and the South Pacific (Click here if you are new!)'
+category = 8
+sub_category = 835
+
+[dispatches.'government_intro']
+id = 1192502
+title = 'Introduction to the Government of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'factbook']
+id = 1192534
+title = "The Coalition of the South Pacific's Factbook"
+category = 8
+sub_category = 835
+
+[dispatches.'get_involved']
+id = 1192503
+title = 'Get Involved in the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'government_jobs']
+id = 1205787
+title = 'Get a job in the Government of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'elections']
+id = 1192504
+title = 'Elections in the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'private_newspapers']
+id = 1192505
+title = 'List of Private Newspapers in the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'elections_guide']
+id = 1192516
+title = 'Beginner guide to Elections in the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'elections_voting_methods']
+id = 1192517
+title = 'Election voting methods explained'
+category = 8
+sub_category = 835
+
+[dispatches.'ns_guide']
+id = 1192532
+title = 'Full Guide to NationStates'
+category = 8
+sub_category = 835
+
+[dispatches.'politics_guide']
+id = 1199302
+title = 'Beginner guide to politics in the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'assembly_intro']
+id = 1192506
+title = 'The Assembly of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'become_legislator']
+id = 1192507
+title = 'Become a Legislator in the South Pacific!'
+category = 8
+sub_category = 835
+
+[dispatches.'assembly_guide']
+id = 1192509
+title = 'Beginner guide to the Assembly of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'assembly_procedures']
+id = 1192510
+title = 'Legislative Procedures of the Assembly of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'assembly_details']
+id = 1192515
+title = 'Details on the powers of the Assembly of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'cabinet_intro']
+id = 1192519
+title = 'The Executive branch of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'cabinet_elections']
+id = 1192520
+title = 'Cabinet elections in the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'cabinet_details']
+id = 1192521
+title = 'Details on the working of the Executive branch'
+category = 8
+sub_category = 835
+
+[dispatches.'court_intro']
+id = 1192522
+title = 'The High Court of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'court_details']
+id = 1192523
+title = 'Details on the powers of the High Court of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'court_procedures']
+id = 1192524
+title = 'Procedures of the High Court of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'court_guide']
+id = 1192525
+title = 'Beginner guide to the High Court of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'indie_intro']
+id = 1205793
+title = 'Independent institutions of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'crs_intro']
+id = 1192526
+title = 'The Council on Regional Security of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'endo_cap']
+id = 1192558
+title = 'The Endorsement Cap in the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'proscriptions']
+id = 1220344
+title = 'Regions proscribed by the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'legcomm']
+id = 1192527
+title = 'The Legislator Committee of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'election_commission']
+id = 1212829
+title = "The Election Commission of the South Pacific"
+category = 8
+sub_category = 835
+
+[dispatches.'coa']
+id = 1192528
+title = 'The Chair of Assembly of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'delegate_intro']
+id = 1192529
+title = 'The Delegate of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'delegate_details']
+id = 1192530
+title = 'Details on the working of the Delegate of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'delegate_elections']
+id = 1192531
+title = 'Delegate elections in the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'laws_index']
+id = 1192536
+title = "The South Pacific's Laws Index"
+category = 8
+sub_category = 835

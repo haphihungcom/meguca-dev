@@ -5,7 +5,7 @@
 import logging
 import logging.config
 
-from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 from meguca import info
 from meguca import exceptions
@@ -22,7 +22,7 @@ class Meguca():
     """Scheduling and plugin handling."""
 
     def __init__(self, plugins, general_config, plugin_config):
-        self.scheduler = BackgroundScheduler()
+        self.scheduler = BlockingScheduler()
 
         self.plugins = plugins
 
@@ -112,7 +112,8 @@ class Meguca():
                                coalesce=True,
                                **schedule_config)
 
-        logger.debug('Schedule "%s" with %s and %r', name, schedule_mode, schedule_config)
+        logger.debug('Schedule "%s" with %s and %r',
+                     name, schedule_mode, schedule_config)
 
     def schedule_plugins(self, plg_category):
         """Schedule plugins by category.

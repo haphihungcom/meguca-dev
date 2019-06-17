@@ -1,0 +1,89 @@
+{% import 'macros/sign.txt' as sign %}
+
+{% extends 'layout/assembly.txt' %}
+
+{% block body %}
+
+[title]Procedures of the Assembly[/title]
+[subtitle]of the Coalition of the South Pacific[/subtitle]
+
+{{ sign.note('If you are a beginner, you should read [url=assembly_guide]this[/url] instead.') }}
+
+[p]All business in the Assembly are conducted through a 4-steps process:[/p]
+[list]
+[*]Proposal
+[*]Debate
+[*]Motion
+[*]Vote
+[/list]
+
+[box]
+[center][h2]Summary[/h2][/center]
+[table=100]
+[tr][th]Bill type[/th][th]Minimum debate period[/th][th]Voting period[/th][th]Required majority to pass[/th][th]Notes[/th][/tr]
+[tr][td]General law, resolutions, approvals of all kinds[/td][td]3 days[/td][td]3 days[/td][td]Simple majority[/td][td][/td][/tr]
+[tr][td]Treaties[/td][td]5 days[/td][td]5 days[/td][td]Simple majority[/td][td][/td][/tr]
+[tr][td]Constitutional law and resolutions[/td][td]5 days[/td][td]5 days[/td][td]Three-fifths supermajority[/td][td]May require gameside referendum[/td][/tr]
+[tr][td]Recall resolutions and Motions of No Confidence[/td][td]3 days[/td][td]3 days[/td][td]Three-fifths supermajority[/td][td][/td][/tr]
+[/table]
+[/box]
+
+[p]The below text explain everything in more details.[/p]
+
+[h2]Proposal[/h2]
+
+[p]A Legislator introduces a bill to the Assembly. It can be either a:[/p]
+[list]
+[*][em]General Matter:[/em] Any bill which relates to general laws, amendments, resolutions, appointments, and treaties with foreign regions; or a
+[*][em]Constitutional Matter:[/em] Any bill which deals with constitutional laws, constitutional amendments, resolutions dealing with matters of constitutional law,.
+[/list]
+
+[h2]Debate[/h2]
+
+[p]Bills regarding:[/p]
+[list]
+[*]General Matter (except for treaties) are debated for a minimum period of three days.
+[*]Constitutional Matters and treaties are debated for a minimum period of five days.
+[/list]
+
+[p]If a debate leads to multiple bills or resolutions which address the same issue,the Chair of the Assembly will separately and simultaneously bring these competing bills or resolutions to vote,following the standard voting procedure. The bill or resolution that receives the most votes in favour and meets the minimum requirement for passage will become law.[/p]
+
+[h3]Debate time waiving[/h3]
+
+[p]The Chair may waive the minimum debate period if a Legislator motions for them to do so. This Motion must be Seconded by another Legislator. If there are no objections to the motion within twenty-four hours,the period may be waive.[/p]
+
+
+[h2]Motion[/h2]
+
+[p]Following the completion of the minimum debate period, any Legislator may
+Motion to Vote. This Motion must be Seconded by another Legislator before a
+vote can commence.[/p]
+
+[h2]Vote[/h2]
+
+[p]Bills regarding:[/p]
+[list]
+[*]General Matters are voted for a minimum period of three days.
+[*]Constitutional Matters are voted for a minimum period of five days.
+[/list]
+
+[p]In the event of multiple bills or resolutions which address the same issue, the Chair will separately and simultaneously bring these competing bills or resolutions to vote, following the standard voting procedure. The bill or resolution that receives the most votes in favour and meets the minimum requirement for passage will become law.[/p]
+
+[p]The Chair will finalise the vote by counting the votes and determining whether the bill has passed or failed to pass. They will inform the Assembly of the result and add, amend, or remove laws in [url=laws_index]the laws index[/url].[/p]
+
+[list]
+[*]Bills regarding general laws, amendments, resolutions, and treaties require a simple majority of those voting to pass. Appointments, unless otherwise specified, require a simple majority of those voting to pass.
+[*]Bills regarding constitutional laws, constitutional amendments, and resolutions dealing with matters of constitutional law and recalling of government officials require a three-fifths supermajority of those voting to pass.
+[/list]
+
+[h3]If the Chair is vacant[/h3]
+
+[p]If the Chair is vacant, then a deputy chair or any other Legislator can conduct the vote instead.[/p]
+
+[h3]Gameside referendum[/h3]
+
+[p]Any bill passed by the Assembly which affects the gameside community or its home-side governance as determined by the Chair does not immediately take effect. Rather, it proceeds to [url=lc_intro]the Local Council[/url] who will arrange for it to be debated and voted upon by the gameside community. Only after it has passed the gameside vote can a bill take effect.[/p]
+
+[box][ref][p][law]The Legislative Procedure Act[/law][/p][/ref][/box]
+
+{% endblock body %}

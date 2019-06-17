@@ -1,0 +1,7 @@
+[data_dump]
+path = 'meguca/nations.xml.gz'
+
+[precision]
+# Enabling Precision Mode will make Endo Collector sends errors if it detects illegal endorsement activities.
+# Disabling this mode is recommended if you don't need accurate recording of endorsement activities.
+precision_mode = false

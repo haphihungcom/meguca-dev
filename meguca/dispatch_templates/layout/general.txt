@@ -1,0 +1,10 @@
+{% import 'macros/header_macros.txt' as macros %}
+
+{% block header %}
+{{ macros.gen_header(subtitle='The Coalition of the South Pacific') }}
+{% endblock header %}
+[box][h3]Notice[/h3]
+[p]This is a test of the dispatch management system. Everything here uses stub data and formatting guideline.[/p]
+[/box]
+
+{% block body %}{% endblock body %}

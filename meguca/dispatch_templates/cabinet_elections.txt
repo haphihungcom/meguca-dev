@@ -1,0 +1,84 @@
+{% extends "layout/elections.txt" %}
+
+{% block body %}
+
+[title]Cabinet elections[/title]
+[subtitle]in the Coalition of the South Pacific[/subtitle]
+
+[p]Cabinet Ministers and the Prime Minister are elected in [b]Cabinet elections[/b] which occur every 4 months (February, June, October). Only [url=become_legislator]Legislators[/url] of the Assembly can run or vote in Cabinet elections. There are four positions that one can run and vote for in a Cabinet election: Prime Minister, Minister of Regional Affairs, Minister of Foreign Affairs, and Minister of Military Affairs. Cabinet elections are conducted on [url=forum]the forum[/url] by the [url=election_commission]Election Commission[/url].[/p]
+
+[h2]Time periods[/h2]
+
+[p]A Cabinet election lasts for one and a half week and has three periods:[/p]
+[list]
+[*][em]Nomination (Days 1-6):[/em] This is when Legislators can declare their candidacy or nominate others. It starts immediately after an election starts and lasts for 6 days.
+[*][em]Campaign (Days 3-10):[/em] This is when declared candidates campaign by writing forum posts, dispatches, answering questions, joining debates,... to encourage voters to vote for them. This period starts 3 days after an election starts and lasts for one week.
+[*][em]Vote (Days 10-13):[/em] Legislators vote on candidates in this period. It starts 3 days after the campaign period ends.
+[*][em]Transition (Days 13-20):[/em] The old Cabinet transfers powers to the new Cabinet
+[/list]
+
+[h2]How to vote[/h2]
+
+[h3]Eligibility[/h3]
+
+[p]You can only vote in a Cabinet election if you are a Legislator and [u]became one before the current election starts[/u].[/p]
+
+[h3]Voting method[/h3]
+
+[p]Instant-runoff Voting (IRV) with Optional Preferential Voting (OPV) is used for Cabinet elections. To vote, you just need to rank candidates based on your preferences on a ballot. Counting votes using this method is a little bit complex and you can read [url=elections_voting_methods]this dispatch[/url] to know more about it.[/p]
+
+[h3]Voting guide[/h3]
+
+[p]The vote will be conducted on our regional forum in a thread designated by the Election Commission.[/p]
+[list]
+[*][em]Step 1:[/em] Read the [i]Information and Nominations[/i] thread which is pinned in the Election Center subforum (This subforum will be uncovered when an election starts) for information on the current election, where candidates post their campaign, and where the voting thread is.
+[*][em]Step 2:[/em] Read the campaign post of [u]all[/u] candidates to know who to vote for, ask them some questions if you want.
+[*][em]Step 3:[/em] Post in the voting thread a list of candidates you vote for, the candidates need to be [u]sorted in your order of preference[/u].
+[/list]
+
+[spoiler=[p]Example ballot[/p]]
+[p]If you like to vote for Donald Duck the most, Mickey Mouse the second, Goofy the third, and Mermaid the fourth then make a ballot like below (Candidates are sorted based on how much you like them) then post it.[/p]
+[box][p]Donald Duck[/p]
+[p]Mickey Mouse[/p]
+[p]Goofy[/p]
+[p]Mermaid[/p]
+[/box]
+[/spoiler]
+
+[h3]Secret ballot[/h3]
+
+[p]If you don't want people to know who you vote for, just send the ballot to a designated forum account via the forum's Personal Message system. The [i]Information and Nominations[/i] thread will tell you what the account is. (Currently, it is [url=secret_ballot_forum_acc]{{ misc.secret_ballot_forum_acc }}[/url])[/p]
+
+
+[h2]How to run[/h2]
+
+[h3]Eligibility[/h3]
+
+[p]To run for an office in a Cabinet election, you need to be a Legislator and you became one before the election starts.[/p]
+
+[h3]Rules[/h3]
+
+[p]Your candidacy in a Cabinet election is only valid if you follow these rules:[/p]
+[list]
+[*]You are only allowed to run for one office at a time.
+[*]You can run for a Cabinet office while you are holding one, however, you need to resign from it if you run for another office and win.
+[p](Example: If you are the Minister of Military Affairs and you run for the Minister of Regional Affairs office and win then you must resign from the Minister of Military Affairs office before starting the Regional Affairs one)[/p]
+[*]You don't hold any position in other regions which is equivalent to the one you are running for.
+[p](Example: If you are the President of region A, you are not allowed to run for the Prime Minister office unless you agree to resign the other position should you win)[/p]
+[/list]
+
+[h3]Running guide[/h3]
+
+[list]
+[*][em]Step 1:[/em] Read the [i]Information and Nominations[/i] post which is pinned in the Election Center subforum (This subforum will be uncovered when an election starts) for information on the current election and where the nomination thread and campaign subforum are.
+[*][em]Step 2:[/em]  Declare your candidacy in the nomination thread.
+[*][em]Step 3:[/em] Write a Conflict of Interests (CoI) post which contains all potential conflicts of interests you may have (Positions you are holding outside the region, alternative nations, membership in other regions,...) and campaign post which shows why voters should vote for you then post them as a thread in the campaign subforum. [u]You need to write a CoI and campaign post in order for you to be considered an official candidate[/u]. These may also be included together in one post.
+[*][em]Step 4 (Optional):[/em] Answer questions made by voters, join debates,...
+[*][em]Step 5:[/em] You are done. Now you just need to wait for voters to vote for you.
+[/list]
+
+[h2]The winner[/h2]
+
+[p]If a candidate receives the most votes, they will be the winner and will take office one week after the election ends.[/p]
+
+{% endblock body %}

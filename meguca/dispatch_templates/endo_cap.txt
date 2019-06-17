@@ -1,0 +1,34 @@
+{% extends 'layout/security.txt' %}
+
+{% block body %}
+
+[title]The Endorsement Cap[/title]
+
+[p][b]The Endorsement Cap[/b] or [b]Endo Cap[/b] is a limit on how many endorsements your nation is legally allowed to have. Your endorsement count should not be higher than this limit. This acts as a security guard to prevent nations from having too many endorsements and being in the danger zone of pulling a coup.[/p]
+
+[center][h3]The current endorsement cap is 400[/h3][/center]
+[img]https://docs.google.com/spreadsheets/d/e/2PACX-1vT_HrN4vY_ybjtI_QG8OXgif-HqNfxv8chMNW9gqx9NnlHEZpj2mxtpEhP6mc9kc9rO0emXathAA4fS/pubchart?oid=767480451&format=image[/img]
+
+[h2]What happens if I exceed the endorsement cap?[/h2]
+
+[p]If you exceed the endorsement cap, a member nation of the [url=crs_intro]Council on Regional Security[/url] (CRS) will send you a telegram to notify that you have exceeded it and instruct you to lower your endorsement count until you are compliance with the cap again.[/p]
+
+[p]Please don't be scared if this happens as it is a common occurrence and is often accidental! You just need to be calm and follow the CRS nation's instructions.[/p]
+
+[h2]How can I reduce my endorsement count to comply with the cap again?[/h2]
+
+[p]You can reduce it by:[/p]
+[list][*][url=ns_telegram]Sending a telegram[/url] to some nations to ask them to withdraw endorsements from you. This is [u]the best way[/u] as you will only lose enough endorsements to comply with the endorsement cap again.
+[*]Resigning from the World Assembly (Go to [url=ns_wa]the World Assembly page[/url] then click Resign) then join it again. This is the fastest way but you will lose all endorsements.
+[*]Withdrawing your endorsement from some nations so that they will withdraw their endorsements from you. This way is non-guarantee as they may not be aware of you doing this.
+[/list]
+
+[h2]What would happen if I refuse to lower my endorsement count?[/h2]
+
+[p]Your nation will receive repeated telegrams seeking compliance. If you continue to refuse, you will be ejected from this region by a CRS nation or the Delegate.[/p]
+
+[h2]Who sets and enforces the endorsement cap?[/h2]
+
+[p]This is the duty of the [url=crs_intro]Council on Regional Security[/url] (CRS).[/p]
+
+{% endblock body %}

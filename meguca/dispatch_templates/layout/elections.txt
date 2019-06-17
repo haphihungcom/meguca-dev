@@ -1,0 +1,13 @@
+{% import 'macros/header_macros.txt' as macros %}
+
+{% extends 'layout/general.txt' %}
+
+{% block header %}
+{{ macros.gen_2rows_header(upper_urls={'Introduction': 'elections',
+                                       'Guide': 'elections_guide',
+                                       'Voting methods': 'elections_voting_methods'},
+                           lower_urls={'Cabinet': 'cabinet_elections',
+                                       'Delegate': 'delegate_elections',
+                                       'Chair of Assembly': 'coa',
+                                       'Local Council': 'lc_elections'} )}}
+{% endblock  %}

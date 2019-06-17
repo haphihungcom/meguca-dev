@@ -1,0 +1,13 @@
+{% import 'macros/header_macros.txt' as macros %}
+
+{% extends 'layout/general.txt' %}
+
+{% block header %}
+{{ macros.gen_header(urls={'Home': 'assembly_intro',
+                           'Get Involved': 'become_legislator',
+                           'Guide': 'assembly_guide',
+                           'Details': 'assembly_details',
+                           'Procedures': 'assembly_procedures',
+                           'Chair of Assembly': 'coa',
+                           'Laws Index': 'laws_index'}, logo='') }}
+{% endblock header %}

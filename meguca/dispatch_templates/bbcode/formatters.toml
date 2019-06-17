@@ -1,0 +1,158 @@
+[simple_formatters]
+[simple_formatters.p]
+template = '[font=Segoe UI, Helvetica, sans-serif][size=120]%(value)s[/size][/font]'
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
+[simple_formatters.title]
+template = '[center][font=Segoe UI, Helvetica, sans-serif][size=250][color=1089e6][b]%(value)s[/b][/color][/size][/font][/center]'
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
+[simple_formatters.subtitle]
+template = '[center][font=Segoe UI, Helvetica, sans-serif][size=160][color=1089e6][b]%(value)s[/b][/color][/size][/font][/center]'
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
+[simple_formatters.h1]
+template = '[font=Segoe UI, Helvetica, sans-serif][size=250][color=1089e6][b]%(value)s[/b][/color][/size][/font]'
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
+[simple_formatters.h2]
+template = '[font=Segoe UI, Helvetica, sans-serif][size=170][color=1089e6][b]%(value)s[/b][/color][/size][/font]'
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
+[simple_formatters.h3]
+template = '[font=Segoe UI, Helvetica, sans-serif][size=150][color=1089e6][b]%(value)s[/b][/color][/size][/font]'
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
+[simple_formatters.h4]
+template = '[font=Segoe UI, Helvetica, sans-serif][size=130][color=1089e6][b]%(value)s[/b][/color][/size][/font]'
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
+[simple_formatters.em]
+template = '[color=1089e6][b]%(value)s[/b][/color]'
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
+[simple_formatters.tt]
+template = '[tr][background-block=#1089e6][hr][center][font=Segoe UI, Helvetica, sans-serif][size=120][color=#ffffff][b]%(value)s[/b][/color][/font][/size][/center][hr][/background-block][/tr]'
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
+[simple_formatters.th]
+template = '[td][font=Segoe UI, Helvetica, sans-serif][size=130][color=1089e6][b]%(value)s[/b][/color][/size][/font][/td]'
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
+[simple_formatters.td]
+template = '[td][font=Segoe UI, Helvetica, sans-serif][size=120]%(value)s[/size][/font][/td]'
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
+[simple_formatters.td_r]
+template = '[td]%(value)s[/td]'
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
+[simple_formatters.'*']
+template = '[*][font=Segoe UI, Helvetica, sans-serif][size=120]%(value)s[/size][/font]'
+render_embedded = true
+newline_closes = true
+same_tag_closes = true
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
+[simple_formatters.'*_r']
+template = '[*]%(value)s'
+render_embedded = true
+newline_closes = true
+same_tag_closes = true
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
+
+[formatters]
+[formatters.ref]
+func_name = 'ref'
+func_path = 'meguca/dispatch_templates/bbcode/formatters.py'
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
+[formatters.url]
+func_name = 'url'
+func_path = 'meguca/dispatch_templates/bbcode/formatters.py'
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
+[formatters.raw_url]
+func_name = 'raw_url'
+func_path = 'meguca/dispatch_templates/bbcode/formatters.py'
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false

@@ -1,0 +1,30 @@
+{% macro gen_header(urls={}, logo='', subtitle='') -%}
+[background-block=#019AED][center][color=#019aed].[/color]
+{% if logo == '' %}
+[img]http://tspforums.xyz/images/18myskins/logo.png[/img]
+{% else %}
+[img]{{ logo }}[/img]
+{% endif %}
+[color=#019aed].[/color][/center][/background-block][background-block=#38b9ff][center][color=#38b9ff].[/color]
+{% if urls == {} %}
+{% if subtitle != '' %}[font=Segoe UI, Helvetica, sans-serif][size=140][color=#fff]{{ subtitle }}[/color][/size][/font]
+{% endif %}
+{% else %}
+[font=Segoe UI, Helvetica, sans-serif][size=140]{% for name, url in urls.items() %}[raw_url={{ url }}][color=#fff]{{ name }}[/color][/raw_url]{% if loop.revindex != 1 %} [color=#fff]|[/color] {% endif %}{% endfor %}[/size][/font]
+{% endif %}
+[color=#38b9ff].[/color][/center][/background-block]
+{%- endmacro %}
+
+{% macro gen_2rows_header(upper_urls, lower_urls, logo='') -%}
+[background-block=#019AED][center][color=#019aed].[/color]
+{% if logo == '' %}
+[img]http://tspforums.xyz/images/18myskins/logo.png[/img]
+{% else %}
+[img]{{ logo }}[/img]
+{% endif %}
+[color=#019aed].[/color][/center][/background-block][background-block=#38b9ff][center][color=#38b9ff].[/color]
+[font=Segoe UI, Helvetica, sans-serif][size=140]{% for name, url in upper_urls.items() %}[raw_url={{ url }}][color=#fff]{{ name }}[/color][/raw_url]{% if loop.revindex != 1 %} [color=#fff]|[/color] {% endif %}{% endfor %}[/size][/font]
+[color=#019aed].[/color][/center][/background-block][background-block=#1089e6][center][color=#38b9ff].[/color]
+[font=Segoe UI, Helvetica, sans-serif][size=140]{% for name, url in lower_urls.items() %}[raw_url={{ url }}][color=#fff]{{ name }}[/color][/raw_url]{% if loop.revindex != 1 %} [color=#fff]|[/color] {% endif %}{% endfor %}[/size][/font]
+[color=#38b9ff].[/color][/center][/background-block]
+{%- endmacro %}
