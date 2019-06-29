@@ -84,6 +84,6 @@ vote can commence.[/p]
 
 [p]Any bill passed by the Assembly which affects the gameside community or its home-side governance as determined by the Chair does not immediately take effect. Rather, it proceeds to [url=lc_intro]the Local Council[/url] who will arrange for it to be debated and voted upon by the gameside community. Only after it has passed the gameside vote can a bill take effect.[/p]
 
-[box][ref][p][law]The Legislative Procedure Act[/law][/p][/ref][/box]
+[box][ref][law]The Legislative Procedure Act[/law][/ref][/box]
 
 {% endblock body %}

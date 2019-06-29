@@ -20,8 +20,8 @@ def raw_url(tag_name, value, options, parent, context):
 
 def ref(tag_name, value, options, parent, context):
     if '[*]' in value:
-        return ('[font=Segoe UI, Helvetica, sans-serif][size=120][color=1089e6][b]Reference: [/b]'
+        return ('[font=Avenir, Segoe UI, sans-serif][size=120][color=#019aed][b]Reference: [/b]'
                 '[/color][/size][/font][list]{}[/list]').format(value)
     else:
-        return ('[font=Segoe UI, Helvetica, sans-serif][size=120][color=1089e6][b]Reference: [/b]'
-                '[/color][/size][/font]{}').format(value)
+        return ('[font=Avenir, Segoe UI, sans-serif][size=120][color=#019aed][b]Reference: [/b]'
+                '[/color]{}[/size][/font]').format(value)

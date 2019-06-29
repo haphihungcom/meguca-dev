@@ -1,1 +1,84 @@
-[reserved]
+{% extends 'layout/court.txt' %}
+
+{% block body %}
+
+[title]Details on the working of the High Court[/title]
+[subtitle]of the Coalition of the South Pacific[/subtitle]
+
+[p]The High Court of the South Pacific is vested with the powers to conduct criminal trials, clarify, interpret laws, reconcile contradictions, and veto laws or directives from the Legislative or Executive branch which violate constitutional laws or the Charter. Associate Justices of the High Court are appointed by the Cabinet and approved by the Assembly. A Chief Justice chosen by fellow Associate Justices will lead the team.[/p]
+
+[box]
+[h4]Composition:[/h4] [p]Associate Justices led by a Chief Justice. No term period or limit[/p]
+
+[h4]Powers:[/h4]
+[list][*]Conduct criminal trials
+[*]Answer Legal Questions
+[*]Veto laws or directives which violate constitutional laws
+[/list]
+
+[h4]Appointment:[/h4] [p]Appointed by the Cabinet, approved by the Assembly[/p]
+
+[h4]Checks and balances:[/h4] [p]Can be recalled by the Assembly[/p]
+[/box]
+
+[h2]Composition[/h2]
+
+[p]The High Court is comprised of Associate Justices (Incumbent: {{ gov_officials.hc_justices|gen_list }}) who will handle cases either individually or collectively. In many occasions, a typical case has more than one justice. The Chief Justice ({{ gov_officials.hc_chief_justice|nation }}) is the head of the team, organizes various matters in the Court, and assigns cases to Associate Justices. A Chief Justice is chosen by their fellow Associate Justices. If the Chief Justice is vacant, Associate Justices will collectively operate the Court until a new Chief Justice is chosen.[/p]
+
+[p]Both Associate Justices and Chief Justice have no term. They will serve until they retire or are recalled.[/p]
+
+[box][ref][law]Section 1, 2, 3 of Article I of the Judicial Act[/law][/ref][/box]
+
+[h2]Powers[/h2]
+
+[h3]Conduct criminal trials[/h3]
+
+[p]The High Court is the only institution in the Coalition which has the right to conduct trials on criminal cases happened within the jurisdiction of the Coalition government. The procedure for criminal trials are the same for any other types of cases (Read below for more information). The High Court typically depends on [law]the Criminal Code[/law] for criminal trials.[/p]
+
+[box][ref][*][law]Section 7, Article VIII of the Charter of the South Pacific[/law]
+[*][law]Article 5 of the Judicial Act[/law]
+[/ref][/box]
+
+[h3]Answer Legal Questions[/h3]
+
+[p]If there are ambiguities in the law, any citizen may submit a Legal Question (LQ) to the High Court to provide clarification to the law. The High Court may provide the answer to a LQ to clarify the law in question. LQs typically seek answers about clarification on the meaning of existing law or the applicability of law to concrete or hypothetical situations.[/p]
+
+[p]E.g Is it possible for the Cabinet to override decisions made by the Local Council according to section 8, article IX of the Charter.[/p]
+
+[p]After a LQ is answered, the opinions delivered in the answer will have the full force of law (Anything happens after this will need to comply to this interpretation of the law) until it is appealed or the related laws are changed by the Assembly. LQs are responsible for the "common law" property in the South Pacific's legal system as it provides a way for laws to be created via judicial decisions (In contrast to Civil Laws which are laws created by the Legislature).[/p]
+
+[p]E.g A citizen submits a LQ on whether [url=legcomm]the Legislator Committee[/url] can remove legislatorship at any time because the Legislator Committee Act does not clearly specify something like that. If the High Court answers that the Legislator Committee Act gives the institution full power to remove legislatorship at any time then in the future, the Legislator Committee will be able to do that with the full confidence that it is legal. If the High Court answers they cannot then if the action will be illegal. The legal status will be kept as such until the answer is appealed or the Assembly makes changes to the Legislator Committee Act.[/p]
+
+[p]The procedure to conduct a LQ is the same as any other types of cases.[/p]
+
+[box][ref][*][law]Section 6, Article VIII of the Charter of the South Pacific[/law]
+[*][law]Article 4 of the Judicial Act[/law]
+[/ref][/box]
+
+[h3]Veto laws or directives[/h3]
+
+[p]If the High Court finds a general law passed by the Assembly, a regulation, directive (such as Executive Orders),  given out by the executive branch, or any other official acts of the government violate constitutional laws (Such as the Charter, the Elections Act,...) then it can veto these acts and render them void.[/p]
+
+[box][ref][law]Section 4, Article VIII of the Charter of the South Pacific[/law][/ref][/box]
+
+[h2]Case procedure[/h2]
+
+[p]All types of cases (Criminal cases, Legal Questions,...) have a very similar procedure although there are some differences. Details on case procedures are explained in details [url=court_procedures]here[/url]. If you are a beginner however, it is recommended to read [url=court_guide]this[/url] instead.[/p]
+
+[h2]Appointment[/h2]
+
+[p]High Court justices are appointed by the Cabinet and approved by the Assembly via a simple majority vote. In order for one to be appointed as a justice, he/she needs to be a Legislator. There is no limit on how many or when justices can be appointed however the Cabinet is [i]explicitly[/i] required to appoint Associate Justices if there are less than two justices, there is no Chief Justice and fellow justices cannot choose a new one, or a case cannot continue because all justices have recused.[/p]
+
+[box][ref][*][law]Section 5, 6, Article 1 of the Judicial Act[/law]
+[*][law]Article 2 of the Judicial Act[/law]
+[/ref][/box]
+
+[h2]Recall[/h2]
+
+[p]Like any other government official, High Court justices can be recalled by the Assembly via a three-fifths majority vote.[/p]
+
+[p]For more information on recall procedure for government officials, please read [url=assembly_details#recall]this dispatch[/url].[/p]
+
+[box][ref][law]Section 1, Article XI of the Charter of the South Pacific[/law][/ref][/box]
+
+{% endblock body %}

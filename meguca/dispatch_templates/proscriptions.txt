@@ -7,8 +7,6 @@
 [title]Proscriptions[/title]
 [subtitle]in the Coalition of the South Pacific[/subtitle]
 
-{{ sign.note('Proscriptions should not be confused with [url=prohibitions]Prohibitions[/url]. Prohibitions are a less strict version of Proscriptions.') }}
-
 [p]A Proscription is a ban on one individual or an entire region from staying and participating in any area under the jurisdiction of the Coalition of the South Pacific's Government. Such harsh punishments are only carried out to individuals or organizations that have committed very serious offenses to the Coalition as a whole (Coup d'etat, invasion, infiltration,...). Proscriptions are issued/revoked by [url=cabinet_intro]the Cabinet[/url] or [url=crs_intro]the Council on Regional Security[/url] (CRS). Proscriptions can be reviewed by [url=court_intro]the High Court[/url] or by the issuing authority (Cabinet or/and CRS) under request from [url=assembly_intro]the Assembly[/url].[/p]
 
 [box]
@@ -29,7 +27,7 @@
 [*][em]Full Proscription:[/em] Comprises a Regional Proscription as well as a ban on access to off-site resources of the Coalition such as our [url=forum]forum[/url] and [url=discord]Discord server[/url].
 [/list]
 
-[box][ref][p][law]Article 2 of the Proscription Act[/law][/p][/ref]
+[box][ref][law]Article 2 of the Proscription Act[/law][/ref]
 [/box]
 
 [h2]Issuing/revoking a Proscription[/h2]
@@ -45,7 +43,7 @@
 
 [p]The issuing authority can revoke a Proscription if they want. The issuing authority must issue a report on why the Proscription isn't necessary anymore to the Assembly.[/p]
 
-[box][ref][p][law]Article 3 of the Proscription Act[/law][/p][/ref]
+[box][ref][law]Article 3 of the Proscription Act[/law][/ref]
 [/box]
 
 [h2]Review a Proscription[/h2]
@@ -57,7 +55,7 @@
 [*][em]Membership review:[/em] For a Proscription on regions/organizations, review whether an individual is a member of the proscribed regions/organizations.
 [/list]
 
-[box][ref][p][law]Article 4 of the Proscription Act[/law][/p][/ref]
+[box][ref][law]Article 4 of the Proscription Act[/law][/ref]
 [/box]
 
 [p]Normal [url=court_procedure]judicial procedures[/url] are used like any other cases.[/p]
@@ -68,7 +66,7 @@
 
 [p]The Assembly can require the issuing authority to review a Proscription by passing a resolution with a simple majority vote. Review for Proscriptions on regions/organizations is only possible with this method.[/p]
 
-[box][ref][p][law]Section 4, Article 3 of the Proscription Act[/law][/p][/ref]
+[box][ref][law]Section 4, Article 3 of the Proscription Act[/law][/ref]
 [/box]
 
 {% endblock body %}

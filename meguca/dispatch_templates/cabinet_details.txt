@@ -35,8 +35,7 @@
 [list]
 [*]Special election if more than half the term remains
 [*]Appoint any Legislator as replacement until next normal election if less than half the term remains
-[/list]
-[/box]
+[/list][/box]
 
 
 [h2]Term[/h2]
@@ -81,8 +80,7 @@
 
 [p]Advisers and deputies can work as individuals or can be grouped into institutions like the MoRA's Advisory Council, the MoFA Team (Defunct),...[/p]
 
-[box][ref][p][law]Section 15, Article IV of the Charter of the South Pacific[/law][/p][/ref]
-[/box]
+[box][ref][law]Section 15, Article IV of the Charter of the South Pacific[/law][/ref][/box]
 
 [h3]Appoint positions in other institutions[/h3]
 
@@ -97,8 +95,7 @@
 [ref]
 [*][law]Article I of the Judicial Act[/law]
 [*][law]Article II of the Judicial Act[/law]
-[/ref]
-[/box]
+[/ref][/box]
 
 [h3]Appoint members of the Legislator Committee[/h3]
 
@@ -111,8 +108,7 @@
 
 [box][p]For more information about the Legislator Committee, visit [url=legcomm]this dispatch[/url].[/p]
 
-[ref][p][law]Article I of the Legislator Committee Act[/law][/p][/ref]
-[/box]
+[ref][law]Article I of the Legislator Committee Act[/law][/ref][/box]
 
 [h3]Nominate members of the Council on Regional Security[/h3]
 
@@ -120,8 +116,7 @@
 
 [box][p]For more information about the Council on Regional Security, visit [url=crs_intro]this dispatch[/url].[/p]
 
-[ref][p][law]Article IX of the Charter of the South Pacific[/law][/p][/ref]
-[/box]
+[ref][law]Article IX of the Charter of the South Pacific[/law][/ref][/box]
 
 [h2]Issue Executive Orders (EO)[/h2]
 
@@ -134,8 +129,7 @@
 [ref]
 [*][law]Section 13, Article VI of the Charter of the South Pacific[/law]
 [*][law]Section 14, Article VI of the Charter of the South Pacific[/law]
-[/ref]
-[/box]
+[/ref][/box]
 
 [h2]High Court's veto power[/h2]
 
@@ -143,8 +137,7 @@
 
 [box][p]For more information on the High Court, visit [url=court_intro]this dispatch[/url].[/p]
 
-[ref][p][law]Section 4, Article VIII of the Charter of the South Pacific[/law][/p][/ref]
-[/box]
+[ref][law]Section 4, Article VIII of the Charter of the South Pacific[/law][/ref][/box]
 
 
 [h2]Elections and recalls[/h2]
@@ -161,30 +154,26 @@
 [*][law]Article 4 of the Elections Act[/law]
 [*][law]Section 5, Article VI of the Charter of the South Pacific[/law]
 [*][law]Section 6, Article VI of the Charter of the South Pacific[/law]
-[/ref]
-[/box]
+[/ref][/box]
 
 [h3]Recalls[/h3]
 
-[p]Any member of the Cabinet can be recalled by the Assembly with a Recall Resolution for dereliction of duty, abuse of authority, or violations of the law. Any Legislator can initiate a Recall Resolution against a Cabinet member. The Resolution will be debated for three days. If the Resolution receives a motion and a second, it will be put on a vote. In order for the Resolution to pass, there needs to be a 3/5 majority of those voting. Immediately after the Recall Resolution is passed, the Cabinet member will be removed from office. Read the [url=#vacancies]Vacancies section[/url] to know who will replace the spot if a Cabinet member is removed.[/p]
+[p]Any member of the Cabinet can be recalled by the Assembly with a Recall Resolution for dereliction of duty, abuse of authority, or violations of the law. Any Legislator can initiate a Recall Resolution against a Cabinet member. The Resolution will be debated for three days. If the Resolution receives a motion and a second, it will be put on a vote. In order for the Resolution to pass, there needs to be a 3/5 majority of those voting. Immediately after the resolution is passed, the Cabinet member will be removed from office. Read the [url=#vacancies]Vacancies section[/url] to know who will replace the spot if a Cabinet member is removed.[/p]
 
-[box][ref][p][law]Section 1, Article XI of the Charter of the South Pacific[/law][/p][/ref]
-[/box]
+[box][ref][law]Section 1, Article XI of the Charter of the South Pacific[/law][/ref][/box]
 
 
 [h3]Motion of No Confidence (MoNC)[/h3]
 
 [p]All Cabinet members can be recalled at the same time by the Assembly with a Motion of No Confidence (MoNC). A MoNC can be initiated by any Legislator and will be debated for three days after being introduced. If a MoNC receives a motion and a second, it will be put on a vote. The vote needs a 3/5 majority in order to pass. If passes, a special Cabinet election will happen to fill the spots left by removed Cabinet members. MoNC is usually initiated if everyone has lost faith in the effectiveness and activities of the Executive branch of the government.[/p]
 
-[box][ref][p][law]Section 2, Article XI of the Charter of the South Pacific[/law][/p][/ref]
-[/box]
+[box][ref][law]Section 2, Article XI of the Charter of the South Pacific[/law][/ref][/box]
 [anchor=vacancies][/anchor]
 [h3]Vacancies[/h3]
 
 [p]If a Cabinet office is vacant (Because the holder has resigned for example), a special election for that office will start if there is more than half of the term remains, if there is less than half of the term remains or the office is vacant because nobody ran in its election, the Cabinet can appoint any Legislator as a replacement until the next regularly scheduled election.[/p]
 
-[box][ref][p][law]Article 6 of the Election Act[/law][/p][/ref]
-[/box]
+[box][ref][law]Article 6 of the Election Act[/law][/ref][/box]
 
 [h2]Independent institutions[/h2]
 

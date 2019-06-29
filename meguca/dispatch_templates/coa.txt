@@ -37,21 +37,21 @@
 
 [p]If you want to know how to vote in Chair elections and other types of elections, please visit [url=elections_guide]this dispatch[/url].[/p]
 
-[box][ref][p][law]Article 5 of the Elections Act[/law][/p][/ref]
+[box][ref][law]Article 5 of the Elections Act[/law][/ref]
 [/box]
 
 [h2]Recalls[/h2]
 
 [p]Like any other government official, the Chair can be recalled by Legislators with a Recall Resolution which requires a 3/5 supermajority to pass.[/p]
 
-[box][ref][p][law]Section 1, Article XI of the Charter of the South Pacific[/law][/p][/ref]
+[box][ref][law]Section 1, Article XI of the Charter of the South Pacific[/law][/ref]
 [/box]
 
 [h2]Vacancies[/h2]
 
 [p]If the Chair is vacant, the most senior deputy will serve as Acting Chair and a new Chair election will happen. If no deputy is available, [url=cabinet_intro]the Cabinet[/url] will appoint a Legislator as Acting Chair.[/p]
 
-[box][ref][p][law]Section 4, Article IV of the Charter of the South Pacific[/law][/p][/ref]
+[box][ref][law]Section 4, Article IV of the Charter of the South Pacific[/law][/ref]
 [/box]
 
 {% endblock body %}

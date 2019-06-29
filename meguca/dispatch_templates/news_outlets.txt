@@ -1,0 +1,28 @@
+{% import 'macros/sign.txt' as sign %}
+
+{% extends 'layout/general.txt' %}
+
+{% block body %}
+[title]List of news outlet[/title]
+
+[p]This is a list of news outlets (newspapers, podcasts,...) that exist in the South Pacific. Both public and private news outlets are listed. These news outlets can cover anything from roleplays, regional politics, real-life opinions to meme and other silly stuff. Click on a link below will send you to the homepage/index dispatch or forum thread of a news outlet. News outlets without an index/homepage dispatch are not listed for practical reasons.[/p]
+
+{{ sign.note("Please telegram " ~ misc.news_outlet_adder|nation ~ " with a link to your news outlet's homepage/index dispatch or forum thread in order to get your news outlet listed. [u]Please note that your news outlet needs to have a homepage/index dispatch which contains links to content you have published or a thread on our [url=f_news]journalism forum area[/url] in order for it to be listed on here[/u].", title="Don't see your newspaper on this?") }}
+
+[h2]Active newspapers[/h2]
+
+[p]These are news outlets that still publish frequently. In general, a news outlet which publishes at least one publication per month will be put in this list.[/p]
+
+[list]{% for name, url in active_news_outlets.items() %}
+[*][url={{ url }}]{{ name }}[/url]
+{% endfor %}[/list]
+
+[h2]Other newspapers[/h2]
+
+[p]These are news outlets that aren't active enough to be put in the above list. You can find news outlets that either publish very rarely or are fully inactive in this list.[/p]
+
+[list]{% for name, url in other_news_outlets.items() %}
+[*][url={{ url }}]{{ name }}[/url]
+{% endfor %}[/list]
+
+{% endblock body %}

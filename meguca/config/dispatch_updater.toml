@@ -42,9 +42,9 @@ title = 'Elections in the South Pacific'
 category = 8
 sub_category = 835
 
-[dispatches.'private_newspapers']
+[dispatches.'news_outlets']
 id = 1192505
-title = 'List of Private Newspapers in the South Pacific'
+title = 'List of news outlets in the South Pacific'
 category = 8
 sub_category = 835
 

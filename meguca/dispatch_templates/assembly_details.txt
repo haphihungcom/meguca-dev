@@ -7,30 +7,29 @@
 
 [box][h3]Summary[/h3]
 
-[h4]Membership:[/h4] [p]Comprised of voluntarily joined Legislators[/p]
+[h4]Membership:[/h4] [p]Comprised of voluntarily joined [url=become_legislator]Legislators[/url][/p]
 
 [h4]Powers:[/h4]
 [list]
 [*]Create legislation
 [*]Approve:
-[list][*]High Court Associate Justices appointments
-[*]Legislator Committee appointments
-[*]Council on Regional Security nominations
-[*]SPSF Generals appointments
+[list][*][url=court_intro]High Court[/url] Associate Justices appointments
+[*][url=legcomm]Legislator Committee[/url] appointments
+[*][url=crs_intro]Council on Regional Security[/url] nominations
+[*][url=spsf_intro]SPSF[/url] Generals appointments
 [/list]
 [*]Elect:
-[list][*]The Cabinet
-[*]The Delegate
+[list][*][url=cabinet_intro]The Cabinet[/url]
+[*][url=delegate_intro]The Delegate[/url]
 [/list]
 [*]Recall government officials
 [*]Initiate a Motion of No Confidence (MoNC)
-[*]Request a Proscription review
-[*]Approve the continuation of an Executive Order
+[*]Request a [url=proscriptions]Proscription[/url] review
+[*]Approve the continuation of an [url=cabinet_eo]Executive Order[/url]
 [*]Approve CRS membership requirements
 [/list]
 
-[h4]Checks and balances:[/h4] [p]Laws can be vetoed by the High Court[/p]
-[/box]
+[h4]Checks and balances:[/h4] [p]Laws can be vetoed by the High Court[/p][/box]
 
 [h2]Membership[/h2]
 
@@ -44,8 +43,7 @@
 
 [p]For more information on the Legislator Committee, visit [url=legislator_committee]this dispatch[/url].[/p]
 
-[ref][p][law]Section 5, Article IV of the Charter of the South Pacific[/law][/p][/ref]
-[/box]
+[ref][law]Section 5, Article IV of the Charter of the South Pacific[/law][/ref][/box]
 
 [h2]Powers[/h2]
 
@@ -64,8 +62,7 @@
 [ref]
 [*][law]Section 1, Article IV of the Charter of the South Pacific[/law]
 [*][law]Legislative Procedure Act[/law]
-[/ref]
-[/box]
+[/ref][/box]
 
 [h3]Approve appointments[/h3]
 
@@ -79,8 +76,7 @@
 [*][law]Section 5, Article 1 of the Judicial Act[/law]
 [*][law]Section 2, Article 1 of the Legislator Committee Act[/law]
 [*][law]Section 3, Article 1 of the Military Code[/law]
-[/ref]
-[/box]
+[/ref][/box]
 
 [h4]Approve Council on Regional Security nominations[/h4]
 
@@ -88,8 +84,7 @@
 
 [box][p]For more information on the CRS, visit [url=crs_intro]this dispatch[/url].[/p]
 
-[ref][p][law]Section 2, Article IX of the Charter of the South Pacific[/law][/p][/ref]
-[/box]
+[ref][law]Section 2, Article IX of the Charter of the South Pacific[/law][/ref][/box]
 
 [h3]Elect government officials[/h3]
 
@@ -99,8 +94,7 @@
 
 [box][p]For more information on Cabinet elections, visit [url=cabinet_elections]this dispatch[/url].[/p]
 
-[ref][law]Section 5, Article VI of the Charter of the South Pacific[/law][/p][/ref]
-[/box]
+[ref][law]Section 5, Article VI of the Charter of the South Pacific[/law][/ref][/box]
 
 [h4]Elect the Delegate[/h4]
 
@@ -111,22 +105,19 @@
 [ref]
 [*][law]Section 4 and 5, Article VII of the Charter of the South Pacific[/law]
 [*][law]Article 3 of the Elections Act[/law]
-[/ref]
-[/box]
+[/ref][/box]
 
-[h3]Recall government officials[/h3]
+[anchor=recall][/anchor][h3]Recall government officials[/h3]
 
 [p]Any government official in the Executive branch and the Judicial branch (Cabinet ministers, the Prime Minister, Cabinet advisers, High Court justices, Council on Regional Security members, Legislator Committee members, Local Council members,...) can be recalled by the Assembly via a vote. Unlike other types of votes, a recall vote needs a 3/5 supermajority in order to pass. A recall for a government official should only be initiated if the government official doesn't do their job, abuses authority, or violates the laws.[/p]
 
-[box][ref][p][law]Section 1, Article XI of the Charter of the South Pacific[/law][/p][/ref]
-[/box]
+[box][ref][law]Section 1, Article XI of the Charter of the South Pacific[/law][/ref][/box]
 
 [h3]Initiate a Motion of No Confidence (MoNC)[/h3]
 
 [p]The Assembly can initiate a Motion of No Confidence (MoNC) which will recall the entire Cabinet and trigger a special Cabinet election. A MoNC is issued if everyone has lost faith in the Cabinet and the Prime Minister. A MoNC will go into effect after a vote which requires a 3/5 majority to pass.[/p]
 
-[box][ref][p][law]Section 2, Article XI of the Charter of the South Pacific[/law][/p][/ref]
-[/box]
+[box][ref][law]Section 2, Article XI of the Charter of the South Pacific[/law][/ref][/box]
 
 [h3]Request a Proscription Review[/h3]
 
@@ -134,8 +125,7 @@
 
 [box][p]For more information on Proscriptions, visit [url=proscriptions]this dispatch[/url].[/p]
 
-[ref][p][law]Section 4, Article 3 of the Proscription Act[/law][/p][/ref]
-[/box]
+[ref][law]Section 4, Article 3 of the Proscription Act[/law][/ref][/box]
 
 [h3]Approve the continuation of an Executive Order[/h3]
 
@@ -143,8 +133,7 @@
 
 [box][p]For more information on Executive Orders, visit [url=cabinet_eo]this dispatch[/url].[/p]
 
-[ref][p][law]Section 14, Article VI of the Charter of the South Pacific[/law][/p][/ref]
-[/box]
+[ref][law]Section 14, Article VI of the Charter of the South Pacific[/law][/ref][/box]
 
 [h3]Approve CRS membership requirements[/h3]
 
@@ -152,8 +141,7 @@
 
 [box][p]For more information on CRS membership requirements, visit [url=crs_intro]this dispatch[/url].[/p]
 
-[ref][p][law]Section 2, Article IX of the Charter of the South Pacific[/law][/p][/ref]
-[/box]
+[ref][law]Section 2, Article IX of the Charter of the South Pacific[/law][/ref][/box]
 
 [h2]High Court's veto power[/h2]
 
@@ -161,8 +149,7 @@
 
 [box][p]For more information on the High Court, visit [url=court_intro]this dispatch[/url].[/p]
 
-[ref][p][law]Section 4, Article VIII of the Charter of the South Pacific[/law][/p][/ref]
-[/box]
+[ref][law]Section 4, Article VIII of the Charter of the South Pacific[/law][/ref][/box]
 
 [h2]The Chair of Assembly[/h2]
 
@@ -173,7 +160,6 @@
 [ref]
 [*][law]Section 2, 3, 4, Article IV of the Charter of the South Pacific[/law]
 [*][law]Article 5 of the Elections Act[/law]
-[/ref]
-[/box]
+[/ref][/box]
 
 {% endblock body %}

@@ -13,17 +13,16 @@ def get_url(url, custom_vars_urls, dispatches):
         str: Real URL.
     """
 
-    # Handle special URLs
-    if 'https://' not in url:
-        # URLs in custom vars file take precedent
-        if url in custom_vars_urls:
-            real_url = custom_vars_urls[url]
-        elif url in dispatches:
-            dispatch_id = dispatches[url]['id']
-            real_url = 'https://www.nationstates.net/page=dispatch/id={}'.format(dispatch_id)
-        else:
-            real_url = url
+    if url in custom_vars_urls:
+        r = custom_vars_urls[url]
+    elif url in dispatches:
+        dispatch_id = dispatches[url]['id']
+        r = 'https://www.nationstates.net/page=dispatch/id={}'.format(dispatch_id)
+    elif url.split('#')[0] in dispatches:
+        url = url.split('#')
+        dispatch_id = dispatches[url[0]]['id']
+        r = 'https://www.nationstates.net/page=dispatch/id={}#{}'.format(dispatch_id, url[1])
     else:
-        real_url = url
+        r = url
 
-    return real_url
+    return r

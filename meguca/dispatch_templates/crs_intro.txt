@@ -29,7 +29,7 @@
 [*]Appoint an Intelligence Coordinator among themselves to handle intelligence operations.
 [/list]
 
-[box][ref][p][law]Section 9, 10, 11, 12, 13, Article IX of the Charter of the South Pacific[/law][/p][/ref]
+[box][ref][law]Section 9, 10, 11, 12, 13, Article IX of the Charter of the South Pacific[/law][/ref]
 [/box]
 
 [h2]Requirements to become a member of the CRS[/h2]
@@ -43,7 +43,7 @@
 
 [p]The specific influence score, ranking, and endorsement numbers may be updated by the CRS, with majority approval by [url=assembly_intro]the Assembly[/url] (Our legislature), to reflect changes to the disbursement of influence in the region or updates to the game.[/p]
 
-[box][ref][p][law]Section 2, Article IX of the Charter of the South Pacific[/law][/p][/ref]
+[box][ref][law]Section 2, Article IX of the Charter of the South Pacific[/law][/ref]
 [/box]
 
 [h2]How do I join the CRS?[/h2]
@@ -56,7 +56,7 @@
 
 [p]Alternatively, the Delegate and [url=cabinet_intro]the Cabinet[/url] can jointly nominate you if they want you. The nomination is stopped if two-thirds of the CRS members objected. If the nomination moves pass the CRS with no objection then it will be put on a simple majority approval vote by the Assembly like above.[/p]
 
-[box][ref][p][law]Section 3, 4, 5, Article IX of the Charter of the South Pacific[/law][/p][/ref]
+[box][ref][law]Section 3, 4, 5, Article IX of the Charter of the South Pacific[/law][/ref]
 [/box]
 
 [h2]Can a CRS member be removed?[/h2]

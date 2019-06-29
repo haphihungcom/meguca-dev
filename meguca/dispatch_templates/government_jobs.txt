@@ -18,10 +18,6 @@
 [center][h4]Become an Ambassador[/h4]
 [url=fa_jobs][size=130]Sign up here[/size][/url][/center]
 [p]Ambassadors are the ones who act as a bridge between our region and other regions and carry out diplomacy and relationship between the two. Ambassador is the perfect entry job for the [url=fa_intro]Ministry of Foreign Affairs[/url] as you will gain valuable experience about foreign diplomacy and learn more about the rich culture and diversity of NationStates's world.[/p]
-[hr]
-[center][h4]High Court jobs[/h4]
-[url=court_jobs][size=130]Sign up here[/size][/url][/center]
-[p]Judges of the High Court, our supreme judicial institution, are appointed by the Cabinet so unfortunately, this position is not open for beginners, however, the High Court offers jobs that only require an application such as legal text researchers, paperwork managers, event organizers,... If you are interested in laws and judicial matters, just sign up for one of the jobs [url=court_jobs]here[/url]. These jobs are opened for both experienced and beginner individuals and are perfect chances to learn more about the Judiciary and gain the experience required if you want to become a judge in the future.[/p]
 [/box]
 
 {% endblock body %}

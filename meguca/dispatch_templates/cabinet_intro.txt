@@ -41,6 +41,7 @@
 [*][em]Cabinet:[/em] {{ gov_officials.cabinet_advisors|gen_list }}
 [*][em]MoRA Advisory Council:[/em] {{ gov_officials.mora_advisory_council|gen_list }}
 [*][em]General Corps:[/em] {{ gov_officials.general_corps|gen_list }}
+[/list]
 [hr]
 [/box][/floatright]
 
