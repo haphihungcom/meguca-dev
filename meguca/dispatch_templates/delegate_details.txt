@@ -33,7 +33,7 @@
 [*]Moderate the RMB according to moderation policies set by the Local Council
 [/list]
 
-[h4]Checks and balances:[/h4] [p]Decisions can be vetoed by the High Court[/p]
+[h4]Checks and balances:[/h4] [p]Decisions can be voided by the High Court[/p]
 
 [h4]Elections and recalls:[/h4]
 [list]

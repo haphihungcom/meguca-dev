@@ -22,7 +22,7 @@
 [*]Issue an Executive Order (EO)
 [/list]
 
-[h4]Checks and balances:[/h4] [p]Decisions can be vetoed by the High Court[/p]
+[h4]Checks and balances:[/h4] [p]Decisions can be voided by the High Court[/p]
 
 [h4]Elections and recalls: [/h4]
 [list]
@@ -131,7 +131,7 @@
 [*][law]Section 14, Article VI of the Charter of the South Pacific[/law]
 [/ref][/box]
 
-[h2]High Court's veto power[/h2]
+[h2]High Court's invalidation power[/h2]
 
 [p]Any decision from the Cabinet, from an Executive Order to a normal directive, can be voided by the High Court if such decisions violate anything in the Charter of the South Pacific or any other constitutional law such as [law]the Elections Act[/law].[/p]
 

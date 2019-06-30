@@ -5,7 +5,7 @@
 [title]Details on the working of the High Court[/title]
 [subtitle]of the Coalition of the South Pacific[/subtitle]
 
-[p]The High Court of the South Pacific is vested with the powers to conduct criminal trials, clarify, interpret laws, reconcile contradictions, and veto laws or directives from the Legislative or Executive branch which violate constitutional laws or the Charter. Associate Justices of the High Court are appointed by the Cabinet and approved by the Assembly. A Chief Justice chosen by fellow Associate Justices will lead the team.[/p]
+[p]The High Court of the South Pacific is vested with the powers to conduct criminal trials, clarify, interpret laws, reconcile contradictions, and void laws or directives from the Legislative or Executive branch which violate constitutional laws or the Charter. Associate Justices of the High Court are appointed by the Cabinet and approved by the Assembly. A Chief Justice chosen by fellow Associate Justices will lead the team.[/p]
 
 [box]
 [h4]Composition:[/h4] [p]Associate Justices led by a Chief Justice. No term period or limit[/p]
@@ -13,7 +13,7 @@
 [h4]Powers:[/h4]
 [list][*]Conduct criminal trials
 [*]Answer Legal Questions
-[*]Veto laws or directives which violate constitutional laws
+[*]Void laws or directives which violate constitutional laws
 [/list]
 
 [h4]Appointment:[/h4] [p]Appointed by the Cabinet, approved by the Assembly[/p]
@@ -55,9 +55,9 @@
 [*][law]Article 4 of the Judicial Act[/law]
 [/ref][/box]
 
-[h3]Veto laws or directives[/h3]
+[h3]Void laws or directives[/h3]
 
-[p]If the High Court finds a general law passed by the Assembly, a regulation, directive (such as Executive Orders),  given out by the executive branch, or any other official acts of the government violate constitutional laws (Such as the Charter, the Elections Act,...) then it can veto these acts and render them void.[/p]
+[p]If the High Court finds a general law passed by the Assembly, a regulation, directive (such as Executive Orders),  given out by the executive branch, or any other official acts of the government violate constitutional laws (Such as the Charter, the Elections Act,...) then it can void these acts and render them void.[/p]
 
 [box][ref][law]Section 4, Article VIII of the Charter of the South Pacific[/law][/ref][/box]
 

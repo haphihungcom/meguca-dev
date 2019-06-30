@@ -29,7 +29,7 @@
 [*]Approve CRS membership requirements
 [/list]
 
-[h4]Checks and balances:[/h4] [p]Laws can be vetoed by the High Court[/p][/box]
+[h4]Checks and balances:[/h4] [p]Laws can be voided by the High Court[/p][/box]
 
 [h2]Membership[/h2]
 
@@ -143,7 +143,7 @@
 
 [ref][law]Section 2, Article IX of the Charter of the South Pacific[/law][/ref][/box]
 
-[h2]High Court's veto power[/h2]
+[h2]High Court's invalidation power[/h2]
 
 [p]The High Court can declare any law or resolution passed by the Assembly unconstitutional and thereby void them if they violate anything in the Charter or other constitutional laws (Such as [law]the Elections Act[/law]).[/p]
 
