@@ -185,19 +185,23 @@ class Renderer():
 
         self.ctx.update(data)
 
-    def render(self, template_name):
+    def render(self, template_path, dispatch_name):
         """Render a dispatch.
 
         Args:
-            template_name (str): Template file name.
+            template_path (str): Template file path.
+            dispatch_name (str): Current dispatch name.
 
         Returns:
             str: Rendered dispatch.
         """
 
-        rendered = self.template_renderer.render(template_name, self.ctx)
+        render_ctx = self.ctx
+        render_ctx['current_dispatch'] = dispatch_name
+
+        rendered = self.template_renderer.render(template_path, render_ctx)
         rendered = self.bb_parser.format(rendered)
 
-        logger.debug('Rendered template "%s": %s', template_name, rendered)
+        logger.debug('Rendered template "%s": %s', template_path, rendered)
 
         return rendered

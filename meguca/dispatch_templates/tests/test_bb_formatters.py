@@ -53,4 +53,4 @@ class TestRef():
                            parent=None, context=None)
 
         assert r == ('[font=Avenir, Segoe UI, sans-serif][size=120][color=#019aed][b]Reference: [/b]'
-                     '[/color][/size][/font]foo')
+                     '[/color]foo[/size][/font]')

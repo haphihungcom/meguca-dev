@@ -149,33 +149,29 @@ class TestTemplateRenderer():
 class TestDispatchRenderer():
     @pytest.fixture
     def setup_template(self):
-        template = ('{% for i in j %}[test]{{ i|filter2(1) }}[/test]{% endfor %}'
-                    '[moo=test1][foo][bar]{{ john.dave }}[/bar][/foo][/moo]')
+        template = ('{% for i in j %}[tag1]{{ i|filter2(1) }}[/tag1]{% endfor %}'
+                    '[dar]{{ john.dave }}{{ current_dispatch }}[/dar]')
         custom_vars = {'john': {'dave': 'marry'}, 'key1': 'val1'}
-        simple_bb_formatters = {'test': {'template': '[a]%(value)s[/a]'}}
 
         with open('tests/template.txt', 'w') as f:
             f.write(template)
 
         toml.dump(custom_vars, open('tests/custom_vars.toml', 'w'))
-        toml.dump(simple_bb_formatters, open('tests/simple_bb_formatters.toml', 'w'))
 
         yield 0
 
         os.remove('tests/template.txt')
         os.remove('tests/custom_vars.toml')
-        os.remove('tests/simple_bb_formatters.toml')
 
     def test_render(self, setup_template):
         data = {'j': [1, 2, 3]}
         config = {'conf1': 'val1'}
         ins = dispatch_renderer.Renderer('tests', 'tests/resources/filters.py',
-                                         'tests/simple_bb_formatters.toml',
-                                         'tests/resources/bb_formatters.py',
+                                         'tests/resources/bb_formatters.toml',
                                          'tests/custom_vars.toml', config)
         ins.update_data(data)
 
-        result = ('[a]1and1[/a][a]2and1[/a][a]3and1[/a]'
-                  '[vnm=test1][efg=val1][xyz=val1]marry[/xyz][/efg][/vnm]')
-        assert ins.render('template.txt') == result
+        expected = ('[tagr1]1and1[/tagr1][tagr1]2and1[/tagr1][tagr1]3and1[/tagr1]'
+                    '[abc]marryhomura[/abc]')
+        assert ins.render('template.txt', 'homura') == expected
 

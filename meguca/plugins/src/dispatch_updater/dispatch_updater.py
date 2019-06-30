@@ -28,7 +28,7 @@ class DispatchUpdater(plugin_categories.View):
         template_ext = self.plg_config['general']['template_file_ext']
         for name, info in self.dispatches.items():
             template_path = '{}.{}'.format(name, template_ext)
-            text = self.renderer.render(template_path)
+            text = self.renderer.render(template_path, name)
             self.update_dispatch(info, text)
             logger.info('Updated dispatch "%s"', name)
 
