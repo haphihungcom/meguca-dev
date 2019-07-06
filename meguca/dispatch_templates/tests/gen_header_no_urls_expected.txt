@@ -1,5 +1,0 @@
-[background-block=#019AED][center][color=#019aed].[/color]
-[img]test[/img]
-[color=#019aed].[/color][/center][/background-block][background-block=#38b9ff][center][color=#38b9ff].[/color]
-[font=Segoe UI, Helvetica, sans-serif][size=140][color=#fff]Test[/color][/size][/font]
-[color=#38b9ff].[/color][/center][/background-block]

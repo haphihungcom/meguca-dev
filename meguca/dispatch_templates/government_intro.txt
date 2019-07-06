@@ -1,4 +1,25 @@
+{% import 'macros/header_macros.txt' as macros with context %}
+
 {% extends "layout/welcome.txt" %}
+
+{% block header %}
+{{ macros.gen_header(urls={'Home': 'welcome',
+                           'Get Involved': 'get_involved',
+                           'Jobs': 'government_jobs',
+                           'Guides': 'guide_index',
+                           'SWAN': 'swan_intro',
+                           'Government': 'government_intro',
+                           'Roleplay': 'roleplay_guide',
+                           'Regional Affairs': 'ra_intro',
+                           'Military': 'spsf_intro',
+                           'About us': 'factbook'},
+                     sub_urls={'Assembly': 'assembly_intro',
+                               'Executive': 'cabinet_intro',
+                               'High Court': 'court_intro',
+                               'Independent institutions': 'indie_intro',
+                               'Elections': 'elections'}) }}
+
+{% endblock %}
 
 {% block body %}
 
@@ -11,8 +32,7 @@
 
 [p][em]Flag:[/em][/p][/center]
 
-[hr]
-[p][em]Capital:[/em] Our Forum[/p]
+[hr][p][em]Capital:[/em] [url=forum]Our Forum[/url][/p]
 [hr]
 [p][em]Government:[/em] Unitary parliamentary republic[/p]
 [list]
@@ -32,7 +52,7 @@
 
 [p]The Government of the South Pacific is the entity that governs [region]the South Pacific[/region] region and its community. It is a parliamentary republic and is one of NationStates oldest and biggest democracies. Its job is to engage, moderate, and protect the community of this region. The Government belongs to a part of NationStates known as [i]Gameplay[/i] or more specifically, [i]Regional Politics[/i]. This part of the game mainly deals with managing a region and developing it into the greatest or worst place, depends on you, your friends, or your enemies. If you like realistic politics, making laws, interacting with other, or trying to make something better for everyone then this is the place for you![/p]
 
-[p]Regional politics is not a roleplay thing as it involves real powers and responsibilities. Unlike roleplay, regional politics doesn’t require pretense, because there are actual game mechanics which allow its moves to be played out and, in this case, actual votes will get actual candidates elected to actual roles with actual powers that they can actually carry out to the benefit (or detriment) of the region. It may sound scary but remember, this is still just a game! We have an abundance of guides and tutorials to assist you along the way if you choose to play in this side of the game.[/p]
+[p]Regional politics is not a roleplay thing as it involves real powers and responsibilities. Unlike roleplay, regional politics doesn't require pretense, because there are actual game mechanics which allow its moves to be played out and, in this case, actual votes will get actual candidates elected to actual roles with actual powers that they can actually carry out to the benefit (or detriment) of the region. It may sound scary but remember, this is still just a game! We have an abundance of guides and tutorials to assist you along the way if you choose to play in this side of the game.[/p]
 
 [p]If you are an absolute beginner, we recommend you to begin from [url=politics_guide]this handy guide[/url] on our politics.[/p]
 
@@ -60,7 +80,7 @@
 [*][em]Minister of Military Affairs[/em] (Incumbent: {{ gov_officials.moma|nation }}) who leads the [url=spsf_intro]Ministry of Military Affairs[/url] (MoMA) and deals with running the South Pacific Special Forces (SPSF), our regional military. The SPSF participates in what known as [i]Military Gameplay[/i] or [i]Raiding/Defending[/i] (R/D) which is an area of gameplay that uses the game mechanics to invade other regions or defend them from being invaded.
 [/list]
 [p]The Executive branch employs dozens of personnel such as ambassadors, journalists, roleplayers, event organizers, soldiers, officers, commanders, managers,... all work together to make the region better. The Cabinet and the Prime Minister have the power to issue executive orders and appoint some positions. They are elected every 3 months by the Assembly ([url=elections_intro]Click here[/url] to read more about elections).[/p]
-[*][em]Judicial:[/em] The High Court is the highest and only court of the region, where all matters related to law interpretations and conflicts are resolved. It consists of Associate Justices and is led by the Chief Justice (Incumbent: {{ gov_officials.hc_chief_justice|nation }}). Justices are appointed by the Cabinet and approved by the Assembly. Aside from justices,there are also informal roles such as legal text analyzers, court-related event organizers, investigators, paperwork managers,... in this body.
+[*][em]Judiciary:[/em] The High Court is the highest and only court of the region, where all matters related to law interpretations and conflicts are resolved. It consists of Associate Justices and is led by the Chief Justice (Incumbent: {{ gov_officials.hc_chief_justice|nation }}). Justices are appointed by the Cabinet and approved by the Assembly. Aside from justices,there are also informal roles such as legal text analyzers, court-related event organizers, investigators, paperwork managers,... in this body.
 [/list]
 
 [p]Aside from the above, there are a few bodies known as [url=indie_intro]independent institutions[/url] that don't belong to any government ministry such as the [url=crs_intro]Council on Regional Security[/url] (CRS) which handles matters such as protecting the region from intruders, gathering intelligence,...;[url=legcomm]The Legislator Committee[/url] (LegComm) which handles legislator applications;...[/p]

@@ -1,3 +1,3 @@
-{% import 'macros/header_macros.txt' as macros %}
-{{ macros.gen_header(urls={'Test1': 'https://test1',
-                           'Test2': 'https://test2'}, logo='test')  }}
+{% import 'macros/header_macros.txt' as macros with context %}
+{{ macros.gen_header(urls={'Test1': 'test1',
+                           'Test2': 'test2'}, logo='test')  }}

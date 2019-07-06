@@ -30,6 +30,12 @@ title = 'Get Involved in the South Pacific'
 category = 8
 sub_category = 835
 
+[dispatches.'guide_index']
+id = 1230616
+title = 'List of guides about NationStates and the South Pacific'
+category = 8
+sub_category = 835
+
 [dispatches.'government_jobs']
 id = 1205787
 title = 'Get a job in the Government of the South Pacific'
@@ -99,6 +105,12 @@ sub_category = 835
 [dispatches.'assembly_details']
 id = 1192515
 title = 'Details on the powers of the Assembly of the South Pacific'
+category = 8
+sub_category = 835
+
+[dispatches.'assembly_hr']
+id = 1229771
+title = 'Human Resources - The Assembly of the South Pacific'
 category = 8
 sub_category = 835
 

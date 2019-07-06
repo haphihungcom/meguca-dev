@@ -1,13 +1,16 @@
-{% import 'macros/header_macros.txt' as macros %}
+{% import 'macros/header_macros.txt' as macros with context %}
 
 {% extends 'layout/general.txt' %}
 
 {% block header %}
 {{ macros.gen_header(urls={'Home': 'welcome',
                            'Get Involved': 'get_involved',
+                           'Jobs': 'government_jobs',
                            'Guides': 'guide_index',
+                           'SWAN': 'swan_intro',
                            'Government': 'government_intro',
                            'Roleplay': 'roleplay_guide',
-                           'SWAN': 'swan_intro',
-                           'About our region': 'factbook'}) }}
+                           'Regional Affairs': 'ra_intro',
+                           'Military': 'spsf_intro',
+                           'About us': 'factbook'}) }}
 {% endblock header %}

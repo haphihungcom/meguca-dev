@@ -1,1 +1,71 @@
-[reserved]
+{% extends 'layout/welcome.txt' %}
+
+{% block body %}
+
+[title]Welcome to NationStates and the South Pacific![/title]
+
+[p]If you are new to NationStates or are an experienced player but want to learn more about [region]the South Pacific[/region] (TSP) or want to migrate to it, this is the place for you![/p]
+
+[h2]How to play NationStates[/h2]
+
+[p]NationStates is a multiplayer political simulation game that you can play in many ways (We will talk more about them). The most common way to play is to "answer issues". This is the only way you can develop and mold your nation to your liking. Every day, your nation will face certain issues about the economy, society, politics, diplomacy, wars,... Your job as a leader is to decide how to solve these issues.[/p]
+[Spoiler=[p]Click to know more...[/p]][p]Click the [i]Issues[/i] button on the top to view what issues your nation is facing. To tackle an issue, click on one. You will see a few solutions to fix the issue present to you. Make up your mind about what solution will fix things the best then click [i]Answer[/i] on the solution you want. After choosing a solution, it will automatically be implemented and a page with changes in the statistics of your nation (such as GDP, civil rights rating, average income,...) the solution created will show up along with a few funny news headlines your decision caused. It is up to you to make decisions that turn your nation into an utopia where everyone is happy or the most 1984-ish world ever. There is no way to win or lose the game. Competitions only happen on the [url=ns_nation_census]World Census's rankings[/url] which rank all nations based on some statistics.[/p]
+
+[p]The fun of this is that in many cases, there are unorthodox, weird, extreme, and funny issues and solutions and along with them are quirky changes to your nation that you absolutely did not expect and may make you feel delightful or annoying depend on your political leaning. You cannot micro-control your nation (like directly changing tax rates, arrest people,...) though. Making broad decisions by answering issues is the only way to change these things and move your nation forward. When you play long enough, you will unlock some abilities such as setting leader name, official religion, capital city, or custom pre-title for your nation. Aside from that, you can also gain easter eggs and rank badges on your nation's page.[/p]
+
+[p]If you want to know more about issues and tips on how to properly answer hard ones, you should read [url=ns_pol_faq]this great FAQ[/url] or come over to the [url=nsf_got_issues]Got Issues forum[/url] to get help.[/p][/spoiler]
+
+[p]Although issue answering is the main way to play the game, most people who stick around find joys in [url=roleplay_guide]roleplaying[/url], [url=government_intro]regional politics[/url], writing and debating [url=ns_wa]World Assembly[/url] (Our equivalent of the United Nations) resolutions, [url=spsf_intro]military gameplay[/url] (invading and defending regions),... or just interacting with fellow nations. If you think issue answering is boring, you should try out some of the above areas.[/p]
+
+[h2]What is a region and what is the South Pacific[/h2]
+
+[p]A region is basically a community of nations. You are free to move your nation to any region you like by finding one (Click on [i]The World[/i] on the left to find one), opening its page, then clicking [i]Move [your nation name] to [region][/i] (Example: [i]Move Bigtopia to the North Pacific[/i]). The region you are in right now is [region]the South Pacific[/region] (check the [i]Region[/i] area on your nation page). The South Pacific is one of the five feeder regions which new nations automatically spawn into so you probably came here by chance![/p]
+
+[p][b]The South Pacific[/b], full name is the [b]Coalition of the South Pacific[/b], is one of NationStates's largest and most active regions. We are the home of over {{ test.region_nation_num }} nations. Aside from being big, we are also one of NationStates's oldest democracies. The community of thousands of nations is governed by a [url=government_intro]democratic republican government[/url] (not roleplay, a real government which has real power) in which any citizen can take parts. We offer a variety of activities ranging from just bantering on the [url=rmb]Regional Message Board[/url] (RMB) to [url=roleplay_guide]roleplaying[/url], [url=ra_intro]writing newspapers, organizing events[/url], [url=swan_intro]collecting endorsements[/url], [url=spsf_intro]invading and defending[/url] other regions from being invaded, [url=assembly_intro]making laws[/url] which govern the entire region,...[/p]
+
+[h2]Get started in the South Pacific[/h2]
+
+[list]
+[*][url=rmb][b]Chat with fellow regional nations on the Regional Message Board (RMB):[/b][/url] Make sure you read the [url=rmb_rules]Rules and Etiquette[/url] first though to make sure moderators don't annoy you.
+[*][url=swan_intro][b]Participate in the Southern World Assembly Initiative:[/b][/url] This is the best way to gather endorsements, influence for your nation and help our region more secure and powerful.
+[*][url=forum][b]Join our forum:[/b][/url] Most of the activities of the government along with formal roleplays and journalism happen on our forum so get on it is a must if you are interested in real politics!
+[*][url=discord][b]Join our Discord chat:[/b][/url] This is where majority of chats about daily life subjects and informal discussions about government matters and NationStates happen. Also, this is the easiest place to receive help and get in touch with government officials so join it if you haven't already!
+[*][url=factbook][b]Find out more about the South Pacific:[/b][/url] The South Pacific is a big region with many different aspects. Please read [url=factbook]this factbook[/url] which sums up everything about it.
+[/list]
+
+[h2]Get involved[/h2]
+
+[list]
+[*][url=become_legislator][b]Become a Legislator:[/b][/url] If you like hard politics and like to write laws or do work that makes the region better then you should join the forum-side government (Our equivalent of the federal/national government). Becoming a Legislator is the easiest and fastest way to get involved in politics as you can write, debate, vote on laws that govern our region, and vote for government officials, run in elections,...
+[*][url=government_jobs][b]Work for the government:[/b][/url] If you don't like politics but still want to help the region and gather experience working in a government then you can sign up for a job(s) at a ministry about writing newspapers, welcoming and instructing newbies, organizing events and festivals, carrying out diplomacy with other regions, doing military operations,...
+[*][url=roleplay_guide][b]Roleplaying:[/b][/url] You can roleplay about wars, trades, or everything else about your nation with other nations on gameside using Nowhere or on our forum if you want things to be more formal. Roleplaying is awesome if you like writing, creating stories, and do not like the limits on creativity that issue answering imposes. Please read [url=roleplay_guide]this short guide[/url] to know how and where to roleplay.
+[*][url=spsf_intro][b]Enlist in the Military:[/b][/url] The South Pacific Special Forces is the region's small but elite military force that can carry out military operations such as invasions and defenses on other regions ranging from small scale for-fun to complex high-stake missions with our friends and allies. If you like something fast-paced and require strategic thinking, the military is where you want!
+[*][em]Establish organizations, newspapers, make discussions,...:[/em] There is nearly no limit on what you can do in our region. You can create communities, newspapers, discussion groups, political parties,... in our region on gameside or on the forum to build more activity for the region and gain more experience for yourself.
+[/list]
+
+[h2]Know what is happening[/h2]
+
+[p]You can know what is happening on gameside and forumside of our region by reading one of the following:[/p]
+
+[list]
+[*][url=f_cabinet_twitter][b]Cabinet Twitter[/b][/url]: These are short and concise updates from [url=cabinet_intro]the Cabinet[/url] which show what they have done, what the current status of the government is,..
+[*][url=coco_news][b]Coco News:[/b][/url] This is our frequently published newspaper which summarizes everything that has happened in the region in the past month/weeks. The <> presents both news about politics, foreign affairs, regional affairs, gameside events,... and analysis/commentary on some special occasions.
+[*][url=news_outlets][b]Private newspapers:[/b][/url] These are private newspapers maintained by our citizens. They offer news that are independent and about more subjects than the above.
+[*][em]Read the forum and the RMB:[/em] Don't like news? Reading [url=forum]the forum[/url] or [url=rmb]the RMB[/url] by yourself is the best way to know what is happening without bias and in great details. Here is a guide on how to navigate the forum.
+[*][em]Ask others:[/em] You can ask other players via the RMB, telegrams, or Discord to know more about various matters. It is recommended to ask senior members of the region and government officials if you want the best and most accurate answer.
+[/list]
+
+[h2]Learn more[/h2]
+
+[p]You can learn more about everything in our region by reading various dispatches and guides, below are a good few to get started:[/p]
+
+[list]
+[*][url=ns_guide][b]NationStates Guide:[/b][/url] A guide to nearly everything about NationStates.
+[*][url=politics_guide][b]Politics Guide:[/b][/url] A beginner guide to politics in our region. A must-read if you are new and want to get involved in our politics!
+[*][url=elections_guide][b]Elections Guide:[/b][/url] Many positions in the Government are elected. Read this to know what and how to vote and run in elections.
+[*][url=roleplay_guide][b]Roleplay Guide:[/b][/url] A guide about where and how to roleplay in our region.
+[*][url=index][b]List of government dispatches:[/b][/url] These dispatches will give you official information about our region and the structures, procedures, and staff of our government.
+[*][url=guide_index][b]List of guides:[/b][/url] A list of guides about NationStates and our region.
+[/list][p]...[/p]
+
+{% endblock body %}

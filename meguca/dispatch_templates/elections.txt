@@ -49,7 +49,7 @@
 
 [h2]Local Council elections[/h2]
 
-[p]Elections for the three seats of the Local Council (LC) which is the gameside part of the government and handles interaction with the gameside community happen once every 3 months (June, October, February). Local Council candidates are voted on by World Assembly nations in our region using the regional poll feature. First-past-the-post (FPTP) voting method is used for these elections. Usually, three candidates with the most votes will get the seats. However, when there are a lot of candidates (more than what NationStates's poll feature can handle), the procedure is different.[/p]
+[p]Elections for the three seats of the [url=lc_intro]Local Council[/url] (LC) which is the gameside part of the government and handles interaction with the gameside community happen once every 3 months (June, October, February). Local Council candidates are voted on by World Assembly nations in our region using the regional poll feature. First-past-the-post (FPTP) voting method is used for these elections. Usually, three candidates with the most votes will get the seats. However, when there are a lot of candidates (more than what NationStates's poll feature can handle), the procedure is different.[/p]
 
 [p]One needs to be a citizen of the South Pacific in order to run for these elections.[/p]
 
@@ -60,7 +60,7 @@
 
 [h2]Cabinet elections[/h2]
 
-[p]The Cabinet of the Government which is the head of the executive branch and consists of the Prime Minister, Minister of Military Affairs (MoMA), Minister of Regional Affairs (MoRA), Minister of Foreign Affairs (MoFA) is elected every 3 months (February, June, October) by legislators of the Assembly (Our legislature). Electors will vote on candidates using Instant-runoff Voting (Click here if you don't know what this is).[/p]
+[p][url=cabinet_intro]The Cabinet[/url] of the Government which is the head of the executive branch and consists of the Prime Minister, Minister of Military Affairs (MoMA), Minister of Regional Affairs (MoRA), Minister of Foreign Affairs (MoFA) is elected every 3 months (February, June, October) by legislators of the Assembly (Our legislature). Electors will vote on candidates using Instant-runoff Voting (Click here if you don't know what this is).[/p]
 
 [p]In order to run for a position in the Cabinet, one needs to be a legislator.[/p]
 
@@ -69,7 +69,7 @@
 
 [h2]Delegate elections[/h2]
 
-[p]The Delegate of the South Pacific, who is the head of state and holds the gameside delegate position along with all administrative powers that come with it, is elected every 6 months (January, June) by a two-step process. In the first step, legislators of the Assembly will vote on candidates using Instant-runoff Voting. Two candidates with the most votes will go to the second step where they will be voted on by World Assembly nations in the gameside using First-past-the-post. The candidate which gets the most vote will win the position.[/p]
+[p][url=delegate_intro]The Delegate[/url] of the South Pacific, who is the head of state and holds the gameside delegate position along with all administrative powers that come with it, is elected every 6 months (January, June) by a two-step process. In the first step, legislators of the Assembly will vote on candidates using Instant-runoff Voting. Two candidates with the most votes will go to the second step where they will be voted on by World Assembly nations in the gameside using First-past-the-post. The candidate which gets the most vote will win the position.[/p]
 
 [p]The Delegate position is the hardest position to run. One needs to be a legislator and have a high amount of popularity on both the gameside and forumside community.[/p]
 
@@ -78,7 +78,7 @@
 
 [h2]Chair of Assembly elections[/h2]
 
-[p]The Chair of the Assembly, who handles paperwork matters of the Assembly, is elected by legislators of the Assembly one week before the end of term of the current Chair using Approval Voting (Click here if you don't know what this is). The candidate that gets the most votes will win the election. As usual, one needs to be a legislator in order to run.[/p]
+[p]The [url=coa]Chair of the Assembly[/url], who handles paperwork matters of the Assembly, is elected by legislators of the Assembly one week before the end of term of the current Chair using Approval Voting (Click here if you don't know what this is). The candidate that gets the most votes will win the election. As usual, one needs to be a legislator in order to run.[/p]
 
 [box][p]For more information about Chair of Assembly elections, visit [url=coa]this dispatch[/url].[/p][/box]
 

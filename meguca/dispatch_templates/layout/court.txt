@@ -1,4 +1,4 @@
-{% import 'macros/header_macros.txt' as macros %}
+{% import 'macros/header_macros.txt' as macros with context %}
 
 {% extends 'layout/general.txt' %}
 
@@ -7,5 +7,5 @@
                            'Guide': 'court_guide',
                            'Details': 'court_details',
                            'Procedures': 'court_procedures',
-                           'Case library': 'court_orcs'}, logo='') }}
+                           'Case library': 'court_orcs'}) }}
 {% endblock header %}

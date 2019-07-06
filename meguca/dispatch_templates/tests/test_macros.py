@@ -14,20 +14,15 @@ class TestMacros():
 
         yield env
 
-    def test_gen_header_no_urls(self, env):
-        template = env.get_template('tests/gen_header_no_urls_test.txt')
-
-        assert template.render() == open(TEST_DIR + 'gen_header_no_urls_expected.txt').read()
-
     def test_gen_header_with_urls(self, env):
         template = env.get_template('tests/gen_header_with_urls_test.txt')
 
-        assert template.render() == open(TEST_DIR + 'gen_header_with_urls_expected.txt').read()
+        assert template.render(current_dispatch='test1') == open(TEST_DIR + 'gen_header_with_urls_expected.txt').read()
 
-    def test_2rows_gen_header(self, env):
-        template = env.get_template('tests/gen_2rows_header_test.txt')
+    def test_gen_header_with_sub_urls(self, env):
+        template = env.get_template('tests/gen_sub_urls_header_test.txt')
 
-        assert template.render() == open(TEST_DIR + 'gen_2rows_header_expected.txt').read()
+        assert template.render(current_dispatch='test1') == open(TEST_DIR + 'gen_sub_urls_header_expected.txt').read()
 
 
 

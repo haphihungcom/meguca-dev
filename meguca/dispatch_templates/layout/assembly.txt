@@ -1,4 +1,4 @@
-{% import 'macros/header_macros.txt' as macros %}
+{% import 'macros/header_macros.txt' as macros with context %}
 
 {% extends 'layout/general.txt' %}
 
@@ -9,5 +9,7 @@
                            'Details': 'assembly_details',
                            'Procedures': 'assembly_procedures',
                            'Chair of Assembly': 'coa',
-                           'Laws Index': 'laws_index'}, logo='') }}
+                           'Human Resources': 'assembly_hr',
+                           'Laws Index': 'laws_index',
+                           'Archive': 'f_assembly_archive'}) }}
 {% endblock header %}

@@ -17,7 +17,7 @@
 
 [center][p][em]Headquarter:[/em][/p]
 
-[url=executive_offices_forum]Executive Offices subforum[/url][/center][hr]
+[url=f_executive_offices]Executive Offices subforum[/url][/center][hr]
 
 [center][p][em]The Cabinet[/em][/p][/center]
 

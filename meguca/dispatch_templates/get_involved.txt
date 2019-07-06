@@ -2,8 +2,7 @@
 
 {% block body %}
 
-[title]How to get involved[/title]
-[subtitle]in the Coalition of South Pacific[/subtitle]
+[title]Get involved in the South Pacific[/title]
 
 [p]The South Pacific is a very big and diverse community, there are a lot of stuff you can do here, ranging from just fun banter to serious politics. Below are ways that you can become involved in the community and have fun in the process![/p]
 

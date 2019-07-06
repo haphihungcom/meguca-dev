@@ -1,15 +1,14 @@
-{% import 'macros/header_macros.txt' as macros %}
+{% import 'macros/header_macros.txt' as macros with context %}
 
 {% extends 'layout/general.txt' %}
 
 {% block header %}
-{{ macros.gen_2rows_header(upper_urls={'Home': 'cabinet_intro',
-                                       'Get Involved': 'get_involved',
-                                       'Details': 'cabinet_details',
-                                       'Elections': 'cabinet_elections'},
-                           lower_urls={'Regional Affairs': 'ra_intro',
-                                       'Foreign Affairs': 'fa_intro',
-                                       'Military Affairs': 'spsf_intro',
-                                       'Independent institutions': 'indie_intro'},
-                           logo='') }}
+{{ macros.gen_header(urls={'Home': 'cabinet_intro',
+                           'Get Involved': 'government_jobs',
+                           'Details': 'cabinet_details',
+                           'Elections': 'cabinet_elections'},
+                           sub_urls={'Regional Affairs': 'ra_intro',
+                                     'Foreign Affairs': 'fa_intro',
+                                     'Military Affairs': 'spsf_intro',
+                                     'Independent institutions': 'indie_intro'}) }}
 {% endblock header %}

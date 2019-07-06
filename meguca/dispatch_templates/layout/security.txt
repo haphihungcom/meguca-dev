@@ -1,4 +1,4 @@
-{% import 'macros/header_macros.txt' as macros %}
+{% import 'macros/header_macros.txt' as macros with context %}
 
 {% extends 'layout/general.txt' %}
 

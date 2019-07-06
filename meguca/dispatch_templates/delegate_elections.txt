@@ -1,8 +1,9 @@
-{% extends "layout/elections.txt" %}
+{% extends "layout/delegate.txt" %}
 
 {% block body %}
 
 [title]Delegate elections[/title]
+[subtitle]in the Coalition of the South Pacific[/subtitle]
 
 [p]The Delegate is elected in [b]Delegate elections[/b] which occur every 6 months (January and July). Only [url=become_legislator]Legislators[/url] of the Assembly can run for the position of Delegate or vote in the first round of Delegate elections. Unlike other types of elections, Delegate elections are conducted in a two-stage process, first on [url=forum]the forum[/url], then using a gameside poll, both overseen by the [url=election_commission]Election Commission[/url].[/p]
 

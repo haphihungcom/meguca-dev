@@ -4,5 +4,6 @@
 [img]test[/img]
 [color=#019aed]·[/color][/background-block]
 [background-block=#0080c4][color=#0080c4]·[/color]
+[font=Avenir, Segoe UI, sans-serif][size=120][color=#0080c4]—[/color][raw_url=test3][color=#fff][b]Test3[/b][/color][/raw_url][color=#0080c4]—[/color] [color=#fff]|[/color] [color=#0080c4]—[/color][raw_url=test4][color=#fff][b]Test4[/b][/color][/raw_url][color=#0080c4]—[/color][/size][/font]
 [color=#0080c4]·[/color]
 [/background-block][/align][/box]

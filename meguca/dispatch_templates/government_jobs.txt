@@ -15,9 +15,9 @@
 [url=spsf_intro][size=130]Sign up here[/size][/url][/center]
 [p]If you hate text and want something fast-paced and requires strategic thinking then the military is your option! Our regional military, the South Pacific Special Forces (SPSF) is a body which takes part in what known as Military Gameplay, an area of the game that deals with invading and defending regions.[/p]
 [hr]
-[center][h4]Become an Ambassador[/h4]
+[center][h4]Join the Diplomatic Corps[/h4]
 [url=fa_jobs][size=130]Sign up here[/size][/url][/center]
-[p]Ambassadors are the ones who act as a bridge between our region and other regions and carry out diplomacy and relationship between the two. Ambassador is the perfect entry job for the [url=fa_intro]Ministry of Foreign Affairs[/url] as you will gain valuable experience about foreign diplomacy and learn more about the rich culture and diversity of NationStates's world.[/p]
+[p]The Diplomatic Corps are the staff of the [url=fa_intro]Ministry of Foreign Affairs[/url]. They are ambassadors, envoy, representatives, and advisors who act as bridges between our region and other regions and carry out diplomacy and relationship between the two. Being in the Diplomatic Corps is the perfect way to get started in foreign affairs as you will gain valuable experience about foreign diplomacy and learn more about the rich culture and diversity of NationStates's world.[/p]
 [/box]
 
 {% endblock body %}

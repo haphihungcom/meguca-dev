@@ -1,4 +1,4 @@
-{% extends "layout/elections.txt" %}
+{% extends "layout/cabinet.txt" %}
 
 {% block body %}
 

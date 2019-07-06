@@ -1,1 +1,66 @@
-[reserved]
+{% extends 'layout/assembly.txt' %}
+
+{% block body %}
+
+[title]Become a Legislator in the South Pacific![/title]
+
+[p]If you are interested in helping to shape our government, then you will want to apply to become a Legislator. Being a Legislator allows you to propose, debate, and vote on laws which govern our region [region]the South Pacific[/region] in [url=assembly_intro]the Assembly[/url] (Our legislature), participate in the private assembly halls,and vote and run for offices in our government! There is no special requirement other than you need to be a citizen in the South Pacific in order to join.[/p]
+
+[p][i]Note that you do not need to be a Legislator to contribute and you can participate in other ways. (such as [url=roleplay_guide]roleplay[/url], [url=ra_get_involved]journalism, event planning[/url], [url=spsf_intro]military[/url] or simply hanging around and enjoying our fine South Pacifican culture)[/i][/p]
+
+[h2]Requirements[/h2]
+
+[p]You need to have a nation in [region]the South Pacific[/region]. (Any nation is sufficient, it does not need to be your main nation or a member of the World Assembly although we strongly recommend that)[/p]
+
+[p]There are some additional requirements for special cases but it is very unlikely that you'll need to meet them.[/p]
+
+[h2]How to apply[/h2]
+[list]
+[*][em]Step 1:[/em] Make a new thread in this [url=f_legislator_signup]place[/url] on our forum with a title of your choosing.
+[*][em]Step 2:[/em] Introduce yourself! Say hi, or hello, or guten Tag, or whatever else strikes your fancy at that moment.
+[*][em]Step 3:[/em] Copy and paste the contents of the Application Form box below, and fill out the questions there.
+[*][em]Step 4:[/em] Post it in the thread - and done! It's that easy!
+[/list]
+
+[p]Usually, applications will be processed within one or two days or less by a dedicated government institution known as the [url=legcomm]Legislator Committee[/url] (it consists of {{ gov_officials.legcomm|gen_list }}). You will receive both a telegram to your nation(s) and a reply post on your application thread with the result.[/p]
+
+[center][h3]Application Form[/h3][/center]
+[box][pre]Nation in the South Pacific: [nation]<Fill nation name here>[/nation]
+Nation with World Assembly membership (if different) (optional):
+Nation most often used (if different):
+Other significant nations or aliases on NationStates:
+Current involvement in other regions:
+Past involvement in other regions:
+Discord handle:
+
+I pledge to uphold the laws of the Coalition of the South Pacific.[/pre][/box]
+
+[h2]Things to do after you have been accepted:[/h2]
+[list]
+[*]Read [url=politics_guide]this guide[/url] to learn about our politics and [url=assembly_guide]this guide[/url] to know how to participate in the Assembly.
+[*]Read and contribute to the [url=f_assembly_hall]Assembly Hall[/url] and the [url=f_private_assembly_hall]Private Assembly Hall[/url] by proposing and debating on laws that govern the South Pacific.
+[*]Wield your democratic voice and vote on legislation in [url=f_voting_chamber]The Voting Chamber[/url]!
+[*]If you're on our [url=discord]Discord server[/url], you will get access to the #legislators-lounge channel to discuss matters in a chat setting.
+[/list]
+
+[h2]Staying as legislator[/h2]
+
+[p]If you want to keep your legislator status, you must:[/p]
+[list]
+[*_r][p]Keep your nation in the South Pacific![/p]
+[spoiler=[p]What if I must move it out?[/p]][p]If you must move it out, you can move in another nation as long as you post the new nation [url=f_assembly_office]here[/url].[/p][/spoiler]
+[*_r][p]Vote on legislation! We require that you vote on half of all assembly matters a month to keep your Legislator status.[/p]
+[spoiler=[p]What if I am not sure what I want to vote for?[/p]][p]If you're not sure what to vote for, you can always vote to abstain, which will count towards your monthly quota.[/p][/spoiler]
+[spoiler=[p]What if I am going on vacation?[/p]][p]If you're going on vacation, that's not a problem - just let the [url=coa]Chair of the Assembly[/url] know in the [url=f_legislator_loa]Leave of Absence thread[/url] on our forum.[/p][/spoiler]
+[*]Have fun! Well, that isn't strictly a requirement, but we're sure you will either way.
+[/list]
+
+[h2]Resignations, information updates, and other things[/h2]
+
+[p]If you want to resign, apply for a leave, update information such as Discord account and nation, please visit [url=assembly_hr]this dispatch[/url].[/p]
+
+[p]Happy legislating! Let your voice be heard.[/p]
+
+[p]If you have any question, please read [url=f_legislator_signup_faq]this FAQ[/url] or contact members of the Legislator Committee ({{ gov_officials.legcomm|gen_list }}) for answers.[/p]
+
+{% endblock body %}

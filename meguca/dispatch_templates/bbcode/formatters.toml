@@ -71,6 +71,15 @@ standalone = false
 strip = false
 swallow_trailing_newline = false
 
+[simple_formatters.danger]
+template = '[color=#ff0000][b]%(value)s[/b][/color]'
+render_embedded = true
+newline_closes = false
+same_tag_closes = false
+standalone = false
+strip = false
+swallow_trailing_newline = false
+
 [simple_formatters.tt]
 template = '[tr][background-block=#019aed][hr][center][font=Avenir, Segoe UI, sans-serif][size=120][color=#ffffff][b]%(value)s[/b][/color][/font][/size][/center][hr][/background-block][/tr]'
 render_embedded = true

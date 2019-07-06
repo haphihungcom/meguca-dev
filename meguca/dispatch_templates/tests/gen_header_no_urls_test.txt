@@ -1,2 +1,0 @@
-{% import 'macros/header_macros.txt' as macros %}
-{{ macros.gen_header(logo='test', subtitle='Test') }}

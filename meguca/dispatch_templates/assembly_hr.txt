@@ -1,0 +1,40 @@
+{% extends 'layout/assembly.txt' %}
+
+{% block body %}
+
+[title]The Assembly - Human Resources[/title]
+
+[p]Human resources matters (Resignations, leaves of absence, profile information changes) are handled jointly by the [url=coa]Chair of Assembly[/url] (CoA) and the [url=legcomm]Legislator Committee[/url].[/p]
+
+[h2]Leave of Absence[/h2]
+
+[p]If you are busy and don't have time to participate in the Assembly, please apply for a Leave of Absence (LoA) to make sure your legislatorship don't get removed due to inactivity. Fill in the form below and post it in the [url=f_legislator_loa]Leave of Absence thread[/url] on our forum.[/p]
+
+[center][h3]Leave of Absence application[/h3][/center]
+[box][pre]Start Date:
+End Date:
+Reason(s):[/pre][/box]
+
+[p]After your LoA ended, remember to post in that thread again to remind the CoA that your LoA has ended.[/p]
+
+[spoiler=[p]Example[/p]][box][pre]Start Date: 1/12/2019
+End Date: 31/12/2019
+Reason(s): Vacation[/pre][/box][/spoiler]
+
+[h2]Resign from Legislatorship[/h2]
+
+[p]You can resign from Legislatorship by posting your resignation in the [url=f_assembly_office]Office of Assembly Affairs thread[/url] on our forum.[/p]
+
+[p]E.g. I want to resign from being a legislator, thank you for supporting me in the past few years.[/p]
+
+[h2]Information update[/h2]
+
+[p]If you want to change your resident nation, Discord account, or other information then please post the new information in the [url=f_assembly_office]Office of Assembly Affairs thread[/url] on our forum.[/p]
+
+[p]E.g. Please change my TSP nation to Bigtopia and my Discord account to ABCD[/p]
+
+[h2]Other matters[/h2]
+
+[p]If you need to ask a question or want something not listed here, please post in the [url=f_assembly_office]Office of Assembly Affairs thread[/url] on our forum or contact the CoA ({{ gov_officials.coa|nation }}) or members of the Legislator Committee ({{ gov_officials.legcomm|gen_list }}). Someone will help you.[/p]
+
+{% endblock body %}

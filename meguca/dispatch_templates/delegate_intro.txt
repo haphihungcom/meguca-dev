@@ -3,7 +3,7 @@
 {% block body %}
 
 [title]The Delegate[/title]
-[subtitle]of the South Pacific[/subtitle]
+[subtitle]of the Coalition of the South Pacific[/subtitle]
 
 [subtitle]Incumbent: {{ gov_officials.delegate|nation }}[/subtitle]
 
