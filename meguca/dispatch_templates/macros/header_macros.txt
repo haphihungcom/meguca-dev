@@ -15,3 +15,13 @@
 [color=#0080c4]·[/color]
 [/background-block][/align][/box]
 {% endmacro -%}
+
+{% macro gen_sub_header(urls={}, title='') -%}
+[background-block=#019aed][tab=5][url=#Top][img]https://i.imgur.com/slGSfIS.png[/img][/url][/tab]
+[align=center][font=Avenir, Segoe UI, sans-serif][size=300][color=#ffffff][b]{{ title }}[/b][/color][/size][/font]
+[color=#019aed]·[/color][/align][/background-block]
+[background-block=#38b9ff][align=center][color=#38b9ff]·[/color]
+[font=Avenir, Segoe UI, sans-serif][size=120]{% for name, url in urls.items() %}[color=#38b9ff]—[/color][raw_url={{ url }}][color=#fff][b]{{ name }}[/b][/color][/raw_url][color=#38b9ff]—[/color]{% if loop.revindex != 1 %} [color=#fff]|[/color] {% endif %}{% endfor %}[/size][/font]
+[color=#38b9ff]·[/color]
+[/background-block][/align]
+{% endmacro -%}

@@ -5,6 +5,7 @@
 {% block body %}
 
 [title]Details on the working of the Delegate[/title]
+[subtitle]of the Coalition of the South Pacific[/subtitle]
 
 {{ sign.note("This dispatch uses the word 'Regional Officers' which are different from government officials. Regional Officers (RO) are nations appointed by the Delegate with some administrative powers such as the ability to change the World Factbook Entry (WFE), flag, moderate the Message Board (RMB),... While ROs are usually the same people as government officials, the two concepts are totally different. RO is the equivalent of forum moderators and is a feature of NationStates while government officials are in-character positions created by our laws. Our laws don't dictate how ROs work.") }}
 

@@ -5,12 +5,14 @@
 {% block header %}
 {{ macros.gen_header(urls={'Home': 'welcome',
                            'Get Involved': 'get_involved',
-                           'Jobs': 'government_jobs',
                            'Guides': 'guide_index',
-                           'SWAN': 'swan_intro',
-                           'Government': 'government_intro',
-                           'Roleplay': 'roleplay_guide',
-                           'Regional Affairs': 'ra_intro',
-                           'Military': 'spsf_intro',
-                           'About us': 'factbook'}) }}
+                           'Factbook': 'factbook',
+                           'Government': 'government_intro',},
+                     sub_urls={'Become Legislator': 'become_legislator',
+                               'Jobs': 'government_jobs',
+                               'SWAN': 'swan_intro',
+                               'Roleplay': 'roleplay_intro',
+                               'Regional Affairs': 'ra_intro',
+                               'Military': 'spsf_intro',
+                               'Elections': 'elections'}) }}
 {% endblock header %}

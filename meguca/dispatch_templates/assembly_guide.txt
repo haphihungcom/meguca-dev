@@ -1,3 +1,6 @@
+{% import 'macros/header_macros.txt' as headers %}
+{% import 'macros/sign.txt' as sign %}
+
 {% extends "layout/assembly.txt" %}
 
 {% block body %}
@@ -5,10 +8,378 @@
 [title]Beginner Guide to the Assembly[/title]
 [subtitle]of the Coalition of the South Pacific[/subtitle]
 
-[p]If you are new to [url=assembly_intro]the Assembly[/url] and making laws, you have come to the right place. The Assembly is our legislature and is the place where laws which govern the region are created.[/p]
+{{ sign.note("This guide is long. You should read [url=assembly_procedures]this[/url] if you don't like the hand-holding approach of this guide") }}
 
-[h2]Membership[/h2]
+[box][anchor=intro][/anchor]
+{{ headers.gen_sub_header(urls={'Introduction': '#intro_intro',
+                                'Legislative process': '#process',
+                                'Types of legislation': '#types'},
+                          title='INTRODUCTION') }}
 
+[hr]
+
+[anchor=intro_intro][/anchor][h1]INTRODUCTION[/h1]
+
+[p]Welcome to the Assembly! The place where legislation and decisions which impact the South Pacific's community are created. This dispatch will guide you how to participate in the Assembly, make, debate, and vote on laws![/p]
+
+[p]Before continuing, you should read [url=politics_guide]the guide on our politics[/url] which introduces you to how our government works and our political environment. If you have done that, you are good to continue.[/p]
+
+[p]Let's revise on the powers of the Assembly:[/p]
+[list]
+[*]It makes laws which regulate our community.
+[*]It elects [url=cabinet_intro]the Cabinet[/url] which is the head of our executive branch.
+[*]It elects [url=delegate_intro]the Delegate[/url] which is our head of state.
+[*]It approves appointments of [url=court_intro]High Court justices[/url], [url=crs_intro]CRS members[/url],...
+[*]It also does other stuff you don't need to know now. (Read [url=assembly_details]this[/url] if you want to know anyway)
+[/list]
+
+[p]Members of the Assembly are called [i]Legislators[/i] and they join the Assembly by [url=become_legislator]voluntarily signing up[/url] for it.[/p]
+
+[h3]Where is the Assembly?[/h3]
+
+[p]Business of the Assembly happen on [url=f_assembly_hall]the Assembly Hall[/url] part of our forum. Here, you can find threads of discussion we are having and in these threads are Legislators posting comments and drafts of legislation. You can also find [url=f_legislator_loa]a thread pinned near the top[/url] where you can post leaves of absence (LoA) or resignations, [url=f_voting_chamber]the Voting Chamber[/url] which is where we vote on legislation, and the [url=f_private_assembly_hall]Private Assembly Hall[/url] where we discuss sensitive matters.[/p]
+
+[h3]What do I do in the Assembly?[/h3]
+
+[p]95% of the time, the Assembly is all about writing, debating, and voting on legislation, the remaining 5% are elections which we cover [url=elections]here[/url]. In the Assembly, you can read up discussions on new legislation, posting opinions, corrections on legislation you are interested in, vote on legislation to bring them into effect, and of course, propose new ones. Look down below for more details on these.[/p]
+
+[h3]Where can I find the laws and do I have to know them?[/h3]
+
+[p]Laws passed by the Assembly are archived in the [url=laws_index]Laws Index[/url]. You don't need to know every law there, you just need to be aware of how our government works and what the legislative procedure is. When writing legislation (discussed below), you will have to read related laws to avoid conflicts though but still, nothing much since we don't have a lot of laws, our laws are usually short and written in non-fancy English.[/p]
+
+[h3]Understanding the matters being discussed in the Assembly[/h3]
+
+[p]If you are a beginner, you may not understand the issues and problems being discussed. The quickest way to understand them is asking other Legislators, they will enthusiastically explain them for you! You can also read the [url=news_outlets]latest news[/url] or if you prefer the raw approach, read some of the laws in [url=laws_index]the Laws Index[/url] or [url=index]browse the dispatches[/url].[/p]
+
+[p]This part of the guide already gives you most of the knowledge needed to participate in the Assembly, the below will show you how a legislation is made along with how to write, propose, debate, and vote on one.[/p]
+
+[hr]
+
+[anchor=process][/anchor][h1]THE LEGISLATIVE PROCESS[/h1]
+
+[p]Now that you know the introduction, let's learn how to actually make laws and participate in the legislative business. As you have learnt above, the main job of the Assembly is to make laws, resolutions, approve treaties,... (these are collectively known as [i]legislation[/i]). In the Assembly, any legislation has to go through four steps before it goes into effect:[/p]
+[list]
+[*][url=#proposal][b]Proposal:[/b][/url] A Legislator will draft the legislation he/she wants to enact at this step and post it on the Assembly forum. The draft can be a new law, amendments to old laws, repeal of old laws, resolutions,... or just rough ideas for discussion before actually writing a legislation.
+[*][url=#debate][b]Debate:[/b][/url] After a legislation has been proposed, other Legislators will [i]debate[/i] on it, talking about why and how it is needed, making corrections, changes, offering comments,... After going through this step, most legislation are either slightly or significantly changed from the original draft in the proposal step or even outright dropped.
+[*][url=#motion][b]Motion to vote:[/b][/url] If everything is settled in the debate step, Legislators may motion the legislation to vote.
+[*][url=#vote][b]Vote:[/b][/url] After receiving a motion, the legislation is brought to a vote in this step. If there are enough votes (depends on the type of legislation), the legislation will pass and go into effect.
+[/list]
+
+[p]The process is the same for literally everything else the Assembly does (resolutions, treaties, appointment approvals,...) except [url=elections]elections[/url]. The only differences are how long some of the steps are and how many votes are needed for something to pass. This depends on the type of legislation we are dealing with and how important it is.[/p]
+
+[p]Sections below will explain each of the steps in details and guide you how to participate in them.[/p]
+
+[hr]
+
+[anchor=types][/anchor][h1]Types of legislation[/h1]
+
+[p]There is no formal definitions on legislation types we have however we typically deal with these kinds of legislation:[/p]
+[list]
+[*][em]Law:[/em] Very obvious in its purpose. It is a set of rules everyone in the region must comply. This is the most common legislation type.
+[*][em]Treaty:[/em] A set of agreements between us and other regions.
+[*][em]Amendment:[/em] Changes to existing legislation.
+[*][em]Appointment approval:[/em] Used to approve the appointment of someone to a government office.
+[*][em]Resolution:[/em] Everything else such as recalls, requests for the government to do something, statements,...
+[/list]
+
+[p]Based on the degree of importance, legislation can be categorized into:[/p]
+[list]
+[*][em]General legislation:[/em] General laws, amendments, resolutions, appointment approvals, treaties,...
+[*][em]Constitutional legislation:[/em] Laws, amendments, resolutions which form the foundation of our community, are considered fundamental to governance, or otherwise are considered of great importance (such as the Charter, election laws,...)
+[/list]
+
+[p]Don't get overwhelmed about the types since you don't need to clarify it when writing your legislation and the legislative process for all legislation types is the same.[/p]
+[/box]
+
+[box][anchor=proposal][/anchor]
+{{ headers.gen_sub_header(urls={'Begin writing': '#proposal_intro',
+                                'Formatting': '#formatting',
+                                'Posting': '#post'},
+                          title='PROPOSING & WRITING LEGISLATION') }}
+
+[hr]
+
+[anchor=propose][/anchor][h1]BEGIN WRITING YOUR LEGISLATION[/h1]
+
+[p]The start of a new legislation is the proposal step. Any Legislator can propose a legislation to the Assembly. Useful note: A proposed legislation is called a [i]bill[/i].The process is very simple although you will need to pay attention to the formatting of your legislation.[/p]
+
+[p]If you are a beginner, you probably don't need to know how to write bills yet. You should jump to the [url=#debate]debating[/url] and [url=#vote]voting[/url] section below and skip this part if you want.[/p]
+
+[h3]Find a problem to work on[/h3]
+
+[p]Our region has a multitude of problems to be fixed and improvements to be made, you can go through [url=laws_index]the Laws Index[/url]to find laws with loopholes, laws which fail at addressing the related problems, you can read [url=news_outlets]the news[/url], or just hear from someone that there is problem ABC which needs to be fixed. Again, ask other Legislators if you don't know anything![/p]
+
+[h3]Read the Laws Index first![/h3]
+
+[p]Before writing your bill, you should look over [url=laws_index]the Laws Index[/url] first to see if there is any law which conflicts with your bill or already does what your bill does. The name of the law is descriptive enough that you don't need to read the laws themselves to know what they are doing. E.g. if you are writing a bill on elections, you should look at the [law]Elections Act[/law] first.[/p]
+
+[h3]Writing your bill[/h3]
+
+[p]Once you have picked a problem to work on, you can begin working on how to fix it! For normal bills, just jump into writing it right away. Start a new thread on the [url=f_assembly_hall]Assembly Hall[/url] or the [url=f_private_assembly_hall]Private Hall[/url] (if your bill is about sensitive matters) part of our forum by clicking the [i]Post Thread[/i] button near the top of the forum and start writing. A bill is really just a list of rules the region has to comply, you just need to list the rules you want to have out. For example, if you want to force our beloved former delegate [nation]Erinor[/nation] to not change his name on our [url=discord]Discord server[/url], draft a bill like this:[/p]
+[quote=FREE COA Act;0][center][p]FREE COA Act[/p][/center]
+[center][p]An Act to Secure Eternal Reference and Assuredly Plausible Historicity[/p][/center]
+
+[p]1. This Act shall be known in full as the Securing Eternal Reference and Assuredly Plausible Historicity Act.[/p]
+
+[p]2. This Act shall be known in short as the SERAPH Act.[/p]
+
+[p]3. Seraph shall be forbidden from changing his nickname on the regional chat.[/p]
+
+[p]4. Should Seraph change his nickname, a chat moderator or administrator shall change it back to 'Seraph'.[/p]
+
+[p]5. This Act shall not be enacted.[/p]
+
+[p]6. Should this Act be enacted, it will be considered repealed after being in force for a full day.[/p]
+[/quote]
+
+[p]You may notice that the language is very formal. If you are not used to the style, you should write the bill with a more experienced Legislator or read existing laws in [url=laws_index]the Laws Index[/url] to get a hang of the style.[/p]
+
+[p]If your bill is big and affects many aspects of the region then you should start a discussion thread and post your rough ideas first for other to comment on before drafting the actual bill.[/p]
+
+[hr]
+
+[anchor=formatting][/anchor][h1]FORMAT YOUR BILL[/h1]
+
+[p]The formatting of your bill must comply with the standards specified in the [law]Law Standards Act[/law] since we like well-formatted laws. If you don't like to do the formatting job yourself, you can just ask others to do it. You can use the buttons at the top of our forum's post editor to format your work. Don't read the standard act itself though since it is rather long, you only need to know these things:[/p]
+[list]
+[*]Your bill should have a title (E.g. the South Pacific Iced Tea Regulation Act). The title should be bolded and centered at the top.
+[*]You should also have a short subtitle which summarizes what your bill does. It should be italicized, centered, and placed below the title. (E.g. An Act to control the distribution of Iced Tea in the South Pacific)
+[*]Each section should be numbered with parentheses at the beginning. If you only have one section then you don't need to do this.
+[spoiler=[p]Click to view example...[/p]][quote=Example;0][p](1) Adding salt to iced tea is prohibited.[/p]
+
+[p](2) Changes in the formula of iced tea shall be approved by the Commission on Iced Tea Regulation.[/p]
+
+[p](3) Waste iced tea shall be disposed in approved recycle facilities.[/p]
+[/quote][/spoiler]
+[*]If a section has sub-sections then the sub-sections need to be lettered with lowercase letters at the beginning.
+[spoiler=[p]Click to view example...[/p]][quote=Example;0][p](1) Addition of the following ingredient to iced tea is prohibited:[/p]
+[p]a. Salt[/p]
+[p]b. Pepper[/p]
+[p]c. Alcohol[/p]
+
+[p](2) Changes in the formula of iced tea shall be approved by the Commission on Iced Tea Regulation.[/p]
+
+[p](3) Waste iced tea shall be disposed in approved recycle facilities.[/p]
+[/quote][/spoiler]
+[*]You should group sections with the same subject into an article. Articles should be numbered and bolded.
+[spoiler=[p]Click to view example...[/p]][quote=Example;0][p][b]1. Scope[/b][/p]
+
+[p](1) Iced tea is defined as an aromatic beverage prepared by pouring hot or boiling water over tea leaf then adding ice in.[/p]
+
+[p](2) The production, distribution, and consumption of iced tea in the Coalition shall be regulated by this Act.[/p]
+
+[p][b]2. Commission on Iced Tea Regulation[/b][/p]
+
+[p](1) The Commission on Iced Tea Regulation is the commission responsible for enforcing the regulation described in this Act.[/p]
+
+[p](2) The Commission on Iced Tea Regulation comprises three legislators that have each been appointed by the cabinet and approved by the assembly via a simple majority vote.[/p]
+[/quote][/spoiler]
+[*]If your bill has addendum, add them at the end of your bill, number them, and place them in a quote box. We rarely use addendum in laws though, the [law]Law Standards Act[/law] itself contains an example of this at the bottom.
+[/list]
+
+[p]Using these rules, we can reformat our FREE COA Act above as follow to comply with the standard:[/p]
+[quote=FREE COA Act;0][center][p][b]FREE COA Act[/b][/p][/center]
+[center][p][i]An Act to Secure Eternal Reference and Assuredly Plausible Historicity[/i][/p][/center]
+
+[p][b]1. Naming[/b][/p]
+
+[p](1) This Act shall be known in full as the Securing Eternal Reference and Assuredly Plausible Historicity Act.[/p]
+
+[p](2) This Act shall be known in short as the SERAPH Act.[/p]
+
+[p][b]2. Dispositions[/b][/p]
+
+[p](1) Seraph shall be forbidden from changing his nickname on the regional chat.[/p]
+
+[p](2) Should Seraph change his nickname, a chat moderator or administrator shall change it back to 'Seraph'.[/p]
+
+[p][b]3. Final Dispositions[/b][/p]
+
+[p](1) This Act shall not be enacted.[/p]
+
+[p](2) Should this Act be enacted, it will be considered repealed after being in force for a full day.[/p]
+[/quote]
+
+[h3]Amendments[/h3]
+
+[p]If your bill is an amendment, which means a set of changes to existing laws, then the formatting rules are the same, except for a few things:[/p]
+[list]
+[*]You don't need to include the whole law with your changes in, just quote the section where the changes are made and omit the rest. Use the ellipses to indicate the parts you omit. Note that you cannot omit the title of the law and the article of the section you are amending since people need to know where the section you are amending lies at in the law.
+[*]When amending a law, you will add and remove some text from it. Mark your additions with green color and deletions with red color and strike-through.
+[/list]
+
+[p]Example of an amendment on Section 7, Article IV of the Charter of the South Pacific to change how [url=lc_intro]the Local Council[/url] participates in the Assembly:[/p]
+[quote=Example;0][center][p][b]The Charter of the South Pacific[/b][/p][/center]
+
+...
+
+[p][b]IV. THE LOCAL COUNCIL[/b][/p]
+
+...
+
+[p]7. The Local Council representative will [color=#32cd32]have the power to cast[/color] [strike][color=#ff0000]have[/color][/strike] a[color=#32cd32]n additional[/color] weighted [color=#32cd32]block[/color] vote [color=#32cd32]worth[/color] [strike][color=#ff0000]of[/color][/strike] [color=#32cd32]one-fifth[/color] [strike][color=#ff0000]20%[/color][/strike] of all non-abstaining votes cast on bills, [color=#32cd32]not including the block vote, giving them a one-sixth share of the total vote, excluding abstentions[/color]. The Chair will calculate how many votes are allotted to the representative at the close of each vote, [color=#32cd32]rounding them to the nearest whole number,[/color] and [color=#32cd32]will[/color] then add the representative’s total votes to the final tally.[/p]
+[/quote]
+
+[p]You can see that everything else except the section, its article, and the title of the Charter is omitted and replaced with ellipses. The new text is colored green and the removed text is struck through and colored red.[/p]
+
+[hr]
+
+[anchor=post][/anchor][h1]POSTING YOUR LEGISLATION[/h1]
+
+[p]After you have done all the hard work of writing and formatting your bill, now it is time to post it for other Legislators to see. There are two places where you can post new bill:[/p]
+[list]
+[*][url=f_private_assembly_hall][b]The Private Assembly Hall:[/b][/url] Post on this place if your bill contains sensitive matters such as military, security, intelligence policies, controversial talks about alliances,... Things that you think the public shouldn't see in general.
+[*][url=f_assembly_hall][b]The Assembly Hall:[/b][/url] For everything else, just post on this place.
+[/list]
+
+[p]There is no punishment if you post on the wrong place, the Chair of Assembly will usually correct that for you.[/p]
+
+[p]After you have posted your bill draft, the next step is debating your bill with others.[/p]
+
+[/box]
+
+[box][anchor=debate][/anchor]
+
+{{ headers.gen_sub_header(urls={'Introduction': '#debate_intro',
+                                'Debate period': '#debate_period'},
+                          title='DEBATING') }}
+
+[hr]
+
+[anchor=debate_intro][/anchor][h1]INTRODUCTION TO DEBATING[/h1]
+
+[p]After a bill has been proposed, the next step is debating and adjusting the draft to fit everyone's minds before putting it to vote. This step doesn't have any procedure or requirements you must abide by aside from the debate time.[/p]
+
+[p]In this step, you and others discuss the ins and outs of the draft, why and how the bill will work, what are the downsides, alternatives,... and make changes to it. Most normal bills are slightly or significantly altered when going through this stage, some may get dropped completely. When debating, the bill's proposers will receive questions, complements, and criticisms just like in real-life political debates. When you are arguing for your bill, keep in mind that the responses from others aimed at [i]your work[/i], not you, so don't be discouraged when someone criticizes you.[/p]
+
+[h3]Don't fear but also don't attack others[/h3]
+
+[p]When debating, remember that this is just a game, people will give your bill or opinions their own opinions, sometimes harshly, to make your bill better and more representative of the best interests of the South Pacific's citizens, none will think you are a dumb noob or is a <insert insulting adjective> player if you post a bad bill or opinion, especially if you are a beginner. Don't feel intimidated by others when they question or criticize you, and of course, don't retaliate back by throwing flame at them. Calm, respectful conversations and discussions are best practices in the Assembly (and everywhere else in this game and in real-life).[/p]
+
+[p]Debates in the Assembly are moderated by both the Chair of Assembly as well as normal moderators. Heated arguments with cuss words are tolerable but if personal attacks and other dirty debate techniques like trolling, baiting, gaslighting,... are involved then moderation actions will be carried out. [b]Always keep in mind that this is just a game[/b]. Finally, if you don't know anything, or need to fact-check something, [b]ask other Legislators[/b], they will gladly help you![/p]
+
+[hr]
+
+[anchor=debate_period][/anchor][h1]DEBATE PERIOD[/h1]
+
+[p]There is no limit on how long a bill can be debated on ([strike]Filibustering time[/strike]). However, there is a [i]mandatory debate period[/i] which is how long a debate on a bill must happen before it can be put to a vote. Each type of bills has different mandatory debate period: (Hint: The mandatory debate period of a bill is the same as its voting period and vice versa)[/p]
+[list]
+[*][em]General bills[/em] (General laws, resolutions, appointment approvals,... except treaties)  must be debated on for at least three days.
+[*][em]Constitutional bills[/em] (Constitutional laws, resolutions,...) and [em]treaties[/em] must be debated on for at least five days.
+[/list]
+
+[p]You don't usually need to care about the debate period since the Chair of Assembly will handle it for you. When no one is posting anymore in a debate and the mandatory period still hasn't been reached, people will just wait until it is reached and move to the next step. However, there are times when the wait is not worth it (E.g. unanimous agreement), this is when the debate period waiving power of the Chair comes into play.[/p]
+
+[h3]Waiving mandatory debate period[/h3]
+
+[p]There are special occasions when the topic of a debate doesn't justify its mandatory period. The Chair of Assembly can waive the mandatory debate period of a debate if a Legislator motions for them to do so (by posting a waiving request E.g. "I motion the Chair to waive the debate period of this bill"), another Legislator seconded the motion and no other Legislator objects against in within 24 hours.[/p]
+
+[/box]
+
+[box][anchor=motion][/anchor]
+{{ headers.gen_sub_header(title='MOTIONING') }}
+
+[hr]
+
+[p]If you think the debate is settled and you want to bring your bill to the next step after debating (voting), you need to motion it to vote and your motion needs to be seconded by another Legislator. To motion a bill to vote, just post "I motion this bill to vote" in the bill's forum thread, another Legislator will second it by posting "I seconded this".[/p]
+
+[h3]Do NOT motion in these circumstances:[/h3]
+[list]
+[*]The minimum debate period has not been met. (unless the Chair has waived it)
+[*]There are still a lot of disagreements about your bill.
+[*]Your bill hasn't been properly formatted.
+[/list]
+
+[p]The Chair of Assembly can refuse your motion if the above circumstances exist.[/p]
+
+[h3]Competing bills[/h3]
+
+[p]Sometimes, a debate can create competing bills. Someone may not agree with your bill but agree that the problem should be fixed in another way and propose their own bill. Competing bills are motioned to vote and brought to vote simultaneously.[/p]
+
+[/box]
+
+[box][anchor=vote][/anchor]
+{{ headers.gen_sub_header(urls={'Introduction': '#voting_intro',
+                                'How to vote': '#howto_vote',
+                                'Voting period': '#voting_period',
+                                'Pass threshold': '#threshold',
+                                'Finalizing': '#finalize'},
+                          title='VOTING') }}
+
+[hr]
+
+[h1]INTRODUCTION TO VOTING[/h1]
+
+[p]After a bill has been motioned and seconded to vote, the Chair of Assembly will bring the bill to vote. The bill will pass and become official law if there are enough Legislators vote in favour of the bill. The number of votes required for a bill to pass is different for each type of bills and is discussed below. Voting in the Assembly happens in the [url=f_voting_chamber]Voting Chamber[/url].[/p]
+
+[hr]
+
+[anchor=voting_intro][/anchor][h1]HOW TO VOTE[/h1]
+
+[p]All votes in the Assembly happen on our forum, in the [url=f_voting_chamber]Voting Chamber[/url] area. The Chair will create a dedicated thread for the bill which is brought to vote. The thread will be where everyone votes on the bill. You will be notified on Discord and in NationStates via a dispatch with a link to the thread when a vote happens. There are two ways to vote on the bill in the thread:[/p]
+
+[h3]Vote using poll[/h3]
+
+[p]Above a voting thread there is a poll which you can choose Aye to vote for, Nye to vote against, or Abstain if you can't choose between the two. Click on the choice you want then click [i]Vote[/i] to cast your vote. To undo your vote and vote again, click the small [i]Undo[/i] button near the thread's title.[/p]
+
+[img]poll_voting_example[/img]
+
+[h3]Vote using post[/h3]
+
+[p]If your device doesn't support poll (Tapatalk) then you can vote by posting your vote on the thread. Click [i]New Reply[/i] on the thread, write "Aye", "Nay", or "Abstain" then post it. You can edit your vote if you want until the voting period is over.[/p]
+
+[p][danger]NOTE: Do not vote using poll and post at the same time. Your vote will be discarded if you do that.[/danger][/p]
+
+[img]post_voting_example[/img]
+
+[h3]Abstain vote[/h3]
+
+[p]If you can't choose whether to vote for or against a bill, you [u]need[/u] to choose the abstain vote option. You can only keep your legislatorship in the next month if you have voted on at least half of the bills in the past month (Unless you just joined in this month of course). Voting abstain is the signal that you do read the bills and are active. Not voting at all means you are inactive and is not recommended if you want to keep your legislatorship.[/p]
+
+[hr]
+
+[anchor=voting_period][/anchor][h1]VOTING PERIOD[/h1]
+
+[p]The voting period of a bill is the same as its minimum debate period:[/p]
+[list]
+[*][em]General bills[/em] (General laws, resolutions, appointment approvals) are voted on for three days.
+[*][em]Constitutional bills[/em] (Constitutional laws, resolutions) and [em]treaties[/em] are voted on for five days.
+[/list]
+
+[hr]
+
+[anchor=threshold][/anchor][h1]PASSING REQUIREMENT[/h1]
+
+[p]Each type of bills has different number of votes required for it to pass and become official law:[/p]
+[list]
+[*][em]General bills[/em] (General laws, resolutions, appointment approvals) and [em]treaties[/em] require a simple majority of aye votes to pass (more than 50% of Legislators vote Aye, not counting the Abstain voters)
+[*][em]Constitutional bills[/em] (Constitutional laws, resolutions), [em]recall resolutions[/em] (Used to recall government officials), and [em]Motions of No Confidence[/em] (Used to recall the entire Cabinet) require a three-fifths super-majority of aye votes to pass (more than 3/5 or 60% of Legislators vote Aye, not counting the Abstain voters)
+[/list]
+
+[h3]Competing bills[/h3]
+
+[p]If a debate gives us two competing bills, both of them will be brought to vote simultaneously, however, only one of them can pass. A bill needs to satisfy the above vote number requirement [u]and has more votes than the another bill for it to pass[/u]. If both bills don't satisfy the vote number requirement then both of them don't pass.[/p]
+
+[h3]Gameside referendum[/h3]
+
+[p]For some exceptionally important bills which affect the gameside community, the Chair may decide that a gameside referendum should occur. The [url=lc_intro]Local Council[/url] is in charge in organizing the referendum.[/p]
+
+[hr]
+
+[anchor=finalize][/anchor][h1]FINALIZING A VOTE[/h1]
+
+[p]After a vote has finished, if it meets the vote number requirement above then it will become law and be archived in the [url=laws_index]Laws Index[/url]. If it doesn't meet the number, it will go back to the debating step for further refining or be dropped altogether if the proposer decides to do so.[/p]
+
+[/box]
+
+[box]
+{{ headers.gen_sub_header(title='CONCLUSION') }}
+
+[hr]
+
+[p]After finishing this guide, you now know everything you need to know in order to make a legislation, debate, and vote on it. If you forget something, use the [url=assembly_procedures]Assembly procedures[/url] dispatch instead to reference them rather than this guide, it is much shorter and straight to the point. Happy legislating![/p]
+
+[/box]
 
 
 {% endblock body %}

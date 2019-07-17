@@ -11,7 +11,7 @@
 [*][url=ns_faq][b]NationStates FAQ[/b][/url]: The basics of NationStates.
 [*][url=ns_guide][b]Full NationStates Guide:[/b][/url] A guide to everything about NationStates, even things you don't need to know.
 [*][url=swan_guide][b]SWAN Guide[/b][/url]: How to participate in the [url=swan_intro]Southern World Assembly Initiative[/url].
-[*][url=roleplay_guide][b]Roleplay Guide:[/b][/url] How to roleplay in [region]the South Pacific[/region].
+[*][url=roleplay_intro][b]Roleplay Guide:[/b][/url] How to roleplay in [region]the South Pacific[/region].
 [*][url=politics_guide][b]Politics Guide:[/b][/url] An introduction to our politics and government.
 [*][url=elections_guide][b]Elections Guide:[/b][/url] How to participate in our elections.
 [*][url=assembly_guide][b]Assembly Guide:[/b][/url] How to participate in [url=assembly_intro]the Assembly[/url] (Our law-making body).

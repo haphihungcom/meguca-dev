@@ -1,1 +1,62 @@
-[reserved]
+{% extends 'layout/welcome.txt' %}
+
+{% block body %}
+
+[title]Beginner Guide to Politics[/title]
+[subtitle]of the Coalition of the South Pacific[/subtitle]
+
+[p]So, you're interested in getting involved in politics in the South Pacific, or perhaps you just want to know some more about it. Perhaps the very idea of regional politics leaves you completely baffled and more than a bit overwhelmed. If any of those things are even slightly true, then this guide is for you.[/p]
+
+[h3]Ok, so what exactly is Regional Politics, then? Is it some sort of Roleplay thing?[/h3]
+
+[p]Well, it's not surprising you should ask that. That is, after all, what a lot of people think Regional Politics in NationStates is, but the community actually uses a very different term for it than Roleplay. Instead, they use the term 'Gameplay'. Gameplay in NationStates covers a whole range of things, and whilst you might assume it generally means the core mechanics of the game - dealing with issues, and so on - it is more commonly used to refer to the more emergent elements of the game which the developers have capitalized on in a big way since the game opened in 2003. These, generally, have nothing to do with answering issues, or even, necessarily, the idea of you playing a nation at all. Instead, they focus on World Assembly proposals and votes, endorsements and a whole range of inter- and intra-regional politics, often taking place in off-site forums.[/p]
+
+[p]Whilst many Gameplayers past and present have adopted a persona or character for these actions, many come entirely as they are. Unlike roleplay, gameplay doesn't require pretense, because there are actual game mechanics which allow its moves to be played out and, in the case of regional politics, actual votes which get actual candidates elected to actual roles with actual powers they can actually carry out to the benefit (or detriment) of the region.[/p]
+
+[h3]So, how does this work in the South Pacific, then?[/h3]
+
+[p]The Coalition of the South Pacific (the formal/political name of the government of the region) is one of the oldest democracies in NationStates, as we can date the founding of the Coalition and its government back to June 2003. It hasn't always taken the same form and reforms and amendments and shake-ups have occurred numerous times throughout the past decade and a half. Currently, the Coalition is defined by its [law]Charter[/law] (Our constitution), in which all our elected positions are defined and from which all our laws ultimate emanate.[/p]
+
+[p]The government is your typical Western democratic parliamentary republic with three branches: the Legislature, the Executive, and the Judiciary, which operate independently, check, and balance each other. The Executive branch consists of a Prime Minister (PM) (Incumbent: {{ gov_officials.pm|nation }}), who is our Head of Government and who oversees the executive decision-making body of the Coalition, [url=cabinet_intro]the Cabinet[/url]. The Cabinet consists of the PM plus the Minister of Regional Affairs (Incumbent: {{ gov_officials.mora|nation }}), the Minister of Foreign Affairs (Incumbent: {{ gov_officials.mofa|nation }}), and the Minister of Military Affairs (Incumbent: {{ gov_officials.moma|nation }}) who runs their respective ministries which manage the day-to-day business of our region ranging from foreign affairs, journalism, integration, roleplay management, military, World Assembly matters, military,... (Look below for more details on these)[/p]
+
+[p]Our legislature is the [url=assembly_intro]Assembly[/url], which is the primary legislative body of the Coalition, managed by the [url=coa]Chair of the Assembly[/url] (Incumbent: {{ gov_officials.coa|nation }}) and consisting of those nations who have [url=become_legislator]registered as Legislators[/url] and meet all the requirements to remain as one. The Assembly creates [url=laws_index]laws[/url] which govern the region, [url=elections]elects[/url] members of the Cabinet, approves their appointments and major decisions. Both the Cabinet and the Assembly have their offices primarily on the region's offsite forums, although much informal discussion now takes place in dedicated channels on the [url=discord]our Discord server[/url].[/p]
+
+[p]The [url=court_intro]High Court[/url] is our sole and highest judicial authority. They are tasked with conducting criminal trials, resolving disputes, interpreting laws, and striking them down if they violate our constitutional laws such as the Charter. The High Court consists of Associate Justices and is led by the Chief Justice (Incumbent: {{ gov_officials.hc_chief_justice|nation }})[/p]
+
+[p]On-site the government has the position of [url=delegate_intro]the Delegate[/url] (Incumbent: {{ gov_officials.delegate|nation }}), who serves as our head of state and as an advisor to the Cabinet, as well as [url=lc_intro]the Local Council[/url] (Incumbent: {{ gov_officials.local_council|gen_list }}), who serve to moderate the on-site community and represent their opinions in the Assembly.[/p]
+
+[p]Aside from these, we also have [url=indie_intro]independent institutions[/url] not tying with leadership from any branch of the government such as the [url=crs_intro]Council on Regional Security[/url] (CRS) which oversees our security and intelligence matters, [url=legcomm]the Legislator Committee[/url] (LegComm) which handles legislatorship, [url=election_commission]the Election Commission[/url] (EC) which runs elections.[/p]
+
+[h3]But, what do all these officials actually do?[/h3]
+
+[p]To some extent the easiest way to find out is just to spend some time observing them all, but basically the government functions, as a whole, as a series of debates around our Charter and laws (which may or may not result in amendments to be voted on) and actions that follow from those laws. Individually, the roles vary tremendously, however, and can be moulded by the personalities of those who are voted into them, just as the Charter and Laws are amended over time by the interplay between elected officials and Legislators.[/p]
+
+[p]We'll break those roles down in a bit more detail for you:[/p]
+[list]
+[*][em]Legislators[/em] are able to vote in forum-based elections ([url=cabinet_elections]Cabinet elections[/url], stage one of [url=delegate_elections]Delegate elections[/url]), propose, debate, and vote upon amendments to the Charter and Laws and even create new laws in the process. Becoming a Legislator ([url=become_legislator]Sign up here[/url]) and getting involved in the business of the Assembly is one of the best ways to start getting involved in TSP politics.
+[*][raw_url=coa][em]The Chair of the Assembly[/em][/raw_url] runs Assembly votes and chairs debate. A lot of the time it is more administrative than political and is well suited to organized individuals who can act promptly when required.
+[*][raw_url=lc_intro][em]The Local Council[/em][/raw_url] have the power to suppress posts on the Regional Message Board, and the responsibility to use that to prevent toxic or inappropriate discussion as well as spam. They can also modify the World Factbook Entry and send mass telegrams with permission from the Delegate, and post polls. Serving on the Local Council can be a great way to gain experience about TSP politics if you're nervous about joining the forums to begin with.
+[*][raw_url=f_pm_office][em]The Prime Minister[/em][/raw_url] is in charge of the Cabinet and is the ultimate head of government when it comes to executive decisions and making important statements. A good Prime Minister needs to understand TSP politics fairly well and be able to manage a team of potentially quite disparate ministers.
+[*][em]The Cabinet Ministers[/em] each fulfil a specific role and head up a ministry which may, or may not contain other players helping them achieve their goals, depending on the role and the agenda of the person occupying it:
+[list]
+[*][url=ra_intro][b]Regional Affairs[/b][/url] is all about welcoming new players to the region and keeping activity going with fun events, festivals and so on. It is also about maintaining the regional journalism. Traditionally the Ministry of Regional Affairs has a lot of members working on its various projects and Minister of Regional Affairs is often considered to be the biggest job of the three. As always, though, that will depend on the person in the role and what they choose to make of it. MoRA is a good role for anyone passionate about maintaining getting people involved, organizing events, running newspapers, etc.
+[*][url=fa_intro][b]Foreign Affairs[/b][/url] is about relating to other regions, building treaties, running embassies and so on. At times we have had a large Ministry of Foreign Affairs with many diplomats representing the South Pacific in other regions, but recently this has tended to be a one-man ministry and isn't always heavy on duties. It's a good fit for anyone interested in how regions interact and those interested in the World Assembly also.
+[*][url=spsf_intro][b]Military Affairs[/b][/url] deals with running the South Pacific Special Forces, our regional military. Military gameplay revolves around using WA membership and endorsements to either invade and install a foreign delegate in a region, and thus take control (called [i]raiding[/i] or [i]invading[/i]), or defend a native delegate from just such an attack (called [i]defending[/i]). As such, this is a role best left to those with who are into fast-paced operations, strategic military planning and organizing. If you think you might be interested, join the SPSF first and build up as much experience as you can.
+[/list]
+[*][raw_url=delegate_intro][em]The Delegate[/em][/raw_url] is de facto the most powerful person in the region, with all of the in-game powers available to them, as well as the power to grant those powers to a select number of others (which we distribute amongst the elected officials and the Committee on Regional Security). In TSP law, however, the Delegate's power is more limited, with them serving as more of a figurehead and advisor than as the more traditional head of government. A good Delegate can balance politics and relationships, welcome new nations to the region and serve to represent the South Pacific both internally and externally.
+[*][raw_url=court_intro][em]Chief Justice and Associate Justices[/em][/raw_url] are those who conduct trials for criminal and civil cases, answer Legal Questions to interpret the laws, and strike down laws and decisions which violate the Charter and other constitutional laws. Being a Justice requires significant understanding of the laws, proceedings, and good ethic.
+[/list]
+
+[h3]Political culture, ideologies, and NSGP[/h3]
+
+[p]Roavin[/p]
+
+
+[h3]What is the best way to get into Regional Politics?[/h3]
+[list]
+[*][url=lc_elections][b]Run for the Local Council elections:[/b][/url] This is relatively easy to do as a regular on the RMB (Regional Message Board). So long as you have a strong profile in the community and provide a good platform, then you're in with a chance. Plus, there are three positions going and you can always try again next time if you fail. Finally, you don't have to be a Legislator to nominate yourself, nor do you need to have an intricate understanding of the Assembly to begin doing your job (although learning as you go will help).
+[*][url=become_legislator][b]Become a Legislator:[/b][/url] Register as a Legislator on the forums and get involved in debates and crafting laws in the Assembly. Raise your profile through your involvement and perhaps even make a few suggested amendments yourself and gain significant experience required for holding Cabinet offices or becoming a Justice.
+[*][url=government_jobs][b]Get a job in the government:[/b][/url] If you don't like laws, you can contribute the other way by becoming our journalists, writers, graphic designers, event organizers, ambassadors, military soldiers and commanders,... If you are active enough, you could find yourself appointed to some position in one of the ministries - the perfect way to get some experience and build a portfolio you could use to campaign if you run for election.
+[/list]
+
+{% endblock body %}

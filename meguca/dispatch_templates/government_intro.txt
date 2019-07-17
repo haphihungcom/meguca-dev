@@ -1,25 +1,6 @@
 {% import 'macros/header_macros.txt' as macros with context %}
 
-{% extends "layout/welcome.txt" %}
-
-{% block header %}
-{{ macros.gen_header(urls={'Home': 'welcome',
-                           'Get Involved': 'get_involved',
-                           'Jobs': 'government_jobs',
-                           'Guides': 'guide_index',
-                           'SWAN': 'swan_intro',
-                           'Government': 'government_intro',
-                           'Roleplay': 'roleplay_guide',
-                           'Regional Affairs': 'ra_intro',
-                           'Military': 'spsf_intro',
-                           'About us': 'factbook'},
-                     sub_urls={'Assembly': 'assembly_intro',
-                               'Executive': 'cabinet_intro',
-                               'High Court': 'court_intro',
-                               'Independent institutions': 'indie_intro',
-                               'Elections': 'elections'}) }}
-
-{% endblock %}
+{% extends "layout/government.txt" %}
 
 {% block body %}
 

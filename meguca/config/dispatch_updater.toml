@@ -1,9 +1,12 @@
 [general]
 template_dir_path = 'meguca/dispatch_templates'
 filters_path = 'meguca/dispatch_templates/filters/filters.py'
-custom_vars_path = 'meguca/dispatch_templates/custom_variables.toml'
+custom_vars_path = ['meguca/dispatch_templates/custom_vars/personnel.toml', 'meguca/dispatch_templates/custom_vars/newspapers_list.toml', 'meguca/dispatch_templates/custom_vars/proscription_list.toml', 'meguca/dispatch_templates/custom_vars/urls.toml']
 bb_path = 'meguca/dispatch_templates/bbcode/formatters.toml'
 template_file_ext = 'txt'
+
+[dry_run]
+dispatches = ['welcome']
 
 [dispatches]
 [dispatches.'welcome']

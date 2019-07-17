@@ -1,0 +1,30 @@
+[proscriptions]
+[proscriptions.'Funkadelia']
+type = 'Individual'
+start_date = '25-07-2018'
+association = '[region]Lone Wolves United[/region]'
+note = '[url=https://tspforums.xyz/thread-6362.html]Cabinet statement[/url]'
+
+[proscriptions.'Lamb Stone']
+type = 'Individual'
+start_date = '25-07-2018'
+association = '[region]Lone Wolves United[/region]'
+note = '[url=https://tspforums.xyz/thread-6362.html]Cabinet statement[/url]'
+
+[proscriptions.'Evil Wolf']
+type = 'Individual'
+start_date = '25-07-2018'
+association = '[region]Lone Wolves United[/region]'
+note = '[url=https://tspforums.xyz/thread-6362.html]Cabinet statement[/url]'
+
+[proscriptions.'McMannia']
+type = 'Individual'
+start_date = '25-07-2018'
+association = '[region]HYDRA Command[/region], [region]The Ragerian Imperium[/region]'
+note = '[url=https://tspforums.xyz/thread-6362.html]Cabinet statement[/url]'
+
+[proscriptions.'HYDRA Command']
+type = 'Organization'
+start_date = '25-07-2018'
+association = 'N/A'
+note = '[url=https://tspforums.xyz/thread-6362.html]Cabinet statement[/url]'

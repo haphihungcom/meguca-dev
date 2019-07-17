@@ -1,5 +1,3 @@
-{% import 'macros/sign.txt' as sign %}
-
 {% extends 'layout/assembly.txt' %}
 
 {% block body %}
@@ -7,9 +5,7 @@
 [title]Procedures of the Assembly[/title]
 [subtitle]of the Coalition of the South Pacific[/subtitle]
 
-{{ sign.note('If you are a beginner, you should read [url=assembly_guide]this[/url] instead.') }}
-
-[p]All business in the Assembly are conducted through a 4-steps process:[/p]
+[p]All business in [url=assembly_intro]the Assembly[/url] are conducted through a 4-steps process:[/p]
 [list]
 [*]Proposal
 [*]Debate
@@ -17,68 +13,107 @@
 [*]Vote
 [/list]
 
+[p]Business are conducted on [url=f_assembly_hall]the Assembly Hall[/url] and [url=f_private_assembly_hall]the Private Hall[/url] area on our forum.[/p]
+
 [box]
 [center][h2]Summary[/h2][/center]
-[table=100]
+[table]
 [tr][th]Bill type[/th][th]Minimum debate period[/th][th]Voting period[/th][th]Required majority to pass[/th][th]Notes[/th][/tr]
-[tr][td]General law, resolutions, approvals of all kinds[/td][td]3 days[/td][td]3 days[/td][td]Simple majority[/td][td][/td][/tr]
+[tr][td]General law, resolutions, appointment approvals[/td][td]3 days[/td][td]3 days[/td][td]Simple majority[/td][td][/td][/tr]
 [tr][td]Treaties[/td][td]5 days[/td][td]5 days[/td][td]Simple majority[/td][td][/td][/tr]
 [tr][td]Constitutional law and resolutions[/td][td]5 days[/td][td]5 days[/td][td]Three-fifths supermajority[/td][td]May require gameside referendum[/td][/tr]
 [tr][td]Recall resolutions and Motions of No Confidence[/td][td]3 days[/td][td]3 days[/td][td]Three-fifths supermajority[/td][td][/td][/tr]
 [/table]
 [/box]
 
-[p]The below text explain everything in more details.[/p]
+[h2]Proposal, types of bills, formatting[/h2]
 
-[h2]Proposal[/h2]
-
-[p]A Legislator introduces a bill to the Assembly. It can be either a:[/p]
+[p]Any Legislator can propose a legislation to the Assembly (a proposed legislation is called a bill), in term of function, there are these main types of bills:[/p]
 [list]
-[*][em]General Matter:[/em] Any bill which relates to general laws, amendments, resolutions, appointments, and treaties with foreign regions; or a
-[*][em]Constitutional Matter:[/em] Any bill which deals with constitutional laws, constitutional amendments, resolutions dealing with matters of constitutional law,.
+[*][em]Law:[/em] A system of rules that guides how the government should run.
+[*][em]Amendment:[/em] A change(s) to an existing law(s).
+[*][em]Treaty:[/em] An agreement between us and foreign entities.
+[*][em]Appointment approval:[/em] Approval for the appointment of an individual to a government office.
+[*][em]Resolution:[/em] Everything else such as recalls, dealing with remnants of repealed legislation, delaying elections, requesting the government to do something,...
 [/list]
+
+[p]Bills can also be categorized into:[/p]
+[list]
+[*][em]General bills:[/em] General laws, amendments, resolutions, appointments, and treaties
+[*][em]Constitutional bills:[/em] Laws, amendments, resolutions which form the foundation of our community, are considered fundamental to governance, or otherwise are considered of great importance (E.g. the Charter, election laws,...)
+[/list]
+
+[h3]Formatting standard[/h3]
+
+[p]The formatting of a bill of any type should conform to the standard specified in [law]the Law Standards Act[/law]. The details are specified quite clearly in the law itself. If you don't like to read it, you can read this summary:[/p]
+
+[h4]Layout rules[/h4]
+[list]
+[*]Titles should be bolded and centered.
+[*]Subtitles should be italicized and centered.
+[*]Articles should be numbered and bolded.
+[*]Sections should be numbered with parentheses, unless there is only one section without any sub-sections.
+[*]Sub-sections should be lettered with lowercase letters.
+[*]All titled sections should be followed by a line break before starting a new section
+[*]Addendum should be numbered and at the bottom of all bills, regardless of where the referenced material is in the bill, and placed in a quote box.
+[/list]
+
+[h4]Amendment rules[/h4]
+[list]
+[*]Only note which law, article, and section is being amended, and quote only that part of the law.
+[*]Additions of words should be formatted in green text.
+[*]Subtractions of words should be formatted in red text with a strike-through.
+[*]Ellipses should be used to indicate an intentional omission of a whole article, section, or sub-section.
+[/list]
+
+[p]A bill [i]needs[/i] to comply with the standard before it can be brought to a vote. The [url=coa]Chair of Assembly[/url] will typically correct the formatting for you, however it is recommended to do this by yourself first, the Chair is not there to do the entire formatting work for you.[/p]
 
 [h2]Debate[/h2]
 
-[p]Bills regarding:[/p]
+[h3]Mandatory debate period[/h3]
+
+[p]Bills need to be debated for a mandatory period of time before they can be brought to vote.[/p]
 [list]
-[*]General Matter (except for treaties) are debated for a minimum period of three days.
-[*]Constitutional Matters and treaties are debated for a minimum period of five days.
+[*][em]General bills[/em] are debated for a minimum period of three days.
+[*][em]Constitutional bills and treaties[/em] are debated for a minimum period of five days.
 [/list]
 
-[p]If a debate leads to multiple bills or resolutions which address the same issue,the Chair of the Assembly will separately and simultaneously bring these competing bills or resolutions to vote,following the standard voting procedure. The bill or resolution that receives the most votes in favour and meets the minimum requirement for passage will become law.[/p]
+[h3]Competing bills[/h3]
+
+[p]If a debate leads to multiple bills which address the same issue, the [url=coa]Chair of the Assembly[/url] will separately and simultaneously bring these competing bills to vote, following the standard voting procedure below. The bill which receives the most votes in favour and meets the minimum requirement for passage will become law.[/p]
 
 [h3]Debate time waiving[/h3]
 
-[p]The Chair may waive the minimum debate period if a Legislator motions for them to do so. This Motion must be Seconded by another Legislator. If there are no objections to the motion within twenty-four hours,the period may be waive.[/p]
-
+[p]The Chair may waive the mandatory debate period if a Legislator motions for them to do so. This Motion must be Seconded by another Legislator. If there are no objections to the motion within 24 hours, the period may be waived.[/p]
 
 [h2]Motion[/h2]
 
-[p]Following the completion of the minimum debate period, any Legislator may
-Motion to Vote. This Motion must be Seconded by another Legislator before a
-vote can commence.[/p]
+[p]Following the completion of the mandatory debate period, any Legislator may motion to Vote. This Motion must be Seconded by another Legislator before a vote can commence.[/p]
 
 [h2]Vote[/h2]
 
-[p]Bills regarding:[/p]
+[h3]Voting periods[/h3]
 [list]
-[*]General Matters are voted for a minimum period of three days.
-[*]Constitutional Matters are voted for a minimum period of five days.
+[*][em]General bills[/em] (General laws and amendments, resolutions, appointment approvals) are voted on for a minimum period of three days.
+[*][em]Constitutional bills[/em] (Constitutional laws and resolutions) and [em]treaties[/em] are voted on for a minimum period of five days.
 [/list]
 
-[p]In the event of multiple bills or resolutions which address the same issue, the Chair will separately and simultaneously bring these competing bills or resolutions to vote, following the standard voting procedure. The bill or resolution that receives the most votes in favour and meets the minimum requirement for passage will become law.[/p]
+[h3]Competing bills[/h3]
+
+[p]In the event of multiple bills which address the same issue, the Chair will separately and simultaneously bring these competing bills to vote, following the standard voting procedure. The bill which receives the most votes in favour and meets the minimum requirement for passage will become law.[/p]
+
+[h3]Finalizing a vote[/h3]
 
 [p]The Chair will finalise the vote by counting the votes and determining whether the bill has passed or failed to pass. They will inform the Assembly of the result and add, amend, or remove laws in [url=laws_index]the laws index[/url].[/p]
 
 [list]
-[*]Bills regarding general laws, amendments, resolutions, and treaties require a simple majority of those voting to pass. Appointments, unless otherwise specified, require a simple majority of those voting to pass.
-[*]Bills regarding constitutional laws, constitutional amendments, and resolutions dealing with matters of constitutional law and recalling of government officials require a three-fifths supermajority of those voting to pass.
+[*][em]General bills[/em] (General laws and amendments, appointment approvals, resolutions) and [em]treaties[/em] require a simple majority of those voting to pass.
+[*][em]Constitutional bills[/em] (Constitutional laws and resolutions), [em]recall resolutions[/em], and [em]Motions of No Confidence[/em] require a three-fifths supermajority of those voting to pass.
 [/list]
 
-[h3]If the Chair is vacant[/h3]
+[h3]Vote conducting right[/h3]
 
-[p]If the Chair is vacant, then a deputy chair or any other Legislator can conduct the vote instead.[/p]
+[p]The right to conduct an Assembly vote is reserved for the Chair but if the Chair is vacant, then a deputy chair or any other Legislator can conduct the vote instead.[/p]
 
 [h3]Gameside referendum[/h3]
 

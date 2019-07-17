@@ -1,0 +1,14 @@
+{% import 'macros/header_macros.txt' as macros with context %}
+
+{% extends 'layout/general.txt' %}
+
+{% block header %}
+{{ macros.gen_header(urls={'Introduction': 'government_intro',
+                           'Jobs': 'government_jobs',
+                           'Elections': 'elections'},
+                     sub_urls={'Assembly': 'assembly_intro',
+                               'Cabinet and Ministries': 'cabinet_intro',
+                               'High Court': 'court_intro',
+                               'Independent institutions': 'indie_intro',
+                               'Local Council': 'lc_intro'} )}}
+{% endblock  %}

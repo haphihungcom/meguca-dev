@@ -12,19 +12,19 @@
 [p][em]Voting:[/em] When people vote for you[/p]
 [/list]
 
-[spoiler=[p]Click here for a tl;dr[/p]]
-[box]
+
+[box][center][h2]Summary about elections in the South Pacific[/h2][/center]
 [table=100]
 [tr][th]Position[/th][th]Elected by[/th][th]Time[/th][th]Period[/th][th]Voting method[/th][/tr]
 [tr][td]Delegate[/td]
-[td][b]1st step:[/b] Assembly
-[b]2nd step:[/b] WA nations on game-side[/td]
+[td][b]1[sup]st[/sup] step:[/b] Assembly
+[b]2[sup]nd[/sup] step:[/b] WA nations on game-side[/td]
 [td]The first of January, July[/td]
 [td][b]Nomination and campaign:[/b] First 8 days
-[b]1st step voting:[/b] Next 3 days
-[b]2nd step voting:[/b] Next 1 week[/td]
-[td][b]1st step:[/b] Instant-runoff
-[b]2nd step[/b]: First-past-the-post[/td][/tr]
+[b]1[sup]st[/sup] step voting:[/b] Next 3 days
+[b]2[sup]nd[/sup] step voting:[/b] Next 1 week[/td]
+[td][b]1[sup]st[/sup] step:[/b] Approval
+[b]2[sup]nd[/sup] step[/b]: First-past-the-post[/td][/tr]
 [tr][td]Cabinet Ministers and Prime Minister[/td]
 [td]Assembly[/td]
 [td]The first of February, June, October[/td]
@@ -45,7 +45,7 @@
 [b]Campaign:[/b] Next 4 days
 [b]Voting[/b]: Next 3 days[/td]
 [td]First-past-the-post[/td][/tr][/table]
-[/box][/spoiler]
+[/box]
 
 [h2]Local Council elections[/h2]
 
@@ -53,8 +53,7 @@
 
 [p]One needs to be a citizen of the South Pacific in order to run for these elections.[/p]
 
-[box]
-[p]For more information about Local Council elections, please visit [url=lc_laws]this dispatch[/url].[/p]
+[box][p]For more information about Local Council elections, please visit [url=lc_laws]this dispatch[/url].[/p]
 [/box]
 
 

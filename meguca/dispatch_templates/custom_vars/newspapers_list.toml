@@ -1,0 +1,5 @@
+[active_news_outlets]
+Coco = 'https://www.nationstates.net/page=dispatches/nation=lama_glama_publishing_group'
+
+[other_news_outlets]
+TestNews = 'https://www.nationstates.net/region=the_south_pacific'

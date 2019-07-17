@@ -8,3 +8,13 @@
 [/box]
 
 {% block body %}{% endblock body %}
+
+{% block footer %}
+[box][align=center][background-block=#019AED][font=Avenir, Segoe UI][size=120]
+[img]https://i.imgur.com/FXyrp5C.png[/img]
+[color=#019AED]·[/color][/size][/font][/background-block][background-block=#0080C4]
+[color=#0080C4]·[/color]
+[url=https://www.nationstates.net/region=the_south_pacific][img]https://i.imgur.com/NYenHvV.png[/img][/url][color=#0080C4]—[/color][url=https://discord.gg/tEyyDyh][img]https://i.imgur.com/JyO4OrT.png[/img][/url][color=#0080C4]—[/color][url=https://tspforums.xyz/][img]https://i.imgur.com/SEpkSix.png[/img][/url]
+[color=#0080C4]·[/color]
+[color=#0080C4]·[/color]
+[/background-block][/align][/box]{% endblock footer %}

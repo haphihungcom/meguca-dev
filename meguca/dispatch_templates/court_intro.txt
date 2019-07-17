@@ -5,7 +5,7 @@
 [title]The High Court[/title]
 [subtitle]of the Coalition of the South Pacific[/subtitle]
 
-[p]The High Court is the Judicial branch of the Coalition of South Pacific and is the highest and sole judicial authority of the region. The High Court is tasked with conducting criminal trials, interpreting laws and striking them down if they violate the Charter of the South Pacific. The High Court consists of Associate Justices who are appointed by the Cabinet and approved by the Assembly and are led by a Chief Justice (Incumbent: {{ gov_officials.hc_chief_justice|nation }}).[/p]
+[p]The High Court is the Judicial branch of the Coalition of South Pacific and is the highest and sole judicial authority of the region. The High Court is tasked with conducting criminal trials, resolving disputes, interpreting laws, and striking them down if they violate our constitutional laws. The High Court consists of Associate Justices who are appointed by the Cabinet and approved by the Assembly and are led by a Chief Justice (Incumbent: {{ gov_officials.hc_chief_justice|nation }}).[/p]
 
 [box][table][tt]Current bench[/tt]
 {{ gov_officials.hc_justices|gen_table_tags }}

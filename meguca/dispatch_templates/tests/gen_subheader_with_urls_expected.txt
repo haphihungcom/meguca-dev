@@ -1,0 +1,7 @@
+[background-block=#019aed][tab=5][url=#Top][img]https://i.imgur.com/slGSfIS.png[/img][/url][/tab]
+[align=center][font=Avenir, Segoe UI, sans-serif][size=300][color=#ffffff][b]TEST[/b][/color][/size][/font]
+[color=#019aed]·[/color][/align][/background-block]
+[background-block=#38b9ff][align=center][color=#38b9ff]·[/color]
+[font=Avenir, Segoe UI, sans-serif][size=120][color=#38b9ff]—[/color][raw_url=test1][color=#fff][b]Test1[/b][/color][/raw_url][color=#38b9ff]—[/color] [color=#fff]|[/color] [color=#38b9ff]—[/color][raw_url=test2][color=#fff][b]Test2[/b][/color][/raw_url][color=#38b9ff]—[/color][/size][/font]
+[color=#38b9ff]·[/color]
+[/background-block][/align]

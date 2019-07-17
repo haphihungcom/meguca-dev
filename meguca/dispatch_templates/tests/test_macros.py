@@ -24,5 +24,15 @@ class TestMacros():
 
         assert template.render(current_dispatch='test1') == open(TEST_DIR + 'gen_sub_urls_header_expected.txt').read()
 
+    def test_gen_header_with_no_urls(self, env):
+        template = env.get_template('tests/gen_header_with_no_urls_test.txt')
+
+        assert template.render(current_dispatch='test1') == open(TEST_DIR + 'gen_header_with_no_urls_expected.txt').read()
+
+    def test_gen_subheader_with_urls(self, env):
+        template = env.get_template('tests/gen_subheader_with_urls_test.txt')
+
+        assert template.render(current_dispatch='test1') == open(TEST_DIR + 'gen_subheader_with_urls_expected.txt').read()
+
 
 
