@@ -5,7 +5,7 @@
 import logging
 import logging.config
 
-from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 
 from meguca import info
 from meguca import exceptions
@@ -30,7 +30,7 @@ class Meguca():
 
     def __init__(self, plugins, general_config, plugin_config):
 
-        self.scheduler = BlockingScheduler()
+        self.scheduler = BackgroundScheduler()
 
         self.plugins = plugins
 
