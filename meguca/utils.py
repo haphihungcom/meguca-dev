@@ -1,12 +1,7 @@
 """A few utilities.
 """
 
-
-import logging
-
 import toml
-
-from meguca import exceptions
 
 
 def load_config(filename):
