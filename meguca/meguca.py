@@ -228,7 +228,7 @@ class Meguca():
         self.prepare_stat_plugins()
         self.prepare_plugins('View')
 
-        if not self.config['meguca']['dry_run']['enabled']:
+        if not self.config['meguca']['general']['dry_run']['enabled']:
             self.schedule_all()
 
     def dry_run_plugins(self):
