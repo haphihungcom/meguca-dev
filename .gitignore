@@ -11,3 +11,4 @@ __pycache__/
 *.log
 meguca/config/general_config.toml
 !requirements.txt
+.coverage
