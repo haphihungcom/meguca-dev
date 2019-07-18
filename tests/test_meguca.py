@@ -61,7 +61,7 @@ def meguca_standard_plg(mock_plg, general_config):
                                                       'seconds': 10},
                                                'v2': {'schedule_mode': 'interval',
                                                       'seconds': 12}},
-                           'dry_run': { 'plugins': ['t1', 't2']}})
+                           'dry_run': {'enabled': False, 'plugins': ['t1', 't2']}})
 
     meguca_ins = meguca.Meguca(plugins, general_config, None)
 
