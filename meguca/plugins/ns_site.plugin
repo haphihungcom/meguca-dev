@@ -1,6 +1,6 @@
 [Core]
 Name = NationStates main site POST request sender
-Identifier = ns_site
+Id = ns_site
 Module = src/ns_site/ns_site
 
 [Documentation]

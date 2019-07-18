@@ -6,6 +6,8 @@ import logging
 
 import toml
 
+from meguca import exceptions
+
 
 def load_config(filename):
     """Load configuration from a TOML file.

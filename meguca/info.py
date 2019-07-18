@@ -17,7 +17,7 @@ LOGGING_CONFIG = {
 
     'formatters': {
         'MegucaFormatter': {
-            'format': '%(asctime)s - %(name)s - %(levelname)s : %(message)s'
+            'format': '[%(asctime)s %(name)s %(levelname)s] %(message)s'
         }
     },
 

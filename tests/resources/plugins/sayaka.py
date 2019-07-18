@@ -5,4 +5,7 @@ class Test4(plugin_categories.Collector):
         return {'Sayaka': config['plugins']['Madoka']['TestSection']['TestKey']}
 
     def prepare(self, nagisa):
-        return {'SayakaPrimeRun': nagisa}
+        return {'SayakaPrep': nagisa}
+
+    def dry_run(self, nagisa):
+        return {'SayakaDry': nagisa}

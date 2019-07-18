@@ -1,0 +1,9 @@
+[Core]
+Name = Blacklisted
+Id = blacklisted
+Module = blacklisted
+
+[Documentation]
+Description = A blacklisted plugin
+Author = USoVietnam
+Version = 0.0.1

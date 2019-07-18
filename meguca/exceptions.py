@@ -6,6 +6,10 @@ class GeneralError(Meguca):
     """Raise if a general error happens."""
 
 
+class ConfigError(Meguca):
+    """Raises if a configuration error happens."""
+
+
 class PluginError(Meguca):
     """Base exception for plugin management-related exceptions."""
 

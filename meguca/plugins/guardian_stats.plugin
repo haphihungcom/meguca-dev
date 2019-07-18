@@ -1,5 +1,6 @@
 [Core]
 Name = Guardian stats
+Id = guardian_stats
 Module = src/guardian_stats
 ConfigFile = meguca/config/guardian_stats.toml
 

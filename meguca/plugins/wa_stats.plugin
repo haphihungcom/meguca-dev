@@ -1,5 +1,6 @@
 [Core]
 Name = Regional WA stats
+Id = wa_stats
 Module = src/wa_stats
 
 [Documentation]

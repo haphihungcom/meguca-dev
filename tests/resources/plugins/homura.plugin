@@ -1,6 +1,6 @@
 [Core]
 Name = Homura
-Identifier = homura
+Id = homura
 Module = homura
 
 [Documentation]

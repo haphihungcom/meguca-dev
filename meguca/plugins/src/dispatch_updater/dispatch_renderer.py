@@ -75,7 +75,7 @@ class BBParser():
                                              render_embedded=info['render_embedded'],
                                              strip=info['strip'],
                                              swallow_trailing_newline=info['swallow_trailing_newline'])
-            logger.debug('Loaded simple BBCode formatter %s', tag)
+            logger.debug('Loaded simple BBCode formatter "%s" | "%s"', tag, info)
 
         for tag, info in bb_config['formatters'].items():
             try:
@@ -105,7 +105,7 @@ class BBParser():
                                       render_embedded=info['render_embedded'],
                                       strip=info['strip'],
                                       swallow_trailing_newline=info['swallow_trailing_newline'])
-            logger.debug('Loaded BBCode formatter %s', tag)
+            logger.debug('Loaded BBCode formatter "%s" | "%s"', tag, info)
 
         logger.info('Loaded all BBCode formatters')
 
@@ -202,6 +202,6 @@ class Renderer():
         rendered = self.template_renderer.render(template_path, render_ctx)
         rendered = self.bb_parser.format(rendered)
 
-        logger.debug('Rendered template "%s": %s', template_path, rendered)
+        logger.debug('Rendered template "%s"', template_path)
 
         return rendered

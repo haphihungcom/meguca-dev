@@ -1,5 +1,6 @@
 [Core]
 Name = Regional nation number stats
+Id = nation_num_stats
 Module = src/nation_num_stats
 
 [Documentation]

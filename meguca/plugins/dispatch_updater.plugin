@@ -1,12 +1,8 @@
 [Core]
 Name = Dispatch Updater
-Identifier = dispatch_updater
+Id = dispatch_updater
 Module = src/dispatch_updater/dispatch_updater
 ConfigFile = meguca/config/dispatch_updater.toml
-
-[Scheduling]
-ScheduleMode = interval
-seconds = 100
 
 [Documentation]
 Description = Create dispatches based on templates and upload them.

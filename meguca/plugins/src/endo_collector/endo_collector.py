@@ -32,9 +32,9 @@ def load_dump(dump_path):
 
     try:
         dump = gzip.open(dump_path)
-        logger.info('Loaded data dump')
+        logger.info('Loaded data dump "%s"', dump_path)
     except FileNotFoundError as e:
-        raise FileNotFoundError('Could not find data dump file.') from e
+        raise exceptions.EndoCollectorError('Could not find data dump file.') from e
 
     return dump
 
@@ -51,7 +51,6 @@ def add_endo(endo_sender, endo_receiver, endos, eligible_nations):
 
     if endo_sender in eligible_nations:
         endos.add_edge(endo_sender, endo_receiver)
-        logger.debug('Added endorsement between "%s" and "%s"', endo_sender, endo_receiver)
 
 
 def get_eligible_nations(dump, region_name):
@@ -80,8 +79,6 @@ def get_eligible_nations(dump, region_name):
 
             elem.clear()
 
-    logger.debug('Built eligible nations set: %r', eligible_nations)
-
     return eligible_nations
 
 
@@ -108,7 +105,6 @@ def load_data_from_dump(endos, dump, eligible_nations):
 
                 if endos_text is None:
                     endos.add_node(nation)
-                    logger.debug('Added nation "%s"', nation)
                 elif "," not in endos_text:
                     add_endo(endos_text, nation, endos, eligible_nations)
                 elif "," in endos_text:
@@ -151,7 +147,7 @@ def load_data_from_api(events, endos, precision_mode=False):
             if precision_mode:
                 raise exceptions.IllegalEndorsement
 
-            logger.debug('Illegal endorsement: %s', e)
+            logger.debug('Illegal endorsement on event "%s"', event_text)
 
     logger.info('Loaded endorsement data from NS API')
 
@@ -175,7 +171,7 @@ class EndoDataCollector(plugin_categories.Collector):
             load_data_from_api(events, data['endos'],
                                precision_mode=self.plg_config['precision']['precision_mode'])
         except KeyError:
-            logger.debug('There was no event from %s', self.last_evt_time)
+            logger.debug('There was no event from "%s"', self.last_evt_time)
             pass
 
     def prepare(self, config):
@@ -188,5 +184,7 @@ class EndoDataCollector(plugin_categories.Collector):
         eligible_nations = get_eligible_nations(dump, config['meguca']['general']['region'])
         dump.seek(0)
         load_data_from_dump(endos, dump, eligible_nations)
+
+        logger.debug('Endorsements from data dump "%s"', endos.edges)
 
         return {'endos': endos}

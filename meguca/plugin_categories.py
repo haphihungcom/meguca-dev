@@ -32,7 +32,7 @@ class StandardPlugin(MegucaPlugin):
         raise NotImplementedError
 
     def prepare(self):
-        """Entry method for prime run."""
+        """Entry method for initialization."""
 
 
 class Collector(StandardPlugin):

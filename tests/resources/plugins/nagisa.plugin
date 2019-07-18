@@ -1,6 +1,6 @@
 [Core]
 Name = Nagisa
-Identifier = nagisa
+Id = nagisa
 Module = nagisa
 
 [Documentation]

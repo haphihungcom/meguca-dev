@@ -1,6 +1,6 @@
 [Core]
 Name = Sayaka
-Identifier = sayaka
+Id = sayaka
 Module = sayaka
 
 [Scheduling]

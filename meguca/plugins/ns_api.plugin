@@ -1,6 +1,6 @@
 [Core]
 Name = NationStates API Wrapper
-Identifier = ns_api
+Id = ns_api
 Module = src/ns_api/ns_api
 
 [Documentation]

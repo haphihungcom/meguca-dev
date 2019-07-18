@@ -6,7 +6,7 @@ bb_path = 'meguca/dispatch_templates/bbcode/formatters.toml'
 template_file_ext = 'txt'
 
 [dry_run]
-dispatches = ['welcome']
+dispatches = ['politics_guide', 'welcome']
 
 [dispatches]
 [dispatches.'welcome']

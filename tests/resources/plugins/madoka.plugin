@@ -1,6 +1,6 @@
 [Core]
 Name = Madoka
-Identifier = madoka
+Id = madoka
 Module = madoka
 ConfigFile = tests/resources/plugins/madoka_config.toml
 

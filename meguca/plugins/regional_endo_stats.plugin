@@ -1,5 +1,6 @@
 [Core]
 Name = Regional endorsement stats
+Id = region_endo_stats
 Module = src/regional_endo_stats
 
 [Documentation]

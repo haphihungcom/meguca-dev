@@ -1,5 +1,6 @@
 [Core]
 Name = Delegate endorsement stats
+Id = del_endo_stats
 Module = src/delegate_stats
 ConfigFile = meguca/config/delegate_stats.toml
 

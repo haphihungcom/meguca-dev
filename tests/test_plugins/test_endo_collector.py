@@ -41,7 +41,7 @@ def mock_dump():
 
 class TestLoadDump():
     def test_FileNotFoundError_when_load_dump(self):
-        with pytest.raises(FileNotFoundError):
+        with pytest.raises(exceptions.EndoCollectorError):
             endo_collector.load_dump('')
 
 

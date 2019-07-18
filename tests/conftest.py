@@ -9,18 +9,30 @@ def mock_plg():
     """A mock plugin with standard entry methods and config.
     It behaves like a real plugin."""
 
-    def stub_run():
-        return {'Test': 'Test'}
+    def gen_mock_plg(name='Test', id='test', service=False):
+        def stub_run():
+            return {name: 'Test'}
 
-    def stub_prepare():
-        return {'TestPrime': 'Test Prime'}
+        def stub_prepare():
+            return {name: 'TestPrep'}
 
-    mock_plg_obj = mock.Mock(run=stub_run, prepare=stub_prepare)
-    config = configparser.ConfigParser()
-    config['Core'] = {'ConfigFile': 'Test', 'Identifier': 'test'}
+        def stub_dry_run():
+            return {name: 'TestDry'}
 
-    mock_plg = mock.Mock(plugin_object=mock_plg_obj,
-                         details=config)
-    type(mock_plg).name = mock.PropertyMock(return_value='Test')
+        if service:
+            def stub_get():
+                return 'TestGet'
+            mock_plg_obj = mock.Mock(get=stub_get)
+        else:
+            mock_plg_obj = mock.Mock(run=stub_run, prepare=stub_prepare, dry_run=stub_dry_run)
 
-    return mock_plg
+        config = configparser.ConfigParser()
+        config['Core'] = {'ConfigFile': 'TestFile', 'Id': id}
+
+        mock_plg = mock.Mock(plugin_object=mock_plg_obj,
+                             details=config)
+        type(mock_plg).name = mock.PropertyMock(return_value=name)
+
+        return mock_plg
+
+    return gen_mock_plg

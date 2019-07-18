@@ -11,6 +11,7 @@ from meguca import plugin_categories
 from meguca import utils
 from meguca import exceptions
 
+# TODO: Implement our own Plugin File Locator and Analyzer
 
 logger = logging.getLogger(__name__)
 
@@ -46,10 +47,20 @@ class Plugins():
         """
 
         self.plugin_manager.collectPlugins()
+
         all_plg_config = {}
 
-        for plg in self.plugin_manager.getAllPlugins():
+        plugins = self.plugin_manager.getAllPlugins()
+
+        if not plugins:
+            logger.critical('Could not find any plugin!')
+            raise exceptions.PluginError('Could not find any plugin! Re-check your plugin directory.')
+
+        for plg in plugins:
             self.plugin_manager.activatePluginByName(plg.name)
+
+            if 'Id' not in plg.details['Core']:
+                raise exceptions.PluginError('Could not find Id in description file of plugin "%s"', plg.name)
 
             try:
                 plg_config = utils.load_config(plg.details['Core']['ConfigFile'])
@@ -74,7 +85,12 @@ class Plugins():
             list: Plugin metadata objects (yapsy.PluginInfo).
         """
 
-        return self.plugin_manager.getPluginsOfCategory(category)
+        plugins = self.plugin_manager.getPluginsOfCategory(category)
+
+        if not plugins:
+            logger.warning('Could not find "%s" plugins', category)
+        else:
+            return plugins
 
     def get_all_plugins(self):
         """Get all plugins
@@ -84,45 +100,3 @@ class Plugins():
         """
 
         return self.plugin_manager.getAllPlugins()
-
-
-class EntryParam():
-    """Encapsulate an indexable object to pass as argument
-    to the entry method of a plugin.
-
-    Args:
-        obj (object): An indexable object
-        raise_notyetexist (bool, optional): Defaults to False.
-            Raise NotYetExist instead of NotFound if cannot index object.
-    """
-
-    def __init__(self, obj, raise_notyetexist=False):
-        self.obj = obj
-        self.raise_notyetexist = raise_notyetexist
-
-    def __getitem__(self, key):
-        """Index the object.
-
-        Args:
-            key (int|str): Index number or key.
-
-        Raises:
-            exceptions.NotFound: Raise if cannot index object.
-            exceptions.NotYetExist: Raise if cannot index object when raise_notyetexist is True.
-
-        Returns:
-            Result of the indexing.
-        """
-
-        if key not in self.obj:
-            if self.raise_notyetexist:
-                raise exceptions.NotYetExist(key)
-            else:
-                raise exceptions.NotFound(key)
-
-        return self.obj[key]
-
-    def get_bare_obj(self):
-        """Get the encapsulated object."""
-
-        return self.obj
