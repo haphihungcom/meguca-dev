@@ -64,4 +64,3 @@ class DispatchUpdater(plugin_categories.View):
                   'submitbutton': '1'}
 
         self.ns_site.execute('lodge_dispatch', params)
-        time.sleep(6)

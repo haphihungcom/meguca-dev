@@ -16,6 +16,12 @@ class DataStore(collections.UserDict):
 
     @raise_notyetexist.setter
     def raise_notyetexist(self, toggle):
+        """Change raise_notyetexist state
+
+        Args:
+            toggle (bool): State
+        """
+
         self._raise_notyetexist = toggle
 
     def __getitem__(self, key):

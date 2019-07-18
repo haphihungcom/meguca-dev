@@ -1,12 +1,8 @@
 """Render dispatches from templates.
 """
 
-
-import importlib
 import logging
-import inspect
 
-import toml
 import jinja2
 import bbcode
 
@@ -37,8 +33,13 @@ class CustomVars():
             self.load_custom_vars(custom_vars_path)
 
     def load_custom_vars(self, custom_vars_file):
-            self._custom_vars.update(utils.load_config(custom_vars_file))
-            logger.debug('Loaded custom vars file "%s"', custom_vars_file)
+        """Load custom vars from files
+
+        Args:
+            custom_vars_file (str): Custom vars file name
+        """
+        self._custom_vars.update(utils.load_config(custom_vars_file))
+        logger.debug('Loaded custom vars file "%s"', custom_vars_file)
 
     @property
     def custom_vars(self):
@@ -81,19 +82,16 @@ class BBParser():
             try:
                 funcs = plg_utils.load_funcs(info['func_path'])
             except FileNotFoundError:
-                raise exceptions.BBParserError("Couldn't find BBCode formatter function file %s",
-                                               info['func_path'])
+                raise exceptions.BBParserError("Couldn't find BBCode formatter function file {}".format(info['func_path']))
             if funcs is None:
-                raise exceptions.BBParserError("Couldn't find any function in %s",
-                                               info['func_path'])
+                raise exceptions.BBParserError("Couldn't find any function in {}".format(info['func_path']))
 
             format_func = None
             for func in funcs:
                 if func[0] == info['func_name']:
                     format_func = func[1]
             if format_func is None:
-                raise exceptions.BBParserError('Format function %s did not found in %s',
-                                               info['func_name'], info['func_path'])
+                raise exceptions.BBParserError('Format function {} did not found in {}'.format(info['func_name'], info['func_path']))
 
             self.parser.add_formatter(tag, format_func,
                                       escape_html=False,
@@ -115,13 +113,14 @@ class BBParser():
 
 
 class TemplateRenderer():
-    def __init__(self, template_dir_path, filters_path):
-        """Render a dispatch template.
+    """Render a dispatch template.
 
         Args:
             template_dir_path (str): Template file directory.
             filters_path (str): Path to filters file.
-        """
+    """
+
+    def __init__(self, template_dir_path, filters_path):
         template_loader = jinja2.FileSystemLoader(template_dir_path)
         self.env = jinja2.Environment(loader=template_loader, trim_blocks=True)
 

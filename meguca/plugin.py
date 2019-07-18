@@ -89,8 +89,8 @@ class Plugins():
 
         if not plugins:
             logger.warning('Could not find "%s" plugins', category)
-        else:
-            return plugins
+
+        return plugins
 
     def get_all_plugins(self):
         """Get all plugins

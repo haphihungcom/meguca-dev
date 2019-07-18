@@ -53,7 +53,7 @@ class TestPlugins():
                                          collectPlugins, load_config):
         plugins_ins = plugin.Plugins('','')
 
-        assert plugins_ins.get_plugins('Test') == None
+        assert plugins_ins.get_plugins('Test') == []
     @mock.patch('yapsy.PluginManager.PluginManager.getAllPlugins', return_value='Test')
     def test_get_all_plugins(self, getAllPlugins, activatePluginByName,
                              collectPlugins, load_config):
