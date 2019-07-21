@@ -1,6 +1,8 @@
+import os
 import configparser
 from unittest import mock
 
+import toml
 import pytest
 
 
@@ -36,3 +38,21 @@ def mock_plg():
         return mock_plg
 
     return gen_mock_plg
+
+
+@pytest.fixture
+def toml_files():
+    """Generate TOML config files for testing."""
+
+    existing_files = []
+
+    def gen_toml_files(files={}):
+        for name, config in files.items():
+            with open(name, 'w') as f:
+                toml.dump(config, f)
+                existing_files.append(name)
+
+    yield gen_toml_files
+
+    for name in existing_files:
+        os.remove(name)

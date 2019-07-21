@@ -1,12 +1,12 @@
 import os
 import shutil
+import logging
 from unittest import mock
 
 import pytest
 import toml
 
 from meguca.plugins.src.dispatch_updater import dispatch_renderer
-from meguca.plugins.src.dispatch_updater import exceptions
 
 
 class TestCustomVars():
@@ -36,6 +36,17 @@ class TestCustomVars():
         assert ins._custom_vars == {'foo1': {'bar1': 'john1'},
                                     'foo2': {'bar2': 'john2'}}
 
+    def test_load_custom_vars_with_non_existent_file(self):
+        with pytest.raises(FileNotFoundError):
+            dispatch_renderer.CustomVars(['asas.toml', 'asss.toml'])
+
+    def test_load_custom_vars_with_no_file(self):
+        """Load custom vars if no file is provided.
+        Nothing should happen.
+        """
+
+        dispatch_renderer.CustomVars([])
+
     def test_get_custom_vars(self):
         ins = dispatch_renderer.CustomVars('')
         ins._custom_vars = {'foo': {'bar': 'john'}}
@@ -61,7 +72,7 @@ class TestBBCodeParser():
                                           'strip': False,
                                           'swallow_trailing_newline': False}}}
 
-        with pytest.raises(exceptions.BBParserError):
+        with pytest.raises(FileNotFoundError):
             ins = dispatch_renderer.BBParser(config, '', '')
 
     def test_load_formatter_with_non_existent_func(self):
@@ -75,30 +86,7 @@ class TestBBCodeParser():
                                           'strip': False,
                                           'swallow_trailing_newline': False}}}
 
-        with pytest.raises(exceptions.BBParserError):
-            ins = dispatch_renderer.BBParser(config, '', '')
-
-    @pytest.fixture
-    def setup_func_file(self):
-        with open('func.py', 'w') as f:
-            f.write('')
-
-        yield
-
-        os.remove('func.py')
-
-    def test_load_formatter_with_empty_func_file(self):
-        config = {'simple_formatters': {},
-                  'formatters': {'test': {'func_name': 'abc',
-                                          'func_path': 'func.py',
-                                          'render_embedded': True,
-                                          'newline_closes': False,
-                                          'same_tag_closes': False,
-                                          'standalone': False,
-                                          'strip': False,
-                                          'swallow_trailing_newline': False}}}
-
-        with pytest.raises(exceptions.BBParserError):
+        with pytest.raises(NameError):
             ins = dispatch_renderer.BBParser(config, '', '')
 
     def test_format_with_simple_formatters(self):
@@ -121,57 +109,79 @@ class TestBBCodeParser():
 
 
 class TestTemplateRenderer():
-    @pytest.fixture
-    def setup_template(self):
-        template = '{% for i in j %}{{ i|filter1(2) }} {{ i|filter2(3) }} {% endfor %}'
-        with open('tests/template.txt', 'w') as f:
-            f.write(template)
-
-        yield 0
-
-        os.remove('tests/template.txt')
-
     def test_load_filters(self):
-        ins = dispatch_renderer.TemplateRenderer('tests', 'tests/resources/filters.py')
+        ins = dispatch_renderer.TemplateRenderer('tests', 'tests/resources/filters.py', '')
 
         assert ins.env.filters['filter1']
 
     def test_load_filters_with_no_filters(self):
-        ins = dispatch_renderer.TemplateRenderer('tests', '')
+        ins = dispatch_renderer.TemplateRenderer('tests', '', '')
         assert 'filter1' not in ins.env.filters
 
-    def test_render_with_filters(self, setup_template):
-        ins = dispatch_renderer.TemplateRenderer('tests', 'tests/resources/filters.py')
+    @pytest.mark.usefixtures('mock_templates')
+    def test_validate_templates_no_error(self, mock_templates, caplog):
+        caplog.set_level(logging.ERROR)
 
-        assert ins.render('template.txt',
+        mock_templates({'tests/template_1.txt': '{{ a }}',
+                        'tests/template_2.txt': '{{ b }}'})
+        ins = dispatch_renderer.TemplateRenderer('tests', '', 'txt')
+
+        ins.validate_templates()
+
+        for record in caplog.records:
+            assert record.levelname != 'ERROR'
+
+    @pytest.mark.usefixtures('mock_templates')
+    def test_validate_templates_with_syntax_error(self, mock_templates, caplog):
+        """Validate templates with syntax errors. Should log error.
+        """
+
+        caplog.set_level(logging.ERROR)
+
+        mock_templates({'tests/template_1.txt': '{{ a }',
+                        'tests/template_2.txt': '{{ b }'})
+        ins = dispatch_renderer.TemplateRenderer('tests', '', 'txt')
+
+        ins.validate_templates()
+
+        for record in caplog.records:
+            assert record.levelname == 'ERROR'
+
+    @pytest.mark.usefixtures('mock_templates')
+    def test_render_with_filters(self, mock_templates):
+        mock_templates({'tests/template.txt': '{% for i in j %}{{ i|filter1(2) }} {{ i|filter2(3) }} {% endfor %}'})
+        ins = dispatch_renderer.TemplateRenderer('tests', 'tests/resources/filters.py', 'txt')
+
+        assert ins.render('template',
                           context={'j': [1, 2]}) == '1 2 1and3 2 2 2and3 '
 
+
 class TestDispatchRenderer():
+    @pytest.mark.usefixtures('mock_templates', 'toml_files')
     @pytest.fixture
-    def setup_template(self):
-        template = ('{% for i in j %}[tag1]{{ i|filter2(1) }}[/tag1]{% endfor %}'
-                    '[dar]{{ john.dave }}{{ current_dispatch }}[/dar]')
-        custom_vars = {'john': {'dave': 'marry'}, 'key1': 'val1'}
+    def setup_template(self, mock_templates, toml_files):
+        mock_templates({'tests/template.txt': ('{% for i in j %}[tag1]{{ i|filter2(1) }}[/tag1]{% endfor %}'
+                                               '[dar]{{ john.dave }}{{ current_dispatch }}[/dar]')})
 
-        with open('tests/template.txt', 'w') as f:
-            f.write(template)
+        toml_files({'tests/custom_vars.toml': {'john': {'dave': 'marry'},
+                                               'key1': 'val1'}})
 
-        toml.dump(custom_vars, open('tests/custom_vars.toml', 'w'))
+        yield
 
-        yield 0
-
-        os.remove('tests/template.txt')
-        os.remove('tests/custom_vars.toml')
+    def test_init_with_non_existent_bb_config_file(self):
+        with pytest.raises(FileNotFoundError):
+            ins = dispatch_renderer.Renderer('tests', 'tests/resources/filters.py', '',
+                                             'tests/custom_vars.toml', 'txt', {})
 
     def test_render(self, setup_template):
         data = {'j': [1, 2, 3]}
         config = {'conf1': 'val1'}
         ins = dispatch_renderer.Renderer('tests', 'tests/resources/filters.py',
                                          'tests/resources/bb_formatters.toml',
-                                         'tests/custom_vars.toml', config)
+                                         'tests/custom_vars.toml', 'txt', config)
         ins.update_data(data)
 
         expected = ('[tagr1]1and1[/tagr1][tagr1]2and1[/tagr1][tagr1]3and1[/tagr1]'
-                    '[abc]marryhomura[/abc]')
-        assert ins.render('template.txt', 'homura') == expected
+                    '[abc]marrytemplate[/abc]')
+        assert ins.render('template') == expected
 

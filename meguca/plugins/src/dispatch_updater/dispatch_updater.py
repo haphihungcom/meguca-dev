@@ -18,20 +18,38 @@ class DispatchUpdater(plugin_categories.View):
                                                    self.plg_config['general']['filters_path'],
                                                    self.plg_config['general']['bb_path'],
                                                    self.plg_config['general']['custom_vars_path'],
+                                                   self.plg_config['general']['template_file_ext'],
                                                    self.plg_config)
-        self.renderer.update_data(data)
         self.dispatches = self.plg_config['dispatches']
         self.ns_site = ns_site
+        self.data = data
+        self.update_ctx()
 
-    def run(self, data):
-        self.renderer.update_data(data)
+    def update_ctx(self):
+        self.renderer.update_data(self.data)
 
-        for name, info in self.dispatches.items():
-            self.update_dispatch(name, info)
+    def run(self):
+        self.update_ctx()
+        self.update_all_dispatches()
 
-    def dry_run(self, data):
-        for name in self.plg_config['dry_run']['dispatches']:
-            self.update_dispatch(name, self.dispatches[name])
+    def dry_run(self):
+        self.update_ctx()
+
+        if not self.plg_config['dry_run']['dispatches']:
+            self.update_all_dispatches()
+        else:
+            for name in self.plg_config['dry_run']['dispatches']:
+                self.update_dispatch(name, self.dispatches[name])
+
+    def update_all_dispatches(self):
+        """Update all dispatches.
+        """
+
+        if not self.dispatches:
+            logger.warning('No dispatch was configured')
+        else:
+            for name, info in self.dispatches.items():
+                self.update_dispatch(name, info)
 
     def update_dispatch(self, name, info):
         """Update dispatch.
@@ -40,9 +58,8 @@ class DispatchUpdater(plugin_categories.View):
             name (str): Dispatch file name.
             info (dict): Dispatch information.
         """
-        template_ext = self.plg_config['general']['template_file_ext']
-        template_path = '{}.{}'.format(name, template_ext)
-        text = self.renderer.render(template_path, name)
+
+        text = self.renderer.render(name)
         self.upload_dispatch(info, text)
 
         logger.info('Updated dispatch "%s"', name)
@@ -64,3 +81,4 @@ class DispatchUpdater(plugin_categories.View):
                   'submitbutton': '1'}
 
         self.ns_site.execute('lodge_dispatch', params)
+        #time.sleep(6)
