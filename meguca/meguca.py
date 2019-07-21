@@ -255,6 +255,9 @@ class Meguca():
             self.scheduler.start()
             logger.info('Scheduler started')
 
+    def shutdown(self):
+        self.scheduler.shutdown()
+
 
 def main():
     """Initialize and start Meguca or clean-up and stop it."""
@@ -277,6 +280,12 @@ def main():
     logger.info('Prepared everything')
 
     meguca.run()
+
+    try:
+        while True:
+            pass
+    except (KeyboardInterrupt, SystemExit):
+        meguca.shutdown()
 
 
 if __name__ == '__main__':
