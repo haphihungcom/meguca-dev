@@ -6,12 +6,18 @@ bb_path = 'meguca/dispatch_templates/bbcode/formatters.toml'
 template_file_ext = 'txt'
 
 [dry_run]
-dispatches = ['politics_guide', 'welcome']
+dispatches = []
 
 [dispatches]
 [dispatches.'welcome']
 id = 1192500
 title = 'Introduction to NationStates and the South Pacific (Click here if you are new!)'
+category = 8
+sub_category = 835
+
+[dispatches.'index']
+id = 1237123
+title = "Index to every dispatch about the South Pacific"
 category = 8
 sub_category = 835
 
@@ -108,12 +114,6 @@ sub_category = 835
 [dispatches.'assembly_details']
 id = 1192515
 title = 'Details on the powers of the Assembly of the South Pacific'
-category = 8
-sub_category = 835
-
-[dispatches.'assembly_hr']
-id = 1229771
-title = 'Human Resources - The Assembly of the South Pacific'
 category = 8
 sub_category = 835
 

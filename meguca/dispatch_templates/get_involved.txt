@@ -23,7 +23,7 @@
 [list]
 [*]Join the [url=wa]World Assembly[/url]
 [*]Endorse Delegate {{ gov_officials.delegate|nation }} and members of the Council on Regional Security: {{ gov_officials.crs|gen_list }}
-[*]Endorse everyone else in our region
+[*]Endorse everyone else in our region ([url=swan_endos]Click to know how to do it fast[/url])
 [/list]
 
 [p]Read [url=swan_guide]this guide[/url] if you don't know how to do the above steps.[/p]

@@ -59,15 +59,19 @@
 
 [p]Details on how to work for a ministry(s) can be found [url=government_jobs]here[/url].[/p]
 
+[h2]The Delegate[/h2]
+
+[url=delegate_intro][b]Delegate of the South Pacific[/b][/url] holds the gameside Delegate position along with all technical administration powers of the region on gameside. The Delegate's job is to interact with the gameside community and along with [url=lc_intro]the Local Council[/url], acts as the bridge between the gameside and forumside community. The Delegate is elected by Legislators of the Assembly and gameside World Assembly nations via a two-step process.
+
 
 [h2]Independent institutions[/h2]
 
 [p]The Executive branch also has institutions that don't lie under the leadership of the Cabinet. These institutions typically handle regional security and stability so they are required to not be interfered by politics. Despite that, the Cabinet still involves in them in one way or another by appointing or approving members of these institutions. Currently, these institutions are:[/p]
 
 [list]
-[*][url=delegate_intro][b]Delegate of the South Pacific[/b][/url]: The Delegate holds the gameside Delegate position along with all technical administration powers of the region on gameside. The Delegate's job is to interact with the gameside community and along with [url=lc_intro]the Local Council[/url], acts as the bridge between the gameside and forumside community. The Delegate is elected by Legislators of the Assembly and gameside World Assembly nations via a two-step process.
 [*][url=crs_intro][b]Council on Regional Security - CRS[/b][/url]: It consists of experienced and trustworthy members of the region and is responsible for monitoring and responding to regional security issues as well as operating the main regional intelligence service.
 [*][url=legcomm][b]Legislator Committee - LegComm[/b][/url]: It is a body which handles the admissions of new Legislators. It checks and accepts/rejects Legislator applications and suspends Legislators that cause troubles if necessary.
+[*][url=election_commission][b]Election Commission - EC[/b][/url]: It conducts and oversees all elections in our region.
 [/list]
 
 

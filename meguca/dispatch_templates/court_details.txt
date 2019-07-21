@@ -2,12 +2,14 @@
 
 {% block body %}
 
-[title]Details on the working of the High Court[/title]
+[title]Details on the powers and roles of the High Court[/title]
 [subtitle]of the Coalition of the South Pacific[/subtitle]
 
 [p]The High Court of the South Pacific is vested with the powers to conduct criminal trials, clarify, interpret laws, reconcile contradictions, and void laws or directives from the Legislative or Executive branch which violate constitutional laws or the Charter. Associate Justices of the High Court are appointed by the Cabinet and approved by the Assembly. A Chief Justice chosen by fellow Associate Justices will lead the team.[/p]
 
 [box]
+[h3]Summary[/h3]
+
 [h4]Composition:[/h4] [p]Associate Justices led by a Chief Justice. No term period or limit[/p]
 
 [h4]Powers:[/h4]
@@ -16,7 +18,7 @@
 [*]Void laws or directives which violate constitutional laws
 [/list]
 
-[h4]Appointment:[/h4] [p]Appointed by the Cabinet, approved by the Assembly[/p]
+[h4]Appointment:[/h4] [p]Appointed by [url=cabinet_intro]the Cabinet[/url], approved by [url=assembly_intro]the Assembly[/url][/p]
 
 [h4]Checks and balances:[/h4] [p]Can be recalled by the Assembly[/p]
 [/box]

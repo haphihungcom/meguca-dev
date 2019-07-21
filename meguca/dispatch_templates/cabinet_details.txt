@@ -2,7 +2,7 @@
 
 {% block body %}
 
-[title]Details on the working of the Executive branch[/title]
+[title]Details on powers and roles of the Executive branch[/title]
 [subtitle]of the Coalition of the South Pacific[/subtitle]
 
 [box][h3]Summary[/h3]
@@ -13,13 +13,13 @@
 [list]
 [*]Appoint advisers and deputies
 [*]Appoint/Nominate:
-[list][*]High Court Associate Justices
-[*]Legislator Committee members
+[list][*][url=court_intro]High Court[/url] Associate Justices
+[*][url=legcomm]Legislator Committee[/url] members
 [*]Gameside Regional Officers
-[*]Council on Regional Security (CRS) members
+[*][url=crs_intro]Council on Regional Security[/url] (CRS) members
 [/list]
-[*]Issue a Proscription
-[*]Issue an Executive Order (EO)
+[*]Issue a [url=proscriptions]Proscription[/url]
+[*]Issue an [url=cabinet_eo]Executive Order[/url] (EO)
 [/list]
 
 [h4]Checks and balances:[/h4] [p]Decisions can be voided by the High Court[/p]
@@ -177,10 +177,9 @@
 
 [h2]Independent institutions[/h2]
 
-[p]Independent institutions including the Delegacy, the Legislator Committee, and the Council on Regional Security follow different laws than the Cabinet despite the fact that all belong to the Executive branch. For more information about laws relating to these institutions, read:[/p]
+[p]Independent institutions including the Legislator Committee, and the Council on Regional Security follow different laws than the Cabinet despite the fact that all belong to the Executive branch. For more information about laws relating to these institutions, read:[/p]
 
 [list]
-[*][url=delegate_details]Details on the working of the Delegate[/url]
 [*][url=legcomm]Legislator Committee[/url]
 [*][url=crs_intro]Council on Regional Security[/url]
 [*][url=election_commission]Election Commission[/url]

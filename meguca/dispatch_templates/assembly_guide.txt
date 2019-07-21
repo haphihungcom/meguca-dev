@@ -53,6 +53,14 @@
 
 [p]This part of the guide already gives you most of the knowledge needed to participate in the Assembly, the below will show you how a legislation is made along with how to write, propose, debate, and vote on one.[/p]
 
+[h3]The Chair of Assembly[/h3]
+
+[p]Most moderation and paperwork matters in the Assembly are handled by the [url=coa]Chair of Assembly[/url] who is elected by Legislators. {{ gov_officials.coa|nation }} is our current Chair.[/p]
+
+[h3]The Code of Conduct[/h3]
+
+[p]To make sure Legislators behave orderly in the Assembly, we have a short [url=f_assembly_coc]Code of Conduct[/url] you should read to make sure the Chair doesn't annoy you.[/p]
+
 [hr]
 
 [anchor=process][/anchor][h1]THE LEGISLATIVE PROCESS[/h1]
@@ -116,7 +124,7 @@
 [h3]Writing your bill[/h3]
 
 [p]Once you have picked a problem to work on, you can begin working on how to fix it! For normal bills, just jump into writing it right away. Start a new thread on the [url=f_assembly_hall]Assembly Hall[/url] or the [url=f_private_assembly_hall]Private Hall[/url] (if your bill is about sensitive matters) part of our forum by clicking the [i]Post Thread[/i] button near the top of the forum and start writing. A bill is really just a list of rules the region has to comply, you just need to list the rules you want to have out. For example, if you want to force our beloved former delegate [nation]Erinor[/nation] to not change his name on our [url=discord]Discord server[/url], draft a bill like this:[/p]
-[quote=FREE COA Act;0][center][p]FREE COA Act[/p][/center]
+[quote=SERAPH Act;0][center][p]SERAPH Act[/p][/center]
 [center][p]An Act to Secure Eternal Reference and Assuredly Plausible Historicity[/p][/center]
 
 [p]1. This Act shall be known in full as the Securing Eternal Reference and Assuredly Plausible Historicity Act.[/p]
@@ -177,8 +185,8 @@
 [*]If your bill has addendum, add them at the end of your bill, number them, and place them in a quote box. We rarely use addendum in laws though, the [law]Law Standards Act[/law] itself contains an example of this at the bottom.
 [/list]
 
-[p]Using these rules, we can reformat our FREE COA Act above as follow to comply with the standard:[/p]
-[quote=FREE COA Act;0][center][p][b]FREE COA Act[/b][/p][/center]
+[p]Using these rules, we can reformat our SERAPH Act above as follow to comply with the standard:[/p]
+[quote=SERAPH Act;0][center][p][b]SERAPH Act[/b][/p][/center]
 [center][p][i]An Act to Secure Eternal Reference and Assuredly Plausible Historicity[/i][/p][/center]
 
 [p][b]1. Naming[/b][/p]
@@ -217,7 +225,7 @@
 
 ...
 
-[p]7. The Local Council representative will [color=#32cd32]have the power to cast[/color] [strike][color=#ff0000]have[/color][/strike] a[color=#32cd32]n additional[/color] weighted [color=#32cd32]block[/color] vote [color=#32cd32]worth[/color] [strike][color=#ff0000]of[/color][/strike] [color=#32cd32]one-fifth[/color] [strike][color=#ff0000]20%[/color][/strike] of all non-abstaining votes cast on bills, [color=#32cd32]not including the block vote, giving them a one-sixth share of the total vote, excluding abstentions[/color]. The Chair will calculate how many votes are allotted to the representative at the close of each vote, [color=#32cd32]rounding them to the nearest whole number,[/color] and [color=#32cd32]will[/color] then add the representative’s total votes to the final tally.[/p]
+[p]7. The Local Council representative will [color=#32cd32]have the power to cast[/color] [strike][color=#ff0000]have[/color][/strike] a[color=#32cd32]n additional[/color] weighted [color=#32cd32]block[/color] vote [color=#32cd32]worth[/color] [strike][color=#ff0000]of[/color][/strike] [color=#32cd32]one-fifth[/color] [strike][color=#ff0000]20%[/color][/strike] of all non-abstaining votes cast on bills, [color=#32cd32]not including the block vote, giving them a one-sixth share of the total vote, excluding abstentions[/color]. The Chair will calculate how many votes are allotted to the representative at the close of each vote, [color=#32cd32]rounding them to the nearest whole number,[/color] and [color=#32cd32]will[/color] then add the representative's total votes to the final tally.[/p]
 [/quote]
 
 [p]You can see that everything else except the section, its article, and the title of the Charter is omitted and replaced with ellipses. The new text is colored green and the removed text is struck through and colored red.[/p]
@@ -250,7 +258,7 @@
 
 [p]After a bill has been proposed, the next step is debating and adjusting the draft to fit everyone's minds before putting it to vote. This step doesn't have any procedure or requirements you must abide by aside from the debate time.[/p]
 
-[p]In this step, you and others discuss the ins and outs of the draft, why and how the bill will work, what are the downsides, alternatives,... and make changes to it. Most normal bills are slightly or significantly altered when going through this stage, some may get dropped completely. When debating, the bill's proposers will receive questions, complements, and criticisms just like in real-life political debates. When you are arguing for your bill, keep in mind that the responses from others aimed at [i]your work[/i], not you, so don't be discouraged when someone criticizes you.[/p]
+[p]In this step, you and others discuss the ins and outs of the draft, why and how the bill will work, what are the downsides, alternatives,... and make changes to it. Debates happen in the thread the bill is posted. Most normal bills are slightly or significantly altered when going through this stage, some may get dropped completely. When debating, the bill's proposers will receive questions, complements, and criticisms just like in real-life political debates. When you are arguing for your bill, keep in mind that the responses from others aimed at [i]your work[/i], not you, so don't be discouraged when someone criticizes you.[/p]
 
 [h3]Don't fear but also don't attack others[/h3]
 
@@ -310,7 +318,7 @@
 
 [h1]INTRODUCTION TO VOTING[/h1]
 
-[p]After a bill has been motioned and seconded to vote, the Chair of Assembly will bring the bill to vote. The bill will pass and become official law if there are enough Legislators vote in favour of the bill. The number of votes required for a bill to pass is different for each type of bills and is discussed below. Voting in the Assembly happens in the [url=f_voting_chamber]Voting Chamber[/url].[/p]
+[p]After a bill has been motioned and seconded to vote, the Chair of Assembly will bring the bill to vote, if there is no Chair, their deputies or any Legislator can do the role instead. The bill will pass and become official law if there are enough Legislators vote in favour of the bill. The number of votes required for a bill to pass is different for each type of bills and is discussed below. Voting in the Assembly happens in the [url=f_voting_chamber]Voting Chamber[/url].[/p]
 
 [hr]
 
@@ -328,7 +336,7 @@
 
 [p]If your device doesn't support poll (Tapatalk) then you can vote by posting your vote on the thread. Click [i]New Reply[/i] on the thread, write "Aye", "Nay", or "Abstain" then post it. You can edit your vote if you want until the voting period is over.[/p]
 
-[p][danger]NOTE: Do not vote using poll and post at the same time. Your vote will be discarded if you do that.[/danger][/p]
+[p][danger]NOTE: Do not vote using poll and post at the same time. Your vote will be discarded if you do that. Also, you are not allowed to post any commentary on the voting thread, post them in the debate thread instead.[/danger][/p]
 
 [img]post_voting_example[/img]
 

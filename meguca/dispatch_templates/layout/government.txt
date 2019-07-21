@@ -9,6 +9,7 @@
                      sub_urls={'Assembly': 'assembly_intro',
                                'Cabinet and Ministries': 'cabinet_intro',
                                'High Court': 'court_intro',
+                               'Delegate': 'delegate_intro',
                                'Independent institutions': 'indie_intro',
                                'Local Council': 'lc_intro'} )}}
 {% endblock  %}

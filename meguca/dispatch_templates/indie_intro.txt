@@ -5,14 +5,14 @@
 [title]Independent institutions[/title]
 [subtitle]of the Coalition of the South Pacific[/subtitle]
 
-[p]Independent institutions are institutions which technically belong to the [url=cabinet_intro]Executive branch[/url] but not lie under the authority of the Cabinet. These institutions are non-political and serve to keep the region safe and stable rather politically-motivated actions.[/p]
+[p]Independent institutions are institutions which technically belong to the [url=cabinet_intro]Executive branch[/url] but not lie under the authority of [url=cabinet_intro]the Cabinet[/url]. These institutions are non-political and serve to keep the region safe and stable rather than carry out politically-motivated actions.[/p]
 
 [p]There are currently four independent institutions in the South Pacific:[/p]
 [list]
 [*][url=crs_intro][b]Council on Regional Security (CRS):[/b][/url] Handles security and intelligence matters.
 [*][url=legcomm][b]Legislator Committee (LegComm):[/b][/url] Handles Legislator applications and Legislatorships.
-[*][url=delegate_intro][b]The Delegate:[/b][/url] The Head of State.
 [*][url=election_commission][b]Election Commission[/b]:[/url] Organizes elections.
+[/list]
 
 {% endblock body %}
 

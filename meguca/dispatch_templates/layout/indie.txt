@@ -4,8 +4,7 @@
 
 {% block header %}
 {{ macros.gen_header(urls={'Home': 'indie_intro',
-                           'Legislator Committee': 'legcomm',
                            'CRS': 'crs_intro',
-                           'Delegate': 'delegate_intro',
+                           'Legislator Committee': 'legcomm',
                            'Election Commission': 'election_commission'}) }}
 {% endblock header %}

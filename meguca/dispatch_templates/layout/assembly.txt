@@ -8,8 +8,10 @@
                            'Guide': 'assembly_guide',
                            'Details': 'assembly_details',
                            'Procedures': 'assembly_procedures',
-                           'Chair of Assembly': 'coa',
-                           'Human Resources': 'assembly_hr',
-                           'Laws Index': 'laws_index',
-                           'Archive': 'f_assembly_archive'}) }}
+                           'Chair of Assembly': 'coa'},
+                     sub_urls={'Laws Index': 'laws_index',
+                               'Assembly Office': 'f_assembly_office',
+                               'Code of Conduct': 'f_assembly_coc',
+                               'Forum-side Info Portal': 'f_assembly_info',
+                               'Archive': 'f_assembly_archive'}) }}
 {% endblock header %}

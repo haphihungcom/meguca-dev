@@ -13,7 +13,7 @@
 [*]Vote
 [/list]
 
-[p]Business are conducted on [url=f_assembly_hall]the Assembly Hall[/url] and [url=f_private_assembly_hall]the Private Hall[/url] area on our forum.[/p]
+[p]Business are conducted on [url=f_assembly_hall]the Assembly Hall[/url] and [url=f_private_assembly_hall]the Private Hall[/url] (For sensitive matters) area on our forum. Voting happens in the [url=f_voting_chamber]Voting Chamber[/url].[/p]
 
 [box]
 [center][h2]Summary[/h2][/center]
@@ -69,6 +69,8 @@
 [p]A bill [i]needs[/i] to comply with the standard before it can be brought to a vote. The [url=coa]Chair of Assembly[/url] will typically correct the formatting for you, however it is recommended to do this by yourself first, the Chair is not there to do the entire formatting work for you.[/p]
 
 [h2]Debate[/h2]
+
+[p]After a bill has been proposed, the debate step will be started. This is when you and other Legislators discuss and improve the bill.[/p]
 
 [h3]Mandatory debate period[/h3]
 

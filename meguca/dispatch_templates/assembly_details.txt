@@ -2,7 +2,7 @@
 
 {% block body %}
 
-[title]Details on the working of the Assembly[/title]
+[title]Details on the powers and roles of the Assembly[/title]
 [subtitle]of the Coalition of the South Pacific[/subtitle]
 
 [box][h3]Summary[/h3]
@@ -35,11 +35,11 @@
 
 [p]Anyone who has a nation in the South Pacific can apply for Legislatorship and become a member of the Assembly. If one applies for Legislatorship, their application will be reviewed by a dedicated independent institution known as the Legislator Committee (LegComm). If the review passes, the applicant will officially become a Legislator and have access to relevant areas on the forum and Discord server. Applications are reviewed primarily for vetting out those who apply in bad faith to spy on or subvert the Coalition.[/p]
 
-[p]Legislators can have a Leave of Absence (LoA) or can resign at any time by posting in [url=assembly_hr]the appropriate areas[/url].[/p]
+[p]Legislators can have a Leave of Absence (LoA) or can resign at any time by posting in [url=f_assembly_office]the appropriate areas[/url].[/p]
 
 [box][p]For more information on signing up for Legislatorship, visit [url=become_legislator]this dispatch[/url].[/p]
 
-[p]For more information on LoAs and resignations, visit [url=assembly_hr]this dispatch[/url].[/p]
+[p]For more information on LoAs and resignations, visit [url=f_assembly_office]this forum thread[/url].[/p]
 
 [p]For more information on the Legislator Committee, visit [url=legislator_committee]this dispatch[/url].[/p]
 
