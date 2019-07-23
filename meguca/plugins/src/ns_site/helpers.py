@@ -1,33 +1,51 @@
-from html import parser
+"""Helper function for NS Site.
+"""
+
+import bs4
+
+from meguca.plugins.src.ns_site import exceptions
 
 
-class LocalIdParser(parser.HTMLParser):
-    """Extract localid from HTML."""
+def handle_errors(resp):
+        """Handling errors if a request returns them.
 
-    local_id = None
+        Args:
+            resp (requests.Response): Respond.
 
-    def handle_starttag(self, tag, attrs):
-        if tag == 'input' and ('name', 'localid') in attrs:
-            self.local_id = dict(attrs)['value']
+        Raises:
+            Refer to NS Site exceptions for the exception each type of errors may raise.
+        """
 
-    def get_id(self):
-        return self.local_id
+        if resp.status_code != 200:
+            raise exceptions.NSSiteHTTPError("""A HTTP error occured when connecting to NationStates website.
+                                             HTTP status code: {}""".format(resp.status_code))
+
+        soup = bs4.BeautifulSoup(resp.text, 'html.parser')
+        error_elem = soup.find(name='p', attrs={'class': 'error'})
+
+        if error_elem is None:
+            return
+        else:
+            error = error_elem.string
+
+        if "security check" in error:
+            raise exceptions.NSSiteSecurityError("Security check failed. Please don't login into the "
+                                                 "host nation elsewhere while the software is running.")
+        elif "does not exist" in error:
+            raise exceptions.NSSiteNotFound('The requested page does not exist.')
+        else:
+            raise exceptions.NSSiteError(error)
 
 
-class ErrorParser(parser.HTMLParser):
-    """Extract error text from HTML."""
+def get_localid(html_text):
+    """Extract localid from HTML.
 
-    error = None
-    is_error = False
+    Args:
+        html_text (str): HTML text of respond.
 
-    def handle_starttag(self, tag, attrs):
-        if tag == 'p' and ('class', 'error') in attrs:
-            self.is_error = True
+    Returns:
+        str: localid.
+    """
 
-    def handle_data(self, data):
-        if self.is_error:
-            self.error = data
-            self.is_error = False
-
-    def get_error(self):
-        return self.error
+    soup = bs4.BeautifulSoup(html_text, 'html.parser')
+    return soup.find(name='input', attrs={'name': 'localid'})['value']

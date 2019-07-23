@@ -6,50 +6,6 @@ from meguca.plugins.src.ns_site import ns_site
 from meguca.plugins.src.ns_site import exceptions
 
 
-class TestNSSiteHandleErrors():
-    def test_raise_exception_non_200_http_status_code(self):
-        ins = ns_site.NSSite('', '')
-        resp = mock.Mock(status_code=404, text='')
-
-        with pytest.raises(exceptions.NSSiteHTTPError):
-            ins.handle_errors(resp)
-
-    def test_raise_exception_type_1_security_error(self):
-        ins = ns_site.NSSite('', '')
-        html = '<p class="error">This request failed a security check. Please try again.</p>'
-
-        resp = mock.Mock(status_code=200, text=html)
-
-        with pytest.raises(exceptions.NSSiteSecurityError):
-            ins.handle_errors(resp)
-
-    def test_raise_exception_type_2_security_error(self):
-        ins = ns_site.NSSite('', '')
-        html = '<p class="error">Failed security check.</p>'
-
-        resp = mock.Mock(status_code=200, text=html)
-
-        with pytest.raises(exceptions.NSSiteSecurityError):
-            ins.handle_errors(resp)
-
-    def test_raise_exception_no_pin_provided(self):
-        plg = ns_site.NSSitePlugin()
-        config = {'Auth': {'UserAgent': ''}}
-        ns_api = mock.Mock(session=mock.Mock(headers={}))
-
-        with pytest.raises(exceptions.NSSiteSecurityError):
-            plg.get(ns_api=ns_api, config={'Meguca': config})
-
-    def test_raise_exception_page_not_found(self):
-        ins = ns_site.NSSite('', '')
-        html = '<p class="error">The requested page does not exist.</p>'
-
-        resp = mock.Mock(status_code=200, text=html)
-
-        with pytest.raises(exceptions.NSSiteNotFound):
-            ins.handle_errors(resp)
-
-
 class TestNSSite():
     @mock.patch('requests.Session.get',
                 return_value=mock.Mock(status_code=200,
@@ -81,13 +37,25 @@ class TestIntegrationNSSite():
 
         return ns_api
 
-    def test_init_get_pin_from_ns_api(self, mock_ns_api):
+    @mock.patch('requests.Session.get',
+                return_value=mock.Mock(status_code=200,
+                                       text='<input type="hidden" name="localid" value="67890">'))
+    def test_init_get_pin_from_ns_api_and_set_localid(self, mock_request_get, mock_ns_api):
         plg = ns_site.NSSitePlugin()
         config = {'auth': {'user_agent': 'Test'}}
 
         ins = plg.get(ns_api=mock_ns_api, config={'meguca': config})
 
         assert ins.session.cookies['pin'] == '12345'
+        assert ins.localid == '67890'
+
+    def test_raise_exception_no_pin_provided(self):
+        plg = ns_site.NSSitePlugin()
+        config = {'Auth': {'UserAgent': ''}}
+        ns_api = mock.Mock(session=mock.Mock(headers={}))
+
+        with pytest.raises(exceptions.NSSiteSecurityError):
+            plg.get(ns_api=ns_api, config={'Meguca': config})
 
     def test_send_dispatch_update_request(self, mock_ns_api):
         plg = ns_site.NSSitePlugin()
