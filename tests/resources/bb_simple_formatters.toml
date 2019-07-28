@@ -1,0 +1,5 @@
+[tag1]
+template = '[tagr1]%(value)s[/tagr1]'
+
+[tag2]
+template = '[tagr2]%(value)s[/tagr2]'
