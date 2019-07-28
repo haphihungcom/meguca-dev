@@ -1,10 +1,10 @@
- {% extends "layout/elections.txt" %}
+{% extends "layout/elections.txt" %}
 
  {% block body %}
 
 [title]Elections in the South Pacific[/title]
 
-[p][url=lc_intro]The Local Council[/url] (Gameside government), [url=cabinet_intro]Cabinet Ministers, the Prime Minister[/url], [url=delegate_intro]the Delegate[/url], and [url=coa_intro]the Chair of Assembly[/url] are positions that are elected in the South Pacific. All elections in our region are similar in how they are carrying out, with just a few variations in term of electors, voting methods, and time.[/p] The [url=election_commission]Election Commission[/url] is the body which oversees and carries out elections.[/p]
+[p][url=lc_intro]The Local Council[/url] (Gameside government), [url=cabinet_intro]Cabinet Ministers, the Prime Minister[/url], [url=delegate_intro]the Delegate[/url], and [url=coa_intro]the Chair of Assembly[/url] are positions that are elected in the South Pacific. All elections in our region are similar in how they are carrying out, with just a few variations in term of electors, voting methods, and time. The [url=election_commission]Election Commission[/url] is the body which oversees and carries out elections.[/p]
 
 [p]Every election in the South Pacific consists of three periods:[/p]
 [list][p][em]Nomination:[/em] When you declare your candidacy or nominate others[/p]

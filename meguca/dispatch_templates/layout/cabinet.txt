@@ -10,5 +10,6 @@
                            sub_urls={'Regional Affairs': 'ra_intro',
                                      'Foreign Affairs': 'fa_intro',
                                      'Military Affairs': 'spsf_intro',
+                                     'Delegate': 'delegate_intro',
                                      'Independent institutions': 'indie_intro'}) }}
 {% endblock header %}

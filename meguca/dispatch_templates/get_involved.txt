@@ -58,7 +58,7 @@
 
 [h2]Establish a news outlet[/h2]
 
-[p]You can inform people by creating a news outlet. Your outlet can cover anything, from regional politics, roleplay news to the latest topic on the RMB in any format. You can start by writing on a dispatch then post a link to it on the RMB for people to see. If your newspaper publishes regularly enough, contact {{ gov_officials.news_outlet_adder|nation }} to get it featured on [url=news_outlets]our regional news outlet list[/url]. Alternatively you may want to use [url=f_news]our forum[/url] as a platform instead.[/p]
+[p]You can inform people by creating a news outlet. Your outlet can cover anything, from regional politics, roleplay news to the latest topic on the RMB in any format. You can start by writing on a dispatch then post a link to it on the RMB for people to see. If your newspaper publishes regularly enough, contact {{ misc.news_outlet_adder|nation }} to get it featured on [url=news_outlets]our regional news outlet list[/url]. Alternatively you may want to use [url=f_news]our forum[/url] as a platform instead.[/p]
 
 [h2]More ways[/h2]
 

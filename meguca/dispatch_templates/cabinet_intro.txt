@@ -61,8 +61,7 @@
 
 [h2]The Delegate[/h2]
 
-[url=delegate_intro][b]Delegate of the South Pacific[/b][/url] holds the gameside Delegate position along with all technical administration powers of the region on gameside. The Delegate's job is to interact with the gameside community and along with [url=lc_intro]the Local Council[/url], acts as the bridge between the gameside and forumside community. The Delegate is elected by Legislators of the Assembly and gameside World Assembly nations via a two-step process.
-
+[p][url=delegate_intro][b]Delegate of the South Pacific[/b][/url] holds the gameside Delegate position along with all technical administration powers of the region on gameside. The Delegate's job is to interact with the gameside community and along with [url=lc_intro]the Local Council[/url], acts as the bridge between the gameside and forumside community. The Delegate is elected by Legislators of the Assembly and gameside World Assembly nations via a two-step process.[/p]
 
 [h2]Independent institutions[/h2]
 
