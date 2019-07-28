@@ -56,3 +56,23 @@ def toml_files():
 
     for name in existing_files:
         os.remove(name)
+
+
+@pytest.fixture
+def text_files():
+    """Create text files for testing.
+    """
+
+    existing_files = []
+
+    def gen_mock_files(files={'test.txt': ''}):
+        for name, text in files.items():
+            with open(name, 'w') as f:
+                f.write(text)
+                existing_files.append(name)
+
+    yield gen_mock_files
+
+    for name in existing_files:
+        with open(name, 'w') as f:
+            os.remove(name)
