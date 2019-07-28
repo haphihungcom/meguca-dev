@@ -1,11 +1,13 @@
 [general]
-dispatch_config_path = ['meguca/dispatch_templates/dispatches.toml']
-template_dir_path = 'meguca/dispatch_templates'
+dispatch_config_path = ['meguca/dispatch_templates/dispatches.toml', 'meguca/dispatch_templates/laws_dispatches.toml']
+id_store_path = 'meguca/dispatch_templates/id_store.json'
+
+[renderer]
+template_dir_path = ['meguca/dispatch_templates']
 filters_path = 'meguca/dispatch_templates/filters/filters.py'
 custom_vars_path = ['meguca/dispatch_templates/custom_vars/personnel.toml', 'meguca/dispatch_templates/custom_vars/newspapers_list.toml', 'meguca/dispatch_templates/custom_vars/proscription_list.toml', 'meguca/dispatch_templates/custom_vars/urls.toml']
 bb_path = 'meguca/dispatch_templates/bbcode/formatters.toml'
-id_store_path = 'meguca/dispatch_templates/id_list.json'
 template_file_ext = 'txt'
 
 [dry_run]
-dispatches = []
+dispatches = ['charter', 'elections_act']

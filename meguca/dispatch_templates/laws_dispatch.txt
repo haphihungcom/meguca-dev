@@ -1,0 +1,7 @@
+{% extends 'layout/laws.txt' %}
+
+{% block body %}
+
+[laws]
+
+{% endblock body %}

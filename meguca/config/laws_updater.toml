@@ -1,0 +1,38 @@
+[general]
+dispatch_config_path = 'meguca/dispatch_templates/laws_dispatches.toml'
+template_dir_path = 'meguca/dispatch_templates'
+template_ext = 'txt'
+category = 8
+sub_category = 835
+std_template_path = 'meguca/dispatch_templates/laws_dispatch.txt'
+
+[bb_lookup]
+container = 'div[class="post_body scaleimages"]'
+default_bb_tag = '[p]{text}[/p]'
+line_break_html_tag = 'br'
+
+[bb_lookup.tags]
+[bb_lookup.tags.bold]
+name ='span'
+attrs = {class = ['mycode_b'], style = 'font-weight: bold;'}
+bb_tag = '[b]{text}[/b]'
+
+[bb_lookup.tags.italic]
+name = 'span'
+attrs = {class = ['mycode_i'], style = 'font-style: italic;'}
+bb_tag = '[i]{text}[/i]'
+
+[bb_lookup.tags.align_center]
+name = 'div'
+attrs = {class = ['mycode_align'], style = 'text-align: center;'}
+bb_tag = '[align=center]{text}[/align]'
+
+[laws]
+[laws.charter]
+title = 'The Charter of the South Pacific'
+url = 'https://tspforums.xyz/thread-4111.html'
+
+[laws.elections_act]
+title = 'The Elections Act'
+url = 'https://tspforums.xyz/thread-4112.html'
+

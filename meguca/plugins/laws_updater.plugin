@@ -1,0 +1,10 @@
+[Core]
+Name = Laws Updater
+Id = laws_updater
+Module = src/laws_updater
+ConfigFile = meguca/config/laws_updater.toml
+
+[Documentation]
+Description = Helps syndicate laws from forum to dispatches.
+Author = USoVietnam
+Version = 0.0.1
