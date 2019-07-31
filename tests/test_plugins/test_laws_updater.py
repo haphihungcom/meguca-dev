@@ -11,19 +11,23 @@ from meguca.plugins.src import laws_updater
 class TestGetBBTag():
     def test_get_bb_tag_from_html_element(self):
         html = bs4.BeautifulSoup('<span class="xyz">ABC</span>', 'html.parser')
-        lut = [{'selector': '.xyz', 'bb_tag': 'test'}]
+        lut = {'test': {'name': 'span',
+                        'attrs': {'class': ['xyz']},
+                        'bb_tag': '[test]{text}[/test]'}}
 
-        tag = laws_updater.get_bb_tag(html, lut, 'test_default')
+        tag = laws_updater.get_bb_tag(html.contents[0], lut)
 
-        assert tag == 'test'
+        assert tag == '[test]{text}[/test]'
 
     def test_get_bb_tag_from_html_element_not_on_lut(self):
         html = bs4.BeautifulSoup('<span class="efj">ABC</span>', 'html.parser')
-        lut = [{'selector': '.xyz', 'bb_tag': 'test'}]
+        lut = {'test': {'name': 'span',
+                        'attrs': {'class': ['xyz']},
+                        'bb_tag': '[test]{text}[/test]'}}
 
-        tag = laws_updater.get_bb_tag(html, lut, 'test_default')
+        tag = laws_updater.get_bb_tag(html.contents[0], lut)
 
-        assert tag == 'test_default'
+        assert tag == '{text}'
 
 
 class TestGenBBCode():
