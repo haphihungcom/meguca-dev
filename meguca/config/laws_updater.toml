@@ -1,10 +1,10 @@
 [general]
-dispatch_config_path = 'meguca/dispatch_templates/laws_dispatches.toml'
-template_dir_path = 'meguca/dispatch_templates'
+dispatch_config_path = 'meguca/dispatch_templates/laws/laws_dispatches.toml'
+template_dir_path = 'meguca/dispatch_templates/laws'
 template_ext = 'txt'
 category = 8
 sub_category = 835
-std_template_path = 'meguca/dispatch_templates/laws_dispatch.txt'
+std_template_path = 'meguca/dispatch_templates/laws/laws_template.txt'
 
 [bb_lookup]
 container = 'div[class="post_body scaleimages"]'

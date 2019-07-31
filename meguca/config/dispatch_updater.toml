@@ -1,5 +1,5 @@
 [general]
-dispatch_config_path = ['meguca/dispatch_templates/dispatches.toml', 'meguca/dispatch_templates/laws_dispatches.toml']
+dispatch_config_path = ['meguca/dispatch_templates/dispatches.toml', 'meguca/dispatch_templates/laws/laws_dispatches.toml']
 id_store_path = 'meguca/dispatch_templates/id_store.json'
 blacklist = []
 
@@ -7,7 +7,7 @@ blacklist = []
 custom_vars_path = ['meguca/dispatch_templates/custom_vars/personnel.toml', 'meguca/dispatch_templates/custom_vars/newspapers_list.toml','meguca/dispatch_templates/custom_vars/proscription_list.toml', 'meguca/dispatch_templates/custom_vars/urls.toml']
 
 [renderer.template]
-template_dir_path = 'meguca/dispatch_templates'
+template_dir_path = ['meguca/dispatch_templates', 'meguca/dispatch_templates/laws']
 filters_path = 'meguca/dispatch_templates/filters/filters.py'
 template_file_ext = 'txt'
 

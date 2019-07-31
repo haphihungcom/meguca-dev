@@ -2,6 +2,7 @@
 __pycache__/
 .pytest_cache/
 .vscode/
+meguca/dispatch_templates/laws
 .tox/
 *.json
 *.png

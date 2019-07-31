@@ -180,7 +180,7 @@ class TestLawsUpdater():
         """
 
         text_files({'tests/test1.txt': 'dork',
-                    'tests/test1.txt': 'dork'})
+                    'tests/test2.txt': 'dork'})
         ins = setup_laws_updater
         ins.get_bbcode_laws = mock.Mock(return_value='Test')
 
@@ -194,8 +194,17 @@ class TestLawsUpdater():
         with open('tests/test2.txt') as f:
             assert f.read() == 'Test'
 
+    @pytest.fixture
+    def clean_dispatch_integration(self):
+        yield
+
+        os.remove('tests/tsunamy.txt')
+
     @pytest.mark.usefixtures('text_files')
-    def test_run_integration(self, text_files, setup_laws_updater):
+    def test_run_integration(self, text_files,
+                             setup_laws_updater,
+                             clean_dispatch_integration,
+                             clean_dispatch_config):
         text_files({'tests/lampshade.txt': 'Empty'})
         text_files({'tests/std_laws_template.txt': '{% block body %} [laws] {% endblock %}'})
         ins = setup_laws_updater
