@@ -27,10 +27,11 @@ class IDStore():
     def load_from_json(self):
         """Load dispatch IDs from configured JSON file.
         """
+
         try:
             with open(self.id_store_path) as f:
                 self._store = json.load(f)
-                logger.debug('Loaded id store: "%r"', self._store)
+                logger.debug('Loaded id store: %r', self._store)
         except FileNotFoundError:
             self.save()
             logger.debug('Created id store at "%s"', self.id_store_path)
@@ -47,6 +48,8 @@ class IDStore():
                 self._store[name] = info['id']
             except KeyError:
                 pass
+
+        self.saved = False
 
     def __contains__(self, name):
         """Check existence of an ID.
@@ -82,6 +85,19 @@ class IDStore():
         self._store.update({name: dispatch_id})
         self.saved = False
 
+    def add_id_from_html(self, name, html):
+        """Add new dispatch ID from dispatch's HTML text respond.
+
+        Args:
+            html (str): HTML from response.
+            name (str): Dispatch file name.
+        """
+
+        dispatch_id = get_id_from_html(html)
+        self[name] = dispatch_id
+        logger.debug('Added ID "%d" of dispatch "%s"',
+                     dispatch_id, name)
+
     def save(self):
         """Save ID store into file.
         """
@@ -92,24 +108,52 @@ class IDStore():
         with open(self.id_store_path, 'w') as f:
             json.dump(self._store, f)
             self.saved = True
-            logger.debug('Saved id store: "%r"', self._store)
+            logger.debug('Saved id store: %r', self._store)
 
 
-def load_funcs(path):
-    """Get function objects from a .py file.
+
+def get_dispatch_info(dispatch_config, id_store):
+    """Compose and return dispatch information
+    for use as context in the template renderer.
 
     Args:
-        path (str): Path to .py file.
+        dispatch_config (dict): Dispatch configuration.
+        id_store (IDStore): Dispatch ID store.
+
+    Returns:
+        dict: Dispatch information.
+    """
+
+    dispatches = dispatch_config
+    for name in dispatch_config.keys():
+        dispatches[name]['id'] = id_store[name]
+
+    return dispatches
+
+
+def get_funcs(path):
+    """Get functions from a module file (.py).
+
+    Args:
+        path (str): Path to module file (.py).
+    """
+
+    module = load_module(path)
+    return inspect.getmembers(module, inspect.isfunction)
+
+
+def load_module(path):
+    """Load module from an absolute path.
+
+    Args:
+        path (str): Path to module file (.py).
     """
 
     spec = importlib.util.spec_from_file_location('module', path)
-    if spec is None:
-        return None
-    else:
+    if spec is not None:
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
-        funcs = inspect.getmembers(module, inspect.isfunction)
-        return funcs
+        return module
 
 
 def load_dispatch_config(dispatch_config_path):
@@ -124,19 +168,21 @@ def load_dispatch_config(dispatch_config_path):
 
         if isinstance(dispatch_config_path, str):
             dispatches = toml.load(dispatch_config_path)
-            logger.debug('Loaded dispatch config: "%r"', dispatches)
-        else:
+            logger.info('Loaded dispatch config: "%r"', dispatches)
+        elif isinstance(dispatch_config_path, list):
             dispatches = {}
             for dispatch_config in dispatch_config_path:
                 dispatches.update(toml.load(dispatch_config))
                 logger.debug('Loaded dispatch config: "%r"', dispatches)
+                logger.info('Loaded all dispatch config files')
+        else:
+            dispatches = {}
 
-        logger.info('Loaded all dispatch config files')
         return dispatches
 
 
-def get_new_dispatch_id(html_text):
-    """Get new dispatch's ID from respond's HTML.
+def get_id_from_html(html_text):
+    """Get new dispatch ID from respond's HTML.
 
     Args:
         html_text (str): HTML text of respond.

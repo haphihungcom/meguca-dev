@@ -50,7 +50,7 @@ class TestBBRegistry():
         assert r['tag_name'] == 'test' and r['john'] == True
         assert r['obj'].a == 1
 
-    @mock.patch('meguca.plugins.src.dispatch_updater.utils.load_classes')
+    @mock.patch('meguca.plugins.src.dispatch_updater.utils.load_module')
     def test_init_complex_formatters(self, mock):
         ins = bb_parser.BBRegistry
 
@@ -65,13 +65,12 @@ class TestBBRegistry():
         config = {'test1': {'foo': 'bar', 'loo': 'var'},
                   'test2': {'foo2': 'bar2', 'loo2': 'var2'}}
 
-        ins.init_complex_formatters('test.py', config)
+        r = ins.init_complex_formatters('test.py', config)
 
-        r = ins.complex_formatters
-        assert ins.complex_formatters[0]['obj'].config == {'foo': 'bar', 'loo': 'var'}
-        assert ins.complex_formatters[1]['obj'].config == {'foo2': 'bar2', 'loo2': 'var2'}
+        assert r[0]['obj'].config == {'foo': 'bar', 'loo': 'var'}
+        assert r[1]['obj'].config == {'foo2': 'bar2', 'loo2': 'var2'}
 
-    @mock.patch('meguca.plugins.src.dispatch_updater.utils.load_classes')
+    @mock.patch('meguca.plugins.src.dispatch_updater.utils.load_module')
     def test_init_complex_formatters_with_non_existent_config(self, mock):
         ins = bb_parser.BBRegistry
 
@@ -84,13 +83,12 @@ class TestBBRegistry():
         ins.complex_formatters = [{'tag_name': 'test1', 'obj': Formatter1(), 'john': True},
                                   {'tag_name': 'test2', 'obj': Formatter2(), 'john': False}]
 
-        ins.init_complex_formatters('test.py', {})
+        r = ins.init_complex_formatters('test.py', {})
 
-        r = ins.complex_formatters
-        assert not hasattr(ins.complex_formatters[0]['obj'], 'config')
-        assert not hasattr(ins.complex_formatters[1]['obj'], 'config')
+        assert not hasattr(r[0]['obj'], 'config')
+        assert not hasattr(r[1]['obj'], 'config')
 
-    @mock.patch('meguca.plugins.src.dispatch_updater.utils.load_classes',
+    @mock.patch('meguca.plugins.src.dispatch_updater.utils.load_module',
                 side_effect=FileNotFoundError)
     def test_init_complex_formatters_with_non_existent_file(self, mock):
         ins = bb_parser.BBRegistry()
@@ -99,78 +97,50 @@ class TestBBRegistry():
             ins.init_complex_formatters('test.py', {})
 
 
-
-class TestBBParserLoader():
+class TestBBSimpelFormatters():
     @pytest.mark.usefixtures('toml_files')
     def test_load_simple_formatters_with_simple_formatter_file_exists(self, toml_files):
-        formatter_config = {'tag1': {'template': 'test1',
-                                     'render_embedded': True,
-                                     'newline_closes': False},
-                            'tag2': {'template': 'test2',
-                                     'render_embedded': True,
-                                     'newline_closes': False,
-                                     'same_tag_closes': True}}
-        toml_files({'tests/test.toml': formatter_config})
-        config = {'simple_formatter_path': 'tests/test.toml'}
-        mock_parser = mock.Mock(add_simple_formatter=mock.Mock())
-        ins = bb_parser.BBParserLoader(mock_parser, mock.Mock(), config)
+        formatters = {'tag1': {'template': 'test1',
+                               'render_embedded': True,
+                               'newline_closes': False},
+                      'tag2': {'template': 'test2',
+                               'render_embedded': True,
+                               'newline_closes': False,
+                               'same_tag_closes': True}}
+        toml_files({'tests/test.toml': formatters})
+        ins = bb_parser.BBSimpleFormatters()
 
-        ins.load_simple_formatters()
+        ins.load_formatters('tests/test.toml')
 
-        mock_parser.add_simple_formatter.assert_called_with(tag_name='tag2',
-                                                            template='test2',
-                                                            escape_html=False,
-                                                            replace_links=False,
-                                                            replace_cosmetic=False,
-                                                            render_embedded=True,
-                                                            newline_closes=False,
-                                                            same_tag_closes=True,
-                                                            standalone=False,
-                                                            strip=False,
-                                                            swallow_trailing_newline=False)
+        r = [{'tag_name': 'tag1', 'template': 'test1',
+              'render_embedded': True, 'newline_closes': False},
+             {'tag_name': 'tag2', 'template': 'test2',
+              'render_embedded': True, 'newline_closes': False, 'same_tag_closes': True}]
+
+        assert ins.formatters == r
 
     def test_load_simple_formatters_with_non_configured_simple_formatter_file(self):
         """Nothing should happen.
         """
 
-        mock_parser = mock.Mock(add_simple_formatter=mock.Mock())
-        ins = bb_parser.BBParserLoader(mock.Mock(), mock.Mock(), {})
+        ins = bb_parser.BBSimpleFormatters()
 
-        ins.load_simple_formatters()
+        ins.load_formatters(None)
 
-        mock_parser.add_simple_formatter.assert_not_called()
+        assert ins.formatters == []
 
     def test_load_simple_formatters_with_non_existent_simple_formatter_file(self):
         """Nothing should happen.
         """
 
-        mock_parser = mock.Mock(add_simple_formatter=mock.Mock())
-        ins = bb_parser.BBParserLoader(mock_parser, mock.Mock(),
-                                       {'simple_formatter_path': 'ghhj'})
+        ins = bb_parser.BBSimpleFormatters()
 
-        ins.load_simple_formatters()
+        ins.load_formatters('non_existent.toml')
 
-        mock_parser.add_simple_formatter.assert_not_called()
+        assert ins.formatters == []
 
-    @pytest.mark.usefixtures('toml_files')
-    def test_load_simple_formatters_with_no_template_simple_formatter_file(self, toml_files):
-        """Nothing should happen.
-        """
 
-        formatter_config = {'tag1': {'render_embedded': True,
-                                     'newline_closes': False},
-                            'tag2': {'render_embedded': True,
-                                     'newline_closes': False,
-                                     'same_tag_closes': True}}
-        toml_files({'tests/test.toml': formatter_config})
-        config = {'simple_formatter_path': 'tests/test.toml'}
-        mock_parser = mock.Mock(add_simple_formatter=mock.Mock())
-        ins = bb_parser.BBParserLoader(mock_parser, mock.Mock(), config)
-
-        ins.load_simple_formatters()
-
-        mock_parser.add_simple_formatter.assert_not_called()
-
+class TestBBComplexFormatters():
     @pytest.fixture
     def mock_bb_registry(self):
         class Test1():
@@ -184,104 +154,132 @@ class TestBBParserLoader():
         f = [{'tag_name': 'test1', 'obj': Test1(), 'newline_closes': True},
              {'tag_name': 'test2', 'obj': Test2(), 'same_tag_closes': True}]
 
-        ins = mock.Mock(init_complex_formatters=mock.Mock())
-        type(ins).complex_formatters = f
+        ins = mock.Mock(init_complex_formatters=mock.Mock(return_value=f))
 
         return ins
 
     def test_load_complex_formatters_with_not_configured_config(self, mock_bb_registry):
-        config = {'complex_formatter_path': 'test.py'}
-        mock_parser_core = mock.Mock(add_complex_formatter=mock.Mock())
-        ins = bb_parser.BBParserLoader(mock_parser_core, mock_bb_registry, config)
+        ins = bb_parser.BBComplexFormatters()
 
-        ins.load_complex_formatters()
+        ins.load_formatters(mock_bb_registry, 'test.py', None)
 
         mock_bb_registry.init_complex_formatters.assert_called_with('test.py', {})
 
-        f = mock_bb_registry.complex_formatters
-        r = mock_parser_core.add_complex_formatter
-        r.assert_called_with(tag_name='test2',
-                             render_func=f[1]['obj'].format,
-                             escape_html=False,
-                             replace_links=False,
-                             replace_cosmetic=False,
-                             render_embedded=True,
-                             newline_closes=False,
-                             same_tag_closes=True,
-                             standalone=False,
-                             strip=False,
-                             swallow_trailing_newline=False)
 
     def test_load_complex_formatters_with_non_existent_config(self, mock_bb_registry):
         config = {'complex_formatter_path': 'test.py',
                   'complex_formatter_config_path': 'ghghgh'}
-        mock_parser_core = mock.Mock(add_complex_formatter=mock.Mock())
-        ins = bb_parser.BBParserLoader(mock_parser_core, mock_bb_registry, config)
+        ins = bb_parser.BBComplexFormatters()
 
-        ins.load_complex_formatters()
+        ins.load_formatters(mock_bb_registry, 'test.py', 'non_existent.toml')
 
         mock_bb_registry.init_complex_formatters.assert_called_with('test.py', {})
-
-        f = mock_bb_registry.complex_formatters
-        r = mock_parser_core.add_complex_formatter
-        r.assert_called_with(tag_name='test2',
-                             render_func=f[1]['obj'].format,
-                             escape_html=False,
-                             replace_links=False,
-                             replace_cosmetic=False,
-                             render_embedded=True,
-                             newline_closes=False,
-                             same_tag_closes=True,
-                             standalone=False,
-                             strip=False,
-                             swallow_trailing_newline=False)
 
     @pytest.mark.usefixtures('toml_files')
     def test_load_complex_formatters_with_config(self, mock_bb_registry, toml_files):
         formatter_config = {'test1': {'key1': 'val1'}}
         toml_files({'tests/test.toml': formatter_config})
-        config = {'complex_formatter_path': 'test.py',
-                  'complex_formatter_config_path': 'tests/test.toml'}
-        mock_parser_core = mock.Mock(add_complex_formatter=mock.Mock())
-        ins = bb_parser.BBParserLoader(mock_parser_core, mock_bb_registry, config)
+        ins = bb_parser.BBComplexFormatters()
 
-        ins.load_complex_formatters()
+        ins.load_formatters(mock_bb_registry, 'test.py', 'tests/test.toml')
 
         mock_bb_registry.init_complex_formatters.assert_called_with('test.py', formatter_config)
 
-        f = mock_bb_registry.complex_formatters
-        r = mock_parser_core.add_complex_formatter
-        r.assert_called_with(tag_name='test2',
-                             render_func=f[1]['obj'].format,
-                             escape_html=False,
-                             replace_links=False,
-                             replace_cosmetic=False,
-                             render_embedded=True,
-                             newline_closes=False,
-                             same_tag_closes=True,
-                             standalone=False,
-                             strip=False,
-                             swallow_trailing_newline=False)
+    def test_load_complex_formatters_with_non_configured_complex_formatter_path(self, mock_bb_registry):
+        ins = bb_parser.BBComplexFormatters()
 
-    def test_load_complex_formatters_with_non_configured_complex_formatter_path(self):
-        mock_parser_core = mock.Mock(add_complex_formatter=mock.Mock())
-        ins = bb_parser.BBParserLoader(mock_parser_core, mock.Mock(), {})
+        ins.load_formatters(mock_bb_registry, None, None)
 
-        ins.load_complex_formatters()
+        mock_bb_registry.init_complex_formatters.assert_not_called()
 
-        mock_parser_core.add_complex_formatter.assert_not_called()
+
+class TestBBParserLoader():
+    def test_load_simple_formatters_with_template_configured(self):
+        mock_parser = mock.Mock(add_simple_formatter=mock.Mock())
+        simple_formatters = [{'tag_name': 'tag1', 'template': 'test1', 'newline_closes': True},
+                             {'tag_name': 'tag2', 'template': 'test2', 'render_embedded': False}]
+        mock_simple_formatters = mock.Mock(get_formatters=mock.Mock(return_value=simple_formatters))
+        ins = bb_parser.BBParserLoader(mock_parser)
+
+        ins.load_simple_formatters(mock_simple_formatters)
+
+        mock_parser.add_simple_formatter.assert_called_with(
+            tag_name='tag2',
+            template='test2',
+            escape_html=False,
+            replace_links=False,
+            replace_cosmetic=False,
+            newline_closes=False,
+            same_tag_closes=False,
+            standalone=False,
+            render_embedded=False,
+            strip=False,
+            swallow_trailing_newline=False
+        )
+
+    def test_load_simple_formatters_with_template_not_configured(self):
+        """Simple formatter should not be loaded.
+        """
+
+        mock_parser = mock.Mock(add_simple_formatter=mock.Mock())
+        simple_formatters = [{'tag_name': 'tag1', 'newline_closes': True},
+                             {'tag_name': 'tag2', 'template': 'test2', 'render_embedded': False}]
+        mock_simple_formatters = mock.Mock(get_formatters=mock.Mock(return_value=simple_formatters))
+        ins = bb_parser.BBParserLoader(mock_parser)
+
+        ins.load_simple_formatters(mock_simple_formatters)
+
+        mock_parser.add_simple_formatter.assert_called_once_with(
+            tag_name='tag2',
+            template='test2',
+            escape_html=False,
+            replace_links=False,
+            replace_cosmetic=False,
+            newline_closes=False,
+            same_tag_closes=False,
+            standalone=False,
+            render_embedded=False,
+            strip=False,
+            swallow_trailing_newline=False
+        )
+
+    def test_load_complex_formatters(self):
+        mock_parser = mock.Mock(add_complex_formatter=mock.Mock())
+        mock_render_func_1 = mock.Mock()
+        mock_render_func_2 = mock.Mock()
+        complex_formatters = [{'tag_name': 'tag1', 'func': mock_render_func_1},
+                              {'tag_name': 'tag2', 'func': mock_render_func_2, 'render_embedded': False}]
+        mock_complex_formatters = mock.Mock(get_formatters=mock.Mock(return_value=complex_formatters))
+        ins = bb_parser.BBParserLoader(mock_parser)
+
+        ins.load_complex_formatters(mock_complex_formatters)
+
+        mock_parser.add_complex_formatter.assert_called_with(
+            tag_name='tag2',
+            render_func=mock_render_func_2,
+            escape_html=False,
+            replace_links=False,
+            replace_cosmetic=False,
+            newline_closes=False,
+            same_tag_closes=False,
+            standalone=False,
+            render_embedded=False,
+            strip=False,
+            swallow_trailing_newline=False
+        )
 
 
 class TestBBParserIntegration():
-    def test_integration(self):
-        config = {'simple_formatter_path': 'tests/resources/bb_simple_formatters.toml',
-                  'complex_formatter_path': 'tests/resources/bb_complex_formatters.py',
-                  'complex_formatter_config_path': 'tests/resources/bb_complex_formatter_config.toml'}
-        ins = bb_parser.BBParser(config)
+    def test_format_integration(self):
+        simple_formatter_path = 'tests/resources/bb_simple_formatters.toml'
+        complex_formatter_path = 'tests/resources/bb_complex_formatters.py'
+        complex_formatter_config_path = 'tests/resources/bb_complex_formatter_config.toml'
+        ins = bb_parser.BBParser(simple_formatter_path, complex_formatter_path,
+                                 complex_formatter_config_path)
         text = ('[dar]john[bar]doe[/bar][/dar][foo]marry[tag1]curie[/tag1][/foo]'
-                '[moo=123][tag2]mirai[/tag2][/moo]')
+                '[moo=123][tag2]mirai[/tag2][/moo][tag3]abc[/tag3]')
 
         r = ins.format(text, example={'hoo': 'cool'})
 
         assert r == ('[abc]john[xyz=testval]doe[/xyz][/abc][efg=cool]marry[tag1]curie[/tag1][/efg]'
-                     '[vnm=123][tagr2]mirai[/tagr2][/vnm]')
+                     '[vnm=123][tagr2]mirai[/tagr2][/vnm][tag3]abc[/tag3]')

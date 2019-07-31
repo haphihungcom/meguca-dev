@@ -64,6 +64,14 @@ class TestIDStore():
 
         assert 'Test' in ins
 
+    def test_add_id_from_html(self):
+        ins = utils.IDStore('')
+        html = '<p class="info"> ABCD <a href="/page=dispatch/id=1234567">CDSE</a></p>'
+
+        ins.add_id_from_html('test', html)
+
+        ins._store['test'] = 1234567
+
     @mock.patch('json.dump')
     def test_save_when_saved_is_true(self, mock_json_dump, setup_test_file):
         ins = utils.IDStore('test.json')
@@ -106,10 +114,3 @@ class TestLoadDispatchConfig():
         r = utils.load_dispatch_config(['test1.toml', 'test2.toml'])
 
         assert r == {'Test1': 'TestVal1', 'Test2': 'TestVal2'}
-
-
-class TestGetNewDispatchId():
-    def test_with_new_dispatch_id(self):
-        html = '<p class="info"> ABCD <a href="/page=dispatch/id=1234567">CDSE</a></p>'
-
-        assert utils.get_new_dispatch_id(html) == 1234567

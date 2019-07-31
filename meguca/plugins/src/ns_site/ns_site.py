@@ -37,7 +37,7 @@ class NSSite():
 
     Args:
         user_agent (str): User agent
-        pin (str): Defaults to None. PIN number to authenticate requests.
+        pin (str): PIN number to authenticate requests.
     """
 
     def __init__(self, user_agent, pin):
@@ -62,9 +62,9 @@ class NSSite():
         params['localid'] = self.localid
         url = ACTION_URL.format(action)
 
-        resp = self.session.post(url, data=params)
+        resp = self.session.post(url, data=params, )
 
-        logger.debug('Sent POST request with parameters: %r', params)
+        logger.debug('Sent POST request: %s', action)
 
         helpers.handle_errors(resp)
 
