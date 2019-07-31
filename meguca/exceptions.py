@@ -10,8 +10,17 @@ class ConfigError(Meguca):
     """Raises if a configuration error happens."""
 
 
-class PluginError(Meguca):
+class PluginManagerError(Meguca):
     """Base exception for plugin management-related exceptions."""
+
+
+class PluginError(Meguca):
+    """Base exception for plugin exceptions.
+    If raises and not handled, plugin will automatically be blacklisted.
+
+    Args:
+        Meguca ([type]): [description]
+    """
 
 
 class NotFound(PluginError):
