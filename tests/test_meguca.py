@@ -28,8 +28,8 @@ def general_config():
 def meguca_dummy_plg(general_config):
     """A Meguca instance with a dummy plugin."""
 
-    plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mock.Mock()]))
-    meguca_ins = meguca.Meguca(plugins, general_config, None)
+    plg_manager = mock.Mock(get_plugins=mock.Mock(return_value=[mock.Mock()]))
+    meguca_ins = meguca.Meguca(plg_manager, general_config, None)
 
     return meguca_ins
 
@@ -51,8 +51,8 @@ def meguca_standard_plg(mock_plg, general_config):
         else:
             return [mock_plg('Test1', 't1'), mock_plg('Test2', 't2')]
 
-    plugins = mock.Mock(get_plugins=mock.Mock(side_effect=get_plugins),
-                        get_all_plugins=mock.Mock(side_effect=get_plugins))
+    plg_manager = mock.Mock(get_plugins=mock.Mock(side_effect=get_plugins),
+                            get_all_plugins=mock.Mock(side_effect=get_plugins))
     general_config.update({'plugin_schedule': {'c1': {'schedule_mode': 'interval',
                                                       'seconds': 6},
                                                'c2': {'schedule_mode': 'interval',
@@ -63,7 +63,7 @@ def meguca_standard_plg(mock_plg, general_config):
                                                       'seconds': 12}},
                            'dry_run': {'enabled': False, 'plugins': ['t1', 't2']}})
 
-    meguca_ins = meguca.Meguca(plugins, general_config, None)
+    meguca_ins = meguca.Meguca(plg_manager, general_config, None)
 
     return meguca_ins
 
@@ -143,9 +143,9 @@ class TestRunStatPlugins():
         mock_plg_2 = mock.Mock(plugin_object=mock.Mock(run=stub_run_2),
                                details=mock_plg_config_2)
 
-        plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mock_plg_2, mock_plg_1]))
+        plg_manager = mock.Mock(get_plugins=mock.Mock(return_value=[mock_plg_2, mock_plg_1]))
         general_config = {'general': {'blacklist': []}}
-        meguca_ins = meguca.Meguca(plugins, general_config, None)
+        meguca_ins = meguca.Meguca(plg_manager, general_config, None)
         meguca_ins.data = mock.Mock(__getitem__=mock.Mock(), update=mock.Mock())
         type(meguca_ins.data).raise_notyetexist = mock.PropertyMock(return_value=False)
 
@@ -192,8 +192,8 @@ class TestLoadServices():
         plg_info = configparser.ConfigParser()
         plg_info['Core'] = {'Id': 'Test'}
         mock_plg = mock.Mock(plugin_object=mock.Mock(get=get), details=plg_info)
-        plugins = mock.Mock(get_plugins=mock.Mock(return_value=[mock_plg]))
-        meguca_ins = meguca.Meguca(plugins, None, None)
+        plg_manager = mock.Mock(get_plugins=mock.Mock(return_value=[mock_plg]))
+        meguca_ins = meguca.Meguca(plg_manager, None, None)
 
         meguca_ins.load_services()
 
@@ -242,14 +242,14 @@ class TestRunMeguca():
         assert meguca_ins.data == {'Test1': 'TestDry', 'Test2': 'TestDry'}
 
 
-class TestIntegrationMeguca():
+class TestMegucaIntegration():
     @freezegun.freeze_time('2018-01-01 00:00:00', tick=True)
     def test_run_meguca_with_real_plugins_and_config(self):
         general_config = utils.load_config('tests/resources/general_config.toml')
-        plugins = plugin.Plugins('tests/resources/plugins', 'plugin')
-        plugin_config = plugins.load_plugins()
+        plg_manager = plugin.PlgManager('tests/resources/plugins', 'plugin')
+        plugin_config = plg_manager.load_plugins()
 
-        meguca_ins = meguca.Meguca(plugins, general_config, plugin_config)
+        meguca_ins = meguca.Meguca(plg_manager, general_config, plugin_config)
 
         meguca_ins.prepare()
         meguca_ins.run()
@@ -261,10 +261,10 @@ class TestIntegrationMeguca():
 
     def test_dry_run_meguca_real_plugins_and_config(self):
         general_config = utils.load_config('tests/resources/general_config_dryrun.toml')
-        plugins = plugin.Plugins('tests/resources/plugins', 'plugin')
-        plugin_config = plugins.load_plugins()
+        plg_manager = plugin.PlgManager('tests/resources/plugins', 'plugin')
+        plugin_config = plg_manager.load_plugins()
 
-        meguca_ins = meguca.Meguca(plugins, general_config, plugin_config)
+        meguca_ins = meguca.Meguca(plg_manager, general_config, plugin_config)
 
         meguca_ins.prepare()
         meguca_ins.run()

@@ -23,20 +23,20 @@ class Meguca():
     """Scheduling and plugin handling.
 
         Args:
-            plugins (plugin.Plugins): Plugin manager interface.
+            plg_manager (plugin.PlgManager): Plugin manager interface.
             general_config (dict): General configuration.
-            plugin_config (dict): Plugins' configuration.
+            plg_config (dict): Plugins' configuration.
     """
 
-    def __init__(self, plugins, general_config, plugin_config):
+    def __init__(self, plg_manager, general_config, plg_config):
 
         self.scheduler = BackgroundScheduler()
 
-        self.plugins = plugins
+        self.plg_manager = plg_manager
 
         # Holds general and plugins' configuration
         self.config = {'meguca': general_config,
-                       'plugins': plugin_config}
+                       'plugins': plg_config}
 
         # Holds all service objects
         self.services = {}
@@ -102,7 +102,7 @@ class Meguca():
         # it will be put on queue to run again after the required data
         # become available.
         queue = []
-        for plg in self.plugins.get_plugins('Stat'):
+        for plg in self.plg_manager.get_plugins('Stat'):
             if plg.details['Core']['Id'] not in self.config['meguca']['general']['blacklist']:
                     queue.append(plg)
                     logger.debug('Stat plugin "%s" added to queue', plg.name)
@@ -158,7 +158,7 @@ class Meguca():
             plg_category (str): Category name.
         """
 
-        for plg in self.plugins.get_plugins(plg_category):
+        for plg in self.plg_manager.get_plugins(plg_category):
             if plg.details['Core']['Id'] not in self.config['meguca']['general']['blacklist']:
                 plg_id = plg.details['Core']['Id']
                 schedule_config = dict(self.config['meguca']['plugin_schedule'][plg_id])
@@ -189,7 +189,7 @@ class Meguca():
     def load_services(self):
         """Load service plugins."""
 
-        for plg in self.plugins.get_plugins('Service'):
+        for plg in self.plg_manager.get_plugins('Service'):
             args = self.get_args(plg.plugin_object.get)
             self.services[plg.details['Core']['Id']] = plg.plugin_object.get(**args)
             logger.debug('Loaded service "%s"', plg.name)
@@ -207,7 +207,7 @@ class Meguca():
             plg_category (str): Plugin category name.
         """
 
-        for plg in self.plugins.get_plugins(plg_category):
+        for plg in self.plg_manager.get_plugins(plg_category):
             if plg.details['Core']['Id'] not in self.config['meguca']['general']['blacklist']:
                 try:
                     self.run_plugin(plg, 'prepare')
@@ -234,7 +234,7 @@ class Meguca():
     def dry_run_plugins(self):
         """Dry run plugins by configured order for testing."""
 
-        plugins = {plg.details['Core']['Id']: plg for plg in self.plugins.get_all_plugins()}
+        plugins = {plg.details['Core']['Id']: plg for plg in self.plg_manager.get_all_plugins()}
 
         for plg_id in self.config['meguca']['dry_run']['plugins']:
             try:
@@ -272,10 +272,10 @@ def main():
         logger.critical('Could not find general configuration file!')
         raise exceptions.ConfigError('Could not find general configuration file!')
 
-    plugins = plugin.Plugins(info.PLUGIN_DIR_PATH, info.PLUGIN_DESC_EXT)
-    plugin_config = plugins.load_plugins()
+    plg_manager = plugin.PlgManager(info.PLUGIN_DIR_PATH, info.PLUGIN_DESC_EXT)
+    plg_config = plg_manager.load_plugins()
 
-    meguca = Meguca(plugins, general_config, plugin_config)
+    meguca = Meguca(plg_manager, general_config, plg_config)
     meguca.prepare()
     logger.info('Prepared everything')
 

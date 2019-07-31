@@ -24,7 +24,7 @@ PLUGIN_CATEGORIES = {
 }
 
 
-class Plugins():
+class PlgManager():
     """Load plugins and provide an interface to access them.
 
         Args:
@@ -54,13 +54,13 @@ class Plugins():
 
         if not plugins:
             logger.critical('Could not find any plugin!')
-            raise exceptions.PluginError('Could not find any plugin! Re-check your plugin directory.')
+            raise exceptions.PluginManagerError('Could not find any plugin! Re-check your plugin directory.')
 
         for plg in plugins:
             self.plugin_manager.activatePluginByName(plg.name)
 
             if 'Id' not in plg.details['Core']:
-                raise exceptions.PluginError('Could not find Id in description file of plugin "%s"', plg.name)
+                raise exceptions.PluginManagerError('Could not find Id in description file of plugin "%s"', plg.name)
 
             try:
                 plg_config = utils.load_config(plg.details['Core']['ConfigFile'])
