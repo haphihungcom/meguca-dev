@@ -29,7 +29,7 @@
 
 [p]Both Associate Justices and Chief Justice have no term. They will serve until they retire or are recalled.[/p]
 
-[box][ref][law]Section 1, 2, 3 of Article I of the Judicial Act[/law][/ref][/box]
+[box][ref][law]Section 1, 2, 3, Article I of the Judicial Act[/law][/ref][/box]
 
 [h2]Powers[/h2]
 

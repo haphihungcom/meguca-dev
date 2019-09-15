@@ -80,7 +80,7 @@
 
 [h3]Misc[/h3]
 [list]
-[*][url=laws_index]The Laws Index[/url]
+[*][url=law_index]The Laws Index[/url]
 [/list]
 
 {% endblock body %}

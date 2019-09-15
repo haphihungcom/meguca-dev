@@ -74,7 +74,7 @@
 
 [p]In addition to the above powers, the Delegate also holds the following responsibilities:[/p]
 
-[list][*][em]Regional Security:[/em] The Delegate, along with the Council on Regional Security is responsible for ensuring that the region remains secure and that security threats are dealt with.  They do this by maintaining a high endorsement count and using their Border Control power in accordance with the Border Control Act.
+[list][*][em]Regional Security:[/em] The Delegate, along with the Council on Regional Security is responsible for ensuring that the region remains secure and that security threats are dealt with. They do this by maintaining a high endorsement count and using their Border Control power in accordance with the Border Control Act.
 
 [*][em]Promoting Growth and Activity:[/em] As the figurehead of the Coalition, the Delegate must work with the Cabinet and the Local council to ensure that the region remains active and builds on what has gone before.  They may use their Appearance, Communications and Polls powers to accomplish this.
 

@@ -1,0 +1,22 @@
+{% import 'macros/header_macros.txt' as macros with context %}
+
+{% extends 'layout/general.txt' %}
+
+{% block header %}
+{{ macros.gen_header(sub_urls={'Return to the Assembly': 'assembly_intro'}) }}
+{% endblock header %}
+
+{% block body %}
+
+[title]Law Index of the South Pacific[/title]
+
+[p]This is an index of laws currently in effect in the South Pacific. Only [url=assembly_intro]Assembly-passed[/url] laws are included here. For Local Council laws, please check [url=lc_policies]here[/url]. Repealed laws and non-law legislation can be found on the forumside [url=f_matt_duck]MATT-DUCK Law Index[/url].[/p]
+
+[list]
+{% for url, name in data_products.laws.items() %}
+[*][url={{ url }}]{{ name }}[/url]
+{% endfor %}
+[/list]
+
+{% endblock body %}
+

@@ -45,11 +45,11 @@
 
 [h3]Where can I find the laws and do I have to know them?[/h3]
 
-[p]Laws passed by the Assembly are archived in the [url=laws_index]Laws Index[/url]. You don't need to know every law there, you just need to be aware of how our government works and what the legislative procedure is. When writing legislation (discussed below), you will have to read related laws to avoid conflicts though but still, nothing much since we don't have a lot of laws, our laws are usually short and written in non-fancy English.[/p]
+[p]Laws passed by the Assembly are archived in the [url=law_index]Laws Index[/url]. You don't need to know every law there, you just need to be aware of how our government works and what the legislative procedure is. When writing legislation (discussed below), you will have to read related laws to avoid conflicts though but still, nothing much since we don't have a lot of laws, our laws are usually short and written in non-fancy English.[/p]
 
 [h3]Understanding the matters being discussed in the Assembly[/h3]
 
-[p]If you are a beginner, you may not understand the issues and problems being discussed. The quickest way to understand them is asking other Legislators, they will enthusiastically explain them for you! You can also read the [url=news_outlets]latest news[/url] or if you prefer the raw approach, read some of the laws in [url=laws_index]the Laws Index[/url] or [url=index]browse the dispatches[/url].[/p]
+[p]If you are a beginner, you may not understand the issues and problems being discussed. The quickest way to understand them is asking other Legislators, they will enthusiastically explain them for you! You can also read the [url=news_outlets]latest news[/url] or if you prefer the raw approach, read some of the laws in [url=law_index]the Laws Index[/url] or [url=index]browse the dispatches[/url].[/p]
 
 [p]This part of the guide already gives you most of the knowledge needed to participate in the Assembly, the below will show you how a legislation is made along with how to write, propose, debate, and vote on one.[/p]
 
@@ -115,11 +115,11 @@
 
 [h3]Find a problem to work on[/h3]
 
-[p]Our region has a multitude of problems to be fixed and improvements to be made, you can go through [url=laws_index]the Laws Index[/url]to find laws with loopholes, laws which fail at addressing the related problems, you can read [url=news_outlets]the news[/url], or just hear from someone that there is problem ABC which needs to be fixed. Again, ask other Legislators if you don't know anything![/p]
+[p]Our region has a multitude of problems to be fixed and improvements to be made, you can go through [url=law_index]the Laws Index[/url]to find laws with loopholes, laws which fail at addressing the related problems, you can read [url=news_outlets]the news[/url], or just hear from someone that there is problem ABC which needs to be fixed. Again, ask other Legislators if you don't know anything![/p]
 
 [h3]Read the Laws Index first![/h3]
 
-[p]Before writing your bill, you should look over [url=laws_index]the Laws Index[/url] first to see if there is any law which conflicts with your bill or already does what your bill does. The name of the law is descriptive enough that you don't need to read the laws themselves to know what they are doing. E.g. if you are writing a bill on elections, you should look at the [law]Elections Act[/law] first.[/p]
+[p]Before writing your bill, you should look over [url=law_index]the Laws Index[/url] first to see if there is any law which conflicts with your bill or already does what your bill does. The name of the law is descriptive enough that you don't need to read the laws themselves to know what they are doing. E.g. if you are writing a bill on elections, you should look at the [law]Elections Act[/law] first.[/p]
 
 [h3]Writing your bill[/h3]
 
@@ -140,7 +140,7 @@
 [p]6. Should this Act be enacted, it will be considered repealed after being in force for a full day.[/p]
 [/quote]
 
-[p]You may notice that the language is very formal. If you are not used to the style, you should write the bill with a more experienced Legislator or read existing laws in [url=laws_index]the Laws Index[/url] to get a hang of the style.[/p]
+[p]You may notice that the language is very formal. If you are not used to the style, you should write the bill with a more experienced Legislator or read existing laws in [url=law_index]the Laws Index[/url] to get a hang of the style.[/p]
 
 [p]If your bill is big and affects many aspects of the region then you should start a discussion thread and post your rough ideas first for other to comment on before drafting the actual bill.[/p]
 
@@ -376,7 +376,7 @@
 
 [anchor=finalize][/anchor][h1]FINALIZING A VOTE[/h1]
 
-[p]After a vote has finished, if it meets the vote number requirement above then it will become law and be archived in the [url=laws_index]Laws Index[/url]. If it doesn't meet the number, it will go back to the debating step for further refining or be dropped altogether if the proposer decides to do so.[/p]
+[p]After a vote has finished, if it meets the vote number requirement above then it will become law and be archived in the [url=law_index]Laws Index[/url]. If it doesn't meet the number, it will go back to the debating step for further refining or be dropped altogether if the proposer decides to do so.[/p]
 
 [/box]
 

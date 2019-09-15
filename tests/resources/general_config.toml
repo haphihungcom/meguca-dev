@@ -7,7 +7,7 @@ run_date = '2018-01-01 00:00:04'
 timezone = 'UTC'
 
 [dry_run]
-enabled = false
+enable = false
 plugins = []
 
 [plugin_schedule]

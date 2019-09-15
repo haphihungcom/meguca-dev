@@ -9,6 +9,7 @@ import codecs
 import toml
 
 from meguca import plugin_categories
+from meguca import exceptions
 from meguca.plugins.src.dispatch_updater import dispatch_renderer
 from meguca.plugins.src.dispatch_updater import utils
 
@@ -87,7 +88,7 @@ class DispatchUpdater(plugin_categories.View):
 
         self.dispatch_config = utils.load_dispatch_config(general_conf.get('dispatch_config_path', None))
         if not self.dispatch_config:
-            logger.warning('No dispatch was configured')
+            raise exceptions.PluginError('No dispatch was configured')
         self.blacklist = general_conf.get('blacklist', [])
 
         dry_run_conf = self.plg_config.get('dry_run', {})

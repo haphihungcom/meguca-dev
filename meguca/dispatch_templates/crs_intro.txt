@@ -18,7 +18,7 @@
 
 [h2]Duties and powers of the CRS[/h2]
 
-[p]Member nations of the CRS are granted Border Control power in-game, which means they can eject or ban nations. According to the [law]Charter of the Coalition of the South Pacific[/law], some of the duties and powers of the CRS are:[/p]
+[p]Member nations of the CRS are granted Border Control power in-game, which means they can eject or ban nations. According to the [law]Charter of the South Pacific[/law], some of the duties and powers of the CRS are:[/p]
 
 [list][*]Prevent the Delegacy from being taken by anyone other than the legally elected [url=delegate_intro]Delegate[/url].
 [*]Work with the Delegate and the [url=cabinet_intro]Prime Minister[/url] to establish a line of succession for the Delegate seat in case the current Delegate is vacant.

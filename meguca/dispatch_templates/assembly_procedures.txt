@@ -106,7 +106,7 @@
 
 [h3]Finalizing a vote[/h3]
 
-[p]The Chair will finalise the vote by counting the votes and determining whether the bill has passed or failed to pass. They will inform the Assembly of the result and add, amend, or remove laws in [url=laws_index]the laws index[/url].[/p]
+[p]The Chair will finalise the vote by counting the votes and determining whether the bill has passed or failed to pass. They will inform the Assembly of the result and add, amend, or remove laws in [url=law_index]the laws index[/url].[/p]
 
 [list]
 [*][em]General bills[/em] (General laws and amendments, appointment approvals, resolutions) and [em]treaties[/em] require a simple majority of those voting to pass.

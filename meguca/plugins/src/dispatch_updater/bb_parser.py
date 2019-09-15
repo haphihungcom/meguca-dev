@@ -3,6 +3,7 @@
 
 import copy
 import logging
+import inspect
 
 import toml
 import bbcode
@@ -28,10 +29,11 @@ class BBRegistry():
         """
 
         def decorator(class_obj):
-            kwargs['obj'] = class_obj()
+            kwargs['obj'] = class_obj
             kwargs['tag_name'] = tag_name
             cls.complex_formatters.append(kwargs)
 
+            # Returns original class object to make tests on them possible.
             return class_obj
 
         return decorator
@@ -51,16 +53,19 @@ class BBRegistry():
         except FileNotFoundError:
             raise FileNotFoundError('Could not find complex formatter file at "{}"'.format(path))
 
+        inited_formatters = []
         for formatter in cls.complex_formatters:
             tag_name = formatter['tag_name']
             if tag_name in config:
-                print(cls.complex_formatters)
                 formatter['obj'].config = config[tag_name]
-                logger.debug('Loaded complex formatter "%s" configuration: %r', tag_name, config[tag_name])
+                logger.debug('Loaded complex formatter "%s" configuration: %r',
+                              tag_name, config[tag_name])
+            formatter['obj'] = formatter['obj']()
+            inited_formatters.append(formatter)
+            logger.debug('Loaded complex formatter "%s"', tag_name)
 
-        r = cls.complex_formatters
         cls.complex_formatters = []
-        return r
+        return inited_formatters
 
 
 class BBFormatters():
@@ -222,7 +227,7 @@ class BBParserLoader():
                 newline_closes=formatter.get('newline_closes', False),
                 same_tag_closes=formatter.get('same_tag_closes', False),
                 standalone=formatter.get('standalone', False),
-                render_embedded=formatter.get('render_embedded', False),
+                render_embedded=formatter.get('render_embedded', True),
                 strip=formatter.get('strip', False),
                 swallow_trailing_newline=formatter.get('swallow_trailing_newline', False)
             )

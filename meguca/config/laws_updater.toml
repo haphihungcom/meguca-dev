@@ -6,6 +6,19 @@ category = 8
 sub_category = 835
 std_template_path = 'meguca/dispatch_templates/laws/laws_template.txt'
 
+[anchor_lookup]
+[anchor_lookup.subsection]
+match = '(?m)^([a-z])\. .+'
+anchor_link = '\g<1>'
+
+[anchor_lookup.section]
+match = '\((\d+)\) .+'
+anchor_link = 's\g<1>'
+
+[anchor_lookup.article]
+match = '(\w+)\. .+'
+anchor_link = 'a\g<1>'
+
 [bb_lookup]
 container = 'div[class="post_body scaleimages"]'
 default_bb_tag = '[p]{text}[/p]'
@@ -27,12 +40,93 @@ name = 'div'
 attrs = {class = ['mycode_align'], style = 'text-align: center;'}
 bb_tag = '[align=center]{text}[/align]'
 
+[bb_lookup.tags.quote]
+name = 'blockquote'
+attrs = {class = ['mycode_quote']}
+bb_tag = '[box]{text}[/box]'
+
+[bb_lookup.tags.cite]
+name = 'cite'
+attrs = {}
+bb_tag = '[i]{text}[/i][hr]'
+
+[bb_lookup.tags.strike]
+name = 'span'
+attrs = {class = ['mycode_s'], style = 'text-decoration: line-through;'}
+bb_tag = '[strike]{text}[/strike]'
+
+[bb_lookup.tags.red]
+name = 'span'
+attrs = {class = ['mycode_color'], style = 'color: #ff0000;'}
+bb_tag = '[color=ff0000]{text}[/color]'
+
+[bb_lookup.tags.green]
+name = 'span'
+attrs = {class = ['mycode_color'], style = 'color: #27AE60;'}
+bb_tag = '[color=27ae60]{text}[/color]'
+
 [laws]
+[laws.treaties_act]
+title = 'Treaties Act'
+url = 'https://tspforums.xyz/thread-4566.html'
+
 [laws.charter]
 title = 'The Charter of the South Pacific'
 url = 'https://tspforums.xyz/thread-4111.html'
+alt_names = ['charter of the south pacific']
 
 [laws.elections_act]
 title = 'The Elections Act'
 url = 'https://tspforums.xyz/thread-4112.html'
 
+[laws.legislator_committee_act]
+title = 'Legislator Committee Act'
+url = 'https://tspforums.xyz/thread-5792.html'
+
+[laws.legislative_procedure_act]
+title = 'Legislative Procedure Act'
+url = 'https://tspforums.xyz/thread-5083.html'
+
+[laws.law_standards_act]
+title = 'Law Standards Act'
+url = 'https://tspforums.xyz/thread-4960.html'
+
+[laws.criminal_code]
+title = 'Criminal Code'
+url = 'https://tspforums.xyz/thread-4114.html'
+
+[laws.regional_communications_act]
+title = 'Regional Communications Act'
+url = 'https://tspforums.xyz/thread-4542.html'
+
+[laws.proscription_act]
+title = 'Proscription Act'
+url = 'https://tspforums.xyz/thread-6204.html'
+
+[laws.judicial_act]
+title = 'Judicial Act'
+url = 'https://tspforums.xyz/thread-6064.html'
+
+[laws.holidays_act]
+title = 'Holidays Act'
+url = 'https://tspforums.xyz/thread-4116.html'
+
+[laws.sunshine_act]
+title = 'Sunshine Act'
+url = 'https://tspforums.xyz/thread-4117.html'
+
+[laws.political_parties_act]
+title = 'Political Parties Act'
+url = 'https://tspforums.xyz/thread-4562.html'
+
+[laws.border_control_act]
+title = 'Border Control Act'
+url = 'https://tspforums.xyz/thread-5578.html'
+
+[laws.military_code]
+title = 'Military Code'
+url = 'https://tspforums.xyz/thread-4115.html'
+
+[laws.regional_officers_act]
+title = 'Regional Officers Act'
+url = 'https://tspforums.xyz/thread-4118.html'

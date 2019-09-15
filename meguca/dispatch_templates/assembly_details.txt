@@ -41,7 +41,7 @@
 
 [p]For more information on LoAs and resignations, visit [url=f_assembly_office]this forum thread[/url].[/p]
 
-[p]For more information on the Legislator Committee, visit [url=legislator_committee]this dispatch[/url].[/p]
+[p]For more information on the Legislator Committee, visit [url=legcomm]this dispatch[/url].[/p]
 
 [ref][law]Section 5, Article IV of the Charter of the South Pacific[/law][/ref][/box]
 
@@ -49,11 +49,7 @@
 
 [h3]Create legislation[/h3]
 
-[p]The Assembly is the Legislature of the Coalition so its main task is to create laws. The Assembly can either pass a Law or a Resolution:[/p]
-[list]
-[*]Law: A set of rules to abide (Example: A law about trading lampshades)
-[*]Resolution: Anything else (Example: A Resolution to recall the Prime Minister)
-[/list]
+[p]The Assembly is the Legislature of the Coalition so its main task is to create laws.[/p]
 
 [p]Any Legislator can propose a legislation on any topic as a draft. The draft will be debated by other Legislators as needed to refine it. When the draft receives a motion and a second, it will be brought to a vote. The required length of debating and voting along with the required number of votes to pass are different based on the type of legislation. A legislation which is considered "constitutional" (by having an article which says so) usually has a longer debate and vote and a higher required vote majority to pass.[/p]
 
@@ -70,7 +66,7 @@
 
 [p]A Minister of Military Affairs's appointment of General for the South Pacific Special Forces (SPSF) and Cabinet's appointment of Associate Justice for the High Court and member for the Legislator Committee (LegComm) require a simple majority approval vote from the Assembly.[/p]
 
-[box][p]For more information on the High Court, visit [url=court_intro]this dispatch[/url]. For more information on the LegComm, visit [url=legislator_committee]this dispatch[/url]. For more information on the SPSF, visit [url=spsf_intro]this dispatch[/url].[/p]
+[box][p]For more information on the High Court, visit [url=court_intro]this dispatch[/url]. For more information on the LegComm, visit [url=legcomm]this dispatch[/url]. For more information on the SPSF, visit [url=spsf_intro]this dispatch[/url].[/p]
 
 [ref]
 [*][law]Section 5, Article 1 of the Judicial Act[/law]
@@ -103,7 +99,7 @@
 [box][p]For more information on Delegate elections, visit [url=delegate_elections]this dispatch[/url].[/p]
 
 [ref]
-[*][law]Section 4 and 5, Article VII of the Charter of the South Pacific[/law]
+[*][law]Section 4, 5, Article VII of the Charter of the South Pacific[/law]
 [*][law]Article 3 of the Elections Act[/law]
 [/ref][/box]
 
@@ -155,7 +151,7 @@
 
 [p]The Chair of Assembly (CoA) (Incumbent: {{ gov_officials.coa|nation }}) is the official who maintains order and handles paperwork in the Assembly. The CoA can appoint any Legislator as deputies to help. The Chair is elected by Legislators eight days before the term of the current Chair ends (A Chair term usually lasts for four months) via Approval Voting. The CoA has the power to conduct votes, decide debate times, update the law archive, order the suspension of trouble-making Legislators,...[/p]
 
-[box][p]For more information on the CoA, visit [url=chair_of_assembly]this dispatch[/url].[/p]
+[box][p]For more information on the CoA, visit [url=coa]this dispatch[/url].[/p]
 
 [ref]
 [*][law]Section 2, 3, 4, Article IV of the Charter of the South Pacific[/law]

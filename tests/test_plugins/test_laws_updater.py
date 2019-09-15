@@ -8,6 +8,30 @@ import bs4
 from meguca.plugins.src import laws_updater
 
 
+class TestGenAnchor():
+    def test_gen_anchor(self):
+        lut = {'section': {'match': '\((\d+)\) .+',
+                           'anchor_link': 's\g<1>'},
+               'article': {'match': '(\w+)\. .+',
+                           'anchor_link': 'a\g<1>'},
+               'subsection': {'match': '([a-z]+)\. .+',
+                              'anchor_link': '\g<1>'}}
+        ins = laws_updater.GenAnchor(lut)
+
+        r1 = ins.get_anchor('1. ABCD')
+        ins.get_anchor('(1) EFB')
+        r2 = ins.get_anchor('(2) GHJ')
+        r3 = ins.get_anchor('asasaas')
+        ins.get_anchor('2. POL')
+        r4 = ins.get_anchor('(1) AKL')
+        r5 = ins.get_anchor('a. AKL')
+
+        assert r1 == '[anchor=a1][/anchor]'
+        assert r2 == '[anchor=a1_s2][/anchor]'
+        assert r3 == None
+        assert r4 == '[anchor=a2_s1][/anchor]'
+        assert r5 == '[anchor=a2_s1_a][/anchor]'
+
 class TestGetBBTag():
     def test_get_bb_tag_from_html_element(self):
         html = bs4.BeautifulSoup('<span class="xyz">ABC</span>', 'html.parser')
@@ -44,19 +68,20 @@ class TestGenBBCode():
                           'attrs': {'class': ['align'],
                                     'style': 'text-align: center;'},
                           'bb_tag': '[align=center]{text}[/align]' }}
-        html = ('<div class="align" style="text-align: center;">  \n\n'
-                '<span class="bold" style="font-weight: bold;">Title</span>  <br />'
+        html = ('<div class="align" style="text-align: center;">  \n'
+                '<weird><span class="bold" style="font-weight: bold;">Title</span></weird>  <br />'
                 '<span class="italic" style="font-style: italic;">Subtitle</span>  <br />'
                 '</div>  '
                 '<br />ABCDEF  '
                 '<span class="bold" style="font-weight: bold;">  Article</span>')
         soup = bs4.BeautifulSoup(html, 'html.parser')
 
-        r = laws_updater.gen_bbcode(soup, lut, 'br', '[p]{text}[/p]')
+        r = laws_updater.gen_bbcode(soup, lut, mock.Mock(get_anchor=mock.Mock(return_value=None)),
+                                    'br', '[p]{text}[/p]')
 
-        assert r == ('[align=center][b][p]Title[/p][/b]\n'
-                     '[i][p]Subtitle[/p][/i]\n[/align]\n'
-                     '[p]ABCDEF[/p][b][p]Article[/p][/b]')
+        assert r == ('[align=center]\n[b][p]Title[/p][/b] \n'
+                     '[i][p]Subtitle[/p][/i] \n[/align] '
+                     '\n[p]ABCDEF  [/p][b][p]  Article[/p][/b]')
 
 
 class TestEmbedJinjaTemplate():
@@ -78,18 +103,24 @@ class TestEmbedJinjaTemplate():
 class TestLawsUpdater():
     @pytest.fixture
     def setup_laws_updater(self):
-        lut = {'bold': { 'name': 'span',
-                         'attrs': {'class': ['bold'],
-                                   'style': 'font-weight: bold;'},
-                         'bb_tag': '[b]{text}[/b]' },
-               'italic': { 'name': 'span',
-                           'attrs': {'class': ['italic'],
-                                     'style': 'font-style: italic;'},
-                           'bb_tag': '[i]{text}[/i]' },
-               'align': { 'name': 'div',
-                          'attrs': {'class': ['align'],
-                                    'style': 'text-align: center;'},
-                          'bb_tag': '[align=center]{text}[/align]' }}
+        bb_lut = {'bold': {'name': 'span',
+                           'attrs': {'class': ['bold'],
+                                     'style': 'font-weight: bold;'},
+                           'bb_tag': '[b]{text}[/b]' },
+                  'italic': {'name': 'span',
+                             'attrs': {'class': ['italic'],
+                                       'style': 'font-style: italic;'},
+                             'bb_tag': '[i]{text}[/i]' },
+                  'align': {'name': 'div',
+                            'attrs': {'class': ['align'],
+                                      'style': 'text-align: center;'},
+                            'bb_tag': '[align=center]{text}[/align]' }}
+        anchor_lut = {'section': {'match': '\((\d+)\) .+',
+                                  'anchor_link': 's\g<1>'},
+                      'article': {'match': '(\w+)\. .+',
+                                  'anchor_link': 'a\g<1>'},
+                      'subsection': {'match': '([a-z]+)\. .+',
+                                     'anchor_link': '\g<1>'}}
         config = {'general': {'dispatch_config_path': 'tests/dispatch_config.toml',
                               'category': 8,
                               'sub_category': 835,
@@ -99,7 +130,8 @@ class TestLawsUpdater():
                   'bb_lookup': {'container': 'div[class="postbody"]',
                                 'default_bb_tag': '[p]{text}[/p]',
                                 'line_break_html_tag': 'br',
-                                'tags': lut},
+                                'tags': bb_lut},
+                  'anchor_lookup': anchor_lut,
                   'laws': {'test1': {'title': 'Test 1', 'url': 'abc'},
                            'test2': {'title': 'Test 2', 'url': 'xyz'}}}
 
@@ -228,10 +260,10 @@ class TestLawsUpdater():
             elif url == 'https://test2.html':
                 html = ('<div>Kanna Kamui</div>\n<div class="postbody">'
                         '<div class="align" style="text-align: center;">'
-                        '<span class="bold" style="font-weight: bold;">Tsunamy Act</span>\n <br />'
+                        '<span class="bold" style="font-weight: bold;">Tsunamy Act</span> <br />'
                         '<span class="italic" style="font-style: italic;">An Act about permanent delegacy. \n</span><br />'
                         '</div><br />'
-                        '\n<span class="bold" style="font-weight: bold;">\n  1. Article</span>'
+                        '\n<span class="bold" style="font-weight: bold;">\n  V. Article</span>'
                         '<br />(1) Tsunamy shall be our permanent Delegate.'
                         '<br />(2) Failure to endorse Tsunamy results in lampshade confiscation.   </div>')
 
@@ -240,18 +272,18 @@ class TestLawsUpdater():
         with mock.patch('requests.Session.get', side_effect=mock_html):
             ins.run()
 
-        r1 = ('{% block body %} [align=center][b][p]Lampshade Act[/p][/b]\n'
-              '[i][p]An Act for Testing.[/p][/i]\n[/align]\n'
+        r1 = ('{% block body %} [align=center]\n[b][p]Lampshade Act  [/p][/b]\n\n'
+              '[i][p]An Act for Testing. [/p][/i]\n[/align]\n'
               '[p]Preamble[/p]\n'
-              '[b][p]1. Article[/p][/b]\n'
-              '[p](1) Racoon shall be the regional animal.[/p]\n'
-              '[p](2) Failure to feed the racoon results in security actions.[/p] {% endblock %}')
+              '[b][anchor=a1][/anchor][p]1. Article[/p][/b]\n'
+              '\n[anchor=a1_s1][/anchor][p](1) Racoon shall be the regional animal.[/p]'
+              '\n[anchor=a1_s2][/anchor][p](2) Failure to feed the racoon results in security actions.[/p] {% endblock %}')
 
-        r2 = ('{% block body %} [align=center][b][p]Tsunamy Act[/p][/b]\n'
-              '[i][p]An Act about permanent delegacy.[/p][/i]\n[/align]\n'
-              '[b][p]1. Article[/p][/b]\n'
-              '[p](1) Tsunamy shall be our permanent Delegate.[/p]\n'
-              '[p](2) Failure to endorse Tsunamy results in lampshade confiscation.[/p] {% endblock %}')
+        r2 = ('{% block body %} [align=center][b][p]Tsunamy Act[/p][/b] \n'
+              '[i][p]An Act about permanent delegacy. [/p][/i]\n[/align]\n'
+              '\n[b][anchor=aV][/anchor][p]  V. Article[/p][/b]'
+              '\n[anchor=aV_s1][/anchor][p](1) Tsunamy shall be our permanent Delegate.[/p]'
+              '\n[anchor=aV_s2][/anchor][p](2) Failure to endorse Tsunamy results in lampshade confiscation.   [/p] {% endblock %}')
 
         with open('tests/lampshade.txt') as f:
             assert f.read() == r1

@@ -26,43 +26,23 @@ class TestIDStore():
         ins.load_from_json()
 
         assert os.path.isfile('test.json')
-        assert ins._store == {}
+        assert ins == {}
 
     def test_init_load_id_store_when_file_already_exists(self, setup_test_file):
         ins = utils.IDStore('test.json')
 
         ins.load_from_json()
 
-        assert ins._store == {'Test': 1}
+        assert ins == {'Test': 1}
 
     def test_load_id_store_from_dispatches(self):
         ins = utils.IDStore('test.json')
-        ins._store = {'Test1': 1}
+        ins['test1'] = 1234567
 
-        ins.load_from_dispatch_config({'dis1': {'id': 2, 'title': 'a'},
+        ins.load_from_dispatch_config({'dis1': {'id': 7654321, 'title': 'a'},
                                        'dis2': {'title': 'a'}})
 
-        assert ins._store == {'Test1': 1, 'dis1': 2}
-
-    def test_getitem(self):
-        ins = utils.IDStore('')
-        ins._store = {'Test': 1}
-
-        assert ins['Test'] == 1
-
-    def test_setitem(self):
-        ins = utils.IDStore('')
-        ins._store = {'Test': 1}
-
-        ins['Test1'] = 2
-
-        assert ins._store == {'Test': 1, 'Test1': 2}
-
-    def test_contains(self):
-        ins = utils.IDStore('')
-        ins._store = {'Test': 1}
-
-        assert 'Test' in ins
+        assert ins == {'test1': 1234567, 'dis1': 7654321}
 
     def test_add_id_from_html(self):
         ins = utils.IDStore('')
@@ -70,7 +50,7 @@ class TestIDStore():
 
         ins.add_id_from_html('test', html)
 
-        ins._store['test'] = 1234567
+        ins['test'] = 1234567
 
     @mock.patch('json.dump')
     def test_save_when_saved_is_true(self, mock_json_dump, setup_test_file):
@@ -114,3 +94,34 @@ class TestLoadDispatchConfig():
         r = utils.load_dispatch_config(['test1.toml', 'test2.toml'])
 
         assert r == {'Test1': 'TestVal1', 'Test2': 'TestVal2'}
+
+
+class TestGetDispatchInfo():
+    def test_with_no_missing_dispatch(self):
+        dispatch_config = {'test1': {'title': 'Test 1', 'category': '123',
+                                     'subcategory-123': '456'},
+                           'test2': {'title': 'Test 2', 'category': '678',
+                                     'subcategory-123': '980'}}
+        id_store = {'test1': 1234567, 'test2': 8901234}
+
+        r = utils.get_dispatch_info(dispatch_config, id_store)
+        assert r == {'test1': {'id': 1234567, 'title': 'Test 1',
+                               'category': '123', 'subcategory-123': '456'},
+                     'test2': {'id': 8901234, 'title': 'Test 2',
+                               'category': '678', 'subcategory-123': '980'}}
+
+    def test_with_missing_dispatches(self):
+        dispatch_config = {'test1': {'title': 'Test 1', 'category': '123',
+                                     'subcategory-123': '456'},
+                           'test2': {'title': 'Test 2', 'category': '678',
+                                     'subcategory-123': '980'}}
+        id_store = {'test1': 1234567, 'test2': 8901234,
+                    'test3': 9876543, 'test4': 456789}
+
+        r = utils.get_dispatch_info(dispatch_config, id_store)
+
+        assert r == {'test1': {'id': 1234567, 'title': 'Test 1',
+                               'category': '123', 'subcategory-123': '456'},
+                     'test2': {'id': 8901234, 'title': 'Test 2',
+                               'category': '678', 'subcategory-123': '980'},
+                     'test3': {'id': 9876543}, 'test4': {'id': 456789}}

@@ -25,6 +25,6 @@
 
 [p]For obvious reasons, the Election Commissioner can't run in the election they are managing. Additionally, the Election Commissioner cannot hold a Cabinet office, Delegate office, or Local Council office.[/p]
 
-[ref][law]Article 1, the Elections Act[/law][/ref]
+[ref][law]Article 1 of the Elections Act[/law][/ref]
 
 {% endblock body %}

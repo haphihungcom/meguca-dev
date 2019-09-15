@@ -1,6 +1,6 @@
 {% macro gen_header(urls={}, sub_urls='', logo='') -%}
 [anchor=Top][/anchor][box][align=center][background-block=#0080c4]
-[font=Avenir, Segoe UI, sans-serif][size=120]{% for name, url in urls.items() %}{% if url == current_dispatch %}[background=#019aed][color=#019aed]—[/color][raw_url={{ url }}][color=#fff][b]{{ name }}[/b][/color][/raw_url][color=#019aed]—[/color][/background]{% else %}[color=#0080c4]—[/color][raw_url={{ url }}][color=#fff][b]{{ name }}[/b][/color][/raw_url][color=#0080c4]—[/color]{% endif %} {% endfor %}[/size][/font][/background-block]
+[font=Avenir, Segoe UI, sans-serif][size=120]{% for name, url in urls.items() %}{% if url == current_dispatch.name %}[background=#019aed][color=#019aed]—[/color][raw_url={{ url }}][color=#fff][b]{{ name }}[/b][/color][/raw_url][color=#019aed]—[/color][/background]{% else %}[color=#0080c4]—[/color][raw_url={{ url }}][color=#fff][b]{{ name }}[/b][/color][/raw_url][color=#0080c4]—[/color]{% endif %} {% endfor %}[/size][/font][/background-block]
 [background-block=#019aed][color=#019aed]·[/color]
 {% if logo == '' %}
 [img]https://i.imgur.com/7xcajyZ.png[/img]

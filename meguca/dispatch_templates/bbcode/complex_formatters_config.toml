@@ -1,0 +1,5 @@
+[law]
+laws_config_path = 'meguca/config/laws_updater.toml'
+citation_pattern = '(Section ((?P<sec>\d+), ))?(((\d+), )+)?(Article (?P<art>\w+) of )?(?P<law>.+)'
+article_format = 'a{}'
+section_format = '_s{}'

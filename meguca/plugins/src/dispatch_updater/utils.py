@@ -1,6 +1,7 @@
 """ Utilities for this plugin.
 """
 
+import collections
 import inspect
 import logging
 import json
@@ -12,7 +13,7 @@ import bs4
 logger = logging.getLogger(__name__)
 
 
-class IDStore():
+class IDStore(collections.UserDict):
     """Load dispatch ID list. Create a new one if not exist.
 
     Args:
@@ -20,18 +21,22 @@ class IDStore():
     """
 
     def __init__(self, id_store_path):
-        self._store = {}
+        if id_store_path is None:
+            logger.error('ID store path not configured!')
         self.id_store_path = id_store_path
         self.saved = False
+        super().__init__()
 
     def load_from_json(self):
         """Load dispatch IDs from configured JSON file.
         """
+        if self.id_store_path is None:
+            return
 
         try:
             with open(self.id_store_path) as f:
-                self._store = json.load(f)
-                logger.debug('Loaded id store: %r', self._store)
+                self.data = json.load(f)
+                logger.debug('Loaded id store: %r', self.data)
         except FileNotFoundError:
             self.save()
             logger.debug('Created id store at "%s"', self.id_store_path)
@@ -45,34 +50,11 @@ class IDStore():
 
         for name, info in dispatches.items():
             try:
-                self._store[name] = info['id']
+                self.data[name] = info['id']
             except KeyError:
                 pass
 
         self.saved = False
-
-    def __contains__(self, name):
-        """Check existence of an ID.
-
-        Args:
-            name (str): Dispatch file name.
-
-        Returns:
-            bool: True if contains ID.
-        """
-
-        return name in self._store
-
-    def __getitem__(self, name):
-        """Get dispatch ID.
-
-        Args:
-            name (str): Dispatch file name.
-
-        Returns:
-            int: Dispatch ID.
-        """
-        return self._store[name]
 
     def __setitem__(self, name, dispatch_id):
         """Add new dispatch ID.
@@ -82,7 +64,7 @@ class IDStore():
             dispatch_id (int): Dispatch ID.
         """
 
-        self._store.update({name: dispatch_id})
+        self.data[name] = dispatch_id
         self.saved = False
 
     def add_id_from_html(self, name, html):
@@ -102,13 +84,13 @@ class IDStore():
         """Save ID store into file.
         """
 
-        if self.saved:
+        if self.saved or self.id_store_path is None:
             return
 
         with open(self.id_store_path, 'w') as f:
-            json.dump(self._store, f)
+            json.dump(self.data, f)
             self.saved = True
-            logger.debug('Saved id store: %r', self._store)
+            logger.debug('Saved id store: %r', self.data)
 
 
 
@@ -125,8 +107,11 @@ def get_dispatch_info(dispatch_config, id_store):
     """
 
     dispatches = dispatch_config
-    for name in dispatch_config.keys():
-        dispatches[name]['id'] = id_store[name]
+    for name, dispatch_id in id_store.items():
+        if name in dispatches:
+            dispatches[name]['id'] = id_store[name]
+        else:
+            dispatches[name] = {'id': id_store[name]}
 
     return dispatches
 
@@ -176,7 +161,7 @@ def load_dispatch_config(dispatch_config_path):
                 logger.debug('Loaded dispatch config: "%r"', dispatches)
                 logger.info('Loaded all dispatch config files')
         else:
-            dispatches = {}
+            dispatches = None
 
         return dispatches
 

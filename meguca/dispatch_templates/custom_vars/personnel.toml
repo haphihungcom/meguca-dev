@@ -2,7 +2,7 @@
 delegate = 'Erinor'
 local_council = ['Volaworand', 'Aumeltopia', 'Auphelia']
 crs = ['Sandaoguo', 'Farengeto', 'Kringalia', 'Erinor', 'Tsunamy', 'Pencil Sharpeners 2']
-legcomm = ['United States of Vietnam', 'Nakarisaune', 'Erinor']
+legcomm = ['United States of Vietnam', 'Nakarisaune']
 general_corps = ['United States of Vietnam', 'Roavin', 'Nakarisaune']
 mora_advisory_council = ['Kringalia', 'Volaworand', 'Islands of Unity', 'Aidenfieeld', 'Beepee', 'Roavin', 'Pencil Sharpeners 2']
 cabinet_advisors = ['Amerion', 'Roavin', 'Islands of Unity', 'Heliseum']

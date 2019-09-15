@@ -126,10 +126,7 @@
 
 [box][p]For more information about Executive Orders, visit [url=cabinet_eo]this dispatch[/url].[/p]
 
-[ref]
-[*][law]Section 13, Article VI of the Charter of the South Pacific[/law]
-[*][law]Section 14, Article VI of the Charter of the South Pacific[/law]
-[/ref][/box]
+[ref][law]Section 13, 14, Article VI of the Charter of the South Pacific[/law][/ref][/box]
 
 [h2]High Court's invalidation power[/h2]
 
@@ -173,7 +170,7 @@
 
 [p]If a Cabinet office is vacant (Because the holder has resigned for example), a special election for that office will start if there is more than half of the term remains, if there is less than half of the term remains or the office is vacant because nobody ran in its election, the Cabinet can appoint any Legislator as a replacement until the next regularly scheduled election.[/p]
 
-[box][ref][law]Article 6 of the Election Act[/law][/ref][/box]
+[box][ref][law]Article 6 of the Elections Act[/law][/ref][/box]
 
 [h2]Independent institutions[/h2]
 

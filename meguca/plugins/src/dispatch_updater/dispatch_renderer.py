@@ -7,6 +7,7 @@ import toml
 import jinja2
 import bbcode
 
+from meguca import exceptions
 from meguca.plugins.src.dispatch_updater import bb_parser
 from meguca.plugins.src.dispatch_updater import utils
 
@@ -60,6 +61,8 @@ class TemplateRenderer():
     """
 
     def __init__(self, template_dir_path, filters_path, template_ext):
+        if template_dir_path is None:
+            raise exceptions.PluginError('Dispatch template directory path not configured!')
         template_loader = jinja2.FileSystemLoader(template_dir_path)
         # Make access to undefined context variables generate logs.
         undef = jinja2.make_logging_undefined(logger=logger)
@@ -112,29 +115,22 @@ class Renderer():
     """
 
     def __init__(self, config):
-        template_config = config.get('template', None)
-        if template_config is None or 'template_dir_path' not in template_config:
-            logger.error('Dispatch template path not configured!')
-        else:
-            self.template_renderer = TemplateRenderer(template_config.get('template_dir_path', None),
-                                                      template_config.get('filters_path', None),
-                                                      template_config.get('template_file_ext', None))
+        template_config = config.get('template', {})
+        self.template_renderer = TemplateRenderer(template_config.get('template_dir_path', None),
+                                                  template_config.get('filters_path', None),
+                                                  template_config.get('template_file_ext', None))
 
-        bb_config = config.get('bbcode', None)
-        if bb_config is None:
-            self.bb_parser = None
-            logger.warning('BBCode parser not configured!')
-        else:
-            self.bb_parser = bb_parser.BBParser(bb_config.get('simple_formatter_path', None),
-                                                bb_config.get('complex_formatter_path', None),
-                                                bb_config.get('complex_formatter_config_path', None))
+        bb_config = config.get('bbcode', {})
+        self.bb_parser = bb_parser.BBParser(bb_config.get('simple_formatter_path', None),
+                                            bb_config.get('complex_formatter_path', None),
+                                            bb_config.get('complex_formatter_config_path', None))
 
         custom_vars = CustomVars(config.pop('custom_vars_path', None))
 
         # Context for templates
         self.ctx = custom_vars.custom_vars
 
-    def update_ctx(self, data, plg_config, config, dispatch_info):
+    def update_ctx(self, data, plg_config, ext_config, dispatch_info):
         """Update context with new info.
 
         Args:
@@ -145,7 +141,7 @@ class Renderer():
         """
 
         self.ctx.update({'data_products': data, 'config': plg_config,
-                         'ext_config': config, 'dispatch_info': dispatch_info})
+                         'ext_config': ext_config, 'dispatch_info': dispatch_info})
 
     def render(self, name):
         """Render a dispatch.
@@ -161,8 +157,7 @@ class Renderer():
         self.ctx['current_dispatch'].update(self.ctx['dispatch_info'][name])
 
         rendered = self.template_renderer.render(name, self.ctx)
-        if self.bb_parser is not None:
-            rendered = self.bb_parser.format(rendered, **self.ctx)
+        rendered = self.bb_parser.format(rendered, **self.ctx)
 
         logger.debug('Rendered dispatch "%s"', name)
 

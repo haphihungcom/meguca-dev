@@ -60,8 +60,8 @@ class TestBBRegistry():
         class Formatter2():
             pass
 
-        ins.complex_formatters = [{'tag_name': 'test1', 'obj': Formatter1(), 'john': True},
-                                  {'tag_name': 'test2', 'obj': Formatter2(), 'john': False}]
+        ins.complex_formatters = [{'tag_name': 'test1', 'obj': Formatter1, 'john': True},
+                                  {'tag_name': 'test2', 'obj': Formatter2, 'john': False}]
         config = {'test1': {'foo': 'bar', 'loo': 'var'},
                   'test2': {'foo2': 'bar2', 'loo2': 'var2'}}
 
@@ -80,8 +80,8 @@ class TestBBRegistry():
         class Formatter2():
             pass
 
-        ins.complex_formatters = [{'tag_name': 'test1', 'obj': Formatter1(), 'john': True},
-                                  {'tag_name': 'test2', 'obj': Formatter2(), 'john': False}]
+        ins.complex_formatters = [{'tag_name': 'test1', 'obj': Formatter1, 'john': True},
+                                  {'tag_name': 'test2', 'obj': Formatter2, 'john': False}]
 
         r = ins.init_complex_formatters('test.py', {})
 

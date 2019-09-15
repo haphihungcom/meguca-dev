@@ -125,7 +125,7 @@ class TestDispatchUpdaterIntegration():
     def setup_plugin_and_templates(self, text_files, toml_files):
         templates = {'tests/template_1.txt': '{% for i in data_products.j %}{{ i }}{% endfor %}',
                      'tests/template_2.txt': '{{ ext_config.meguca.general.dummy }}',
-                     'tests/template_3.txt': '{{ s }} {{ k }}'}
+                     'tests/template_3.txt': '{{ s }} {{ k }} {{ dispatch_info.template_2.id }}'}
         text_files(templates)
 
         data = {'j': [1, 2, 3]}
@@ -183,7 +183,7 @@ class TestDispatchUpdaterIntegration():
                                      'category': '789',
                                      'subcategory-789': '123',
                                      'dname': 'Example 3',
-                                     'message': b'10 5',
+                                     'message': b'10 5 67890',
                                      'submitbutton': '1'})]
         ins.ns_site.execute.assert_has_calls(expected_calls)
 
@@ -219,7 +219,7 @@ class TestDispatchUpdaterIntegration():
                                      'category': '789',
                                      'subcategory-789': '123',
                                      'dname': 'Example 3',
-                                     'message': b'10 5',
+                                     'message': b'10 5 67890',
                                      'submitbutton': '1'})]
         ins.ns_site.execute.assert_has_calls(expected_calls)
 
@@ -251,7 +251,7 @@ class TestDispatchUpdaterIntegration():
                                      'category': '789',
                                      'subcategory-789': '123',
                                      'dname': 'Example 3',
-                                     'message': b'10 5',
+                                     'message': b'10 5 67890',
                                      'submitbutton': '1'})]
         ins.ns_site.execute.assert_has_calls(expected_calls)
 

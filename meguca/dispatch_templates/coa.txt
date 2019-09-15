@@ -14,7 +14,7 @@
 [h2]Powers and roles[/h2]
 
 [list][*]Conduct and record votes. Can delay vote if necessary.
-[*]Keep legislative record and maintain the [url=laws_index]Laws Index[/url].
+[*]Keep legislative record and maintain the [url=law_index]Laws Index[/url].
 [*]Moderate debates. Can waive [url=assembly_procedures]mandatory debate period[/url] if a Legislator has motioned for them to do so and the motion receives no objection in the last 24 hours.
 [*]Correct typographical errors, grammatical errors, naming or formatting inconsistencies in laws. Any correction needs to be presented to Legislators for a three-days comment period.
 [*]Order [url=legcomm]the Legislator Committee[/url] to suspend disruptive members.
