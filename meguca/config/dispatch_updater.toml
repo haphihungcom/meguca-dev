@@ -13,7 +13,8 @@ template_file_ext = 'txt'
 
 [renderer.bbcode]
 simple_formatter_path = 'meguca/dispatch_templates/bbcode/simple_formatters.toml'
-complex_formatter_path =  'meguca/dispatch_templates/bbcode/complex_formatters.py'
+complex_formatter_path = 'meguca/dispatch_templates/bbcode/complex_formatters.py'
+complex_formatter_config_path = 'meguca/dispatch_templates/bbcode/complex_formatters_config.toml'
 
 [dry_run]
-dispatches = ['charter', 'elections_act']
+dispatches = []

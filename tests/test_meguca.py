@@ -18,7 +18,7 @@ def general_config():
     config = {'general': {'blacklist': []},
               'stat_plugins_schedule': {'schedule_mode': 'interval',
                                         'seconds': 1},
-              'dry_run': {'enabled': False,
+              'dry_run': {'enable': False,
                           'plugins': []}}
 
     return config
@@ -61,7 +61,7 @@ def meguca_standard_plg(mock_plg, general_config):
                                                       'seconds': 10},
                                                'v2': {'schedule_mode': 'interval',
                                                       'seconds': 12}},
-                           'dry_run': {'enabled': False, 'plugins': ['t1', 't2']}})
+                           'dry_run': {'enable': False, 'plugins': ['t1', 't2']}})
 
     meguca_ins = meguca.Meguca(plg_manager, general_config, None)
 
@@ -71,7 +71,7 @@ def meguca_standard_plg(mock_plg, general_config):
 class TestRunPlugin():
     @pytest.mark.usefixtures('mock_plg')
     def test_run_plugin_with_entry_method_has_no_param(self, mock_plg):
-        meguca_ins = meguca.Meguca(mock.Mock(), None, None)
+        meguca_ins = meguca.Meguca(mock.Mock(), {}, {})
 
         meguca_ins.run_plugin(mock_plg(), 'run')
 
@@ -79,7 +79,7 @@ class TestRunPlugin():
 
     @pytest.mark.usefixtures('mock_plg')
     def test_run_plugin_with_entry_method_has_params(self, mock_plg):
-        meguca_ins = meguca.Meguca(mock.Mock(), None, None)
+        meguca_ins = meguca.Meguca(mock.Mock(), {}, {})
         meguca_ins.data = {'TestData': 'Test Data'}
 
         def stub_run(data):
@@ -95,14 +95,14 @@ class TestRunPlugin():
     @pytest.mark.usefixtures('mock_plg')
     @mock.patch('meguca.meguca.Meguca.run_plugin', side_effect=exceptions.NotFound(''))
     def test_run_plugin_with_plugin_indexes_non_existent_key_of_data_dict(self, run_plugin, mock_plg):
-        meguca_ins = meguca.Meguca(mock.Mock(), None, None)
+        meguca_ins = meguca.Meguca(mock.Mock(), {}, {})
 
         with pytest.raises(exceptions.NotFound):
             meguca_ins.run_plugin(mock_plg())
 
     @pytest.mark.usefixtures('mock_plg')
     def test_run_plugin_with_entry_method_has_service_params(self, mock_plg):
-        meguca_ins = meguca.Meguca(mock.Mock(), None, None)
+        meguca_ins = meguca.Meguca(mock.Mock(), {}, {})
         meguca_ins.services = {'service': mock.Mock(return_value='Test')}
 
         def stub_run(service):
@@ -157,7 +157,7 @@ class TestRunStatPlugins():
 
 class TestPluginSchedulingMethods():
     def test_schedule_with_a_method_with_kwargs(self):
-        meguca_ins = meguca.Meguca(mock.Mock(), None, None)
+        meguca_ins = meguca.Meguca(mock.Mock(), {}, {})
         mock_method = mock.Mock()
         config = {'schedule_mode': 'interval', 'seconds': 1}
 
@@ -193,7 +193,7 @@ class TestLoadServices():
         plg_info['Core'] = {'Id': 'Test'}
         mock_plg = mock.Mock(plugin_object=mock.Mock(get=get), details=plg_info)
         plg_manager = mock.Mock(get_plugins=mock.Mock(return_value=[mock_plg]))
-        meguca_ins = meguca.Meguca(plg_manager, None, None)
+        meguca_ins = meguca.Meguca(plg_manager, {}, {})
 
         meguca_ins.load_services()
 
@@ -235,7 +235,7 @@ class TestRunMeguca():
 
     def test_dry_run(self, meguca_standard_plg):
         meguca_ins = meguca_standard_plg
-        meguca_ins.config['meguca']['dry_run']['enabled'] = True
+        meguca_ins.dry_run = True
 
         meguca_ins.run()
 

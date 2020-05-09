@@ -1,9 +1,0 @@
-{% import 'macros/header_macros.txt' as macros with context %}
-
-{% extends 'layout/general.txt' %}
-
-{% block header %}
-{{ macros.gen_header(urls={'CRS': 'crs_intro',
-                           'Proscriptions': 'proscriptions',
-                           'Endo cap': 'endo_cap'}) }}
-{% endblock header %}

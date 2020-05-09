@@ -34,15 +34,24 @@ class Meguca():
 
         self.plg_manager = plg_manager
 
-        # Holds general and plugins' configuration
-        self.config = {'meguca': general_config,
-                       'plugins': plg_config}
+        general_conf = general_config.get('general', {})
+        self.blacklist = general_conf.get('blacklist', [])
+
+        dry_conf = general_config.get('dry_run', {})
+        self.dry_run = dry_conf.get('enable', False)
+        self.dry_plugins = dry_conf.get('plugins', [])
+
+        self.stat_plugins_schedule = general_config.get('stat_plugins_schedule', {})
+        self.plugin_schedule = general_config.get('plugin_schedule', {})
 
         # Holds all service objects
         self.services = {}
 
         # Holds all data generated and used by plugins
         self.data = data.DataStore()
+        # Holds general and plugins' configuration to pass to plugins.
+        self.config = {'meguca': general_config,
+                       'plugins': plg_config}
 
     def get_args(self, entry_method):
         """Get arguments containing dependencies to inject into plugins via entry method.
@@ -103,7 +112,7 @@ class Meguca():
         # become available.
         queue = []
         for plg in self.plg_manager.get_plugins('Stat'):
-            if plg.details['Core']['Id'] not in self.config['meguca']['general']['blacklist']:
+            if plg.details['Core']['Id'] not in self.blacklist:
                     queue.append(plg)
                     logger.debug('Stat plugin "%s" added to queue', plg.name)
             else:
@@ -159,9 +168,9 @@ class Meguca():
         """
 
         for plg in self.plg_manager.get_plugins(plg_category):
-            if plg.details['Core']['Id'] not in self.config['meguca']['general']['blacklist']:
+            if plg.details['Core']['Id'] not in self.blacklist:
                 plg_id = plg.details['Core']['Id']
-                schedule_config = dict(self.config['meguca']['plugin_schedule'][plg_id])
+                schedule_config = dict(self.plugin_schedule[plg_id])
 
                 self.schedule(self.run_plugin,
                               kwargs={'plg': plg,
@@ -182,7 +191,7 @@ class Meguca():
         self.schedule(self.run_stat_plugins,
                       kwargs={'entry_method': 'run'},
                       name='Stat plugins',
-                      schedule_config=self.config['meguca']['stat_plugins_schedule'])
+                      schedule_config=self.stat_plugins_schedule)
 
         self.schedule_plugins('View')
 
@@ -208,7 +217,7 @@ class Meguca():
         """
 
         for plg in self.plg_manager.get_plugins(plg_category):
-            if plg.details['Core']['Id'] not in self.config['meguca']['general']['blacklist']:
+            if plg.details['Core']['Id'] not in self.blacklist:
                 try:
                     self.run_plugin(plg, 'prepare')
                     logger.debug('Initialized plugin "%s"', plg.name)
@@ -228,7 +237,7 @@ class Meguca():
         self.prepare_stat_plugins()
         self.prepare_plugins('View')
 
-        if not self.config['meguca']['dry_run']['enabled']:
+        if not self.dry_run:
             self.schedule_all()
 
     def dry_run_plugins(self):
@@ -236,7 +245,7 @@ class Meguca():
 
         plugins = {plg.details['Core']['Id']: plg for plg in self.plg_manager.get_all_plugins()}
 
-        for plg_id in self.config['meguca']['dry_run']['plugins']:
+        for plg_id in self.dry_plugins:
             try:
                 plg = plugins[plg_id]
                 logger.info('Dry run plugin "%s"', plg.name)
@@ -248,7 +257,7 @@ class Meguca():
     def run(self):
         """Start the scheduler or dry run."""
 
-        if self.config['meguca']['dry_run']['enabled']:
+        if self.dry_run:
             logger.info('Begin dry run')
             self.dry_run_plugins()
         else:

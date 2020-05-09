@@ -1,1 +1,0 @@
-from meguca.plugins.src.dispatch_updater.bb_parser import BBRegistry as BBCode
